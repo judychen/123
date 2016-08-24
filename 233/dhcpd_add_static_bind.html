@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/dhcpd/dhcpd_add_static_bind.js?1468922814" charset="utf-8"></script>
+
+	<script>
+	function enabled() {
+		var url="setform/form_dhcpd_enable?UID="+parent.uid;
+		var f = new myForm();
+		if ( $("#sel_enabled").val() == "enabled" ) 
+			f.add("enabled", "1" );
+		else
+			f.add("enabled", "0" );
+		f.submit( url, done );
+	}
+
+	function done() {
+		alert("ok!");
+	}
+		
+	</script>
+	
+</head>
+
+<body onLoad="init();" >
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>新增静态地址绑定</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+			<tr class="radius">
+				<td class="col1">MAC地址：</td>
+				<td class="col2">
+					<input type="text" id="text_mac" size="32" maxlength="17" />（例如：AA:BB:CC:AA:BB:CC）
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">IP：</td>
+				<td class="col2">
+					<input type="text" id="text_ip" size="32" />
+				</td>
+			</tr>
+			
+		</table>
+	</div>
+	
+	<div class="content_option">
+		<input type="button" class="buttonL" onClick="goBack();" value="返 回" />
+		<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+	</div>
+</body>
+</html>

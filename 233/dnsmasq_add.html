@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/dnsmasq/dnsmasq_add.js?1468922814" charset="utf-8"></script>
+
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+<style type="text/css">
+select{
+	width:70px;
+}
+</style>
+
+</head>
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px" >
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>新增域名</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr>
+				<td class="col1">域名：</td>
+				<td class="col2">
+					<input class="text" id="domain_name" />(1-64个字符，只允许字母，数字，'.'， '_'，'-')
+				</td>
+			</tr>
+			<tr class="IP_static part_if_enable">
+				<td class="col1">IP地址：</td>
+				<td class="col2">
+					<input class="text" id="domain_ip" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_option">
+		<input type="button" id="btn_Cancel" class="buttonL" onClick="goBack();" value="返 回"/>	
+		<input type="button" id="btn_Ok" class="buttonL" onClick="Ok();" value="确 定"/>	
+	</div>
+
+</body>
+</html>

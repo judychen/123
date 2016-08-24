@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv='pragma' content='no-cache'>
+<title>康凯科技（杭州）有限公司</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/wizard/common.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/wizard/admin_pwd.js?1468922814" charset="utf-8"></script>
+
+<link rel="stylesheet" href="css/wizard.css" type="text/css">
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+
+</head>
+
+<body>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>配置过程</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+
+	<div id="wizard_div"></div>
+
+
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>用户密码</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+
+	<div class="mytbl_content">
+		<table style="width:100%;">
+			<tr class="staticIP">
+				<td class="col1">用户名：</td>
+				<td class="col2"><span id="span_usrname" />admin</span>
+			</tr>
+			<tr class="tr_real_password">
+				<td class="col1">新的密码：</td>
+				<td class="col2"><input type="password" id="text_password" size="20" maxlength="32" />（1-32个字符，不包含单、双引号、分号、空格、问号）</td>
+			</tr>
+			<tr class="tr_real_password">
+				<td class="col1">确认密码：</td>
+				<td class="col2"><input type="password" id="text_password_check" size="20" maxlength="32" /></td>
+			</tr>
+			<tr class="tr_fake_password">
+				<td class="col1">新的密码：</td>
+				<td class="col2"><input type="password" id="text_fake_password" size="20" maxlength="32" value="******" />（1-32个字符，不包含单、双引号、分号、空格、问号）</td>
+			</tr>
+			<tr class="tr_fake_password">
+				<td class="col1">确认密码：</td>
+				<td class="col2"><input type="password" id="text_fake_password_check" size="20" maxlength="32" value="******" /></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="content_option" id="wizard_op" >
+	</div>
+</body>
+</html>

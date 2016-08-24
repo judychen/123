@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="height:100%;min-width:1024px; overflow:auto; margin:0px; padding:0px; border:0px;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		function website() {
+			window.open( "http://www.commsky.com.cn", null, null );
+		}
+
+		function init() {
+			checkParent();
+		}
+
+		function checkParent() {
+			if ( window.top != window.self )
+				window.parent.location = "login.asp";
+			else {
+				$("#text_username").focus().select();
+				$(document).keydown(function(event) {
+					if ( event.keyCode == 13 ) { //即enter
+						/* prevent login twice */
+						if ( $("a:focus").attr("id") != "a_login") {
+							usr_login();
+						}
+					}
+				});
+			}
+		}
+
+		function loginDone( data ) {
+			var jsData = eval("("+data+")");
+			var status = jsData.status;
+			var uid = jsData.uid;
+			if ( status == "ok") {
+				window.parent.location = "index.asp?UID=" + uid ;
+			} else if ( status == "error" ) {
+				$("#text_username").focus().select();
+				$("#errMsg").html("用户不存在或密码错误！");
+			}
+		}
+
+		function isInputValid() {
+			if ( $("#text_username").val() == "" ) {
+				$("#errMsg").html("用户名不能为空！");
+				return false;
+			}
+			if ( $("#text_password").val() == "" ) {
+				$("#errMsg").html("密码不能为空！");
+				return false;
+			}
+			return true;
+		}
+
+		function usr_login() {
+			if ( !isInputValid() )
+				return;
+			var url = "goform/login";
+
+			var str = "";
+			str += "<input type=\"hidden\" name=\"username\" value=\""+ $("#text_username").val() + "\" />";
+			str  += "<input type=\"hidden\" name=\"password\" value=\"" + $("#text_password").val() + "\" />";
+
+			$("#myForm").html("");
+			$("#myForm").append( str );
+
+			var ajaxEvent = $.ajax({
+				cache: true,
+				type: "POST",
+				url: url,
+				data: $("#myForm").serialize(),
+				timeout: 60000,	//unit:ms, 1 minute
+				async: true,
+				success: function(data) {
+					loginDone( data );
+				},
+				complete: function(XMLHttpRequest, status){
+					if ( status == "timeout") {	//status还有success,error等
+						ajaxEvent.abort();				
+					} else if ( status == "error"){
+						;
+					}
+				}
+			});
+		}
+		</script>
+
+<style type="text/css">
+	.a_login div {
+		background-color:#8EA5CF;
+	}
+	.a_login:hover div {
+		background-color:#8096BE;
+	}
+</style>
+
+</head>
+
+<body onload="init();" style="width:100%;height:100%;  text-align:center; background-color:#D2D6E7; margin:0px;">
+	<form id="myForm" style="display:none;" ></form>
+	<div style="width:100%; /*height:100%;*/ padding-top:80px; text-align:center; ">
+		<div class="login_main" style="width:400px; height:416px; background-color:#DDDDDD; text-align:center; margin-left:auto; margin-right:auto; /*margin-top:80px;*/" >
+			<div class="lgform" style="text-align:center; height:350px; background-color:#FFFFFF; /*padding-top:80px;*/">
+				<div style="width:100%; height:40px;"></div>
+				<div class="lgform_title" style="margin-bottom:40px;">
+					<span style="font-size:25px; color:#146990;">CommSky AP</span>
+				</div>
+				<div class="lgmain" style="text-align:center; margin-left:auto; margin-right:auto; width:320px;">
+					<div style="wdith:100%; height:55px; text-align:left;">
+						<div class="login_span" style="width:38px;height:34px; background-color:#F7F7F7; border:1px solid #CCC; float:left; background-image:url(images/login/user.png); background-repeat:no-repeat; background-position:11px 10px;"></div>
+						<div style="height:34px; border:1px solid #ccc;" >
+							<input type="text" autocomplete="off" id="text_username" class="jq_watermark" placeholder="Username" maxlength="32" style="width:266px; float:left; margin-top:8px; margin-left:10px; border:none;outline:none;" />
+						</div>	
+					</div>
+					<div style="height:40px; text-align:left;">
+						<div class="login_span" style="width:38px;height:34px;background-color:#F7F7F7; border:1px solid #CCC; float:left;background-image:url(images/login/lock.png); background-repeat:no-repeat;background-position:13px 10px;"></div>
+						<div style="height:34px; border:1px solid #ccc;" >
+							<input autocomplete="off" placeholder="Password" type="password" id="text_password" class="jq_watermark" maxlength="32" style="width:266px; float:left; margin-top:8px; margin-left:10px; border:none;outline:none;"/>
+						</div>
+					</div>
+					<div id="errMsg" style="color:#FF0000; height:20px; text-align:left; font-size:12px;">
+					</div>
+					<!--
+					<span class="login_span">验证码：</span><input type="text" name="code" id="textfield" class="code">  <img id="imgcode" style="width: 70px;height: 30px;" src="verifycode.php?a=0.8252701396122575" alt="验证码" title="请输入验证码">
+					-->
+					<div style="margin-top:0px; height:55px;">
+						<span class="login_span">&nbsp;</span>
+						<a class="a_login" id="a_login" href="#" onclick="usr_login();" style="text-decoration:none;">
+							<div style="width:318px; height:33px;  color:#FFFFFF; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;">
+								<div style="height:8px;"></div>
+								<div> 登录 </div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div><!--lgform end-->
+			<div class="formbottom" style="color:#636E7B;">
+				<div class="info" style="margin-top:25px;" ><span>24小时服务热线：400-826-8847<a href="#" onclick="website();" style="font-size:13px; text-decoration:none; color:#428BCA;"> CommSky官网</a></span></div>
+			</div>
+		</div><!--login_main end-->
+
+	</div>
+</body>
+</html>

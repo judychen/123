@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myProgress.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/equipment_maintenance/ping.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/equipment_maintenance/image_upgrade.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/equipment_maintenance/tech_support.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/equipment_maintenance/wds.js?1468922814" charset="utf-8"></script>
+
+<style type="text/css">
+	.file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }
+</style>
+
+<script language="javascript">
+	
+	var jsServTpl = { "pkg_wlan_service_template": [ { "sect_name": "ServiceTemplate0", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "psk-key-crypt": "plain", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_2.4G", "portal-scheme": "12", "authentication": "wpa2-radius", "cipher": "ccmp", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "radius-scheme": "AAACopy", "service-template": "enabled", "acl": "36" }, { "sect_name": "ServiceTemplate1", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_5G", "authentication": "wpa2-psk", "cipher": "ccmp", "psk-key": "BQ8MCAoICQU=", "psk-key-crypt": "cipher", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "service-template": "enabled", "acl": "37" } ] };
+	
+	var jsDataDevice = {"device":[{"product":"AP3602","model":"AP3602-WS1-FAT","serial":"A2A9C11Z0091004","ethmac":"34:CD:6D:F3:FE:A0","softversion":"V200R006P02","bootversion":"1.0.3","hardversion":"A","uptime":"2天11时33分","cpu_usage":"0","mem_usage":"64","gateway":"172.20.90.1","dns":"114.114.114.114"}]};
+	function todo(){
+	}
+
+	function myhelp() {
+		if ( $("#device_reboot").css("display") == "block" ) {
+			popHelp("deviceReboot");
+		} else if ( $("#device_upgrade").css("display") == "block" ) {
+			popHelp("deviceUpgrade");
+		} else if ( $("#device_ping").css("display") == "block" ) {
+			popHelp("devicePing");
+		} else if ( $("#device_techSupport").css("display") == "block" ) {
+			popHelp("deviceTechSupport");
+		}
+		
+		else if ( $("#device_wds").css("display") == "block" ) {
+			popHelp("deviceSsid");
+		}
+		
+	}
+
+	function gohome(){
+		window.parent.location.href="index.asp";
+	}
+
+	function waitRebootComplete() {
+		progressTask( 35, gohome );
+	}
+
+	function rebootSuccess() {
+		waitRebootComplete();
+	}
+
+	function upgrade_success() {
+		set_progress_quick( 10 );
+	}
+
+	function upload_file_success() {
+		progressTask( 80, waitRebootComplete, "设备升级中，请等待。。。" );
+		var url="setform/form_dev_start_upgrade?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "test", "test" );
+		f.submit_2( url, upgrade_success, stop_progress );
+	}
+
+	function _reboot() {
+		var url="setform/form_dev_reboot?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "test", "test" );
+		f.submit( url, rebootSuccess );
+	}
+
+	function reboot(){
+		myAlertSelect("确定要重启设备吗？", select_reboot);
+	}
+
+
+	function tabmenu_jump(page) {
+		switch (page){
+		case "设备重启":
+			stopPing();
+			setNavigationBar("设备管理>设备维护>设备重启");
+			$("#device_reboot").css('display','block'); 
+			$("#device_upgrade").css('display','none'); 
+			$("#device_ping").css('display','none'); 
+			$("#device_techSupport").css('display','none'); 
+
+			
+			$("#device_wds").css('display','none'); 
+			
+			break;
+		case "软件升级":
+			stopPing();
+			setNavigationBar("设备管理>设备维护>软件升级");
+			$("#device_reboot").css('display','none'); 
+			$("#device_upgrade").css('display','block'); 
+			$("#device_ping").css('display','none'); 
+			$("#device_techSupport").css('display','none'); 
+
+			
+			$("#device_wds").css('display','none'); 
+			
+
+			break;
+		case "Ping工具":
+			setNavigationBar("设备管理>设备维护>Ping工具");
+			$("#device_reboot").css('display','none'); 
+			$("#device_upgrade").css('display','none'); 
+			$("#device_ping").css('display','block'); 
+			$("#device_techSupport").css('display','none'); 
+
+
+			
+			$("#device_wds").css('display','none'); 
+			
+		//	$("#device_wds").css('display','none'); 
+			break;
+		case "一键导出":
+			stopPing();
+			setNavigationBar("设备管理>设备维护>一键导出");
+			$("#device_reboot").css('display','none'); 
+			$("#device_upgrade").css('display','none'); 
+			$("#device_ping").css('display','none'); 
+			$("#device_techSupport").css('display','block'); 
+
+			
+			$("#device_wds").css('display','none'); 
+			
+			break;
+
+		
+		case "故障排除":
+			stopPing();
+			setNavigationBar("设备管理>设备维护>故障排除");
+			$("#device_reboot").css('display','none'); 
+			$("#device_upgrade").css('display','none'); 
+			$("#device_ping").css('display','none'); 
+			$("#device_techSupport").css('display','none'); 
+			$("#device_wds").css('display','block'); 
+			break;
+		
+		default:
+			break;
+		}
+	}
+
+	$("document").ready( function(){
+		tabMenu_init();
+		$("#sel_wds_enable").change( changeWdsEnable );
+	});
+
+	function init() {
+		setNavigationBar("设备管理>设备维护>设备重启");
+
+		var temp = jsDataDevice.device[0];
+		$("#span_softversion").html(temp.softversion);
+		$("#span_hardversion").html(temp.hardversion);
+
+		/*defalt upgrade method: Local*/
+		var arrJqObj = $(".radio_method");
+		for (i = 0; i < arrJqObj.length; i++) {
+			if ( $( arrJqObj[i] ).val() == "Local" ){
+				$( arrJqObj[i] ).click();
+			}
+		}
+
+		/*defalt export tech_support.tar method: Local*/
+		var arrJqObj = $(".radio_method_tech");
+		for (i = 0; i < arrJqObj.length; i++) {
+			if ( $( arrJqObj[i] ).val() == "Local" ){
+				$( arrJqObj[i] ).click();
+			}
+		}
+
+		
+		var chooseStpl = loadWds();	
+		if ( chooseStpl.idx != -1 ) {
+			$("#sel_wds_ssid").val( chooseStpl.idx );
+			$("#text_wds_ip").val( chooseStpl.ip );
+			$("#text_wds_netmask").val( netmask_num2dottedQuad(chooseStpl.netmask) );
+			$("#sel_wds_enable").val("enable");
+		} else {
+			$("#sel_wds_enable").val("disable");
+		} 
+		
+		changeWdsEnable();
+	}
+
+</script>
+</head>
+
+<body  onLoad="init()">
+	<form id="myForm" name="myForm"></form>
+	<div class="tabmenu">
+		<table width="99%" style="border-collapse:collapse;">
+			<tr class="underline">
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabSelected"><a href="#">设备重启</a></td>
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">软件升级</a></td>
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">Ping工具</a></td>
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">一键导出</a></td>
+				
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">故障排除</a></td>
+				
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+			
+	<div id='device_reboot'>
+		<div align="left" class="mytbl_content">	
+			<input type="button" class="buttonL" value="重  启" style="margin-left:300px; margin-top:10px;" onclick="reboot();"/>
+		</div>
+	</div>
+	
+	<div id="device_upgrade" style="display:none;">
+			<div class="mytbl_content">
+				<form name="myForm2" id="myForm2" method="post" enctype="multipart/form-data" action="setform/form_dev_imageUpgrade_local?UID=" >
+				<table border="0" cellpadding="0" cellspacing="3" class="table_list" style="width:100%;">
+					<tbody class="content_body_area">
+						<tr>
+							<td class="col1">当前硬件版本：</td>
+							<td class="col2"><span id="span_hardversion"></span></td>
+						</tr>
+						<tr>
+							<td class="col1">当前软件版本：</td>
+							<td class="col2"><span id="span_softversion"></span></td>
+						</tr>
+						<tr>
+							<td class="col1">升级方式：</td>
+							<td class="col2">
+								<input type="radio" name="radio_method" class="radio_method" value="Local" onclick="changeMethod(this);" />Local	
+								<input type="radio" name="radio_method" class="radio_method" value="FTP" onclick="changeMethod(this);"/>FTP	
+								<input type="radio" name="radio_method" class="radio_method" value="TFTP" onclick="changeMethod(this);"/>TFTP	
+							</td>
+						</tr>
+						<tr class="tr_local">
+							<td class="col1">请选择升级文件：</td>
+							<td class="col2" style="">
+								<input type="file" name="fileField" id="fileField" size="28" />
+							</td>
+						</tr>					
+						<tr class="tr_ftp">
+							<td class="col1">FTP服务器：</td>
+							<td class="col2">
+								<input type='text' name='text_ftp_server' id='text_ftp_server' maxlength="64" size="48" />（1-64个字符）
+							</td>
+						</tr>
+						<tr class="tr_ftp">
+							<td class="col1">文件名：</td>
+							<td class="col2">
+								<input type='text' name='text_ftp_cfgName' id='text_ftp_cfgName' maxlength="64" size="48" />（1-64个字符）
+							</td>
+						</tr>
+						<tr class="tr_ftp">
+							<td class="col1">用户：</td>
+							<td class="col2">
+								<input type='text' name='text_ftp_username' id='text_ftp_username' maxlength="32" size="48" />（可选）  
+							</td>
+						</tr>
+						<tr class="tr_ftp">
+							<td class="col1">密码：</td>
+							<td class="col2">
+								<input type='password' name='text_ftp_password' id='text_ftp_password' maxlength="32" size="48" />（可选）  
+							</td>
+						</tr>
+						<tr class="tr_tftp">
+							<td class="col1">TFTP服务器：</td>
+							<td class="col2">
+								<input type='text' name='text_tftp_server' id='text_tftp_server' maxlength="64" size="48" />（1-64个字符）
+							</td>
+						</tr>
+						<tr class="tr_tftp">
+							<td class="col1">文件名：</td>
+							<td class="col2">
+								<input type='text' name='text_tftp_cfgName' id='text_tftp_cfgName' maxlength="64" size="48" />（1-64个字符）
+							</td>
+						</tr>
+								
+					</tbody>
+				</table>
+				</form>
+				<!--
+				<div style="font-size:12px; text-align:right; margin-top:3px; width:100%"><a href="more_3G.html">更多...</a></div>-->
+		</div>
+		<div class="content_option">
+			<input class="buttonL" onclick="upgrade();" type="button" value="升 级" />
+		</div>
+	</div>
+	
+	<div id="device_ping" style="display:none;">
+		<div class="mytbl_content">
+			<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+				<tr height="22">
+					<td class="col1" width="150" >主机：</td>
+					<td class="col2" width="400">
+						<input type="text" id="text_host_ip" maxlength="64" />
+					</td>
+				</tr>
+				<tr height="22">
+					<td class="col1" width="150" >次数：</td>
+					<td class="col2" width="400" >
+						<input type="text" id="text_ping_count" style="width:60px;" value="4" />（1-9999）
+						<input type="button" id="ping_start" value="Ping" onclick="ping();" />
+						<input type="button" id="ping_end" value="终止" onclick="stopPing();" style="display:none;" />
+					</td>
+				</tr>
+			</table>
+			<div id="ping_result" style="height:300px; width:99%; border:1px #8EA5CF solid; margin-left:4px; overflow-y:scroll;">
+			</div>
+		</div>
+	</div>
+
+	<div id="device_techSupport" style="display:none;">
+		<!-- start -->
+		<div class="mytbl_content" >
+			<table style="width:100%;">	
+				<tr>
+					<td class="col1">请选择方式：</td>
+					<td class="col2">
+						<input type="radio" name="radio_method_tech" class="radio_method_tech" value="Local" onclick="changeMethod_tech(this);" />Local	
+						<input type="radio" name="radio_method_tech" class="radio_method_tech" value="FTP" onclick="changeMethod_tech(this);"/>FTP	
+						<input type="radio" name="radio_method_tech" class="radio_method_tech" value="TFTP" onclick="changeMethod_tech(this);"/>TFTP	
+					</td>
+				</tr>
+				<tr class="tr_ftp_tech">
+					<td class="col1">FTP服务器：</td>
+					<td class="col2">
+						<input type='text' id='text_ftp_server_tech' maxlength="64" style="width:200px" />（1-64个字符）
+					</td>
+				</tr>
+				<tr class="tr_ftp_tech">
+					<td class="col1">文件名：</td>
+					<td class="col2">
+						<input type='text' id='text_ftp_cfgName_tech' maxlength="32" style="width:200px" value="tech_support.tar" />（1-32个字符）
+					</td>
+				</tr>
+				<tr class="tr_ftp_tech">
+					<td class="col1">用户：</td>
+					<td class="col2">
+						<input type='text' id='text_ftp_username_tech' maxlength="32" style="width:200px" />（可选）
+					</td>
+				</tr>
+				<tr class="tr_ftp_tech">
+					<td class="col1">密码：</td>
+					<td class="col2">
+						<input type='password' id='text_ftp_password_tech' maxlength="32" style="width:200px" />（可选） 
+					</td>
+				</tr>
+				<tr class="tr_tftp_tech">
+					<td class="col1">TFTP服务器：</td>
+					<td class="col2">
+						<input type='text' id='text_tftp_server_tech' style="width:200px" maxlength="64" />（1-64个字符）
+					</td>
+				</tr>
+				<tr class="tr_tftp_tech">
+					<td class="col1">文件名：</td>
+					<td class="col2">
+						<input type='text' id='text_tftp_cfgName_tech' style="width:200px" maxlength="32" value="tech_support.tar" />（1-32个字符）
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+		<div class="content_option">
+			<input class="buttonL" onclick="exportTechSupport();" type="button" value="导 出" />
+		</div>
+		<!-- end -->
+	</div>
+
+	<!-- wds, start -->
+	
+	<div id="device_wds" style="display:none;">
+		<div class="mytbl_content">
+			<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+				<tr height="22">
+					<td class="col1" width="150" >故障排除无线服务：</td>
+					<td class="col2" width="400">
+						<select id="sel_wds_enable" >
+							<option value="enable">启用</option>
+							<option value="disable">禁用</option>
+						</select>
+					</td>
+				</tr>
+				<tr height="22" class="part_tr_wds_enable">
+					<td class="col1">SSID：</td>
+					<td class="col2">
+						<select id="sel_wds_ssid">
+							<option value="" >请选择SSID</option>
+						</select>
+					</td>
+				</tr>
+				<tr height="22" class="part_tr_wds_enable">
+					<td class="col1">IP地址：</td>
+					<td class="col2">
+						<input type='text' id='text_wds_ip' maxlength="64" style="width:200px" />
+					</td>
+				</tr>
+				<tr height="22" class="part_tr_wds_enable" >
+					<td class="col1">子网掩码：</td>
+					<td class="col2">
+						<input type='text' id='text_wds_netmask' maxlength="64" style="width:200px" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="content_option">
+			<input class="buttonL" id="cancel" onclick="cancel_wds();" type="button" value="取 消" />
+			<input class="buttonL" id="apply" onclick="ok_wds();" type="button" value="确 定" />
+		</div>
+	</div>
+	
+	<!-- wds, end-->
+				
+</body>
+</html>

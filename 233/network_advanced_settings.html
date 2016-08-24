@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/network_advanced_settings.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+<link rel="stylesheet" href="css/interface.css" type="text/css">
+
+<script type="text/javascript">
+	var jsInterface = { "pkg_interface": [ { "sect_name": "GigabitEthernet0\/0", "enabled": "enabled", "linkmode": "bridge", "mtu": "1500" }, { "sect_name": "LO0", "enabled": "enabled" }, { "sect_name": "Vlan-interface1", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-Radio0\/0", "mtu": "1500", "enabled": "enabled" }, { "sect_name": "WLAN-Radio0\/1", "mtu": "1500", "enabled": "enabled" }, { "sect_name": "Loopback0", "enabled": "enabled" }, { "sect_name": "WLAN-BSS0", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS1", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS10", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS11", "enabled": "enabled", "mtu": "1500" } ] };
+	var jsSystem = { "pkg_system": [ { "sect_name": "hostname" }, { "sect_name": "wirelessisolation", "enabled": "disabled" }, { "sect_name": "route", "forward": "disabled" }, { "sect_name": "wizard", "run": "1" } ] };
+	var jsAlg = { "pkg_alg": [ { "sect_name": "alg", "ftp": "enabled", "tftp": "enabled", "pptp": "enabled", "h323": "enabled", "sip": "enabled", "irc": "enabled", "netbios": "enabled", "snmp": "enabled" } ] };
+</script>
+
+</head>
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>路由转发</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr>
+				<td class="col1">路由转发：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_ip_forwarding_enable" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>ALG设置</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr>
+				<td class="col1">FTP：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_ftp_enable" />
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">TFTP：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_tftp_enable" />
+				</td>
+			</tr>
+			<tr style="display:none;" >
+				<td class="col1">H323：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_h323_enable" />
+				</td>
+			</tr>
+			<tr style="display:none;">
+				<td class="col1">IRC：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_irc_enable" />
+				</td>
+			</tr>
+			<tr style="display:none;">
+				<td class="col1">NETBIOS：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_netbios_enable" />
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">PPTP：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_pptp_enable" />
+				</td>
+			</tr>
+			<tr style="display:none;">
+				<td class="col1">SIP：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_sip_enable" />
+				</td>
+			</tr>
+			<tr style="display:none;">
+				<td class="col1">SNMP：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_alg_snmp_enable" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="content_option">
+		<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+		<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+	</div>
+
+	<!--接口列表-->
+	<div id="INNER" class="part_switch_link_mode" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>二/三层切换接口列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery part_switch_link_mode">
+	<!--
+		<input type="button" class="buttonL" value="新 增" title="新增三层接口" onclick="addInterface();" style="float:left;margin-left:2px;"/>
+		-->
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">名称</option>
+				<option value="1">模式</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch();"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid part_switch_link_mode" id="tbl_interfaces" >
+	</div>
+
+</body>
+</html>

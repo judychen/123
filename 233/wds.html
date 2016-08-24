@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv='Pragma' content='no-cache'>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/wds.js?1468922814" charset="utf-8"></script>
+
+<script language="javascript">
+	var jsWds = { "pkg_wlan_wds": [ { "sect_name": "wds_role" }, { "sect_name": "wds_rooter", "discover_enable": "enable", "max_level": "2", "default_downlink": "5G", "netid": "newwork" }, { "sect_name": "wds_repeater", "netid": "CommSky_WDS", "downlink": "5G" } ] };
+	var jsAcl = { "pkg_wlan_acl": [ { "sect_name": "36", "policy": "permit", "maclist": [ { "maclist": "11:22:33:44:55:66" }, { "maclist": "77:77:77:77:77:77" } ] }, { "sect_name": "37", "policy": "deny", "maclist": [ { "maclist": "66:55:44:33:22:11" }, { "maclist": "77:77:77:77:77:77" } ] } ] };
+</script>
+
+</head>
+
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>WDS配置</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+	<div class="mytbl_content">
+		<table style="width:100%;">
+			<tr height="28">
+				<td class="col1">模式选择：</td>
+				<td class="col2">
+					<input type="radio" name="radio_wds_role" value="none" />禁用
+					<input type="radio" name="radio_wds_role" value="root" />Root AP
+					<input type="radio" name="radio_wds_role" value="auto" />Auto repeater
+					<input type="radio" name="radio_wds_role" value="static" />Static repeater
+				</td>
+			</tr>
+			<tr height="22" class="part_root part_static">
+				<td class="col1">Net ID：</td>
+				<td class="col2"><input type="text" size="32" id="text_netid" name="text_netid"/>（1-32个字符）</td>
+			</tr>
+			<tr height="22" class="part_auto">
+				<td class="col1">Net ID：</td>
+				<td class="col2"><input type="text" size="32" id="text_netid_auto" name="text_netid_auto"/>（可选，1-32个字符）</td>
+			</tr>
+			<tr height="22" class="part_root part_backhaul">
+				<td class="col1">Backhaul：</td>
+				<td class="col2">
+					<select name="sel_backhaul_root" id="sel_backhaul_root" size="1" >
+						<option value="2G">2.4G</option>
+						<option value="5G">5G</option>
+					</select>
+				</td>
+	 		</tr>
+			<tr height="22" class="part_static part_backhaul">
+				<td class="col1">Backhaul：</td>
+				<td class="col2">
+					<select name="sel_backhaul_static" id="sel_backhaul_static" size="1" >
+						<option value="2G">2.4G</option>
+						<option value="5G">5G</option>
+						<option value="none">关闭</option>
+					</select>
+				</td>
+	 		</tr>
+			<tr height="22" class="part_root part_static">
+				<td class="col1">认证方式：</td>
+				<td class="col2">
+					<select id="sel_auth" name="sel_auth" >
+						<option name="None" value="None">None</option>
+						<option name="WPA-PSK" value="WPA-PSK">WPA2-PSK</option>
+					</select>
+				</td>
+			</tr>
+			<tr class="noRadius part_root part_static">
+				<td class="col1">共享密钥：</td>
+				<td class="col2">
+					<input type="password" id="text_wpa_psk_h" name="text_wpa_psk_h" class="text2" size="32" maxlength="64" onfocus="doclick(2);" />
+					<input type="password" id="text_wpa_psk" name="text_wpa_psk" class="text2" size="32" maxlength="64" onblur="doblur(2);"/><span>（8-63个字符或64个十六进制字符）</span>
+				</td>
+			</tr>
+			<tr height="22" class="part_root part_static">
+				<td class="col1">ACL：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_acl_enable" />
+					<select id="sel_acl_scheme" style="display:none;">
+						<option value="" >请选择ACL方案</option>
+					</select>
+				</td>
+			</tr>
+			<tr height="22" class="part_root">
+				<td class="col1">最大层级：</td>
+				<td class="col2">
+					<select name="sel_max_level" id="sel_max_level" size="1" >
+						<option value="1">1</option>
+						<option value="2">2</option>
+					</select>
+				</td>
+			</tr>
+			<tr height="22" class="part_root">
+				<td class="col1">自动发现功能：</td>
+				<td class="col2">
+					<select name="sel_discovery" id="sel_discovery" size="1" >
+						<option value="enable">Enable</option>
+						<option value="disable">Disable</option>
+					</select>
+				</td>
+			</tr>
+			<tr height="22" class="part_static">
+				<td class="col1">上行绑定MAC：</td>
+				<td class="col2"><input type="text" id="text_uplink_bind_mac" name="text_uplink_bind_mac"/>（可选，XX:XX:XX:XX:XX:XX）</td>
+			</tr>
+		</table>
+	</div>
+
+			
+	<div class="content_option">
+		<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+		<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+	</div>
+
+	<div id="INNER"  align="left" style="margin-top:10px" class="part_root_block">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>Repeater Uplink列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery part_root_block">
+		<input type="button" class="buttonL" value="新 增" title="新增Repeater uplink" onclick="addRepeaterUplink();" style="float:left;margin-left:2px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">Repeater Mac</option>
+				<option value="1">Uplink Mac</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid part_root_block" id="list_wds" >
+	</div>
+
+</body>
+</html>

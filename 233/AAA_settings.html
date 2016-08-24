@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+
+<script type="text/javascript">
+	var jsAAA = {"pkg_radius_scheme":[{"sect_name":"AAACopy","primary-authentication-ip":"1.1.1.2","primary-authentication-port":"1812","primary-accounting-ip":"1.1.1.5","primary-accounting-port":"1813","secondary-authentication-ip":"1.1.1.1","secondary-authentication-port":"1812","secondary-accounting-ip":"1.1.1.1","secondary-accounting-port":"1813"}]
+};
+
+	var arrAAA = new Array();
+
+	function myhelp() {
+		popHelp("aaaSettings");
+	}
+
+	function addAAA(){
+		var url = "AAA_add.asp?UID="+parent.uid;
+		pageJump(url);
+	}
+	
+	function AAA_edit(arrRow, indexRow){
+		//var arrRow = arrAAA[nRow].split(";");
+		var arrRow = arrRow;
+		var schemeName = arrRow[0];
+		
+		var url = "AAA_edit.asp?UID="+parent.uid+"&radius_scheme="+schemeName + "&page=" + tg.getCurrentPage() ;
+		pageJump(url);
+	}
+
+	function addApServiceSuccess() {
+		var url = "AAA_settings.asp?UID="+parent.uid;
+		pageJump(url);
+	}
+
+	function AAA_del(arrRow, indexRow){
+		//var arrRow = arrAAA[nRow].split(";");
+		var arrRow = arrRow;
+		var schemeName = arrRow[0];
+		
+		var url="setform/form_AAA_del?UID="+parent.uid;
+		var f = new myForm();
+		
+		f.add("radius_scheme", schemeName);
+		
+		f.submit( url, addApServiceSuccess );
+	}
+	
+	function onSearch() {
+		var keyWords = $("#text_keywords").val();
+		tg.pageview_search( $("#search_item").val(), keyWords );
+	}
+	
+	var tg = new myGrid('tg');
+	function init() {
+		setNavigationBar("无线设置>AAA认证>AAA方案列表");
+
+		var temp = jsAAA.pkg_radius_scheme;
+		for (i = 0; i< temp.length; i++) {
+			arrAAA[i] = temp[i].sect_name;
+		}
+		
+		tg.pageview_add('方案名称', 0, '87%', MG_SORT_ASCII);
+		tg.pageview_add_btn("编辑",AAA_edit);
+		tg.pageview_add_btn("删除",AAA_del);
+		tg.pageview_set_OPwidth("13%");
+
+		var page = getQueryString("page");
+		if ( page != null )
+			tg.pageview_init(arrAAA, 10, 'list_AAA', page);
+		else	
+			tg.pageview_init(arrAAA, 10, 'list_AAA');
+	}
+</script> 
+
+</head>
+<body onLoad="init();">
+	<form name="myForm" id="myForm"></form>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>AAA方案列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增AAA方案" onclick="addAAA();" style="float:left;margin-left:0px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">方案名称</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="list_AAA">
+	</div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/dhcpd/dhcpd.js?1468922814" charset="utf-8"></script>
+
+	<script>
+	var jsDhcpd = { "pkg_dhcpd": [ { "sect_name": "global", "enabled": "1" } ] }
+	//var jsDhcpd_pool = { "pkg_dhcpd_pool": [ ] }
+	var jsDhcpd_pool = new Array(); 
+	var arrPool = new Array();
+	var jsStatic = new Array();
+
+	</script>
+	
+</head>
+
+<body onLoad="init();" >
+	<div class="tabmenu">
+		<table width="99%" style="border-collapse:collapse;">
+			<tr class="underline">
+				<td style="width:1px;">&nbsp;</td>
+				<!--
+				<td class="tabSelected"><a href="#">客户端列表</a></td>
+				-->
+				<td class="tabUnselected"><a href="#">客户端列表</a></td>
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">动态绑定</a></td>
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">静态绑定</a></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+<div class="part_client" style="display:none;">
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="刷 新" onclick="loadClientList();" style="float:left;margin-left:0px;"/>
+		<input type="button" class="buttonL" value="清 空" onclick="reset_leases();" style="float:left;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="sel_search_item_client" class="searchItem">
+				<option value="0" selected="">客户端名称</option>
+				<option value="1">接口</option>
+				<option value="2">IP地址</option>
+				<option value="3">MAC地址</option>
+				<option value="4">租期剩余时间</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords_client" class="text_keywords" maxlength="22" empty="true" />
+			<input id="apply" onclick="onSearch_client()" type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="list_client">
+	</div>
+</div>
+
+
+<div class="part_dynamic" style="display:none;">
+	<div id="INNER" align="left" style="margin-top:10px; display:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>DHCPD功能</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content" style="display:none;">
+		<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+			<tr class="radius">
+				<td class="col1">使能：</td>
+				<td class="col2">
+					<select id="sel_enabled">
+						<option value="enabled">启用</option>
+						<option value="disabled">禁用</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</div>	
+	<div class="content_option" style="display:none;">
+		<input type="button" class="buttonL" onClick="goBack();" value="返 回" />
+		<input type="button" class="buttonL" onClick="enabled();" value="确 定" />
+		<input type="button" class="buttonL" onClick="getLeases();" value="获取租期" />
+		<!--
+		<input type="button" class="buttonL" onClick="enabled();" value="确 定" />
+		<input type="button" class="buttonL" onClick="enabled();" value="确 定" />
+		-->
+	</div>
+
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>动态地址池列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增地址池方案" onclick="pool_add();" style="float:left;margin-left:0px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="sel_search_item_pool" class="searchItem">
+				<option value="0" selected="">地址池名称</option>
+				<option value="1">IP/子网掩码</option>
+				<option value="2">地址池范围</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords_pool" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch_pool()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="list_dynamic_pool">
+	</div>
+</div>
+
+<div class="part_static" style="display:none;">
+
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>静态绑定导入/导出</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<!-- start -->
+	<div class="mytbl_content" >
+		<table style="width:100%;">	
+			<tr>
+				<td class="col1">请选择方式：</td>
+				<td class="col2">
+					<input type="radio" name="radio_method" class="radio_method" value="Local" onclick="changeMethod_tech(this);" />Local	
+					<input type="radio" name="radio_method" class="radio_method" value="FTP" onclick="changeMethod_tech(this);"/>FTP	
+					<input type="radio" name="radio_method" class="radio_method" value="TFTP" onclick="changeMethod_tech(this);"/>TFTP	
+				</td>
+			</tr>
+			<tr class="tr_local_tech">
+				<td class="col1">请选择导入文件：</td>
+				<td class="col2" style="">
+					<input type="file" name="fileField" id="fileField" size="28" />
+				</td>
+			</tr>					
+
+			<tr class="tr_ftp_tech">
+				<td class="col1">FTP服务器：</td>
+				<td class="col2">
+					<input type='text' id='text_ftp_server' maxlength="64" style="width:200px" />（1-64个字符）
+				</td>
+			</tr>
+			<tr class="tr_ftp_tech">
+				<td class="col1">文件名：</td>
+				<td class="col2">
+					<input type='text' id='text_ftp_cfgName' maxlength="32" style="width:200px" value="dhcpd_mac.list" />（1-32个字符）
+				</td>
+			</tr>
+			<tr class="tr_ftp_tech">
+				<td class="col1">用户：</td>
+				<td class="col2">
+					<input type='text' id='text_ftp_username' maxlength="32" style="width:200px" />（可选）
+				</td>
+			</tr>
+			<tr class="tr_ftp_tech">
+				<td class="col1">密码：</td>
+				<td class="col2">
+					<input type='password' id='text_ftp_password' maxlength="32" style="width:200px" />（可选） 
+				</td>
+			</tr>
+			<tr class="tr_tftp_tech">
+				<td class="col1">TFTP服务器：</td>
+				<td class="col2">
+					<input type='text' id='text_tftp_server' style="width:200px" maxlength="64" />（1-64个字符）
+				</td>
+			</tr>
+			<tr class="tr_tftp_tech">
+				<td class="col1">文件名：</td>
+				<td class="col2">
+					<input type='text' id='text_tftp_cfgName' style="width:200px" maxlength="32" value="dhcpd_mac.list" />（1-32个字符）
+				</td>
+			</tr>
+			
+		</table>
+	</div>
+	<div class="content_option">
+		<input class="buttonL" onclick="importDhcpdStatic();" type="button" value="导 入" />
+		<input class="buttonL" onclick="exportTechSupport();" type="button" value="导 出" />
+	</div>
+	<!-- end -->
+
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>静态绑定列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增静态地址绑定" onclick="dhcpd_add_static_bind();" style="float:left;margin-left:0px;"/>
+		<input type="button" class="buttonL" value="清 空" onclick="reset_static_bind();" style="float:left;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="sel_search_item_static" class="searchItem">
+				<option value="0" selected="">MAC地址</option>
+				<option value="1">IP地址</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords_static" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch_static()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="list_dhcpd_static_bind">
+	</div>
+</div>
+</body>
+</html>

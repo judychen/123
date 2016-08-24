@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+
+<style type="text/css">
+.disabled_op {
+	width:28px;
+	margin:2px;
+	padding:0 6px 0 6px;
+}
+
+#list_vlan table, #list_port table {
+	word-break:break-all;
+	word-wrap:break-word;
+}
+</style>
+
+<script type="text/javascript">
+	
+	var portList = new Array("GEH;trunk;1;2,3,6-10,12,13-15",
+							"BSS1;trunk;1;7,9,12-22",
+							"BSS2;access;2",
+							"BSS3;hybrid;1;1,3;7,9,12-14",
+							"BSS4;access;1");
+	
+	var vlanListDatas = new Array("1;VLAN 0001;VLAN 0001;GigabitEthernet0/0,WLAN-BSS0,WLAN-BSS1,WLAN-BSS10,WLAN-BSS11");
+	var jsVlanPort = { "pkg_vlan_port": [ { "sect_name": "GigabitEthernet0\/0", "pvid": "1", "type": "trunk", "permit": [ { "permit": "all" } ] }, { "sect_name": "WLAN-BSS0", "pvid": "1", "type": "access" }, { "sect_name": "WLAN-BSS1", "pvid": "1", "type": "access" }, { "sect_name": "WLAN-BSS10", "pvid": "1", "type": "access" }, { "sect_name": "WLAN-BSS11", "pvid": "1", "type": "access" } ] };
+	var arrVlanPort = new Array();
+
+	var jsRadio = { "pkg_wlan_radio": [ { "sect_name": "WLAN-Radio0\/0", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "gn", "channel": "6", "distance": "1", "bandwidth": "20", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-80", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "0-0" } ] }, { "sect_name": "WLAN-Radio0\/1", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "an", "channel": "149", "distance": "1", "bandwidth": "40", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-77", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "1-1" } ] } ] };
+	var jsServTpl = { "pkg_wlan_service_template": [ { "sect_name": "ServiceTemplate0", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "psk-key-crypt": "plain", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_2.4G", "portal-scheme": "12", "authentication": "wpa2-radius", "cipher": "ccmp", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "radius-scheme": "AAACopy", "service-template": "enabled", "acl": "36" }, { "sect_name": "ServiceTemplate1", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_5G", "authentication": "wpa2-psk", "cipher": "ccmp", "psk-key": "BQ8MCAoICQU=", "psk-key-crypt": "cipher", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "service-template": "enabled", "acl": "37" } ] };
+	var curTabmenu = "";
+
+	function myhelp() {
+		if ( $(".part_vlan").css("display") == "block")
+			popHelp("vlanSettings");
+		else
+			popHelp("vlanPortList");
+	}
+
+	var arrFilterData = new Array();
+
+	function getServiceTpl( bss_id ){
+		for (var i = 0; i < jsRadio.pkg_wlan_radio.length; i++ ){
+			var radio = jsRadio.pkg_wlan_radio[i];
+
+			if ( typeof(radio.bind) == "undefined" ) 
+				continue;
+
+			for (var k = 0; k < radio.bind.length; k++){
+				var arrBind = radio.bind[k].bind.split("-");	//arrBind[0]:WLAN-BSS, arrBind[1]:service_template
+				if ( arrBind[0] == bss_id) {
+					return arrBind[1];
+				}
+			}
+		}
+
+		return null;
+	}
+
+	function getSsid( servTplId ) {
+		for ( var i = 0; i < jsServTpl.pkg_wlan_service_template.length; i++ ) {
+			var servTpl = jsServTpl.pkg_wlan_service_template[i];	
+			var stID = servTpl.sect_name.slice(15);
+			/*fix bug:servcie template can be bind to radio without ssid settings*/
+			if ( servTplId == stID && typeof(servTpl.ssid) != "undefined" ) {
+				return servTpl.ssid;
+			}
+		}
+		return null;
+	}
+
+/*
+	function filter( index, data ) {
+		arrFilterData.length = 0;
+		var count = 0;
+
+		for ( var i = 0; i < vlanListDatas.length; i++ ) {
+			var arrTemp = vlanListDatas[i].split(";");
+			var exp = new RegExp( data );
+			if ( exp.test( arrTemp[index] ) ) {
+				arrFilterData[count++] = vlanListDatas[i];
+			}
+		}
+	}*/
+
+	function onSearch() {
+		var keyWords = $("#text_keywords").val();
+		tgVlan.pageview_search( $("#sel_search_item").val(), keyWords );
+	}
+
+	function delAllSelVlan() {
+	}
+
+	function changeIpMode(){
+		if ($("#IP_MODE").val() == "dhcp") {
+			$(".IP_static").css('display','table-row');
+			$(".IP_PPPoE").css('display','none');
+		}
+		else if ($("#IP_MODE").val() == "pppoe") {
+			$(".IP_static").css('display','none');
+			$(".IP_PPPoE").css('display','table-row');
+		}
+		else {
+			$(".IP_static").css('display','none');
+			$(".IP_PPPoE").css('display','none');
+		}
+	}
+	
+	function ap_rate_enable(bEnable){
+		if (bEnable == true) {
+			$("#AP_RATE_id_1").removeAttr("disabled");//要变成Enable，JQuery只能这么写
+		}
+		else {
+			$("#AP_RATE_id_1").attr("disabled","disabled");//再改成disabled
+		}
+	}
+	
+	function addVlan(){
+		var url = "vlan_add.asp?UID="+parent.uid;
+		$(window.parent.document).find("#Frame_Content").attr("src",url);
+	}
+
+	function editVlan( arrRow, rowIndex ) {
+		var vlanID = arrRow[0]; 
+		pageJump("vlan_edit.asp?UID="+parent.uid+"&vid="+vlanID+"&page_vlan="+tgVlan.getCurrentPage());
+	}
+
+	function delVlan_success(data){
+		var index = data.indexOf(";");
+		var status = data.substr(0, index);
+		if (status == "ok"){
+			//配置成功，重新加载数据
+			str = data.substr(index+1, data.length-index-1); 
+			vlanListDatas.length = 0;
+			eval("vlanListDatas = new Array("+str+")");
+			//tg.pageview_init(vlanListDatas, 100, 'list_log');
+			//alert(vlanListDatas.length);
+			tgVlan.pageview_init(vlanListDatas, 10, 'list_vlan');
+				
+		}else if (status == "error"){
+			showError(true, arrDatas[1]);
+		}else
+			showError(true, "未知响应！");
+	}
+
+	function delVlan( arrRow, indexRow ) {
+		var vlanID = arrRow[0];
+
+		showWaitConfig(true);
+		var url="setform/del_vlan?UID="+parent.uid;
+		$("#myForm").html("");
+		$("#myForm").append("<input type=\"hidden\" name=\"vlanID\" value=\""+vlanID+"\" />");
+		$("#myForm").attr("action", url);
+		var ajaxEvent = $.ajax({
+			cache: true,
+			type: "POST",
+			url: url,
+			data:$("#myForm").serialize(),
+			timeout:4000,//ms
+			async: true,
+			success: function(data) {
+				showWaitConfig(false);
+				delVlan_success(data);
+			},
+			complete: function(XMLHttpRequest, status){
+				//alert("status:"+status);
+				//alert(XMLHttpRequest.status);
+				if ( status == "timeout"){//status还有success,error等
+					ajaxEvent.abort();				
+					showError(true, "响应超时，请检查网络！");
+				} else if ( status == "error"){
+					showError(true);
+				}
+			}
+		});
+	}
+	
+	function editPort( arrRow, indexRow ) {
+		var portName = arrRow[1];
+		var page = tg.getCurrentPage();
+		pageJump("vlan_port_edit.asp?UID=" + parent.uid + "&portName=" + portName + "&page_port=" + page);
+	}
+
+	function formatVlanMenber(arrRow, index) {
+		var PermitVlanStr = "";
+		var arrPermitVlanList = arrRow[index].split(",");
+		for(var i = 0; i < arrPermitVlanList.length; i++){
+			var arrPermitVlan = arrPermitVlanList[i].split("-");
+			var start = arrPermitVlan[0];
+			var end = arrPermitVlan[1];
+			if(i != 0){
+				PermitVlanStr += ',';	
+			}
+			if(start == end){
+				PermitVlanStr += start;
+			}else{
+				PermitVlanStr += arrPermitVlanList[i];
+			}
+		}
+		return PermitVlanStr;
+		/*if( arrRow[2] == "access" )
+			return "--"; //access port don't have permit vlan
+		else*/
+			//return arrRow[index];
+	}
+
+	function chkformatFunc(arrayRow) {
+		if ( arrayRow[0] == "1" )
+			return false;
+		else
+			return true;
+	}
+	//index为第几列按钮,第1列按钮的index为0
+	function btn_formatFunc(arrayRow, index) {
+		if( arrayRow[0] == "1" )
+			return false;
+		else
+			return true;
+	}
+
+	function Add(){
+		$(".part_op_addVlan").css("display","block");
+		$(".part_op_vlan").css("display","none");
+		$(".part_addVlan").slideToggle("nomarl");
+	}
+	
+	function tabmenuHL( curTabmenu ){
+		var tabname;
+		if (curTabmenu == "" || curTabmenu == "VLAN")
+			tabname = "VLAN";
+		else if ( curTabmenu == "端口") {
+			tabname = "端口";
+		}
+		var arrDom = $(".tabmenu a");
+		for (i = 0; i < arrDom.length; i++){
+			tmp = $(arrDom[i]);
+			if (tmp.html() == tabname){
+				tmp.click();
+			}
+		}
+	}
+
+	function tabmenu_jump(page) {
+		switch (page){
+		case "VLAN":
+			setNavigationBar("网络设置>VLAN管理>VLAN");
+			$(".part_vlan").css('display','block'); 
+			$(".part_port").css('display','none'); 
+			break;
+		case "端口":
+			setNavigationBar("网络设置>VLAN管理>端口");
+			$(".part_vlan").css('display','none'); 
+			$(".part_port").css('display','block'); 
+			break;
+		default:
+			alert("Unkown tab clicked!");
+			break;
+		}
+	}
+	
+	function onSearch() {
+		var keyWords = $("#text_keywords").val();
+		tgVlan.pageview_search( $("#sel_search_item").val(), keyWords );
+	}
+	
+	$("document").ready( function(){
+		tabMenu_init();
+	});
+	
+	var tg = new myGrid('tg');
+	var tgVlan = new myGrid('tgVlan');
+
+	function init() {
+		//tabmenu_jump("VLAN"); 
+		setNavigationBar("网络设置>VLAN管理>VLAN");
+		tabmenuHL(curTabmenu);
+
+		for (i = 0; i < jsVlanPort.pkg_vlan_port.length; i++){
+			var temp = ""
+			temp = jsVlanPort.pkg_vlan_port[i];
+			var port_name;
+			var bss_id;
+			var ssid;
+			port_name = temp.sect_name;
+			if ( port_name.slice(0, 8) == "WLAN-BSS" ) {
+				bss_id = port_name.slice( 8 );
+				var stID = getServiceTpl( bss_id );
+				if ( stID != null ) {
+					ssid = getSsid( stID );
+					if ( ssid != null )
+						arrVlanPort[i] = ssid + ";";
+					else
+						arrVlanPort[i] = "--;";
+				} else
+					arrVlanPort[i] = "--;" /*WLAN-BSS unused*/
+			} else
+				arrVlanPort[i] = "--;" /*Ethernet has no ssid*/
+
+			arrVlanPort[i] += temp.sect_name+";"+temp.type+";"+temp.pvid+";";
+			if(typeof(temp.permit) != "undefined"){
+				if (temp.type == "trunk") {
+					for(j = 0; j < temp.permit.length; j++){
+						if( j!= 0)
+							arrVlanPort[i] += ",";
+						arrVlanPort[i] += temp.permit[j].permit;
+					}
+				} 
+			}else if (temp.type == "access")
+				arrVlanPort[i] += temp.pvid;
+		}
+
+
+		tg.pageview_add('端口', 1, '20%', MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc);
+		tg.pageview_add('SSID', 0, '19%', MG_SORT_ASCII);
+		tg.pageview_add('类型', 2, '10%', MG_SORT_ASCII);
+		tg.pageview_add('PVID', 3, '8%', MG_SORT_NUM);
+		tg.pageview_add('Permit VLAN', 4, '38%', MG_SORT_ASCII, null, formatVlanMenber);
+		tg.pageview_set_OPwidth("5%");
+		tg.pageview_add_btn("编辑", editPort);
+
+		var page_port = getQueryString("page_port");
+		//alert(page_port);
+		if ( page_port != null )
+			tg.pageview_init(arrVlanPort, 10, 'list_port', page_port);
+		else
+			tg.pageview_init(arrVlanPort, 10, 'list_port');
+
+
+		tgVlan.pageview_add('VLAN ID', 0, '12%', MG_SORT_NUM);
+		tgVlan.pageview_add('VLAN名称', 2, '18%', MG_SORT_ASCII);
+		tgVlan.pageview_add('描述', 1, '20%', MG_SORT_ASCII);
+		tgVlan.pageview_add('成员端口', 3, '40%', MG_SORT_NONE);
+		tgVlan.pageview_set_OPwidth("10%");
+		tgVlan.pageview_add_btn("编辑", editVlan );
+		tgVlan.pageview_add_btn("删除", delVlan, null, null, btn_formatFunc);
+		//tgVlan.pageview_add_checkbox(2, chkformatFunc);
+
+		var page_vlan = getQueryString("page_vlan");
+		if ( page_vlan!= null )
+			tgVlan.pageview_init(vlanListDatas, 10, 'list_vlan', page_vlan);
+		else
+			tgVlan.pageview_init(vlanListDatas, 10, 'list_vlan');
+		
+		$(".part_addVlan").css("display","none");
+		$(".part_op_addVlan").css("display","none");
+	}
+</script> 
+
+
+</head>
+<body onLoad="init();">
+    <form name="myForm" id="myForm" method="post"></form>
+	<div class="tabmenu">
+		<table width="99%" style="border-collapse:collapse;">
+			<tr class="underline">
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">VLAN</a></td>
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">端口</a></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- 已有VLAN信息 -->
+	<!-- test_tabmenu
+	<div id="INNER"  class="part_vlan" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>已有VLAN信息</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table> 
+	</div> -->
+	<div class="content_tableQuery part_vlan">
+		<input type="button" class="buttonL" value="新 增" title="新增Vlan" onclick="addVlan();" style="float:left;margin-left:0px;"/>
+		<!--
+		<input type="button" class="buttonL" value="删除所选" style="float:left;" onclick="delAllSelVlan();"/>
+		-->
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="sel_search_item" class="searchItem">
+				<option value="0" selected="">VLAN ID</option>
+				<option value="2">VLAN名称</option>
+				<option value="1">描述</option>
+				<option value="3">成员端口</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" />
+			<input onclick="onSearch();" type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid part_vlan" id="list_vlan" >
+	</div>
+
+	<!-- 端口 -->
+	<!-- test_tabmenu
+	<div id="INNER" class="part_port" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>端口</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	-->
+	<div class="mytbl_content myGrid part_port" id="list_port" >
+	</div>
+		
+</body>
+</html>

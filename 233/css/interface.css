@@ -1,0 +1,24 @@
+#tbl_vlanInterface td.myGrid_col1 {
+	text-align:left;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+/*
+#tbl_vlanInterface td.myGrid_col0 {
+	width:120px;
+}
+#tbl_vlanInterface td.myGrid_col1 {
+	width:240px;
+}
+#tbl_vlanInterface td.myGrid_col2 {
+	width:80px;
+}
+#tbl_vlanInterface td.myGrid_col3 {
+	width:80px;
+}
+#tbl_vlanInterface td.opBtn0 {
+	width:60px;
+}
+#tbl_vlanInterface td.opBtn1 {
+	width:60px;
+}*/

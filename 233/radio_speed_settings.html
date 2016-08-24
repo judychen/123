@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv='Pragma' content='no-cache'>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+
+<script language="javascript">
+	var jsWrrm = { "pkg_wrrm": [ { "sect_name": "wrrm", "dot11g-basic-rateset": "15", "dot11g-supported-rateset": "4080", "dot11g-disabled-rateset": "0", "dot11a-basic-rateset": "21", "dot11a-supported-rateset": "234", "dot11a-disabled-rateset": "0", "dot11n-basic-mcs": "0", "dot11n-supported-mcs": "15", "bandsteering-enable": "disabled", "bandsteering-retry-threshold": "0", "bandsteering-aging-time": "3600", "bandsteering-suppress-enable": "disabled", "bandsteering-suppress-threshold": "40", "arp-optimize": "disabled", "arp-optimize-policy": "broadcast-to-unicast", "rate-optimize": "disabled" } ] };
+
+	var radio_mode_flag = 0;
+	var radio_2G_flag = 1;
+	var radio_5G_flag = 1 << 1;
+
+	function myhelp() {
+		popHelp("radioSpeedSettings");
+	}
+
+	function cancel() {
+		load();
+	}
+
+	function load() {
+		var value_11a_basic = jsWrrm.pkg_wrrm[0]["dot11a-basic-rateset"];
+		var value_11a_support = jsWrrm.pkg_wrrm[0]["dot11a-supported-rateset"];
+		var i;
+
+		if ( ( radio_mode_flag & radio_5G_flag ) == radio_5G_flag ) {
+			i = 0;
+			while ( value_11a_basic > 0 ) {
+				if ( (value_11a_basic & 1) == 1 ) {
+					$("#11a_basic_" + i).attr("checked", true);
+					$("#11a_support_" + i).attr("checked", false);
+				}
+				value_11a_basic = value_11a_basic >> 1;
+				i++;
+			}
+
+			i = 0;
+			while ( value_11a_support > 0 ) {
+				if ( (value_11a_support & 1) == 1 ) {
+					$("#11a_support_" + i).attr("checked", true);
+					$("#11a_basic_" + i).attr("checked", false);
+				}
+				value_11a_support = value_11a_support >> 1;
+				i++;
+			}
+		}
+
+		var value_11g_basic = jsWrrm.pkg_wrrm[0]["dot11g-basic-rateset"];
+		var value_11g_support =jsWrrm.pkg_wrrm[0]["dot11g-supported-rateset"];
+
+		i = 0;
+		while ( value_11g_basic > 0 ) {
+			if ( (value_11g_basic & 1) == 1 ) {
+				$("#11g_basic_" + i).attr("checked", true);
+				$("#11g_support_" + i).attr("checked", false);
+			}
+			value_11g_basic = value_11g_basic >> 1;
+			i++;
+		}
+
+		i = 0;
+		while ( value_11g_support > 0 ) {
+			if ( (value_11g_support & 1) == 1 ) {
+				$("#11g_support_" + i).attr("checked", true);
+				$("#11g_basic_" + i).attr("checked", false);
+			}
+			value_11g_support = value_11g_support >> 1;
+			i++;
+		}
+
+		$("#text_11n_mcs_basic").val( jsWrrm.pkg_wrrm[0]["dot11n-basic-mcs"] );
+		$("#text_11n_mcs_support").val( jsWrrm.pkg_wrrm[0]["dot11n-supported-mcs"] );
+	}
+
+	function speed_changed() {
+		if ( $(this).attr("checked") == "checked") {
+			var id = $(this).attr("id");
+			var other_id;
+			//eg. 11a_basic_6
+			var arrID = id.split("_");
+			if ( arrID[1] == "basic" ) {
+				other_id = arrID[0] + "_support_" + arrID[2];
+				$("#" + other_id ).attr("checked", false);
+			} else if ( arrID[1] == "support" ) {
+				other_id = arrID[0] + "_basic_" + arrID[2];
+				$("#" + other_id ).attr("checked", false);
+			}
+		}
+	}
+
+	$("document").ready( function(){
+	});
+
+	function register_func() {
+		if ( ( radio_mode_flag & radio_5G_flag ) == radio_5G_flag ) {
+			for ( var i = 0; i < arr_speed_11a.length; i++ ) {
+				$("#11a_basic_" + i).change( speed_changed );
+				$("#11a_support_" + i).change( speed_changed );
+			}
+		}
+
+		for ( var i = 0; i < arr_speed_11g.length; i++ ) {
+			$("#11g_basic_" + i).change( speed_changed );
+			$("#11g_support_" + i).change( speed_changed );
+		}
+	}
+	
+	var arr_speed_11a = new Array( 6, 9, 12, 18, 24, 36, 48, 54 );
+	var arr_speed_11g = new Array( 1, 2, 5.5, 11, 6, 9, 12, 18, 24, 36, 48, 54 );
+	var dot11n_mcs;
+	function is11ACPro() {
+		if ( typeof(jsSpec.spec.acpro_5g_rateset) == "undefined"
+				|| jsSpec.spec.acpro_5g_rateset != "disable" ) 
+		{
+			return false;
+		} else
+			return true;
+	}
+
+
+	function init() {
+		setNavigationBar("无线设置>射频速率" );
+
+		var str = "";
+		dot11n_mcs = jsSpec.spec.dot11n;
+		for ( var i = 0; i < jsSpec.spec.radios.length; i++ ) {
+			if ( jsSpec.spec.radios[i].name == "2.4G" )
+				radio_mode_flag |= radio_2G_flag; //2.4G
+			else if ( jsSpec.spec.radios[i].name == "5G" )
+				radio_mode_flag |= radio_5G_flag; //5G
+		}
+
+		var str_basic = "";
+		var str_support = "";
+		if ( (radio_mode_flag & radio_5G_flag) == radio_5G_flag 
+				&& !is11ACPro() 
+		) {
+			for ( var i = 0; i < arr_speed_11a.length; i++ ) {
+				str_basic += "<input type=\"checkbox\" id=\"11a_basic_" + i + "\" />" + arr_speed_11a[i];
+				str_support += "<input type=\"checkbox\" id=\"11a_support_" + i + "\" />" + arr_speed_11a[i];
+			}
+			$("#11a_speed_basic").html( str_basic );
+			$("#11a_speed_support").html( str_support );
+		} else {
+			$("#11a_speed_basic").css("display", "none");
+			$("#11a_speed_support").css("display", "none");
+			$(".part_5G").css("display", "none");
+		}
+
+		str_basic = "";
+		str_support = "";
+		for ( var i = 0; i < arr_speed_11g.length; i++ ) {
+			str_basic += "<input type=\"checkbox\" id=\"11g_basic_" + i + "\" />" + arr_speed_11g[i];
+			str_support += "<input type=\"checkbox\" id=\"11g_support_" + i + "\" />" + arr_speed_11g[i];
+		}
+		$("#11g_speed_basic").html( str_basic);
+		$("#11g_speed_support").html( str_support );
+		
+		$("#dot11n_msc_basic").html("(0-" + dot11n_mcs + "，默认为0)");
+		$("#dot11n_msc_support").html("(0-" + dot11n_mcs +"，默认为" + dot11n_mcs + ")");
+		
+		register_func();
+
+		load();
+	}
+	
+	function isInputValid() {
+		if ( $("#text_11n_mcs_basic").val() == "" ) {
+			myAlert("基本MCS集最大索引不能为空！", "text_11n_mcs_basic");
+			return false;
+		}
+
+		if (!checkNumberRang($("#text_11n_mcs_basic").val(), 0, dot11n_mcs)) {
+			myAlert("非法的基本MCS集最大索引！", "text_11n_mcs_basic");
+			return false;
+		}
+
+		if ( $("#text_11n_mcs_support").val() == "" ) {
+			myAlert("支持MCS集最大索引不能为空！", "text_11n_mcs_support");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_11n_mcs_support").val(), 0, dot11n_mcs) ) {
+			myAlert("非法的支持MCS集最大索引！", "text_11n_mcs_support");
+			return false;
+		}
+
+		if ( parseInt($("#text_11n_mcs_support").val()) < parseInt($("#text_11n_mcs_basic").val()) ) {
+			myAlert("支持MCS集最大索引不能小于基本MCS集最大索引！", "text_11n_mcs_support");
+			return false;
+		}
+
+		return true;
+	}
+
+	
+	function ok() {
+		if ( !isInputValid() ) {
+			return false;
+		}
+		var id_basic = "";
+		var id_support = "";
+		var value_basic = 0;
+		var value_support = 0;
+
+		var url = "setform/form_radio_speed_set?UID=" + parent.uid;
+		var f = new myForm();
+
+		if ( (radio_mode_flag & radio_5G_flag) == radio_5G_flag 
+				&& !is11ACPro() ) 
+		{
+			for ( var i = 0; i < arr_speed_11a.length; i++ ) {
+				id_basic = "11a_basic_" + i;
+				id_support = "11a_support_" + i;
+				if ( $("#" + id_basic).attr("checked") == "checked" ) {
+					value_basic |= 1 << i;
+				}
+
+				if ( $("#" + id_support).attr("checked") == "checked" ) {
+					value_support |= 1 << i;
+				}
+			}
+
+			if ( value_basic == 0 ) {
+				myAlert("基本速率集中至少有一个802.11a模式下支持的射频速率!");
+				return;
+			}
+			f.add( "11a_basic", value_basic);
+			f.add( "11a_support", value_support);
+		}
+
+		value_basic = 0;
+		value_support = 0;
+		for ( var i = 0; i < arr_speed_11g.length; i++ ) {
+			id_basic = "11g_basic_" + i;
+			id_support = "11g_support_" + i;
+			if ( $("#" + id_basic).attr("checked") == "checked" ) {
+				value_basic |= 1 << i;
+			}
+
+			if ( $("#" + id_support).attr("checked") == "checked" ) {
+				value_support |= 1 << i;
+			}
+		}
+		if ( value_basic == 0 ) {
+			myAlert("基本速率集中至少有一个802.11g模式下支持的射频速率!");
+			return;
+		}
+		f.add( "11g_basic", value_basic);
+		f.add( "11g_support", value_support);
+
+		f.add( "mcs_11n_basic", $("#text_11n_mcs_basic").val() );
+		f.add( "mcs_11n_support", $("#text_11n_mcs_support").val() );
+		//alert( value_basic + ":" + value_support);
+		
+		f.submit( url, radio_speed_set_success );
+	}
+
+	function radio_speed_set_success( data ) {
+		jsWrrm = eval("("+data+")");
+		
+		load();
+	}
+
+</script>
+</head>
+
+<body onLoad="init();">
+
+	<div id="INNER"  class="part_5G" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>802.11a</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table> 
+	</div>
+	<div align="left" class="mytbl_content part_5G">	
+		<table width="100%" border="0" cellpadding="0" cellspacing="2" class="table_list">
+			<tr height="22" style="width:100%;">
+				<td class="col1">基本速率：&nbsp;</td>
+				<td class="col2" id="11a_speed_basic"></td>
+			</tr>
+			<tr height="22" style="width:100%;">
+				<td class="col1">支持速率：&nbsp;</td>
+				<td class="col2" id="11a_speed_support"></td>
+			</tr>
+			<!--
+			<tr height="22" style="width:100%;">
+				<td class="col1">禁用速率：&nbsp;</td>
+				<td class="col2" id="11a_speed_disable"></td>
+			</tr>
+			-->
+		</table>
+	</div>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>802.11g</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table> 
+	</div>
+	<div align="left" class="mytbl_content">	
+		<table width="100%" border="0" cellpadding="0" cellspacing="2" class="table_list">
+			<tr height="22" style="width:100%;">
+				<td class="col1">基本速率：&nbsp;</td>
+				<td class="col2" id="11g_speed_basic"></td>
+			</tr>
+			<tr height="22" style="width:100%;">
+				<td class="col1">支持速率：&nbsp;</td>
+				<td class="col2" id="11g_speed_support"></td>
+			</tr>
+			<!--
+			<tr height="22" style="width:100%;">
+				<td class="col1">禁用速率：&nbsp;</td>
+				<td class="col2" id="11g_speed_disable"></td>
+			</tr>
+			-->
+		</table>
+	</div>
+
+	<div id="INNER"  class="part_vlan" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>802.11n</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table> 
+	</div>
+	<div align="left" class="mytbl_content">
+		<table width="100%" border="0" cellpadding="0" cellspacing="2" class="table_list">
+			<tr height="22" style="width:100%;">
+				<td class="col1">基本MCS集最大索引：&nbsp;</td>
+				<td class="col2">
+					<input type="text" id="text_11n_mcs_basic" /><span id="dot11n_msc_basic">(0-76，默认为0)</span>
+				</td>
+			</tr>
+			<tr height="22" style="width:100%;">
+				<td class="col1">支持MCS集最大索引：&nbsp;</td>
+				<td class="col2">
+					<input type="text" id="text_11n_mcs_support" /><span id="dot11n_msc_support">(0-76，默认为0)</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="content_option">
+		<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+		<input type="button" class="buttonL" onClick="ok();" value="确定" />
+	</div>
+
+</body>
+</html>

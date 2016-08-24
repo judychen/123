@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+
+<style type="text/css">
+	.myGrid_col0 {
+		word-break: break-all;
+		word-wrap:break-word;
+	}
+</style>
+
+<script type="text/javascript">
+	var jsRadio = { "pkg_wlan_radio": [ { "sect_name": "WLAN-Radio0\/0", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "gn", "channel": "6", "distance": "1", "bandwidth": "20", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-80", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "0-0" } ] }, { "sect_name": "WLAN-Radio0\/1", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "an", "channel": "149", "distance": "1", "bandwidth": "40", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-77", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "1-1" } ] } ] };
+	var jsServTpl = { "pkg_wlan_service_template": [ { "sect_name": "ServiceTemplate0", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "psk-key-crypt": "plain", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_2.4G", "portal-scheme": "12", "authentication": "wpa2-radius", "cipher": "ccmp", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "radius-scheme": "AAACopy", "service-template": "enabled", "acl": "36" }, { "sect_name": "ServiceTemplate1", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_5G", "authentication": "wpa2-psk", "cipher": "ccmp", "psk-key": "BQ8MCAoICQU=", "psk-key-crypt": "cipher", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "service-template": "enabled", "acl": "37" } ] };
+	var jsInterface = { "pkg_interface": [ { "sect_name": "GigabitEthernet0\/0", "enabled": "enabled", "linkmode": "bridge", "mtu": "1500" }, { "sect_name": "LO0", "enabled": "enabled" }, { "sect_name": "Vlan-interface1", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-Radio0\/0", "mtu": "1500", "enabled": "enabled" }, { "sect_name": "WLAN-Radio0\/1", "mtu": "1500", "enabled": "enabled" }, { "sect_name": "Loopback0", "enabled": "enabled" }, { "sect_name": "WLAN-BSS0", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS1", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS10", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS11", "enabled": "enabled", "mtu": "1500" } ] };
+
+	function myhelp() {
+		popHelp("wirelessSettings");
+	}
+
+	function get_cipher( auth, cipher ) {
+		if ( cipher == "wep40" || cipher == "wep108" )
+			return "WEP";
+
+		if ( auth == "wpa-psk" ) {
+			return "WPA";
+		} else if ( auth == "wpa2-psk" ) {
+			return "WPA2";
+		} else if ( auth == "wpa2-radius" ) {
+			return "WPA2-802.1X";
+		} else if ( auth == "wpa-auto-psk" ) {
+			return "WPA-Auto";
+		} else {
+			return "None";
+		}
+	}
+
+	function delApServiceSuccess(data){
+		//var jsServTpl = eval("("+data+")");
+		jsServTpl = eval("("+data+")");
+
+		arrServTplList.length = 0;
+		/*
+		var count = 0;
+		for(var i = 0; i < jsServTpl.pkg_wlan_service_template.length; i++ ){
+			//get service template ssid
+			var servTpl = jsServTpl.pkg_wlan_service_template[i];	
+			//client_max, ssid, authentication, service-template
+			if ( typeof(servTpl.ssid) == "undefined" ) {
+				servTpl.ssid = "";
+				//continue;
+			}
+			arrServTplList[count] = "";
+			arrServTplList[count] += servTpl.ssid;
+			arrServTplList[count] += ";";
+			arrServTplList[count] += servTpl.client_max;
+			arrServTplList[count] += ";";
+			//arrServTplList[count] += servTpl.authentication;
+			arrServTplList[count] += get_cipher( servTpl.authentication, servTpl.cipher );
+			arrServTplList[count] += ";";
+			//alert(arrServTplList[count]);
+
+			var servTplIndex = servTpl.sect_name.slice(15);
+			var arrBss = getBss(servTplIndex);	//每个raido下是否有BSS对应该服务模板
+			if ( servTpl["service-template"] == "enabled" ) {
+				for ( k=0; k < arrBss.length; k++ ) {
+					if ( arrBss[k] != null ) {
+						if ( isBssEnable( arrBss[k] ) ){ //service template enable && WLAN-BSS enable
+							arrServTplList[count] += "WLAN-BSS"+arrBss[k]+";";
+						}
+						else
+							arrServTplList[count] += "null;";
+							
+					} else
+						arrServTplList[count] += "null;";
+				}
+
+			} else {
+				for (k=0; k < arrBss.length; k++){
+					if ( arrBss[k] != null ){
+						arrServTplList[count] += "WLAN-BSS"+arrBss[k]+";";
+					} else
+						arrServTplList[count] += "null;";
+				}
+			}
+
+			arrServTplList[count] += ";";
+			arrServTplList[count] += servTplIndex;
+
+			//alert(arrServTplList[count]);
+			count++;
+		}
+
+		tg.pageview_init(arrServTplList, 10, 'list_table');
+		*/
+		load();
+	}
+
+	function isWdsManage( stid ) {
+		for ( var i = 0; i < jsServTpl.pkg_wlan_service_template.length; i++ ) {
+			var servTpl = jsServTpl.pkg_wlan_service_template[i];	
+			var servTplIndex = servTpl.sect_name.slice(15);
+			if ( servTplIndex == stid ) {
+				if ( typeof( servTpl.manage_template ) != "undefined" 
+						&& servTpl.manage_template == "enable" )
+					return true;
+				else
+					return false;
+			}
+		}
+		return false;
+	}
+
+	var g_stid;
+	function _delApService() {
+		__delApService( g_stid );
+	}
+
+	function __delApService( stid ) {
+		var url="setform/form_wireless_ap_del_service?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "stid", stid );
+		var bss = getBss( stid );
+		var portName;
+		var ports = "";
+		for ( var i=0; i<bss.length; i++){
+			if ( i != 0 )
+				ports += ";";
+			if (bss[i] == "")
+				ports += "null";
+			else
+				ports += bss[i];
+
+		}
+		f.add( "wlan_bss", ports );
+		f.submit( url, delApServiceSuccess);
+	}
+
+	function delApService( arrRow, indexRow ) {
+		var vs = arrRow;
+		var stid = vs[3]; //stid: service template id
+		if ( isWdsManage( stid ) ) {
+			g_stid = stid;
+			myConfirm("该SSID已应用于故障排除无线服务，是否继续删除？"
+					, false, _delApService);
+		} else 
+			__delApService( stid );
+		
+	}
+
+	function addServiceTemplate(){
+		pageJump("wireless_addServiceTemplate.asp?UID="+parent.uid);
+	}
+	
+	function editApService( arrRow, indexRow ) {
+		var vs = arrRow;
+		var stid = vs[3]; //stid: service template id
+		pageJump( "wireless_settings.asp?UID="+parent.uid+"&stid="+stid + "&page=" + tg.getCurrentPage() );
+	}
+	
+	var tg = new myGrid('tg');
+	var arrServTplList = new Array();
+
+	//tpl_index:service template index;
+	//return: arrBss[0]: radio0; arrBss[1]:radio1
+	function getBss( tpl_index ) {
+		var arrBss = new Array();
+
+		for ( var i = 0; i < jsRadio.pkg_wlan_radio.length; i++ ) {
+			arrBss[i] = null;
+
+			var radio = jsRadio.pkg_wlan_radio[i];
+			if ( typeof(radio.bind) == "undefined" ) 
+				continue;
+
+			for ( var k = 0; k < radio.bind.length; k++ ) {
+				var arrBind = radio.bind[k].bind.split("-");	//arrBind[0]:WLAN-BSS, arrBind[1]:service_template
+				if ( arrBind[1] == tpl_index ) {
+					arrBss[i] = arrBind[0];
+					break;
+				}
+			}
+		}
+
+		return arrBss;
+	}
+
+	function isBssEnable(index) {
+		var bss = "WLAN-BSS" + index;
+		for ( var i = 0; i < jsInterface.pkg_interface.length; i++ ) {
+			var interface = jsInterface.pkg_interface[i];
+			if ( interface.sect_name == bss ) {
+				
+				if ( interface.enabled == "enabled" ) {
+					return true;
+				} else
+					return false;
+			}
+			
+		}
+		return false;
+	}
+
+	function load( firstRun ) {
+		var count = 0;
+		for ( var i = 0; i < jsServTpl.pkg_wlan_service_template.length; i++ ) {
+			//get service template ssid
+			var servTpl = jsServTpl.pkg_wlan_service_template[i];	
+			//client_max, ssid,authentication,service-template
+			if ( typeof(servTpl.ssid) == "undefined" ) {
+				servTpl.ssid = "";
+			}
+
+			if ( typeof(servTpl.client_max) == "undefined" ) {
+				servTpl.client_max = "";
+			}
+
+			arrServTplList[count] = "";
+			arrServTplList[count] += servTpl.ssid;
+			arrServTplList[count] += ";";
+			arrServTplList[count] += servTpl.client_max;
+			arrServTplList[count] += ";";
+			arrServTplList[count] += get_cipher( servTpl.authentication, servTpl.cipher );
+			arrServTplList[count] += ";";
+
+			var servTplIndex = servTpl.sect_name.slice(15);
+			var arrBss = getBss(servTplIndex);	//每个raido下是否有BSS对应该服务模板
+
+			arrServTplList[count] += servTplIndex;
+			arrServTplList[count] += ";";
+			if ( servTpl["service-template"] == "enabled" ) {
+				arrServTplList[count] += "开启;";
+				for ( k = 0; k < arrBss.length; k++ ) {
+					if ( arrBss[k] != null ){
+						if ( isBssEnable( arrBss[k] ) ){ //service template enable && WLAN-BSS enable
+							arrServTplList[count] += "WLAN-BSS"+arrBss[k]+";";
+						}
+						else
+							arrServTplList[count] += ";";
+							
+					} else
+						arrServTplList[count] += ";";
+				}
+
+			} else {
+				arrServTplList[count] += "关闭;";
+				for ( k=0; k < arrBss.length; k++ ){
+					if ( arrBss[k] != null ){
+						arrServTplList[count] += "WLAN-BSS"+arrBss[k]+";";
+					} else
+						arrServTplList[count] += ";";
+				}
+			}
+			
+
+			count++;
+		}
+		var page = getQueryString("page");
+		if ( typeof(firstRun) != "undefined" && page != null )
+			tg.pageview_init(arrServTplList, 10, 'list_table', page );
+		else
+			tg.pageview_init(arrServTplList, 10, 'list_table' );
+	}
+
+	function init() {
+		setNavigationBar("无线设置>无线接入服务>无线服务列表");
+
+		var base = 5;
+		if(jsSpec.spec.radios.length != 4){
+			tg.pageview_add('SSID', 0, '19%', MG_SORT_ASCII);
+			tg.pageview_add('使能状态', 4, '11%', MG_SORT_ASCII);
+		}else{
+			tg.pageview_add('SSID', 0, '10%', MG_SORT_ASCII);
+			tg.pageview_add('使能状态', 4, '11%', MG_SORT_ASCII);	
+		}
+		//var col_width = 36 / jsSpec.spec.radios.length;
+		if(jsSpec.spec.radios.length == 1){
+			var radio = jsSpec.spec.radios[0];
+			tg.pageview_add("射频" + radio.name, base, '22%', 
+					MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc);	
+			tg.pageview_add('最大连接数', 1, '18%', MG_SORT_NUM );
+			tg.pageview_add('认证方式', 2, '18%', MG_SORT_NUM );
+		}else if(jsSpec.spec.radios.length == 4){
+			var col_width = 44 / jsSpec.spec.radios.length;
+			for ( var i = 0; i < jsSpec.spec.radios.length; i++ ) {
+				var radio = jsSpec.spec.radios[i];
+				tg.pageview_add("射频" + radio.name, base + i, col_width + "%", 
+						MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc);
+			}
+			tg.pageview_add('最大连接数', 1, '12%', MG_SORT_NUM);
+			tg.pageview_add('认证方式', 2, '10%', MG_SORT_ASCII);
+		}
+		else{
+			var col_width = 36 / jsSpec.spec.radios.length;
+			for ( var i = 0; i < jsSpec.spec.radios.length; i++ ) {
+				var radio = jsSpec.spec.radios[i];
+				tg.pageview_add("射频" + radio.name, base + i, col_width + "%", 
+						MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc);
+			}
+			tg.pageview_add('最大连接数', 1, '12%', MG_SORT_NUM);
+			tg.pageview_add('认证方式', 2, '10%', MG_SORT_ASCII);
+		}
+		tg.pageview_add_btn("编辑",editApService);
+		tg.pageview_add_btn("删除",delApService);
+		tg.pageview_set_OPwidth("12%");
+
+		load( true );	
+	}
+</script> 
+
+</head>
+<body onLoad="init();">
+	<form name="myForm" id="myForm"></form>
+	<div id="BODY">
+
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>新建无线接入服务</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<div class="mytbl_content">
+			<table width="100%">
+				<tr class="IP_static">
+					<td class="col1">无线接入服务：</td>
+					<td class="col2">
+						<input type="button" class="buttonL" value="新 建" onclick="addServiceTemplate();"/>
+					</td>
+				</tr>
+			</table>
+		</div>	
+    
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>无线服务列表</div></td>
+					<td>&nbsp;</td>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="mytbl_content myGrid" id="list_table">
+		</div>
+		<!--
+		<div style="margin:5px 0 0 10px; text-align:left; font-size:10pt; color:#465f88;">
+			说明：符号“--”表示无线服务未绑定该射频单元
+		</div>
+		-->
+		
+	</div>
+</body>
+</html>

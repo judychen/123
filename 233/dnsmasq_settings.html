@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/dnsmasq/dnsmasq_manage.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+<link rel="stylesheet" href="css/interface.css" type="text/css">
+
+<script type="text/javascript">
+	var jsVlan_interface = { "pkg_vlan_interface": [ { "sect_name": "Vlan-interface1", "description": "Vlan-interface 1 interface" } ] };
+	var jsDialer = { "pkg_dialer": [ { "sect_name": "Vlan-interface1", "type": "dhcp", "dhcp_default_ip": "192.168.0.50", "dhcp_default_netmask": "255.255.255.0" } ] };
+	var jsDnsmasq= { "pkg_dnsmasq": [ { "sect_name": "dnsmasq", "enable": "0" } ] };
+</script> 
+
+</head>
+<body onLoad="init();">
+
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>DNS代理使能</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="mytbl_content">
+			<table width="100%">
+				<tr>
+					<td class="col1">使能状态：</td>
+					<td class="col2">
+                        <input type="checkbox" id="chk_status" name="chk_status" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="content_option">
+			<input type="button" class="buttonL" onClick="Cancel()" value="取 消" />
+			<input type="button" class="buttonL" onClick="Ok()" value="确 定" />
+		</div>
+    <div id="INNER" align="left" style="margin-top:10px">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+            <tr>
+                <td class="bulleted"><div>&nbsp;</div></td>
+                <td class="my_title_tbl_content"><div>静态域名列表</div></td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增domain" onclick="addDomain();" style="float:left;margin-left:0px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="sel_search_item" class="searchItem">
+				<option value="0" selected="">域名名称</option>
+				<option value="1">IP地址</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" />
+			<input onclick="onSearch();" type="button" value="查 询" />
+		</div>
+
+	</div>
+	<div class="mytbl_content myGrid " id="tbl_Domain" >
+	</div>
+
+
+<!--
+	<div id="INNER"  align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>DNSMASQ绑定接口</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content myGrid" id="tbl_vlanInterface" >
+	</div>
+-->
+		
+</body>
+</html>

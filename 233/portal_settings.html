@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/portal/portal_settings.js?1468922814" charset="utf-8"></script>
+
+<style type="text/css">
+	#list_portal table {
+		word-break: break-all;
+		word-wrap:break-word;
+	}	
+</style>
+
+<script type="text/javascript">
+	var jsPortal = { "pkg_portal": [ { "sect_name": "12", "url": "http:\/\/172.20.88.243\/auth\/device\/client", "authip": "10.10.111.111", "enabled": "enabled", "iplist": [ { "iplist": "172.20.88.243\/32" }, { "iplist": "1.1.1.1\/32" } ], "dns_set": "18" } ] };
+	var arrPortal = new Array();
+</script> 
+
+</head>
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>Portal方案列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增Portal方案" onclick="addPortal();" style="float:left;margin-left:0px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">方案名称</option>
+				<option value="1">URL</option>
+				<option value="2">状态</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="list_portal">
+	</div>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title> 康凯科技（杭州）有限公司 </title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="lib/index.css" type="text/css">
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript">
+	function myhelp() {
+		popHelp("vlanAdd");
+	}
+
+	function ajaxDone(data){
+		//配置成功，重新加载数据
+		pageJump("vlan_settings.asp?UID="+parent.uid);
+	}
+
+	function isInputValid() {
+		if ( checkVlanID($("#text_vlan_id").val()) == false ){
+			myAlert("VLAN ID格式不正确!", "text_vlan_id");
+			return false;
+		}
+
+		var name = $("#text_vlan_name").val();
+		if ( isHasChinese( name ) ) {
+			myAlert("字符串不能包含中文！", "text_vlan_name");
+			return false;
+		}
+		if ( !checkStringLen( name, 0, 32 ) ) {
+			myAlert("VLAN名称不能超过32个字符！", "text_vlan_name");
+			return false;
+		}
+		if(name != ""){
+			if ( !check_vlan_name_desc(name) ){
+				myAlert("输入内容不能包含< > / \\ ' \" ; ?字符！", "text_vlan_name");
+				return false;
+			}
+		}
+
+		var desc = $("#text_vlan_desc").val();
+		if ( isHasChinese( desc ) ) {
+			myAlert("字符串不能包含中文！", "text_vlan_desc");
+			return false;
+		}
+		
+		if(desc != ""){
+			if ( !check_vlan_name_desc(desc) ){
+				myAlert("输入内容不能包含< > / \\ ' \" ; ?字符！", "text_vlan_desc");
+				return false;
+			}
+		}
+
+		if ( !checkStringLen( desc, 0, 32 ) ) {
+			myAlert("描述字符长度不正确！", "text_vlan_desc");
+			return false;
+		}
+		
+	//	if ( !checkInputText() )
+	//		return false;
+
+		return true;
+	}
+
+	function ok() {
+		if ( isInputValid() == false )	
+			return;
+
+		var f = new myForm();
+		var url="setform/add_vlan?UID="+parent.uid;
+		f.add( "vlanID", $("#text_vlan_id").val() );
+		f.add( "vlanName", $("#text_vlan_name").val() );
+		f.add( "vlanDesc", $("#text_vlan_desc").val() );
+		
+		f.submit( url, ajaxDone );
+	}
+	
+	function cancel() {
+       ; 
+	}
+	
+	function changeIpMode(){
+		if ($("#IP_MODE").val() == "dhcp") {
+			$(".IP_static").css('display','table-row');
+			$(".IP_PPPoE").css('display','none');
+		}
+		else if ($("#IP_MODE").val() == "pppoe") {
+			$(".IP_static").css('display','none');
+			$(".IP_PPPoE").css('display','table-row');
+		}
+		else {
+			$(".IP_static").css('display','none');
+			$(".IP_PPPoE").css('display','none');
+		}
+		
+	}
+	
+	function ap_rate_enable(bEnable){
+		if (bEnable == true){
+			$("#AP_RATE_id_1").removeAttr("disabled");//要变成Enable，JQuery只能这么写
+		}
+		else {
+			$("#AP_RATE_id_1").attr("disabled","disabled");//再改成disabled
+		}
+	}
+	
+	function goBack(){
+		pageJump("vlan_settings.asp?UID="+parent.uid);
+	}
+
+	function hybridChecked(obj){
+		$obg=$(obj);
+		
+		//myAlert($obg.attr("checked"));
+		//myAlert(typeof($obg.attr("checked")));
+		
+		if ($obg.attr("checked")=="checked") {
+			$(".radio").css('display','block');
+		}
+		else {
+			$(".radio").css('display','none');
+		}
+	}
+	
+	function init(){
+		//myAlert(all_interfaces);
+		setNavigationBar("网络设置>VLAN管理>新增VLAN");
+		$(".radio").css('display','none');
+
+		//myAlert(getQueryString("a"));
+		//myAlert(getQueryString("b"));
+	}
+
+</script> 
+
+
+</head>
+<body onLoad="init();">
+    <form name="myForm" id="myForm" method="post"></form>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>新增VLAN</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr class="IP_static">
+				<td class="col1">VLAN ID：</td>
+				<td class="col2">
+					<input class="text" id="text_vlan_id" />（2-4094，如：5或7-10）
+				</td>
+			</tr>
+			<tr class="IP_static">
+				<td class="col1">名称：</td>
+				<td class="col2">
+					<input class="text" maxlength="32" id="text_vlan_name" />（可选,1-32个字符，不包含< > / \ ' " ; ?）
+				</td>
+			</tr>
+			<tr class="IP_static">
+				<td class="col1">描述：</td>
+				<td class="col2">
+					<input class="text" maxlength="32" id="text_vlan_desc" />（可选,1-32个字符，不包含< > / \ ' " ; ?）
+				</td>
+			</tr>
+			<!--
+			<tr class="IP_static">
+				<td class="col1">三层转发：</td>
+				<td class="col2">
+					<input type="checkbox" id="apply" value="vlan1"/>开启
+				</td>
+			</tr>
+			-->
+		</table>
+	</div>
+	<!--
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>VLAN虚接口</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr class="IP_static">
+				<td class="col1">IP获取方式：</td>
+				<td class="col2">
+					<select id="TxRate" name="TxRate" onChange="change();">
+						<option value="1">Static</option>
+						<option value="2">DHCP</option>
+						<option value="3">PPPoE</option>
+					</select>
+				</td>
+			</tr>
+			<tr class="IP_static">
+				<td class="col1">IP：</td>
+				<td class="col2">
+					<input class="text" id="apply" value="192.168.1.102"/>
+				</td>
+			</tr>
+			<tr class="IP_static">
+				<td class="col1">子网掩码：</td>
+				<td class="col2">
+					<input class="text" id="apply" value="255.255.255.0"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	-->
+<!--	
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>指定端口加入该VLAN</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content myGrid">
+		<table width="100%" cellpadding="5" cellspacing="1" style="text-align:center;">
+			<tr>
+				<td class="titleCell" width="30%">端口</td>
+				<td class="titleCell" width="20%">类型</td>
+				<td class="titleCell" width="50%">加入VLAN</td>
+			</tr>
+			<tr class="odd">
+				<td class="myGrid_col0"> GEH </td>
+				<td class="myGrid_col0"> trunk</td>
+				<td class="myGrid_col0"> <input type="checkbox" /></td>
+			</tr>
+			<tr class="even">
+				<td class="myGrid_col0"> BSS1 </td>
+				<td class="myGrid_col0"> trunk</td>
+				<td class="myGrid_col0"> <input type="checkbox" /></td>
+			</tr>
+			<tr class="odd">
+				<td class="myGrid_col0"> BSS2 </td>
+				<td class="myGrid_col0"> trunk</td>
+				<td class="myGrid_col0"> <input type="checkbox" /></td>
+			</tr>
+			<tr class="even">
+				<td class="myGrid_col0" > BSS3 </td>
+				<td class="myGrid_col0"> hybrid</td>
+				<td class="myGrid_col0">
+					<input type="checkbox" onclick="hybridChecked(this);"/>
+					<div class="radio">
+						<input type="radio" name="radio4"  value="Tagged" checked="checked" />Tagged
+						<input type="radio" name="radio4" onclick="" value="Untagged" />Untagged
+					</div>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td class="myGrid_col0"> BSS4 </td>
+				<td class="myGrid_col0"> access</td>
+				<td class="myGrid_col0"> <input type="checkbox" /></td>
+			</tr>
+		</table>
+	</div>
+-->	
+		
+	<div class="content_option">
+		<input class="buttonL" id="apply" onclick="goBack();" type="button" value="返 回" />
+		<input class="buttonL" id="apply" onclick="ok();" type="button" value="确 定" />
+	</div>
+		
+</body>
+</html>

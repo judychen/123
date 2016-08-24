@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title> 康凯科技（杭州）有限公司 </title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/wireless_addServiceTemplate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+
+<script language="javascript">
+	var jsRadius = { "pkg_radius_scheme": [ { "sect_name": "AAACopy", "primary-authentication-ip": "1.1.1.2", "primary-authentication-port": "1812", "primary-authentication-key-crypt": "cipher", "primary-authentication-key": "BQ==", "primary-accounting-ip": "1.1.1.5", "primary-accounting-port": "1813", "primary-accounting-key-crypt": "cipher", "primary-accounting-key": "BQ==", "secondary-authentication-ip": "1.1.1.1", "secondary-authentication-port": "1812", "secondary-authentication-key-crypt": "cipher", "secondary-primary-authentication-key": "BQ==", "secondary-accounting-ip": "1.1.1.1", "secondary-accounting-port": "1813", "secondary-accounting-key-crypt": "cipher", "secondary-accounting-key": "BQ==" } ] };
+	var jsRadio = { "pkg_wlan_radio": [ { "sect_name": "WLAN-Radio0\/0", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "gn", "channel": "6", "distance": "1", "bandwidth": "20", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-80", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "0-0" } ] }, { "sect_name": "WLAN-Radio0\/1", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "an", "channel": "149", "distance": "1", "bandwidth": "40", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-77", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "1-1" } ] } ] };
+	var jsAcl = { "pkg_wlan_acl": [ { "sect_name": "36", "policy": "permit", "maclist": [ { "maclist": "11:22:33:44:55:66" }, { "maclist": "77:77:77:77:77:77" } ] }, { "sect_name": "37", "policy": "deny", "maclist": [ { "maclist": "66:55:44:33:22:11" }, { "maclist": "77:77:77:77:77:77" } ] } ] };
+	var jsTimeAcl = { "pkg_time_range": [ ] };
+
+	var jsPortal = { "pkg_portal": [ { "sect_name": "12", "url": "http:\/\/172.20.88.243\/auth\/device\/client", "authip": "10.10.111.111", "enabled": "enabled", "iplist": [ { "iplist": "172.20.88.243\/32" }, { "iplist": "1.1.1.1\/32" } ], "dns_set": "18" } ] };
+	/* only for 11ac
+	var jsPortal = { pkg_portal:[] };
+	*/
+</script>
+</head>
+
+<body onLoad="init();" >
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>新增无线服务</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+	<div class="mytbl_content">
+		<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+			<tbody class="content_body_area">
+				<tr height="22">
+					<td class="col1">SSID名称：</td>
+					<td class="col2"><input type="text" id="text_ssid" maxlength="32"/>（1-32位字符，不包含 ? " ; \）</td>
+				</tr>
+				<tr height="22">
+					<td class="col1">选择绑定射频：</td>
+					<td class="col2" id="tr_radio_bind" >
+						<!--
+						<input type="checkbox" id="chk_radio_0" />2.4G
+						<input type="checkbox" id="chk_radio_1" style="margin-left:10px;"/>5G
+						-->
+					</td>
+				</tr>
+				<tr height="22">
+					<td class="col1" width="150" >使能状态：</td>
+					<td class="col2" width="400"><input type="checkbox" id="chk_enableService" checked="checked" /></td>
+				</tr>
+				<tr height="22">
+					<td class="col1">允许广播SSID：</td>
+					<td class="col2" ><input type="checkbox" id="chk_enableSSID" checked="checked"/></td>
+				</tr>
+				<tr height="22">
+					<td class="col1">最大客户端接入数量：</td>
+					<td class="col2"><input type="text" id="text_max_client" value="127"/>（1-127，默认为127）</td>
+				</tr>
+				<tr height="22" >
+					<td class="col1" >用户限速：</td>
+					<td class="col2" >
+						上行
+						<select id="sel_rateLimitUpEnable" >
+							<option value="enable">启用</option>
+							<option value="disable">禁用</option>
+						</select>
+						&nbsp;
+						下行
+						<select id="sel_rateLimitDownEnable" >
+							<option value="enable">启用</option>
+							<option value="disable">禁用</option>
+						</select>
+					</td>
+				</tr>
+				<tr height="22" class="part_rateLimitUpEnable" >
+					<td class="col1" >上行带宽：</td>
+					<td class="col2" >
+						<select id="sel_rateLimitModeUp">
+							<option value="static">静态</option>
+							<option value="dynamic">动态</option>
+						</select>
+						<input type="text" id="text_rateLimitUp" value="2000" />Kbps（100-300000）
+					</td>
+				</tr>
+				<tr height="22" class="part_rateLimitDownEnable" >
+					<td class="col1" >下行带宽：</td>
+					<td class="col2" >
+						<select id="sel_rateLimitModeDown">
+							<option value="static">静态</option>
+							<option value="dynamic">动态</option>
+						</select>
+						<input type="text" id="text_rateLimitDown" value="2000" />Kbps（100-300000）	
+					</td>
+				</tr>
+
+				<!-- portal settings -->
+				<tr>
+					<td class="col1">Portal：</td>
+					<td class="col2">
+						<input type="checkbox" id="chk_portal_enable" />
+						<select id="sel_portal_scheme" style="display:none;">
+							<option value="" >请选择Portal方案</option>
+						</select>
+					</td>
+				</tr>
+				<!-- portal settings, end -->
+
+				<!-- acl settings -->
+				<tr>
+					<td class="col1">ACL：</td>
+					<td class="col2">
+						<input type="checkbox" id="chk_acl_enable" />
+						<select id="sel_acl_scheme" style="display:none;">
+							<option value="" >请选择ACL方案</option>
+						</select>
+					</td>
+				</tr>
+				<!-- acl settings, end -->
+
+
+				<!-- time_acl -->
+				<tr>
+					<td class="col1">上网时段控制：</td>
+					<td class="col2">
+						<input type="checkbox" id="chk_time_acl_enable" />
+						<select id="sel_time_acl_scheme" style="display:none;">
+							<option value="" >请选择时间策略</option>
+						</select>
+					</td>
+				</tr>
+				<!-- time_acl, end -->
+
+<!--
+				<tr height="22">
+					<td class="col1" width="150" >修改缺省VLAN：</td>
+					<td class="col2" width="400"><input type="checkbox" id="chk_enableVLAN" name="chk_enableVLAN"  onclick="enableVLAN();"/></td>
+				</tr>
+				-->
+				<tr height="22" class="ENABLE_VLAN">
+					<td class="col1">VLAN ID：</td>
+					<td class="col2" id="tr_bss_pvid"> 
+					<!--
+						2.4G&nbsp;&nbsp;<input type="text" id="text_pvid_0" value="1" size="6" style="margin-right:10px;"/>
+						5G&nbsp;&nbsp; <input type="text" id="text_pvid_1" value="1" size="6"/>（1-4094,默认为1）
+					-->
+					</td>
+				</tr>
+				<tr>
+					<td class="col1">组播转单播：</td>
+					<td class="col2">
+						<select id="sel_m2u_enable" >
+							<option value="enabled">启用</option>
+							<option value="disabled" selected="selected">禁用</option>
+						</select>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+		<!-- 加密方式设置 -->
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>无线安全</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<div class="mytbl_content">
+			<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+			<tr>
+				<td class="col1">认证方式：</td>
+				<td class="col2">
+					<select id="sel_auth" name="sel_auth" >
+						<option name="None" value="None">None</option>
+						<option name="WEP" value="WEP">WEP</option>
+						<option name="WPA-PSK" value="WPA-PSK">WPA/WPA2-PSK</option>
+						<option name="WPA-1X" value="WPA-1X">WPA2-802.1X</option>
+					</select>
+				</td>
+			</tr>
+			
+			<!-- wep -->
+			<tr class="wep">
+				<td class="col1">Key：</td>
+				<td class="col2">
+					<input type="password" id="text_wep_key" name="text_wep_key" />（5或13个字符，10或26个十六进制字符）
+				</td>
+			</tr>
+			<tr class="wep">
+				<td class="col1">WEP模式：</td>
+				<td class="col2">
+					<input type="radio" name="radio_wep_auth" value="open" checked="checked" />开放
+					<input type="radio" name="radio_wep_auth" value="shared" />共享
+				</td>
+			</tr>
+			<tr class="wep">
+				<td class="col1">Primary Key：</td>
+				<td class="col2">
+					<span>Key 1</span>
+					<!--
+					<select id="option_primaryKey" name="option_primaryKey" onChange="changePrimaryKey();">
+						<option name="primaryKey" value="1">Key 1</option>
+						<option name="primaryKey" value="2">Key 2</option>
+						<option name="primaryKey" value="3">Key 3</option>
+						<option name="primaryKey" value="4">Key 4</option>
+					</select>
+					-->
+				</td>
+			</tr>
+			
+			<tr class="noRadius">
+				<td class="col1">共享密钥：</td>
+				<td class="col2">
+					<!--
+					<select id="sel_passphase_hex" name="sel_simple_or_cipher" onChange="changePassphase();">
+						<option name="passphase" value="passphase">passphase</option>
+						<option name="hex" value="hex">hex</option>
+					</select>
+					-->
+					<input type="password" id="text_wpa_psk" name="text_wpa_psk" class="text2" size="32" maxlength="64" /><span>（8-63个字符或64个十六进制字符）</span>
+				</td>
+			</tr>
+			
+			<tr class="radius">
+				<td class="col1">RADIUS方案：</td>
+				<td class="col2">
+					<select id="sel_radius_scheme" name="sel_radius_scheme" >
+						<option value="" >请选择AAA方案</option>
+						<!--
+						<option name="1" value="1">方案一</option>
+						<option name="2" value="2">方案二</option>
+						<option name="3" value="3">方案三</option>
+						-->
+					</select>
+				</td>
+			</tr>
+			
+			<tr class="WPAMODE">
+				<td class="col1">WPA模式：</td>
+				<td class="col2">
+					<input type="radio" name="radio_wpa_auth" value="wpa-psk" />WPA&nbsp;
+					<input type="radio" name="radio_wpa_auth" value="wpa2-psk" checked="checked" />WPA2
+					<input type="radio" name="radio_wpa_auth" value="wpa-mixed-psk" />Auto&nbsp;
+				</td>
+			</tr>
+		
+			<tr class="WPAorWPA2">
+				<td class="col1">加密方式：</td>
+				<td class="col2">
+					<input type="radio" name="radio_wpa_cipher" value="TKIP" />TKIP
+					<input type="radio" name="radio_wpa_cipher" value="CCMP" checked="checked" />CCMP
+					<input type="radio" name="radio_wpa_cipher" value="TKIP_CCMP" />Auto&nbsp;
+				</td>
+			</tr>
+		
+			<tr class="WPAorWPA2">
+				<td class="col1">GTK-lifetime：</td>
+				<td class="col2">
+					<!-- fixed bug: the checkbox will move after checkbox changed -->	
+					<div style="height:24px; padding-top:2px; float:left; display:block;" >
+						<input type="checkbox" id="chk_gtk_enable" onclick="enable_gtk();" />使能
+					</div>
+					<div style="height:26px; margin-top:1px; float:left; display:block;">
+						<input type="text" id="text_gtk_lifttime" class="part_enable_gtk" style="margin-left:10px;" value="86400" size="8"/>
+						<span class="part_enable_gtk">（600-604800，默认为86400秒）</span>
+					</div>
+				</td>
+			</tr>
+			<tr class="WPAorWPA2">
+				<td class="col1">PTK-lifetime：</td>
+				<td class="col2">
+					<div style="height:24px; padding-top:2px; float:left; display:block;" >
+						<input type="checkbox" id="chk_ptk_enable" onclick="enable_ptk();" />使能
+					</div>
+					<div style="height:26px; margin-top:1px; float:left; display:block;">
+						<input type="text" id="text_ptk_lifttime" class="part_enable_ptk" style="margin-left:10px;" value="3600" size="8"/>
+						<span class="part_enable_ptk" >（300-604800，默认为3600秒）</span>
+					</div>
+				</td>
+			</tr>
+		
+			</table>
+		</div>
+		
+		<div class="content_option">
+			<input type="button" class="buttonL" onClick="goBack();" value="返 回" />
+			<!--
+			<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+			-->
+			<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+		</div>
+</body>
+</html>

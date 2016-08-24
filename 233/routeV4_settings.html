@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/routeV4_settings.js?1468922814" charset="utf-8"></script>
+
+<script type="text/javascript">
+	function myhelp() {
+		if ( $(".route_part_active").css("display") == "block" )
+			popHelp("routeV4SettingsActive");
+		else
+			popHelp("routeV4SettingsStatic");
+	}
+
+	var clientList = new Array("127.0.0.0;255.0.0.0;Direct;0;127.0.0.1;InLoopBack0",
+						"127.0.0.1;255.255.255.255;Direct;0;127.0.0.1;InLoopBack0",
+						"192.168.1.0;255.255.255.0;Direct;0;192.168.1.58;Vlan-interface1",
+						"192.168.1.58;255.255.255.255;Direct;0;127.0.0.1;InLoopBack0");
+
+	var arrRouteStatic = new Array();
+	var routeActiveList = {datas:[{"ip":"172.20.90.255","nexthop":"0.0.0.0","netmask":32,"source":3,"pre":0,"interface":"Vlan-interface1"},{"ip":"172.20.90.219","nexthop":"0.0.0.0","netmask":32,"source":3,"pre":0,"interface":"Vlan-interface1"},{"ip":"172.20.90.0","nexthop":"0.0.0.0","netmask":32,"source":3,"pre":0,"interface":"Vlan-interface1"},{"ip":"172.20.90.0","nexthop":"0.0.0.0","netmask":24,"source":2,"pre":0,"interface":"Vlan-interface1"},{"ip":"0.0.0.0","nexthop":"172.20.90.1","netmask":0,"source":1,"pre":300,"interface":"Vlan-interface1"}]};
+	var routeStaticList = { "pkg_route": [ ] };
+	var curTabmenu = "";
+
+</script> 
+
+</head>
+<body onLoad="init();">
+    <form name="myForm" id="myForm" method="post"></form>
+	<div class="tabmenu">
+		<table width="99%" style="border-collapse:collapse;">
+			<tr class="underline">
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">生效路由</a></td>
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#">静态路由</a></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="route_part_active">
+		<!-- test_tabmenu
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>生效路由列表</div></td>
+					<td>&nbsp;</td>
+					</td>
+				</tr>
+			</table>
+		</div>
+		-->
+		<div class="content_tableQuery">
+			<input type="button" class="buttonL" value="刷 新" onclick="refresh_active();" style="float:left;margin-left:2px;"/>
+			<div>
+				<span style="margin-left:20px;">
+				查询项
+				</span>
+				<select id="search_item_active" class="searchItem">
+					<option value="0" selected="">目的IP地址</option>
+					<option value="2">子网掩码</option>
+					<option value="3">协议</option>
+					<option value="4">优先级</option>
+					<option value="1">下一跳</option>
+					<option value="5">接口</option>
+				</select>
+				<span style="margin-left:10px;">
+				关键词
+				</span>
+				<input id="text_keywords_active" class="text_keywords" maxlength="22" empty="true" />
+				<input onclick="onSearchRouteActive()"  type="button" value="查 询" />
+			</div>
+		</div>
+		<div class="mytbl_content myGrid" id="list_table">
+		</div>
+	</div>
+
+	<div class="route_part_static">
+		<div class="content_tableQuery">
+			<input type="button" class="buttonL" value="新 增" onclick="addStaticRouter();" style="float:left;margin-left:2px;"/>
+			<div>
+				<span style="margin-left:20px;">
+				查询项
+				</span>
+				<select id="search_item_static" class="searchItem">
+					<option value="0" selected="">目的IP地址</option>
+					<option value="2">子网掩码</option>
+					<option value="3">优先级</option>
+					<option value="1">下一跳</option>
+					<option value="4">接口</option>
+				</select>
+				<span style="margin-left:10px;">
+				关键词
+				</span>
+				<input id="text_keywords_static" class="text_keywords" maxlength="22" empty="true" />
+				<input onclick="onSearchRouteStatic();"  type="button" value="查 询" />
+			</div>
+		</div>
+		<div class="mytbl_content myGrid" id="list_static">
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+<style type="text/css">
+select{
+	width:110px;
+}
+</style>
+
+<script type="text/javascript">
+	var jsDns = { "pkg_dns": [ { "sect_name": "DNS" } ] };
+
+	function myhelp() {
+		popHelp("globalDnsSettings");
+	}
+
+	function setGlobalDnsSuccess( data ) {
+		var jsData = eval("("+data+")");
+		//jsDns.pkg_dns = jsData.pkg_dns;
+		jsDns = jsData;
+
+		load();
+	}
+
+	function isInputValid() {
+		if ( $("#text_global_dns_0").val() != "" ) {
+			if(!checkIP( $("#text_global_dns_0").val())){
+				myAlert("主DNS服务器IP格式不正确！", "text_global_dns_0");
+				return false;
+			}
+			
+			if ( is_ip_loopback_address( $("#text_global_dns_0").val() ) ) {
+				myAlert("主DNS服务器IP不能为回环地址!", "text_global_dns_0");
+				return false;
+			}
+			if ( is_ip_multicast_address( $("#text_global_dns_0").val()) ) {
+				myAlert("主DNS服务器IP不能为组播地址!", "text_global_dns_0");
+				return false;
+			}
+			
+			if ( is_ip_reserved($("#text_global_dns_0").val() ) ) {
+				myAlert("主DNS服务器IP地址非法!", "text_global_dns_0");
+				return false;
+			}
+		}
+
+		if ( $("#text_global_dns_1").val() != "") {
+			if(!checkIP( $("#text_global_dns_1").val())){
+				myAlert("备用DNS服务器1 IP格式不正确！", "text_global_dns_1");
+				return false;
+			}
+			
+			if ( is_ip_loopback_address( $("#text_global_dns_1").val() ) ) {
+				myAlert("备用DNS服务器1 IP不能为回环地址!", "text_global_dns_1");
+				return false;
+			}
+			if ( is_ip_multicast_address( $("#text_global_dns_1").val()) ) {
+				myAlert("备用DNS服务器1 IP不能为组播地址!", "text_global_dns_1");
+				return false;
+			}
+			
+			if ( is_ip_reserved( $("#text_global_dns_1").val() ) ) {
+				myAlert("备用DNS服务器1 IP地址非法!", "text_global_dns_1");
+				return false;
+			}
+		}
+
+		if ( $("#text_global_dns_2").val() != "" ) {
+			if(!checkIP( $("#text_global_dns_2").val())){
+				myAlert("备用DNS服务器2 IP格式不正确！", "text_global_dns_2");
+				return false;
+			}
+			
+			if ( is_ip_loopback_address( $("#text_global_dns_2").val() ) ) {
+				myAlert("备用DNS服务器2 IP不能为回环地址!", "text_global_dns_2");
+				return false;
+			}
+			if ( is_ip_multicast_address( $("#text_global_dns_2").val()) ) {
+				myAlert("备用DNS服务器2 IP不能为组播地址!", "text_global_dns_2");
+				return false;
+			}
+			
+			if ( is_ip_reserved( $("#text_global_dns_2").val() ) ) {
+				myAlert("备用DNS服务器2 IP地址非法!", "text_global_dns_2");
+				return false;
+			}
+		}
+
+		if ( $("#text_global_dns_0").val() != "" && $("#text_global_dns_0").val() == $("#text_global_dns_1").val() ) {
+			myAlert("主DNS服务器和备用DNS服务器1 IP不能相同！", "text_global_dns_1");
+			return false;
+		}
+
+		if ( $("#text_global_dns_0").val() != "" && $("#text_global_dns_0").val() == $("#text_global_dns_2").val() ) {
+			myAlert("主DNS服务器和备用DNS服务器2 IP不能相同！", "text_global_dns_2");
+			return false;
+		}
+
+		if ( $("#text_global_dns_1").val() != "" && $("#text_global_dns_1").val() == $("#text_global_dns_2").val() ) {
+			myAlert("备用DNS服务器1和备用DNS服务器2 IP不能相同！", "text_global_dns_2");
+			return false;
+		}
+
+		return true;
+	}
+
+	function Ok() {
+		if ( !isInputValid() )
+			return;
+
+		var f = new myForm();
+		var url = "";
+		url = "setform/form_dns_global_set?UID="+parent.uid;
+		f.add( "dns_0", $("#text_global_dns_0").val() );
+		f.add( "dns_1", $("#text_global_dns_1").val() );
+		f.add( "dns_2", $("#text_global_dns_2").val() );
+		
+		f.submit( url, setGlobalDnsSuccess );
+	}
+
+	function Cancel() {
+		load();
+	}
+
+	function load() {
+		var global_dns = jsDns.pkg_dns[0].dns;
+		if ( typeof(global_dns) == "undefined" ) {
+			$("#text_global_dns_0").val("");
+			$("#text_global_dns_1").val("");
+			$("#text_global_dns_2").val("");
+			return;
+		}
+
+		if ( global_dns.length == 1 ) {
+			$("#text_global_dns_0").val( global_dns[0].dns );
+			$("#text_global_dns_1").val("");
+			$("#text_global_dns_2").val("");
+		} else if ( global_dns.length == 2 ) {
+			$("#text_global_dns_0").val( global_dns[0].dns );
+			$("#text_global_dns_1").val( global_dns[1].dns );
+			$("#text_global_dns_2").val("");
+		} else if ( global_dns.length == 3 ) {
+			$("#text_global_dns_0").val( global_dns[0].dns );
+			$("#text_global_dns_1").val( global_dns[1].dns );
+			$("#text_global_dns_2").val( global_dns[2].dns );
+		}
+	}
+
+	function init() {
+		setNavigationBar("网络设置>DNS管理");
+		load();
+	}
+</script> 
+
+</head>
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px" >
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>全局DNS</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr>
+				<td class="col1">主DNS服务器：</td>
+				<td class="col2">
+					<input type="text" id="text_global_dns_0" maxlength="16" />
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">备用DNS服务器1：</td>
+				<td class="col2">
+					<input type="text" id="text_global_dns_1" maxlength="16" />
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">备用DNS服务器2：</td>
+				<td class="col2">
+					<input type="text" id="text_global_dns_2" maxlength="16" />
+				</td>
+			</tr>
+			
+		</table>
+	</div>
+	<div class="content_option">
+		<input type="button" id="btn_Cancel" class="buttonL" onClick="Cancel();" value="取 消"/>	
+		<input type="button" id="btn_Ok" class="buttonL" onClick="Ok();" value="确 定"/>	
+	</div>
+
+</body>
+</html>

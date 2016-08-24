@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv='pragma' content='no-cache'>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+	
+<script language="javascript">
+	var jsCapwap = { "pkg_capwapc": [ { "sect_name": "global", "domain": "B3DE2E94FDF54A0789371B14155017A4", "enable": "1" }, { "sect_name": "server", "control_port": "5246", "default_server": "redirector.commsky.com.cn", "master_server": "qa-nms.commsky.com.cn" }, { "sect_name": "wtp", "discovery_interval": "5", "echo_interval": "30", "silent_interval": "30", "max_discoveries": "10", "max_retransmit": "5", "mtu": "1300", "max_discovery_interval": "20", "retransmit_interval": "3", "join_timeout": "60" } ] };
+
+	function myhelp() {
+		popHelp("capwapSettings");
+	}
+	
+	function isInputValid() {
+		var master_server = $("#text_master_server").val();
+		if ( master_server != "" ) {
+			/*
+			if ( master_server.indexOf("\"") != -1 ) {
+				myAlert("主CAPWAP服务器不能包含双引号！", "text_master_server");
+				return false;
+			}*/
+		}
+
+		var slave_server = $("#text_slave_server").val();
+		if ( slave_server != "" ) {
+			/*
+			if ( slave_server.indexOf("\"") != -1 ) {
+				myAlert("备份CAPWAP服务器不能包含双引号！", "text_slave_server");
+				return false;
+			} */
+		}
+
+		if ( !checkNumberRang($("#text_port").val(), 256, 65535) ) {
+			myAlert("非法的控制端口" ,"text_port");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_mtu").val(), 512, 1500) ) {
+			myAlert("非法的MTU" ,"text_mtu");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_discovery_interval").val(), 0, 90) ) {
+			myAlert("非法的Discovery Interval" ,"text_discovery_interval");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_max_discovery_interval").val(), 2, 180) ) {
+			myAlert("非法的MAX Discovery Interval" ,"text_max_discovery_interval");
+			return false;
+		}
+		
+		if ( !checkNumberRang($("#text_echo_interval").val(), 10, 60) ) {
+			myAlert("非法的Echo Interval" ,"text_echo_interval");
+			return false;
+		}
+		
+		if ( !checkNumberRang($("#text_retransmit_interval").val(), 1, 30) ) {
+			myAlert("非法的Retransmit Interval" ,"text_retransmit_interval");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_silent_interval").val(), 10, 60) ) {
+			myAlert("非法的Slient Interval" ,"text_silent_interval");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_join_interval").val(), 30, 120) ) {
+			myAlert("非法的Wait Join" ,"text_join_interval");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_max_discoveries").val(), 5, 20) ) {
+			myAlert("非法的Max Discoveries" ,"text_max_discoveries");
+			return false;
+		}
+
+		if ( !checkNumberRang($("#text_max_retransmit").val(), 2, 10) ) {
+			myAlert("非法的Max Retransmit" ,"text_max_retransmit");
+			return false;
+		}
+
+		var default_server = $("#text_default_server").val();
+		if ( default_server != "" ) {
+			/*
+			if ( default_server.indexOf("\"") != -1 ) {
+				myAlert("默认云端服务器不能包含双引号！", "text_default_server");
+				return false;
+			} */
+		}
+
+		return true;
+	}
+
+	function editCapwapSuccess(data) {
+		var jsonData = eval("("+data+")");
+		jsCapwap.pkg_capwapc = jsonData.pkg_capwapc;
+		load();
+	}
+
+	function ok() {
+		if ( !isInputValid() )	
+			return;
+
+		var url="setform/form_capwap_edit?UID="+parent.uid;
+		var f = new myForm();
+		
+		if ( $("#chk_enable").attr("checked") == "checked" ) {
+			f.add("enable", "1");
+		} else
+			f.add("enable", "0");
+		
+		f.add("master_server", $("#text_master_server").val());
+		f.add("slave_server", $("#text_slave_server").val());
+		f.add("default_server", $("#text_default_server").val());
+		f.add("port", $("#text_port").val());
+		f.add("mtu", $("#text_mtu").val());
+		f.add("discovery_interval", $("#text_discovery_interval").val());
+		f.add("max_discovery_interval", $("#text_max_discovery_interval").val());
+		f.add("echo_interval", $("#text_echo_interval").val());
+		f.add("retransmit_interval", $("#text_retransmit_interval").val());
+		f.add("silent_interval", $("#text_silent_interval").val());
+		f.add("join_interval", $("#text_join_interval").val());
+		f.add("max_discoveries", $("#text_max_discoveries").val());
+		f.add("max_retransmit", $("#text_max_retransmit").val());
+
+		f.submit( url, editCapwapSuccess );
+	}
+
+	function cancel(){
+		load();
+	}
+	
+	$(document).ready( function() {
+	/*
+		$("#text_pri_auth_secret_h").focus( function(){
+			domouseover(1);
+		});
+		$("#text_pri_auth_secret").blur( function(){
+			domouseout(1);
+		});
+		*/
+
+
+	});
+
+	function load() {
+		for ( var i = 0; i < jsCapwap.pkg_capwapc.length; i++ ) {
+			var section = jsCapwap.pkg_capwapc[i];
+			if ( section.sect_name == "global" ) {
+				if ( section.enable == "1" ) {
+					$("#chk_enable").attr("checked", true);
+				} else 
+					$("#chk_enable").attr("checked", false);
+			}
+			else if ( section.sect_name == "server" ) {
+				$("#text_default_server").val( section.default_server );
+				$("#text_master_server").val( section.master_server);
+				$("#text_slave_server").val( section.slaver_server);
+				$("#text_port").val( section.control_port );
+			}
+			else if ( section.sect_name == "wtp" ) {
+				$("#text_mtu").val( section.mtu );
+				$("#text_discovery_interval").val( section.discovery_interval );
+				$("#text_max_discovery_interval").val( section.max_discovery_interval );
+				$("#text_echo_interval").val( section.echo_interval );
+				$("#text_retransmit_interval").val( section.retransmit_interval );
+				$("#text_silent_interval").val( section.silent_interval );
+				$("#text_join_interval").val( section.join_timeout );
+				$("#text_max_discoveries").val( section.max_discoveries );
+				$("#text_max_retransmit").val( section.max_retransmit );
+			}
+		}
+	}
+
+	function init() {
+		setNavigationBar("设备管理>CAPWAP");
+		$("tr.advanced").css("display", "none");
+		load();
+
+		$("#chk_advanced_settings").change( show_advanced_settings );
+	}
+
+	function show_advanced_settings() {
+		if ( $("#chk_advanced_settings").attr("checked") == "checked" ) {
+			$("tr.advanced").css("display", "table-row");
+		} else {
+			$("tr.advanced").css("display", "none");
+		}
+	}
+	
+</script>
+</head>
+
+<body onLoad="init();" >
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>CAPWAP</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+			<tr class="radius">
+				<td class="col1">使能状态：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_enable" />	
+				</td>
+			</tr>
+			<tr class="radius">
+				<td class="col1">主CAPWAP服务器：</td>
+				<td class="col2">
+					<input type="text" id="text_master_server" maxlength="64" />（可选, 1-64个字符）
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">备份CAPWAP服务器：</td>
+				<td class="col2">
+					<input type="text" id="text_slave_server" maxlength="64" />（可选，1-64个字符）
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">控制端口：</td>
+				<td class="col2">
+					<input type="text" id="text_port" />（256-65535，默认为5246）
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">高级选项：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_advanced_settings" />
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">MTU：</td>
+				<td class="col2">
+					<input type="text" id="text_mtu" />（512-1500，默认为1300）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Discovery Interval：</td>
+				<td class="col2">
+					<input type="text" id="text_discovery_interval" />（0-90秒，默认为5）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Max Discovery Interval：</td>
+				<td class="col2">
+					<input type="text" id="text_max_discovery_interval" />（2-180秒，默认为20）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Echo Interval：</td>
+				<td class="col2">
+					<input type="text" id="text_echo_interval" />（10-60秒，默认为30）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Retransmit Interval：</td>
+				<td class="col2">
+					<input type="text" id="text_retransmit_interval" />（1-30秒，默认为3）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Silent Interval：</td>
+				<td class="col2">
+					<input type="text" id="text_silent_interval"/>（10-60秒，默认为30）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Wait Join：</td>
+				<td class="col2">
+					<input type="text" id="text_join_interval" />（30-120秒，默认为60）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Max Discoveries：</td>
+				<td class="col2">
+					<input type="text" id="text_max_discoveries" />（5-20，默认为10）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">Max Retransmit：</td>
+				<td class="col2">
+					<input type="text" id="text_max_retransmit" />（2-10，默认为5）
+				</td>
+			</tr>
+			<tr class="advanced">
+				<td class="col1">默认云端服务器：</td>
+				<td class="col2">
+					<input type="text" id="text_default_server" maxlength="64" />（可选，1-64个字符，默认为redirector.commsky.com.cn）
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="content_option">
+		<input type="button" class="buttonL" onClick="cancel();" value="取 消" />	
+		<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+	</div>
+</body>
+</html>

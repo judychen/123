@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+  
+<script type="text/javascript">
+	var jsClientList = {"status":"ok", "data":[]};
+	var jsRadio = { "pkg_wlan_radio": [ { "sect_name": "WLAN-Radio0\/0", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "gn", "channel": "6", "distance": "1", "bandwidth": "20", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-80", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "0-0" } ] }, { "sect_name": "WLAN-Radio0\/1", "beacon-interval": "100", "max-power": "auto", "dtim": "1", "fragment-threshold": "2346", "rts-threshold": "2346", "a-mpdu": "enabled", "mode": "an", "channel": "149", "distance": "1", "bandwidth": "40", "dot11nonly": "disabled", "preamble": "short", "protection-mode": "cts-to-self", "short-gi": "enabled", "rssi-access": "disabled", "rssi-access-threshold": "-77", "bcast-ratelimit": "disabled", "bcast-ratelimit-cir": "10", "bcast-ratelimit-cbs": "30", "atf": "disabled", "device_mode": "normal", "dot11aconly": "disabled", "bind": [ { "bind": "1-1" } ] } ] };
+	var jsServTpl = { "pkg_wlan_service_template": [ { "sect_name": "ServiceTemplate0", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "psk-key-crypt": "plain", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_2.4G", "portal-scheme": "12", "authentication": "wpa2-radius", "cipher": "ccmp", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "radius-scheme": "AAACopy", "service-template": "enabled", "acl": "36" }, { "sect_name": "ServiceTemplate1", "beacon_ssid_hide": "disabled", "client_max": "127", "ptk_lifetime": "3600", "gtk_lifetime": "86400", "ptk_enabled": "disabled", "gtk_enabled": "disabled", "wep_key_slot": "1", "psk-key-type": "passphrase", "m2u_enable": "disabled", "wep40_key_type_1": "passphrase", "wep40_key_crypt_1": "plain", "wep108_key_type_1": "passphrase", "wep108_key_crypt_1": "plain", "ssid": "CommSky_5G", "authentication": "wpa2-psk", "cipher": "ccmp", "psk-key": "BQ8MCAoICQU=", "psk-key-crypt": "cipher", "dynamic-uplink-ratelimit": "0", "static-uplink-ratelimit": "0", "dynamic-downlink-ratelimit": "0", "static-downlink-ratelimit": "0", "service-template": "enabled", "acl": "37" } ] };
+
+	function getServiceTpl( bss_id ){
+		for (var i = 0; i < jsRadio.pkg_wlan_radio.length; i++ ){
+			var radio = jsRadio.pkg_wlan_radio[i];
+
+			if ( typeof(radio.bind) == "undefined" ) 
+				continue;
+
+			for (var k = 0; k < radio.bind.length; k++){
+				var arrBind = radio.bind[k].bind.split("-");	//arrBind[0]:WLAN-BSS, arrBind[1]:service_template
+				if ( arrBind[0] == bss_id){
+					return arrBind[1];
+				}
+			}
+		}
+
+		return null;
+	}
+
+	function getSsid( servTplId ) {
+		for ( var i = 0; i < jsServTpl.pkg_wlan_service_template.length; i++ ) {
+			var servTpl = jsServTpl.pkg_wlan_service_template[i];	
+			var stID = servTpl.sect_name.slice(15);
+			if ( servTplId == stID ) {
+				return servTpl.ssid;
+			}
+		}
+		return "null";
+	}
+    
+	function seeMore(){
+		return;
+		var url = "status_client_detail.asp?UID="+parent.uid;
+		pageJump(url);
+	}
+	
+	function onSearch() {
+		var keyWords = $("#text_keywords").val();
+		tg.pageview_search( $("#sel_search_item").val(), keyWords );
+	}
+
+	function refresh() {
+		var f = new myForm();
+		var url="goform/form_clientList_refresh?UID="+parent.uid;
+		f.add( "test", "test" );
+		
+		f.submit( url, refreshDone );
+	}
+
+	function myhelp() {
+		popHelp("view_clientList");
+	}
+
+	function refreshDone( data ) {
+		var jsonData = eval("("+data+")");
+		jsClientList.data = jsonData.data;
+		jsRadio.pkg_wlan_radio = jsonData.pkg_wlan_radio;
+		jsRadio.pkg_wlan_service_template = jsonData.pkg_wlan_service_template;
+
+		load();
+	}
+
+	var arrClientList = new Array();
+	var tg = new myGrid('tg');
+	
+	//将编号替换为SSID
+	function formatSSID( arrRow, index ){
+		var bss_id = arrRow[index];
+		var stID = getServiceTpl( bss_id );
+
+		return getSsid( stID );
+	}
+	
+	function formatRate( arrRow, index ){
+		return arrRow[index];
+	}
+	
+	function formatRSSI( arrRow, index ){
+		if(arrRow[index] < 0)
+			return " ";
+		else
+			return arrRow[index] - 95;
+	}
+
+	function load() {
+		arrClientList.length = 0;
+		for ( var i = 0; i < jsClientList.data.length; i++ ) {
+			var client = jsClientList.data[i];
+			arrClientList[i] = client.radio + ";";
+			arrClientList[i] += client.bss + ";";
+			arrClientList[i] += client.mac + ";";
+			arrClientList[i] += client.ip + ";";
+			arrClientList[i] += client.uptime + ";";
+			arrClientList[i] += client.aid + ";";
+			arrClientList[i] += client.rssi + ";";
+			arrClientList[i] += client.idle + ";";
+			arrClientList[i] += client.tx_rate + ";";
+			arrClientList[i] += client.rx_rate + ";";
+			arrClientList[i] += client.cipher;
+		}
+
+		tg.pageview_init( arrClientList, 10, 'list_table' );
+
+		/*disable detail function for this publish version*/
+		$(".opBtn0 input").attr("disabled", "disabled");
+	}
+
+	function init() {
+		setNavigationBar("系统状态>客户端>客户端列表");
+		
+		tg.pageview_add('MAC地址', 2, '13%', MG_SORT_ASCII);
+		tg.pageview_add('IP地址', 3, '13%', MG_SORT_ASCII);
+		tg.pageview_add('UpTime', 4, '10%', MG_SORT_ASCII, null);
+		tg.pageview_add('SSID', 1, '18%', MG_SORT_ASCII, null, formatSSID);
+		tg.pageview_add('RSSI', 6, '8%', MG_SORT_NUM, null, formatRSSI);
+		tg.pageview_add('Idle', 7, '8%', MG_SORT_NUM); 
+		tg.pageview_add('TxRate(Mbps)', 8, '15%', MG_SORT_NUM, null, formatRate);
+		tg.pageview_add('RxRate(Mbps)', 9, '15%', MG_SORT_NUM, null, formatRate);
+
+		/*
+		tg.pageview_set_OPwidth("9%");
+		tg.pageview_add_btn("详细", "seeMore");
+		*/
+
+		load();
+	}
+</script> 
+
+</head>
+<body onLoad="init();" >
+	<div id="BODY">
+
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>客户端列表</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<div class="content_tableQuery part_vlan">
+			<input type="button" class="buttonL" value="刷新" onclick="refresh();" style="float:left;margin-left:0px;"/>
+			<!--
+			<input type="button" class="buttonL" value="删除所选" style="float:left;" onclick="delAllSelVlan();"/>
+			-->
+			<div>
+				<span style="margin-left:20px;">
+				查询项
+				</span>
+				<select id="sel_search_item" class="searchItem">
+					<option value="2" selected="">MAC地址</option>
+					<option value="3">IP地址</option>
+					<option value="4">UpTime</option>
+					<option value="1">SSID</option>
+					<option value="6">RSSI</option>
+					<option value="7">Idle</option>
+					<option value="8">TxRate(Mbps)</option>
+					<option value="9">RxRate(Mbps)</option>
+				</select>
+				<span style="margin-left:10px;">
+				关键词
+				</span>
+				<input id="text_keywords" class="text_keywords" maxlength="22" />
+				<input onclick="onSearch();" type="button" value="查 询" />
+			</div>
+		</div>
+		<div class="mytbl_content myGrid" id="list_table">
+		</div>
+		
+	</div>
+
+</body>
+</html>

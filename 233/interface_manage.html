@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/interface/interface_manage.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+<link rel="stylesheet" href="css/interface.css" type="text/css">
+
+<script type="text/javascript">
+	var jsVlan_interface = { "pkg_vlan_interface": [ { "sect_name": "Vlan-interface1", "description": "Vlan-interface 1 interface" } ] };
+	var jsInterface = { "pkg_interface": [ { "sect_name": "GigabitEthernet0\/0", "enabled": "enabled", "linkmode": "bridge", "mtu": "1500" }, { "sect_name": "LO0", "enabled": "enabled" }, { "sect_name": "Vlan-interface1", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-Radio0\/0", "mtu": "1500", "enabled": "enabled" }, { "sect_name": "WLAN-Radio0\/1", "mtu": "1500", "enabled": "enabled" }, { "sect_name": "Loopback0", "enabled": "enabled" }, { "sect_name": "WLAN-BSS0", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS1", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS10", "enabled": "enabled", "mtu": "1500" }, { "sect_name": "WLAN-BSS11", "enabled": "enabled", "mtu": "1500" } ] };
+	var jsDialer = {"pkg_dialer":[{"sect_name":"Vlan-interface1","type":"dhcp","dhcp_default_ip":"192.168.0.50","dhcp_default_netmask":"255.255.255.0"}]}
+;
+	var jsDns = { "pkg_dns": [ { "sect_name": "DNS" } ] };
+	var jsRoute = { "pkg_route": [ ] };
+	var jsDhcpd = { "pkg_dhcpd": [ { "sect_name": "global", "enabled": "1" } ] };
+	var jsNat = { "pkg_nat": [ ] };
+
+	//接口管理 start
+	var arrVlanIfList = new Array("Vlan-interface2;192.168.1.100;255.255.255.0;enabled;desc_XXX",
+							"Vlan-interface3;192.168.1.100;255.255.255.0;enabled;desc_XXX",
+							"Vlan-interface4;192.168.1.100;255.255.255.0;enabled;desc_XXX",
+							"Vlan-interface5;192.168.1.100;255.255.255.0;disabled;desc_XXX");
+</script>
+
+</head>
+<body onLoad="init();">
+    <form name="form1" method="post" action="index.html" id="form1">
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>LAN口（Vlan-interface 1）设置</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="mytbl_content">
+			<table width="100%">
+				<tr>
+					<td class="col1">VLAN ID：</td>
+					<td class="col2">1</td>
+				</tr>
+				<tr>
+					<td class="col1">使能状态：</td>
+					<td class="col2">
+						<select id="sel_ifStatus" name="sel_ifStatus" onChange="changeIfStatus();">
+							<option value="enabled">启用</option>
+							<option value="disabled">禁用</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="part_if_enable" >
+					<td class="col1">IP获取方式：</td>
+					<td class="col2">
+						<select id="sel_ip_mode" name="sel_ip_mode" onChange="changeIpMode( true );">
+							<option value="dhcp">DHCP</option>
+							<option value="static">Static</option>
+							<!-- remove for this publish version -->
+							<!---->
+							<option value="pppoe">PPPoE</option>
+
+						</select>
+					</td>
+				</tr>
+				<!-- 静态IP获取 -->
+				<tr class="IP_static part_if_enable">
+					<td class="col1">IP地址：</td>
+					<td class="col2"><input type="text" id="text_static_ip" name="text_static_ip" size="20" /></td>
+				</tr>
+				<tr class="IP_static part_if_enable">
+					<td class="col1">子网掩码：</td>
+					<td class="col2"><input type="text" id="text_static_netmask" name="text_static_netmask" size="20" /></td>
+				</tr>
+				<tr class="IP_static part_if_enable">
+					<td class="col1">网关(默认路由)：</td>
+					<td class="col2"><input type="text" id="text_static_gateway" name="text_static_gateway" size="20" />（可选）</td>
+				</tr>
+
+				<!-- PPPoE -->
+				<tr class="IP_PPPoE part_if_enable">
+					<td class="col1">上网账号：</td>
+					<td class="col2"><input type="text" id="text_pppoe_account" name="text_pppoe_account" size="20" maxlength="64"/>(1-64个字符，不支持" ' ~ \ #空格和?输入)</td>
+				</tr>
+				<tr class="IP_PPPoE part_if_enable" >
+					<td class="col1">上网口令：</td>
+					<td class="col2"><input type="password" id="text_pppoe_password" name="text_pppoe_password" size="20" maxlength="64"/>(1-64个字符，不支持" ' ~ \ #空格和?输入)</td>
+				</tr>
+				<tr class="IP_PPPoE part_if_enable" >
+					<td class="col1">MTU：</td>
+					<td class="col2"><input type="text" id="text_pppoe_mtu" name="text_pppoe_mtu" size="20" maxlength="5" value="1492"/>(可选，默认值1492，范围128~1492)</td>
+				</tr>
+				<tr class="IP_PPPoE part_if_enable" >
+					<td class="col1">服务名：</td>
+					<td class="col2"><input type="text" id="text_pppoe_servicesname" name="text_pppoe_servicesname" size="20" maxlength="64"/>(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)</td>
+				</tr>
+				<tr class="IP_PPPoE part_if_enable" >
+					<td class="col1">服务器名：</td>
+					<td class="col2"><input type="text" id="text_pppoe_acname" name="text_pppoe_acname" size="20" maxlength="64"/>(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)</td>
+				</tr>
+				<tr class="tr_dns part_if_enable">
+					<td class="col1" >DNS设置：</td>
+					<td class="col2" >
+						<select id="sel_dnsMode" name="sel_dnsMode" onChange="changeDNSMode();">
+							<option value="auto">自动</option>
+							<option value="manual">手动</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="DNS_MANUAL part_if_enable" >
+					<td class="col1">DNS服务器：</td>
+					<td class="col2"><input type="text" id="text_first_dns_server" size="20" maxlength="16" />（可选）</td>
+				</tr>
+				<tr class="DNS_MANUAL part_if_enable" >
+					<td class="col1">备份DNS服务器：</td>
+					<td class="col2"><input type="text" id="text_second_dns_server" size="20" maxlength="16" />（可选）</td>
+				</tr>
+				<!-- dhcpd -->
+				<tr class="IP_static part_if_enable">
+					<td class="col1">DHCP服务器：</td>
+					<td class="col2">
+						<select id="sel_static_dhcpd_enable" >
+							<option value="enabled">启用</option>
+							<option value="disabled" selected="selected" >禁用</option>
+						</select>
+					</td>
+				</tr>
+				<!-- dhcpd, end -->
+
+				<!-- dynamic -->
+				<tr class="IP_dynamic part_if_enable">
+					<td class="col1">默认IP地址：</td>
+					<td class="col2"><input type="text" id="text_dynamic_ip" size="20" />（可选）</td>
+				</tr>
+				<tr class="IP_dynamic part_if_enable">
+					<td class="col1">默认子网掩码：</td>
+					<td class="col2"><input type="text" id="text_dynamic_netmask" size="20" />（可选）</td>
+				</tr>
+				<!-- dynamic, end -->
+
+				<!-- NAT -->
+				<tr>
+					<td class="col1">NAT：</td>
+					<td class="col2">
+						<select id="sel_nat_enable" >
+							<option value="enabled">启用</option>
+							<option value="disabled" selected="selected" >禁用</option>
+						</select>
+					</td>
+				</tr>
+				<!-- NAT, end -->
+			</table>
+		</div>
+
+		<div class="content_option">
+			<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+			<input type="button" class="buttonL" onClick="ok()" value="确 定" />
+		</div>
+
+<!--接口列表-->
+	<div id="INNER"  align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>三层接口列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增三层接口" onclick="addInterface();" style="float:left;margin-left:2px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">名称</option>
+				<option value="3">描述</option>
+				<option value="1">IP地址/子网掩码</option>
+				<option value="2">状态</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearchLog()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="tbl_vlanInterface" >
+	</div>
+
+	</form>
+</body>
+</html>

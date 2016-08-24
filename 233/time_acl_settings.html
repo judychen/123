@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+
+<script type="text/javascript">
+	var jsTimeAcl = { "pkg_time_range": [ ] };
+	//var jsTimeAcl = {"pkg_time_range":[]};
+	var arrTimeAcl = new Array();
+
+	function myhelp() {
+		popHelp("timeAclSettings");
+	}
+
+	function addTimeAcl(){
+		var url = "time_acl_add.asp?UID="+parent.uid;
+		//var url = "time_acl_edit.asp?UID="+parent.uid;
+		pageJump(url);
+	}
+	
+	function TimeAclEdit(arrRow, indexRow){
+		var arrRow = arrRow;
+		var schemeName = arrRow[0];
+		
+		var url = "time_acl_edit.asp?UID="+parent.uid+"&scheme="+schemeName + "&page=" + tg.getCurrentPage() ;
+		pageJump(url);
+	}
+
+	function TimeAclDel(arrRow, indexRow) {
+		var arrRow = arrRow;
+		var schemeName = arrRow[0];
+		
+		var url="setform/form_time_acl_del?UID="+parent.uid;
+		var f = new myForm();
+		
+		f.add("scheme", schemeName);
+		f.submit( url, delTimeAclSuccess);
+	}
+
+	function delTimeAclSuccess() {
+		var url = "time_acl_settings.asp?UID=" + parent.uid;
+		pageJump(url);
+	}
+	
+	function onSearch() {
+		var keyWords = $("#text_keywords").val();
+		tg.pageview_search( $("#search_item").val(), keyWords );
+	}
+
+	function load() {
+		var temp = jsTimeAcl.pkg_time_range;
+		for (var i = 0; i< temp.length; i++) {
+			arrTimeAcl[i] = temp[i].sect_name;
+		}
+
+		var page = getQueryString("page");
+		if ( page != null )
+			tg.pageview_init(arrTimeAcl, 10, 'list_time_acl', page);
+		else	
+			tg.pageview_init(arrTimeAcl, 10, 'list_time_acl');
+	}
+	
+	var tg = new myGrid('tg');
+	function init() {
+		setNavigationBar("无线设置>时间策略>策略列表");
+
+		tg.pageview_add('策略名称', 0, '87%', MG_SORT_ASCII);
+		tg.pageview_add_btn("编辑", TimeAclEdit);
+		tg.pageview_add_btn("删除", TimeAclDel);
+		tg.pageview_set_OPwidth("13%");
+
+		load();
+	}
+</script> 
+
+</head>
+<body onLoad="init();">
+	<form name="myForm" id="myForm"></form>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>时间策略列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增时间策略" onclick="addTimeAcl();" style="float:left;margin-left:0px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">策略名称</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="list_time_acl">
+	</div>
+</body>
+</html>

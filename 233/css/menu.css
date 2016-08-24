@@ -1,0 +1,132 @@
+/* ȥ��1���˵�ѡ�����߿� */
+input{
+	outline:none;
+}
+input[type="button"]::-moz-focus-inner{border-color:transparent;} /*firefox˽������*/
+
+#menu .btn_o, #menu .btn_current
+{
+	width:156px; height:30px;
+	font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+	font-size:13px; font-weight:bold; font-style:normal;
+	color:#FFFFFF;
+	text-align:left;
+	background-color:#8EA5CF;
+    /*background-image:url(../../images/zzz.JPG);*/
+    background-position:110px 0;
+    background-repeat:repeat-y;
+	padding:2px 0px 2px 10px; /*top right bottom left*/
+	cursor:default;
+
+	border:0px;
+	border-color:#4F6887 #4F6887 #01253F #4F6887;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#FFFFFF;
+	outline:none;
+}
+/* �����򵼲˵� */
+#menu .btn_wizard {
+	width:156px; height:30px;
+	font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+	font-size:13px;
+	font-weight:normal;
+	font-style:normal;
+	color:#465F88;
+	text-align:left;
+	background-color:#EAEDF8;
+    /*background-image:url(../../images/zzz.JPG);
+    background-position:110px 0;
+    background-repeat:repeat-y;
+	*/
+	padding:2px 0px 2px 10px; /*top right bottom left*/
+	cursor:default;
+	border:1px solid #8EA5CF;
+	margin-bottom:1px;
+}
+
+/* �����򵼲˵����� */
+#menu .btn_wizard_active {
+	width:156px; height:30px;
+	font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+	font-size:13px;
+	font-weight:normal;
+	font-style:normal;
+	color:#465F88;
+	text-align:left;
+	padding:2px 0px 2px 10px; /*top right bottom left*/
+	cursor:default;
+	border:1px solid #8EA5CF;
+	margin-bottom:1px;
+	background:#EAEDF8 url(../../img/arrow3.png) no-repeat 130px;
+}
+
+/*
+#menu .submenu{
+	border:0px;
+	margin:0px;
+	padding:0px;
+	text-decoration:none;
+	width:156px;
+}*/
+
+#menu .submenus{
+	/*width:172px;*/
+	width:145px;/*tmp*/
+	display:block;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#FFFFFF;
+	
+	font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+	font-size:13px;
+	font-style:normal;
+	
+	padding-bottom:5px;
+	text-align:left;
+	padding-left:10px;
+	/*padding-right:10px;*/
+	padding-top:5px;
+
+}
+
+#menu .submenus:hover /*���껮���Ӳ˵�ʱ*/
+{
+	font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+	font-size:13px;
+	font-style:normal;
+	COLOR: #FFFFFF;
+	background-color:#EAEDF8;
+	/*
+	background-image:url(../../img/arrow1.png);
+	background-repeat:no-repeat;
+	background-position:130px;
+	*/
+	color:#465F88;
+}
+
+#menu .submenus{
+	/*font-family: Arial, Helvetica, sans-serif;*/
+	color:#573452;                 
+	font-size:13px;
+	font-style:normal;
+	text-decoration:none;
+}
+
+/* �����˵����� */
+#menu .current{
+	width:145px;
+	display:block;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#FFFFFF;
+	font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+	color:#465F88;
+	font-size:13px;
+	font-style:normal;
+	text-align:left;
+	padding:5px 0px 5px 10px;
+	
+	background:#EAEDF8 url(../../img/arrow3.png) no-repeat 130px;
+}
+		

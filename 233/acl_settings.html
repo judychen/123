@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/acl/acl_settings.js?1468922814" charset="utf-8"></script>
+
+<script type="text/javascript">
+	var jsAcl = { "pkg_wlan_acl": [ { "sect_name": "36", "policy": "permit", "maclist": [ { "maclist": "11:22:33:44:55:66" }, { "maclist": "77:77:77:77:77:77" } ] }, { "sect_name": "37", "policy": "deny", "maclist": [ { "maclist": "66:55:44:33:22:11" }, { "maclist": "77:77:77:77:77:77" } ] } ] };
+	var arrAcl = new Array();
+</script> 
+
+</head>
+<body onLoad="init();">
+	<form name="myForm" id="myForm"></form>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>ACL方案列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增ACL方案" onclick="addAcl();" style="float:left;margin-left:0px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">方案名称</option>
+				<option value="1">策略</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch()"  type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="list_acl">
+	</div>
+</body>
+</html>

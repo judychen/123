@@ -1,0 +1,46 @@
+#div_progress{ 
+	/*width:400px;*/
+	width:0px;
+	margin-top:160px;
+	margin-left:300px;
+	z-index:998;
+	position:absolute;
+	background-color:#FFF;
+	display:none;
+	/*border:solid #FF0000;*/
+} 
+
+#loading{ 
+	/*width:397px;*/
+	width:0px;
+	height:49px; 
+	/*
+	background:url(../images/bak.png) no-repeat;
+	*/
+} 
+
+#loading div{ 
+	width:0px; height:48px; 
+	/*
+	background:url(../images/pro.gif) no-repeat; 
+	*/
+	color:#FFFFFF; 
+	text-align:center; 
+	font-family:Tahoma; 
+	font-size:18px; 
+	line-height:48px; 
+} 
+#message, #msg_faild { 
+	width:200px; 
+	height:35px; 
+	font-family:Tahoma; 
+	font-size:12px; 
+	background-color:#d8e7f0; 
+	border:1px solid #187CBE; 
+	display:block; 
+	line-height:35px; 
+	text-align:center; 
+	margin-bottom:20px; 
+	margin-left:85px;
+	margin-top:20px;
+}

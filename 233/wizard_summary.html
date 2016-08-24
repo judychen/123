@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv='pragma' content='no-cache'>
+<title>康凯科技（杭州）有限公司</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myProgress.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/wizard/common.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/wizard/summary.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+
+<link rel="stylesheet" href="css/wizard.css" type="text/css">
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+
+</head>
+
+<body>
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>配置过程</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+
+	<div id="wizard_div"></div>
+
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>当前配置</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+
+	<div class="mytbl_content">
+		<table style="width:100%;">
+			<tr class="part_nat_enable" >
+				<td class="col1">工作模式：</td>
+				<td class="col2"><span id="span_link_mode"></span></td>
+			</tr>
+			<tr>
+				<td class="col1">IP地址：</td>
+				<td class="col2"><span id="span_ip_mode"></span></td>
+			</tr>
+			<tr>
+				<td class="col1">用户密码：</td>
+				<td class="col2"><span id="span_admin_pwd"></span></td>
+			</tr>
+			<script>
+				generate_tr_ssid();
+			</script>
+			<!--
+			
+			<tr class="staticIP">
+				<td class="col1">5G SSID：</td>
+				<td class="col2"><span id="span_ssid_2"></span></td>
+			</tr>
+			-->
+			<tr class="staticIP">
+				<td class="col1">认证方式：</td>
+				<td class="col2"><span id="span_cipher"></span></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="content_option" id="wizard_op" >
+	</div>
+</body>
+</html>

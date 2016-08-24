@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myProgress.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+
+<style type="text/css">
+	.file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }
+</style>
+<script type="text/javascript">
+	function myhelp() {
+		popHelp("configManage");
+	}
+	
+	function todo(data){
+		progressTask( 30, gohome );
+	}
+
+	function gohome(){
+		window.parent.location.href="index.asp";
+	}
+
+	function exportCfgSuccess( data ) {
+		myAlert("配置导出成功！");
+	}
+
+	function importCfgSuccess() {
+		progressTask( 35, gohome );
+	}
+
+	function _restore() {
+		var url="setform/form_cfg_restore?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "test", "test" );
+		f.submit( url, todo );
+	}
+
+	function restore(){
+		myConfirm("恢复出厂设置后设备将重启，确定要恢复吗？", false, _restore );
+	}
+	
+	function init(){
+		setNavigationBar("设备管理>配置管理");
+
+		var arrJqObj = $(".radio_method");
+		for(i = 0; i < arrJqObj.length; i++) {
+			if ( $( arrJqObj[i] ).val() == "Local" ){
+				$( arrJqObj[i] ).click();
+			}
+		}
+	}
+
+	function cfg_export_local_done(data) {
+		pageJump( "running.cfg" );
+	}
+
+	function isInputValid_local() {
+		if ( $("#fileField").val() == "" ){
+			myAlert("请选择配置文件！", "fileField");
+			return false;
+		}
+		
+		return true;
+	}
+	function isInputValid_ftp() {
+		if ( $("#text_ftp_server").val() == "") {
+			myAlert("FTP服务器不能为空！", "text_ftp_server");
+			return false;
+		}
+
+		if ( $("#text_ftp_cfgName").val() == "" ) {
+			myAlert("文件名不能为空", "text_ftp_cfgName");
+			return false;
+		}
+
+		if ( !isConfigNameValid($("#text_ftp_cfgName").val()) ) {
+			myAlert( "文件名只能包含_.字母和数字！", "text_ftp_cfgName");
+			return false;
+		}
+
+		if ( isHasChinese( $("#text_ftp_cfgName").val() ) ) {
+			myAlert("文件名不能包含中文！", "text_ftp_cfgName");
+			return false;
+		}
+		
+		return true;
+	}
+
+	function isInputValid_tftp() {
+		if ( $("#text_tftp_server").val() == "") {
+			myAlert("TFTP服务器不能为空！", "text_tftp_server");
+			return false;
+		}
+
+		if ( $("#text_tftp_cfgName").val() == "" ) {
+			myAlert("文件名不能为空！", "text_tftp_cfgName");
+			return false;
+		}	
+
+		if ( !isConfigNameValid( $("#text_tftp_cfgName").val() ) ) {
+			myAlert( "文件名只能包含_.字母和数字！", "text_tftp_cfgName");
+			return false;
+		}
+
+		if ( isHasChinese( $("#text_tftp_cfgName").val() ) ) {
+			myAlert("文件名不能包含中文！", "text_tftp_cfgName");
+			return false;
+		}
+		
+		return true;
+	}
+
+
+	function _form_cfg_import_local() {
+		showWaitConfig(true);
+		$.ajaxFileUpload
+		(
+			{
+				url: 'setform/form_cfg_import_local?UID='+parent.uid, //用于文件上传的服务器端请求地址
+				secureuri: false, //一般设置为false
+				fileElementId: 'fileField', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+				//dataType: 'json', //返回值类型 一般设置为json
+				dataType: 'text',
+				success: function (data, status)  //服务器成功响应处理函数
+				{
+					showWaitConfig(false);
+					//alert(data);
+					var reg = /<pre.+?>(.+)<\/pre>/g;
+					data.match(reg);
+					//alert(RegExp.$1);
+					//var jsonData = eval("("+RegExp.$1+")");
+					var jsonData = eval( "("+data+")" );
+					//alert("___success:"+jsonData.status);
+					if( jsonData.status == "ok" ){
+						importCfgSuccess();
+						//func(data);
+					} else if ( jsonData.status == "error" ){
+						showError( true, jsonData.error);
+					} else
+						showError( true, "未知响应！" );	//never reach here
+					/*
+					if (typeof (data.error) != 'undefined') {
+						if (data.error != '') {
+							alert(data.error);
+						} else {
+							alert(data.msg);
+						}
+					}
+					*/
+				},
+				error: function (data, status, e)//服务器响应失败处理函数
+				{
+					alert(e);
+				}
+			}
+		)
+
+	}
+	function form_cfg_import_local() {
+		if ( !isInputValid_local() )	
+			return;
+
+		myConfirm( "配置导入完成后设备将自动重启，确定要导入吗？", false, _form_cfg_import_local );
+	}
+
+	function _form_cfg_import_ftp() {
+		var url="setform/form_cfg_import_ftp?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "ftpServer", $("#text_ftp_server").val() );
+		f.add( "ftpCfgName", $("#text_ftp_cfgName").val() );
+		f.add( "ftpUserName", $("#text_ftp_username").val() );
+		f.add( "ftpPassword", $("#text_ftp_password").val() );
+		f.submit( url, importCfgSuccess );
+	}
+
+	function form_cfg_import_ftp() {
+		if ( !isInputValid_ftp() )	
+			return;
+
+		myConfirm("配置导入完成后设备将自动重启，确定要导入吗？", false, _form_cfg_import_ftp);
+	}
+
+	function _form_cfg_import_tftp() {
+		var url="setform/form_cfg_import_tftp?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "tftpServer", $("#text_tftp_server").val() );
+		f.add( "tftpCfgName", $("#text_tftp_cfgName").val() );
+		f.submit( url, importCfgSuccess );
+	}
+
+	function form_cfg_import_tftp() {
+		if ( !isInputValid_tftp() )	
+			return;
+
+		myConfirm("配置导入完成后设备将自动重启，确定要导入吗？", false, _form_cfg_import_tftp);
+	}
+
+	function form_cfg_export_local_download() {
+		var url="setform/running.cfg?UID="+parent.uid;
+		pageJump( url );
+	}
+
+	function form_cfg_export_local() {
+		var url="setform/form_log_export_local?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "test", "test" );
+		f.submit( url, form_cfg_export_local_download );
+	}
+
+	function form_cfg_export_ftp(){
+		if ( isInputValid_ftp() == false )	
+			return;
+
+		var url="setform/form_cfg_export_ftp?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "ftpServer", $("#text_ftp_server").val() );
+		f.add( "ftpCfgName", $("#text_ftp_cfgName").val() );
+		f.add( "ftpUserName", $("#text_ftp_username").val() );
+		f.add( "ftpPassword", $("#text_ftp_password").val() );
+		f.submit( url, exportCfgSuccess );
+	}
+
+	function form_cfg_export_tftp() {
+		if ( !isInputValid_tftp() )	
+			return;
+
+		var url="setform/form_cfg_export_tftp?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "tftpServer", $("#text_tftp_server").val() );
+		f.add( "tftpCfgName", $("#text_tftp_cfgName").val() );
+		f.submit( url, exportCfgSuccess );
+	}
+
+	function importCfg(){
+		var arrJqObj = $(".radio_method");
+		for(var i = 0; i < arrJqObj.length; i++) {
+			var tmp = $( arrJqObj[i] );
+			if ( tmp.attr("checked") == "checked" ){
+				if ( tmp.val() == "Local" ) {
+					form_cfg_import_local();
+				} else if ( tmp.val() == "FTP") {
+					form_cfg_import_ftp();
+				} else {
+					form_cfg_import_tftp();
+				}
+			}
+		}
+	}
+	
+	function exportCfg() {
+		var arrJqObj = $(".radio_method");
+		for(i = 0; i < arrJqObj.length; i++) {
+			var tmp = $( arrJqObj[i] );
+			if ( tmp.attr("checked") == "checked" ){
+				if ( tmp.val() == "Local" ) {
+					form_cfg_export_local();
+				} else if ( tmp.val() == "FTP" ) {
+					form_cfg_export_ftp();
+				} else {
+					form_cfg_export_tftp();
+				}
+			}
+		}
+	}
+
+	function openFile() {
+		$("#fileField").click();
+	}
+
+	function changeMethod(obj) {
+		$obj = $(obj);
+
+		if ( $(obj).val()=="Local" ){
+			$(".tr_local").css("display", "table-row");
+			$(".tr_ftp").css("display", "none");
+			$(".tr_tftp").css("display", "none");
+		} else if ($(obj).val()=="FTP"){
+			$(".tr_local").css("display", "none");
+			$(".tr_ftp").css("display", "table-row");
+			$(".tr_tftp").css("display", "none");
+		} else {
+			$(".tr_local").css("display", "none");
+			$(".tr_ftp").css("display", "none");
+			$(".tr_tftp").css("display", "table-row");
+		}
+	}
+
+</script> 
+
+</head>
+<body onLoad="init();">
+    <form name="myForm" id="myForm" ></form>
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>恢复出厂配置</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>	
+		<div class="mytbl_content">
+			<table style="width:100%;">	
+				<tr>
+					<td class="col1">恢复出厂配置：</td>
+					<td class="col2" >
+						<input type='button' class='buttonL' value='恢 复' onClick="restore();" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>配置文件导入/导出</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<div class="mytbl_content">
+			<table style="width:100%;">	
+				<tr>
+					<td class="col1">请选择方式：</td>
+					<td class="col2">
+						<input type="radio" name="radio_method" class="radio_method" value="Local" onclick="changeMethod(this);" />Local	
+						<input type="radio" name="radio_method" class="radio_method" value="FTP" onclick="changeMethod(this);"/>FTP	
+						<input type="radio" name="radio_method" class="radio_method" value="TFTP" onclick="changeMethod(this);"/>TFTP	
+					</td>
+				</tr>
+				<tr class="tr_local">
+					<td class="col1">请选择已有的配置文件：</td>
+					<td class="col2" style="">
+						<!--
+						<input type='text' name='text_local_fileName' id='text_local_fileName' maxlength="0" onclick="openFile();" class='filetxt' size="48" />  
+						<input type='button' class='buttonL' value='浏览...' onclick="openFile();" />(1-63个字符)
+						
+						<input type="file" name="fileField" class="file" id="fileField" size="28" onChange="document.getElementById('text_local_fileName').value=this.value" style="display:none;"/>
+						-->
+						<input type="file" name="fileField" id="fileField" size="28" />
+					</td>
+				</tr>
+				<tr class="tr_ftp">
+					<td class="col1">FTP服务器：</td>
+					<td class="col2">
+						<input type='text' name='text_ftp_server' id='text_ftp_server' maxlength="64" style="width:200px" /> （1-64个字符）
+					</td>
+				</tr>
+				<tr class="tr_ftp">
+					<td class="col1">文件名：</td>
+					<td class="col2">
+						<input type='text' name='text_ftp_cfgName' id='text_ftp_cfgName' maxlength="32" style="width:200px" value="running.cfg" />（1-32个字符）
+					</td>
+				</tr>
+				<tr class="tr_ftp">
+					<td class="col1">用户：</td>
+					<td class="col2">
+						<input type='text' name='text_ftp_username' id='text_ftp_username' maxlength="32" style="width:200px" />（可选）
+					</td>
+				</tr>
+				<tr class="tr_ftp">
+					<td class="col1">密码：</td>
+					<td class="col2">
+						<input type='text' name='text_ftp_password' id='text_ftp_password' maxlength="32" style="width:200px" />（可选） 
+					</td>
+				</tr>
+				<tr class="tr_tftp">
+					<td class="col1">TFTP服务器：</td>
+					<td class="col2">
+						<input type='text' name='text_tftp_server' id='text_tftp_server' style="width:200px" maxlength="64" /> （1-64个字符）
+					</td>
+				</tr>
+				<tr class="tr_tftp">
+					<td class="col1">文件名：</td>
+					<td class="col2">
+						<input type='text' name='text_tftp_cfgName' id='text_tftp_cfgName' style="width:200px" maxlength="32" value="running.cfg" />（1-32个字符）
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+		<div class="content_option">
+			<input class="buttonL" onclick="importCfg();" type="button" value="导 入" />
+			<input class="buttonL" onclick="exportCfg();" type="button" value="导 出" />
+		</div>
+		
+</body>
+</html>

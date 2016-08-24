@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+
+<script type="text/javascript">
+	var jsData = { "pkg_wifisensor": [ { "sect_name": "wifisensor", "enabled": "disabled" } ] };
+
+	function myhelp() {
+		popHelp("wifiProbeSettings");
+	}
+
+	function isInputValid() {
+		var report_method;
+		var udp_ip, udp_port;
+		var interval;
+		var enabled;
+
+		enabled = $("#sel_enable").val();
+		if ( enabled == "disabled" ) {
+			return true;
+		}
+
+		report_method = $("#sel_report_method").val();
+		if ( report_method == "UDP" || report_method == "UDP_TD") {
+			/* UDP */
+			udp_ip = $("#text_udp_ip").val();
+			udp_port = $("#text_udp_port").val();
+			interval = $("#text_interval").val();
+			if ( udp_ip == "" ) {
+				myAlert("服务器IP地址不能为空！", "text_udp_ip");
+				return false;
+			}
+
+			if ( !checkIP(udp_ip) ) {
+				myAlert("服务器IP地址格式不正确！", "text_udp_ip");
+				return false;
+			}
+
+			if ( is_ip_multicast_address(udp_ip) ) {
+				myAlert("服务器IP地址不能为组播地址！", "text_udp_ip");
+				return false;
+			}
+
+			if ( is_ip_loopback_address(udp_ip) ) {
+				myAlert("服务器IP地址不能为回环地址！", "text_udp_ip");
+				return false;
+			}
+			
+			if ( udp_port == "" ) {
+				myAlert("端口不能为空！", "text_udp_port");
+				return false;
+			}
+
+			if ( !checkNumberRang( udp_port, 1, 65535) ) {
+				myAlert("端口格式不正确！", "text_udp_port");
+				return false;
+			}
+
+			if ( interval == "" ) {
+				myAlert("上报间隔不能为空！", "text_interval");
+				return false;
+			}
+
+			if ( !checkNumberRang( interval, 5, 600) ) {
+				myAlert("上报间隔格式不正确！", "text_interval");
+				return false;
+			}
+
+		} else {
+			/* HTTP */
+		}
+	
+		return true;
+	}
+
+	function Ok() {
+		if ( !isInputValid() )
+			return;
+
+		var f = new myForm();
+		var url = "";
+		var udp_ip, udp_port;
+		var report_method;
+
+		if ( $("#sel_enable").val() == "enabled" ) {
+			f.add( "enabled", 1 );
+		} else
+			f.add( "enabled", 0 );
+    
+		f.add("interval", $("#text_interval").val());
+		report_method = $("#sel_report_method").val();
+		if ( report_method == "UDP" || report_method == "UDP_TD") {
+			/* UDP */
+			udp_ip = $("#text_udp_ip").val();
+			udp_port  = $("#text_udp_port").val();
+			f.add("report_method", report_method );
+			f.add("udp_ip", udp_ip);
+			f.add("udp_port", udp_port);
+		} else {
+			/* HTTP */
+		}
+		
+		url = "setform/form_wireless_probe_set?UID="+parent.uid;
+		f.submit( url, setSuccess );
+	}
+
+	function setSuccess( data ) {
+		jsData = eval("("+data+")");
+		load();
+	}
+
+	function Cancel() {
+		load();
+	}
+
+	function load() {
+		var sect_wifisensor_exsit = false;
+		var section;
+		for ( var i = 0; i < jsData.pkg_wifisensor.length; i++ ) {
+			section = jsData.pkg_wifisensor[i];
+			if ( section.sect_name == "wifisensor" ) {
+				sect_wifisensor_exsit = true;
+				break;
+			}
+		}
+
+		if ( sect_wifisensor_exsit ) {
+			if ( section.type == "UDP" || section.type == "UDP_TD") {
+				$("#sel_report_method").val(section.type);	
+				if ( typeof(section.interval) != "undefined" ) {
+					$("#text_interval").val( section.interval);
+				}
+				if ( typeof(section.udp_ip) != "undefined" ) {
+					$("#text_udp_ip").val( section.udp_ip);
+				}
+				if ( typeof(section.udp_port) != "undefined" ) {
+					$("#text_udp_port").val( section.udp_port);
+				}
+			} else {
+				$("#sel_report_method").val("HTTP");	
+			}
+			if ( section.enabled == "enabled" ) {
+				$("#sel_enable").val("enabled");
+				$(".part_enable").css('display','table-row');
+			} else {
+				/* if section.enabled is disabled or undefined */
+				$("#sel_enable").val("disabled");
+				$(".part_enable").css('display','none');
+			}
+			
+		} else {
+			$("#sel_enable").val("disabled");
+			$(".part_enable").css('display','none');
+		}
+	}
+  function do_service() {
+    if ($("#sel_enable").val() == "enabled"){
+    	$(".part_enable").css('display','table-row');
+    } else {
+    	$(".part_enable").css('display','none');
+    }
+  }
+	function init() {
+		setNavigationBar("无线设置>无线探针");
+		load();
+	}
+</script> 
+
+</head>
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px" >
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>无线探针</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr>
+				<td class="col1">使能：</td>
+				<td class="col2">
+					<select id="sel_enable" onchange="do_service();">
+						<option value="enabled">启用</option>
+						<option value="disabled" selected="selected" >禁用</option>
+					</select>
+				</td>
+			</tr>
+			<tr class="part_enable">
+				<td class="col1">上报方式：</td>
+				<td class="col2">
+					<select id="sel_report_method" >
+						<option value="UDP" selected="selected" >UDP</option>
+						<option value="UDP_TD" selected="selected" >TAODIAN</option>
+						<!--
+						<option value="HTTP">HTTP</option>
+						-->
+					</select>
+				</td>
+			</tr>
+			<tr class="part_enable">
+				<td class="col1">服务器IP地址：</td>
+				<td class="col2">
+					<input id="text_udp_ip" />
+				</td>
+			</tr>
+			<tr class="part_enable">
+				<td class="col1">端口：</td>
+				<td class="col2">
+					<input id="text_udp_port" maxlength="5" />（1-65535）
+				</td>
+			</tr>
+			<tr class="part_enable">
+				<td class="col1">上报间隔：</td>
+				<td class="col2">
+					<input id="text_interval" maxlength="3" />（5-600秒）
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_option">
+		<input type="button" id="btn_Cancel" class="buttonL" onClick="Cancel();" value="取 消"/>
+		<input type="button" id="btn_Ok" class="buttonL" onClick="Ok();" value="确 定"/>
+	</div>
+
+</body>
+</html>

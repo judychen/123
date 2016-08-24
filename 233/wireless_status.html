@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="width:100%; overflow:hidden; " class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+    
+<script type="text/javascript">
+	var jsWirelessServ = {"status":"ok", "data":[{"bss_id":0, "radio_id":0, "ssid":"CommSky_2.4G", "auth":"WPA2-Radius", "up":1 },{"bss_id":1, "radio_id":1, "ssid":"CommSky_5G", "auth":"WPA2", "up":1 }]};
+	var arrServiceList = new Array();
+
+	function myhelp() {
+		popHelp("view_wirelessService");
+	}
+
+	function seeMore(){
+		var url = "status_ap_detail.asp?UID="+parent.uid;
+		pageJump(url);
+	}
+
+	function load() {
+		arrServiceList.length = 0;
+		for ( var i = 0; i < jsWirelessServ.data.length; i++ ) {
+			var service = jsWirelessServ.data[i];
+			arrServiceList[i] = service.bss_id + ";";
+			arrServiceList[i] += service.ssid + ";";
+			arrServiceList[i] += service.radio_id + ";";
+			arrServiceList[i] += service.auth + ";";
+			arrServiceList[i] += service.up;
+		}
+
+		tg.pageview_init( arrServiceList, 10, 'list_table' );
+
+		/*disable detail function for this publish version*/
+		$("input").attr("disabled", "disabled");
+	}
+
+	function formatPort( arrRow, index ) {
+		return "WLAN-BSS" + arrRow[index];
+	}
+	
+	function formatRadio( arrRow, index ) {
+		if ( arrRow[index] == 0 )
+			return "2.4G";
+		else
+			return "5G";
+	}
+	
+	function formatAuth( arrRow, index ) {
+		if ( arrRow[index] == "WPA2-Radius" )
+			return "WPA2-802.1X";
+		else if ( arrRow[index] == "WPA-auto" )
+			return "WPA-Auto";
+		else
+			return arrRow[index];
+	}
+
+	function formatServiceEnabled( arrRow, index ) {
+		if ( arrRow[index] == 1 )
+			return "启用";
+		else
+			return "禁用";
+	}
+
+	var tg = new myGrid('tg');
+	
+	function init() {
+		setNavigationBar("系统状态>无线接入服务>无线服务列表");
+		
+		tg.pageview_add('端口', 0, '18%', MG_SORT_NUM, null, formatPort );
+		tg.pageview_add('SSID', 1, '23%', MG_SORT_ASCII);
+		tg.pageview_add('射频单元', 2, '18%', MG_SORT_ASCII, null, formatRadio );
+		tg.pageview_add('认证方式', 3, '17%', MG_SORT_ASCII, null, formatAuth);
+		tg.pageview_add('启用状态', 4, '17%', MG_SORT_ASCII, null, formatServiceEnabled );
+		/*
+		tg.pageview_set_OPwidth("7%");
+		tg.pageview_add_btn("详细", "seeMore");
+		*/
+
+		load();
+	}
+</script> 
+
+</head>
+<body onLoad="init();" >
+	<div id="BODY">
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>无线服务列表</div></td>
+					<td>&nbsp;</td>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="mytbl_content myGrid" id="list_table">
+		</div>
+		
+	</div>
+</body>
+</html>

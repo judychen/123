@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/igmp_snooping/settings.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+
+<script type="text/javascript">
+	var jsIgmp_snooping = { "pkg_igmp_snooping": [ { "sect_name": "config", "group_threshold": "256", "enabled": "0", "m2u_auto_adapt": "0", "multicast_policy": "0", "client_threshold": "256", "client_aging_time": "260", "adapt_sta_threshold": "20" } ] };
+	var arrStaticGroups = new Array();
+
+</script>
+
+</head>
+<body onLoad="init();">
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>组播转发策略设置</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="mytbl_content">
+			<table width="100%">
+				<tr>
+					<td class="col1">组播转发策略：</td>
+					<td class="col2">
+						<select id="sel_multicast_forward_policy" >
+							<option value="accept-all">accept-all</option>
+							<option value="drop-unknown">drop-unknown</option>
+							<option value="drop-all">drop-all</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="col1">智能组播优化：</td>
+					<td class="col2">
+						<select id="sel_m2u_auto_adapt" >
+							<option value="enabled">启用</option>
+							<option value="disabled">禁用</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"><div>IGMP Snooping设置</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="mytbl_content">
+			<table width="100%">
+				<tr>
+					<td class="col1">IGMP Snooping使能：</td>
+					<td class="col2">
+						<select id="sel_igmp_snooping_enable" >
+							<option value="enabled">启用</option>
+							<option value="disabled">禁用</option>
+						</select>
+					</td>
+				</tr>
+				<!--
+				<tr>
+					<td class="col1">组播转单播使能：</td>
+					<td class="col2">
+						<select id="sel_m2u_enable" >
+							<option value="enabled">启用</option>
+							<option value="disabled">禁用</option>
+						</select>
+					</td>
+				</tr>
+				-->
+				<tr>
+					<td class="col1">组播组最大数量：</td>
+					<td class="col2"><input type="text" id="text_group_threshold" size="20" />（1-256, 默认256）</td>
+				</tr>
+				<tr>
+					<td class="col1">各组播组最大成员数量：</td>
+					<td class="col2"><input type="text" id="text_client_threshold" size="20" />（2-256, 默认256）</td>
+				</tr>
+				<tr>
+					<td class="col1">老化时间：</td>
+					<td class="col2"><input type="text" id="text_aging_time" size="20" />（200-1000, 默认260秒）</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="content_option">
+			<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+			<input type="button" class="buttonL" onClick="ok()" value="确 定" />
+		</div>
+
+	<!--接口列表-->
+	<div id="INNER"  align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>静态加入组播组列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_tableQuery">
+		<input type="button" class="buttonL" value="新 增" title="新增静态加入组播组" onclick="addStaticGroup();" style="float:left;margin-left:2px;"/>
+		<div>
+			<span style="margin-left:20px;">
+			查询项
+			</span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">组播组地址</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+			<input class="" id="apply" onclick="onSearch()" type="button" value="查 询" />
+		</div>
+	</div>
+	<div class="mytbl_content myGrid" id="tbl_staticGroups" >
+	</div>
+
+</body>
+</html>

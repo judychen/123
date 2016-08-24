@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>康凯科技（杭州）有限公司</title>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+	<link rel="stylesheet" href="css/accounts_manage.css" type="text/css">
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+
+	<style type="text/css">
+	.disabled_op {
+		width:28px;
+		margin:2px;
+		padding:0 6px 0 6px;
+	}
+	</style>
+
+	<script type="text/javascript">
+	var usersList = new Array();
+	var jsUsers = { "pkg_usrmanage": [ { "sect_name": "admin", "name": "admin", "password": "admin", "level": "1", "cipher": "0" } ] };
+	var jsIdleTime = { "pkg_idletime": [ { "sect_name": "idletime", "time": "5" } ] };
+
+	function myhelp() {
+		popHelp("userManage");
+	}
+			
+	function tabMenuClicked(page, obj){
+		var $obj=$(obj) //DOM Object to Jquery Object
+	
+		if ( $obj.parent().attr('class')=="tabSelected" )
+			return;
+		else if( $obj.parent().attr('class')=="tabHover" ){
+			$(".tabSelected").attr('class','tabUnselected');
+			$obj.parent().attr('class', 'tabSelected');
+		}else {
+			alert("Unkown tab clicked!");
+		}
+		
+		switch (page){
+		case 1:
+			$(".accounts_manage").css('display','block'); 
+			$(".changePWD").css('display','none'); 
+			break;
+		case 2:
+			$(".accounts_manage").css('display','none'); 
+			$(".changePWD").css('display','block'); 
+			break;	
+		default:
+			alert("Unkown tab clicked!");
+		}
+	
+	}
+	
+	function tabMenuMouseover(obj){
+		var $obj=$(obj) //DOM Object to Jquery Object
+	
+		if ( $obj.parent().attr('class')=="tabSelected" )
+			return;
+		else if( $obj.parent().attr('class')=="tabUnselected" ){
+			$obj.parent().attr('class', 'tabHover');
+		}else {
+			alert("Unkown tab clicked!");
+		}
+	
+	}
+
+	function tabMenuMouseout(obj){
+		var $obj=$(obj) //DOM Object to Jquery Object
+	
+		if ( $obj.parent().attr('class')=="tabHover" )
+			$obj.parent().attr('class', 'tabUnselected');
+	}
+
+	function isInputValid() {
+		if ( !checkNumberRang( $("#text_idle_time").val(), 0, 1440 ) ) {
+			myAlert( "用户超时时间应为0-1440之间的数字！", "text_idle_time" );
+			return false;
+		}
+
+		return true;
+	}
+
+	function set_idle_success( data ) {
+		var jsData = eval("("+data+")");
+		jsIdleTime.pkg_idletime = jsData.pkg_idletime;
+		load();
+	}
+
+	function ok(){
+		if ( isInputValid() == false )	
+			return;
+
+		var f = new myForm();
+		var url="setform/form_set_idle?UID="+parent.uid;
+		f.add( "idle_time", $("#text_idle_time").val() );
+		
+		f.submit( url, set_idle_success );
+
+	}
+
+	function cancel(){
+	}
+
+	function cancel_idle() {
+		$("#text_idle_time").val( jsIdleTime.pkg_idletime[0].time );
+	}
+	
+	function addUser(){
+		pageJump("user_add.asp?UID="+parent.uid);
+	}
+
+  	function editUser(arrRow, indexRow){
+		//var arrDatas = usersList[index].split(";");
+		var arrDatas = arrRow;
+		var userName = arrDatas[0];
+		pageJump("user_edit.asp?UID="+parent.uid+"&userName="+userName);
+	}
+
+	function delUserSuccess(data) {
+		jsUsers = eval("("+data+")");
+		load();	
+	}
+
+	function delUser(arrRow, indexRow){
+		var url = "setform/form_del_user?UID="+parent.uid;
+		var f = new myForm();
+		//var arrData = usersList[nRow].split(";");
+		var arrData = arrRow;
+		f.add( "userName", arrData[0] );
+		f.submit( url, delUserSuccess );
+	}
+  
+	function load() {
+		$("#text_idle_time").val( jsIdleTime.pkg_idletime[0].time );
+
+		usersList.length = 0;
+		for ( var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
+			//usersList = new Array("用户1;0","用户2;1","用户3;0");
+			var temp = jsUsers.pkg_usrmanage[i];
+			usersList[i] = temp.name+";"+temp.level;
+		}
+		tg.pageview_init(usersList, 8, 'list_accounts');
+	}
+
+	function format_level( arrRow, index ) {
+		var level = arrRow[index];
+		if ( level == 0 )
+			return "普通用户";
+		else if ( level == 1 )
+			return "管理用户";
+		else
+			return "unkown";
+	}
+
+	function btn_formatFunc( arrayRow, index ) {
+		if( arrayRow[0] == "admin")
+			return false;
+		else
+			return true;
+	}
+	
+	function onSearchLog() {
+		var keyWords = $("#text_keywords").val();
+		tg.pageview_search( $("#search_item").val(), keyWords );
+	}
+
+	var tg = new myGrid('tg');
+	function init(){
+		setNavigationBar("设备管理>用户管理");
+		$("#span_chgPWD_userName").html("admin");
+
+
+		tg.pageview_add('用户名', 0, '50%', MG_SORT_ASCII);
+		tg.pageview_add('级别', 1, '42%', MG_SORT_NUM, null, format_level );
+		tg.pageview_set_OPwidth("7%");
+		
+		tg.pageview_add_btn("编辑", editUser);
+		tg.pageview_add_btn("删除", delUser, null, null, btn_formatFunc);
+
+		//tg.pageview_init(usersList, 8, 'list_accounts');
+		load();
+
+	}
+  </script>
+</head>
+<body onload="init();">
+	<form id="myForm" ></form>
+	<div class="tabmenu">
+		<table width="99%" style="border-collapse:collapse;">
+			<tr class="underline">
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabSelected"><a href="#" onclick="tabMenuClicked(1,this)" onmouseover="tabMenuMouseover(this)" onmouseout="tabMenuMouseout(this)">用户管理</a></td>
+				<!--
+				<td style="width:1px;">&nbsp;</td>
+				<td class="tabUnselected"><a href="#" onclick="tabMenuClicked(2,this)" onmouseover="tabMenuMouseover(this)" onmouseout="tabMenuMouseout(this)">密码修改</a></td>
+				-->
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+
+	<!--  修改密码 -->
+	<!--
+	<div id="INNER" align="left" style="margin-top:10px; display:none;" class="changePWD" >
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>密码修改</div></td>
+				<td>&nbsp;</td>
+				</td>
+			</tr>
+		</table>
+	</div>	
+	-->
+	<div class="mytbl_content changePWD" style="display:none;">
+		<table style="width:100%;">
+			<tr class="staticIP">
+				<td class="col1">用户名：</td>
+				<td class="col2"><span id="span_chgPWD_userName"></span></td>
+			</tr>
+			<tr class="staticIP">
+				<td class="col1">原密码：</td>
+				<td class="col2"><input type="password" id="AP_NETMASK" name="AP_NETMASK" class="text2" size="20" maxlength="16" value="" /></td>
+			</tr>
+			<tr class="staticIP">
+				<td class="col1">新密码：</td>
+				<td class="col2"> <input type="password" id="AP_GATEWAY" name="AP_GATEWAY" class="text2" size="20" maxlength="16" value="" /></td>
+			</tr>
+			<tr class="staticIP">
+				<td class="col1">确认新密码：</td>
+				<td class="col2"> <input type="password" id="AP_GATEWAY" name="AP_GATEWAY" class="text2" size="20" maxlength="16" value="" /></td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_option changePWD" style="display:none;">
+		<input type="button" class="buttonL" onClick="cancel()" value="取 消">	
+		<input type="button" class="buttonL" onClick="ok()" value="确 认">
+	</div>
+	
+	<!-- 用户列表 -->
+	<!--
+	<div id="INNER" align="left" style="margin-top:0px" class="accounts_manage">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>用户列表</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	-->
+	<div class="content_tableQuery accounts_manage">
+		<input type="button" class="buttonL" value="新增用户" onclick="addUser();" style="float:left;margin-left:0px;"/>
+		<div>
+			<span style="margin-left:20px;"> 查询项 </span>
+			<select id="search_item" class="searchItem">
+				<option value="0" selected="">用户名</option>
+				<option value="1">级别</option>
+			</select>
+			<span style="margin-left:10px;">
+			关键词
+			</span>
+			<input id="text_keywords" class="text_keywords" maxlength="22" empty="true">
+			<input class="" id="apply" onclick="onSearchLog()"  type="button" value="查 询">
+		</div>
+	</div>
+	<div class="mytbl_content myGrid accounts_manage" id="list_accounts">
+	</div>
+
+	<div id="INNER" align="left" style="margin-top:30px; " class="accounts_manage">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>页面登录后超时时间</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+	<div class="mytbl_content accounts_manage">
+		<table style="width:100%;">
+			<tr>
+				<td class="col1">超时时间：</td>
+				<td class="col2"><input type="text" id="text_idle_time" class="text2" size="20" maxlength="16" />（0-1440分钟，默认为5）</td>
+			</tr>
+		</table>
+	</div>
+	<div class="content_option accounts_manage">
+		<input type="button" class="buttonL" onClick="cancel_idle()" value="取 消"/>
+		<input type="button" class="buttonL" onClick="ok()" value="确 认"/>
+	</div>
+	
+</body>
+</html>

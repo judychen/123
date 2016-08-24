@@ -1,0 +1,298 @@
+select{
+	border:1px solid gray;
+	background-color:#FFFFFF;
+}
+
+.subPage{
+	width:100%;
+	height:100%;
+	overflow:auto;
+}
+
+.subPage body{
+	width:834px;
+	height:100%;
+	overflow:auto;
+	margin:0px;
+	padding:0px;
+	border:0px;
+}
+
+
+* {font-size:12px; font-family:Arial; line-height:16px;}
+
+.bulleted{
+	width:4px;
+	padding-bottom:6px;
+}
+.bulleted div{
+	background-color:#465f88;
+}
+
+.mytbl_content{
+	/*padding-left:10px;*/
+	margin-top:6px;
+	margin-bottom: 0px;
+	width: 98%;
+	text-align: left;
+	border: 0px dotted blue;
+}
+
+.mytbl_content tr{
+	height:28px;
+}
+.my_title_tbl_content{
+	margin: 0px;
+	padding-left: 5px;
+	text-align: left;
+	width: 99%;
+}
+.my_title_tbl_content div{
+	color: #465f88;
+	font-size: 14px;
+	height: 15px;
+	line-height:18px;
+	width:99%;
+	padding-bottom:9px;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.col1{
+	background-color:#465F88;
+	color:#FFFFFF;
+	text-align:right;
+	width:38%;
+	padding-right:8px;
+    /*background-image:url(../../images/ttt.jpg);*/
+    background-position:0 0;
+    background-repeat:repeat-y;
+}
+.col2{
+	background-color:#D2D6E7;
+	width:62%;
+	padding-left:10px;
+    /*background-image:url(../../images/ppp.jpg);*/
+    background-position:462px 0;
+    background-repeat:repeat-y;
+}
+
+/* tab�˵� begin */
+	div.tabmenu {
+		margin-top:10px;
+		width:100%;
+		margin-bottom:20px;
+		text-align:center;
+	}
+	div.tabmenu table {
+		border-bottom:solid 2px #8EA5CF;
+	}
+	
+	/* tr */
+	div.tabmenu tr.underline{
+		height:25px;width:500px;
+		/*border-bottom:solid 2px #8EA5CF;*/
+	}
+	
+	.tabmenu .tabSelected, .tabmenu .tabHover{
+		width:80px;
+		background-image:url(../images/tabmenuSel.gif);
+		color:#FFFFFF;
+	}
+	.tabmenu .tabUnselected{
+		width:80px;
+		background-image:url(../images/tabmenuUnsel.gif);
+		color:#1F3E81;
+	}
+	.tabmenu a, .tabmenu a:hover, .tabmenu a:active{
+		font-family:verdana, arial, helvetica, sans-serif, tahoma;
+		font-size:13px;
+		font-style:normal;
+		color:#1F3E81;
+	}
+	.tabmenu a{
+		text-decoration:none;
+		display:block; height:100%; line-height:25px;
+	}
+
+/*tab�˵� end */
+	
+	/* table ��ѯ���� start*/
+	.content_tableQuery{
+		margin-top:15px;
+		/*padding-left:10px;*/
+		width:98%;
+		/*text-align:left;*/
+		text-align:right;
+		/*border:1px #000 solid;*/
+	}
+	.searchItem{
+		height:20px;
+	}
+	/*
+	.content_tableQuery .buttonL{
+		float:left;
+	}
+	*/
+
+	/* table ��ѯ���� end */
+	.content_option{
+		margin-top:10px;
+		width:98%;
+		/*padding-right:5px;*/
+		text-align:right;
+	}
+	.btn{
+		background-color: #b2b6c7;
+		margin-right:5px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 10pt;
+	}
+
+/*myGrid begin*/
+	.myGrid .titleCell{
+		background-color:#465F88;
+		font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+		font-size:13px;
+		color:#FFFFFF;
+		/*text-align:center;*/
+	}
+	.myGrid .odd{
+		background-color:#EAEDF8;
+	}
+	.myGrid .even{
+		background-color:#D2D6E7;
+	}
+	.myGrid .activeRow{
+		background-color:#8EA5CF;
+	}
+	.myGrid input[type=button] {
+		font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma, Lucida Console;
+		color:#573452;
+	}
+	.myGrid td{
+		font-family:Lucida Console,Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+		color:#573452;
+		padding:0 5px 0 5px;
+	}
+	.myGrid a.page{
+		text-decoration:none;
+		font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+		font-size:12px;
+	}
+
+	.myGrid .activePage {
+		text-decoration:none;
+		font-family:Microsoft Yahei,verdana, arial, helvetica, sans-serif, tahoma;
+		font-size:12px;
+		color:#000000;
+		cursor:default;
+	}
+
+	/*��ť*/
+/*myGrid end*/
+
+/* �������� ����ͼ */
+	.wizard_navigation{
+		width:100%; height:47px; margin-top:15px; margin-bottom:10px;
+	}
+	.wizard_navigation .active_left{
+		float:left;background:url(../images/navigation.gif) 0px -300px;width:6px; height:47px; margin-left:180px;
+	}
+	.wizard_navigation .active_mid {
+		float:left;background:url(../images/navigation.gif) 0px -350px repeat-x;width:120px; height:47px;
+	}
+	.wizard_navigation .active_right {
+		float:left;background:url(../images/navigation.gif) 0px -250px;width:23px; height:47px;
+	}
+	.wizard_navigation .active_end {
+		float:left;background:url(../images/navigation.gif) 0px -400px;width:25px; height:47px;
+	}
+	.wizard_navigation .inactive_left {
+		float:left;background:url(../images/navigation.gif) 0px 0px;width:6px; height:47px; margin-left:180px;
+	}
+	.wizard_navigation .inactive_mid {
+		float:left;background:url(../images/navigation.gif) 0px -100px repeat-x;width:120px; height:47px;
+	}
+	.wizard_navigation .inactive_right_inactive {
+		float:left;background:url(../images/navigation.gif) 0px -150px repeat-x;width:25px; height:47px;
+	}
+	.wizard_navigation .inactive_right_active {
+		float:left;background:url(../images/navigation.gif) 0px -200px repeat-x;width:25px; height:47px;
+	}
+	.wizard_navigation .inactive_end {
+		float:left;background:url(../images/navigation.gif) 0px -50px;width:25px; height:47px;
+	}
+
+/* ��ť start */
+	.buttonL {
+		cursor: pointer;
+		margin: 2px;
+		font-size: 12px;
+		width: 71px;
+		color:#FFFFFF;
+		font-family: "Arial", "Helvetica";
+		height:22px;
+		line-height:22px;
+		text-align: center;
+		border:0;
+		/*font-weight:bold;*/
+		background: url(../images/11.gif) no-repeat 0px -44px;
+		outline: none;
+		/*
+		event:expression(  onmouseover = function () {
+				this.className = "buttonL_over";
+			}
+
+			,  onmouseout = function () {
+				this.className = "buttonL";
+			}
+		 );*/
+	}
+	.buttonL:hover {
+		cursor: pointer;
+		margin: 2px;
+		font-size: 12px;
+		width: 71px;
+		color: #ffffff;
+		font-family: "Arial", "Helvetica";
+		height:22px;
+		line-height:22px;
+		/*font-weight:bold;*/
+		text-align: center;
+		border: 0;
+		/*background: url(../public/images/v3_btn_bg1.gif) no-repeat;*/
+		background: url(../images/11.gif) no-repeat 0px -22px;
+	
+	}
+	.buttonL_over {
+		cursor: pointer;
+		margin: 2px;
+		font-size: 12px;
+		width: 71px;
+		color: #ffffff;
+		font-family: "Arial", "Helvetica";
+		height:22px;
+		line-height:22px;
+		font-weight:bold;
+		text-align: center;
+		border: 0;
+		/*background: url(../public/images/v3_btn_bg1.gif) no-repeat;*/
+		background: url(../images/11.gif) no-repeat 0px -22px;
+	}
+/* ��ť end */
+
+/* ��־���� start */
+	.rowUnSelected{
+	}
+	.rowSelected{
+		background:#8EA5CF;
+	}
+	.rowHover{
+		background:#8EA5CF;
+	}
+/* end */
+
+.required_field {
+	color:#FF0000;
+	margin-right:5px;
+}

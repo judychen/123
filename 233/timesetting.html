@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+
+<script type="text/javascript">
+	var now_sec= 946870450;
+	var jsNtp = { "pkg_time": [ { "sect_name": "ntpclient", "period": "86400", "server": [ { "server": "time.nist.gov" }, { "server": "time.windows.com" } ], "enabled": "enabled" } ] };
+
+	function myhelp() {
+		popHelp("timeSettings");
+	}
+
+	function change_year_month() {
+		var year = $("#sel_timeYear").val();
+		var month = $("#sel_timeMonth").val();
+		var day = $("#sel_timeDay").val();
+		var days = getDays( year, month );
+		var str = "";
+		for ( var i = 1; i < days + 1; i++ ) {
+			if ( i < 10 )
+				str += "<option value='" + i + "'>0" + i + "</option>";
+			else
+				str += "<option value='" + i + "'>" + i + "</option>";
+		}	
+		$("#sel_timeDay").html( str );
+
+		if ( day < days + 1 )
+			$("#sel_timeDay").attr("value", day);
+		else
+			$("#sel_timeDay").attr("value", days );
+
+	}
+
+	$(document).ready( function() {
+		$("#sel_timeYear").change( change_year_month );
+		$("#sel_timeMonth").change( change_year_month );
+
+	});
+
+	function todo( data ) {
+		jsNtp = eval("("+data+")");
+		now_sec = jsNtp.now;
+		load();
+	}
+
+	function load() {
+		//系统时间定时刷新(周期1s)
+		//refreshTime();
+
+		var jsNtpInfo = jsNtp.pkg_time[0];
+		$("#sel_timeMode").val( jsNtpInfo.enabled );
+
+		var str = "";
+		for ( var i = 2000; i < 2037; i++ ) {
+			str += "<option value='" + i + "'>" + i + "</option>";
+		}
+		$("#sel_timeYear").append( str );
+
+		str = "";
+		for ( var i = 1; i < 13; i++ ) {
+			if ( i < 10 )
+				str += "<option value='" + i + "'>0" + i + "</option>";
+			else
+				str += "<option value='" + i + "'>" + i + "</option>";
+		}
+		$("#sel_timeMonth").append( str );
+
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		var day = now.getDate();
+		var strNow =  year + "-" + month +"-" + day;
+
+		var days = getDays( year, month );
+		str = "";
+		for ( var i = 1; i < days + 1; i++ ) {
+			if ( i < 10 )
+				str += "<option value='" + i + "'>0" + i + "</option>";
+			else
+				str += "<option value='" + i + "'>" + i + "</option>";
+		}
+		$("#sel_timeDay").append( str );
+		//$("#text_date").val(strNow);
+		$("#sel_timeYear").attr("value", year);
+		$("#sel_timeMonth").attr("value", month);
+		$("#sel_timeDay").attr("value", day);
+		$("#sel_timeHours").attr("value", now.getHours());
+		$("#sel_timeMinutes").attr("value", now.getMinutes());
+		$("#sel_timeSeconds").attr("value", now.getSeconds());
+
+		//ntp服务器
+		$("#text_ntpUpTimePeriod").val( jsNtpInfo.period);
+		$("#text_ntpServer").val("");
+		$("#text_ntpServer_2").val("");
+		$("#text_ntpServer_3").val("");
+		var len = jsNtpInfo.server.length;
+		if ( len == 1 ) {
+			$("#text_ntpServer").val( jsNtpInfo.server[0].server );	
+		}
+		else if ( len == 2) {
+			$("#text_ntpServer").val( jsNtpInfo.server[0].server);	
+			$("#text_ntpServer_2").val( jsNtpInfo.server[1].server );	
+		}
+		else if ( len == 3) {
+			$("#text_ntpServer").val( jsNtpInfo.server[0].server);	
+			$("#text_ntpServer_2").val( jsNtpInfo.server[1].server);	
+			$("#text_ntpServer_3").val( jsNtpInfo.server[2].server);	
+		}
+
+		changeTimeMode();
+	}
+
+	function isInputValid() {
+		var timeMode = $("#sel_timeMode").val();
+		var ntp_uptimeperiod = $("#text_ntpUpTimePeriod").val();
+		var ntp_server_1 = $("#text_ntpServer").val();
+		var ntp_server_2 = $("#text_ntpServer_2").val();
+		var ntp_server_3 = $("#text_ntpServer_3").val();
+
+		if ( timeMode == "enabled" ) {
+			//ntp enabled
+			if ( ntp_server_1 == "" ) {
+				myAlert("NTP服务器1不能为空！", "text_ntpServer");
+				return false;
+			} else {
+				if ( isHasChinese( ntp_server_1 ) ) {
+					myAlert("NTP服务器1不能包含中文！", "text_ntpServer");
+					return false;
+				}
+				/*
+				if ( ntp_server_1.indexOf( "\"" ) != -1 ) {
+					myAlert("NTP服务器1不能包含双引号！", "text_ntpServer");
+					return false;
+				}*/
+			}
+
+			if ( ntp_server_2 != "" ) {
+				if ( isHasChinese( ntp_server_2 ) ) {
+					myAlert("NTP服务器2不能包含中文！", "text_ntpServer_2");
+					return false;
+				}
+				/*
+				if ( ntp_server_2.indexOf( "\"" ) != -1 ) {
+					myAlert("NTP服务器2不能包含双引号！", "text_ntpServer_2");
+					return false;
+				}*/
+			}
+
+			if ( ntp_server_3 != "" ) {
+				if ( isHasChinese( ntp_server_3 ) ) {
+					myAlert("NTP服务器3不能包含中文！", "text_ntpServer_3");
+					return false;
+				}
+				/*
+				if ( ntp_server_3.indexOf( "\"" ) != -1 ) {
+					myAlert("NTP服务器3不能包含双引号！", "text_ntpServer_3");
+					return false;
+				}*/
+			}
+
+			if ( ntp_server_1 == ntp_server_2 ) {
+				myAlert("NTP服务器1 与 NTP服务器2相同！", "text_ntpServer_2");
+				return false;
+			}
+
+			if ( ntp_server_1 == ntp_server_3 ) {
+				myAlert("NTP服务器1 与 NTP服务器3相同！", "text_ntpServer_2");
+				return false;
+			}
+
+			if ( ntp_server_2 != "" && ntp_server_2 == ntp_server_3 ) {
+				myAlert("NTP服务器2 与 NTP服务器3相同！", "text_ntpServer_3");
+				return false;
+			}
+
+		} 
+		
+		if (!checkNumberRang(ntp_uptimeperiod, 60, 86400 )){
+				myAlert("非法的时间间隔.", "text_ntpUpTimePeriod");
+				return false;
+		}
+
+		//invalid characters: '?' or ' '
+		if ( !checkInputText()  )
+			return false;
+	
+		return true;
+	}
+
+    function ok() {
+		if ( !isInputValid() ) {
+			return;
+		}
+
+		var f = new myForm();
+		var url = "";
+		if ( $("#sel_timeMode").val() == "enabled" ) {
+			//auto update time
+			url = "setform/ntpEnabled?UID="+parent.uid;
+
+			f.add( "timeMode", $("#sel_timeMode").val() );
+			f.add( "ntpUpTimePeriod", $("#text_ntpUpTimePeriod").val() );
+			f.add( "ntpServer", $("#text_ntpServer").val() );
+			f.add( "ntpServer_2", $("#text_ntpServer_2").val() );
+			f.add( "ntpServer_3", $("#text_ntpServer_3").val() );
+
+		} else {
+			///manual setting
+			//var timeDate = $("#text_date").val();
+			//var arrTimes = timeDate.split("-");
+
+			url="setform/ntpDisabled?UID="+parent.uid;
+
+			f.add( "year",		$("#sel_timeYear").val() );
+			f.add( "month",		$("#sel_timeMonth").val() );
+			f.add( "day",		$("#sel_timeDay").val() );
+			f.add( "hour",		$("#sel_timeHours").val() );
+			f.add( "minute",	$("#sel_timeMinutes").val() );
+			f.add( "second",	$("#sel_timeSeconds").val() );
+		}
+
+		f.submit( url, todo );
+	}
+	
+	function cancel() {
+		load();
+	}
+	
+	function changeTimeMode() {
+		if ($("#sel_timeMode").val() == "disabled") {
+			$(".timeAuto").css('display','none');
+			$(".timeManual").css('display','table-row');
+		}
+		else {
+			$(".timeAuto").css('display','table-row');
+			$(".timeManual").css('display','none');
+		}
+	}
+	
+	function refreshTime() {
+		var now = new Date();
+		now.setTime(now_sec * 1000);//setTime(ms)
+		var year = now.getFullYear();
+		var month = now.getMonth()+1;
+		if (month < 10) month = "0"+month;
+		var day = now.getDate();
+		if (day < 10) day = "0"+day;
+		var hours = now.getHours();
+		if (hours < 10) hours = "0"+hours;
+		var minutes = now.getMinutes();
+		if (minutes < 10) minutes= "0"+minutes;
+		var seconds = now.getSeconds();
+		if (seconds < 10) seconds= "0"+seconds;
+		var strNow =  year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+		$("#time_now").text(strNow);
+		now_sec = parseInt(now_sec)+1;
+	}
+	
+	function init() {
+		setNavigationBar("设备管理>时间设置");
+
+		refreshTime();
+		setInterval(refreshTime, 1000);
+		load();
+	}
+</script> 
+
+</head>
+
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>当前系统时间</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr class="staticIP">
+				<td class="col1" >当前系统时间：</td>
+				<td class="col2" ><span id="time_now"></span></td>
+			</tr>
+		</table>
+	</div>
+		
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>设置系统时间</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+		<div class="mytbl_content">
+			<table width="100%">
+			<tr height="28">
+				<td class="col1">时间更新方式：</td>
+				<td class="col2">
+					<select id="sel_timeMode" name="sel_timeMode" onChange="changeTimeMode();">
+						<option value="enabled">自动同步&nbsp;&nbsp;&nbsp;&nbsp;</option>
+						<option value="disabled">手动设置</option>
+					</select>		
+				</td>
+			</tr>
+			<tr class="timeAuto">
+				<td class="col1">NTP同步间隔：</td>
+				<td class="col2"><input type="text" id="text_ntpUpTimePeriod" name="text_ntpUpTimePeriod" size="32" maxlength="32" />（60-86400秒，默认86400）</td>
+			</tr>
+			<tr class="timeAuto">
+				<td class="col1">NTP服务器1：</td>
+				<td class="col2"><input type="text" id="text_ntpServer" name="text_ntpServer" size="32" maxlength="32" />（1-32个字符）</td>
+			</tr>
+			<tr class="timeAuto">
+				<td class="col1">NTP服务器2：</td>
+				<td class="col2"><input type="text" id="text_ntpServer_2" name="text_ntpServer_2" size="32" maxlength="32" />（可选，1-32个字符）</td>
+			</tr>
+			<tr class="timeAuto">
+				<td class="col1">NTP服务器3：</td>
+				<td class="col2"><input type="text" id="text_ntpServer_3" name="text_ntpServer_3" size="32" maxlength="32" />（可选，1-32个字符）</td>
+			</tr>
+			<tr class="timeManual" >
+				<td class="col1">日期：</td>
+				<td class="col2">
+					<!--
+					<input type="text" id="text_date" name="text_date" size="20" />格式如：2015-02-25
+					-->
+					<select id="sel_timeYear" ></select>
+					年	
+					<select id="sel_timeMonth" > </select>
+					月	
+					<select id="sel_timeDay"> </select>
+					日
+				</td>
+			</tr>
+			<tr class="timeManual">
+				<td class="col1">本地时间：</td>
+				<td class="col2">
+					<select id="sel_timeHours" name="sel_timeHours" style="margin-left:16px;" >
+						<script type="text/javascript">
+							for (var i = 0; i < 24; i++){
+								if(i < 10)
+									document.write("<option value='"+i+"'>0"+i+"</option>");
+								else
+									document.write("<option value='"+i+"'>"+i+"</option>");
+							}
+						</script>						
+					</select>
+					时
+					<select id="sel_timeMinutes" name="sel_timeMinutes">
+						<script type="text/javascript">
+							for (var i = 0; i < 60; i++){
+								if(i < 10)
+									document.write("<option value='"+i+"'>0"+i+"</option>");
+								else
+									document.write("<option value='"+i+"'>"+i+"</option>");
+							}
+						</script>
+					</select>
+					分
+					<select id="sel_timeSeconds" name="sel_timeSeconds">
+						<script type="text/javascript">
+							for(var i = 0; i < 60; i++) {
+								if(i < 10)
+									document.write("<option value='"+i+"'>0"+i+"</option>");
+								else
+									document.write("<option value='"+i+"'>"+i+"</option>");
+							}
+						</script>
+					</select>
+					秒
+				</td>
+			</tr>
+			</table>
+		</div>
+		
+		<div class="content_option" style="z-index:-2;">
+			<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+			<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+		</div>
+</body>
+</html>

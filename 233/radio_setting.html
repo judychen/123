@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv='Pragma' content='no-cache'>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/radio_setting.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+
+<script language="javascript">
+	var	jsData = { "pkg_wlan_radio":[{"sect_name":"WLAN-Radio0/0","radio":"0","enabled":"enabled","beacon-interval":"100","max-power":"auto","dtim":"1","fragment-threshold":"2346","rts-threshold":"2346","a-mpdu":"enabled","mode":"gn","channel":"6","distance":"1","bandwidth":"20","dot11nonly":"disabled","preamble":"short","protection-mode":"cts-to-self","short-gi":"enabled","rssi-access":"disabled","rssi-access-threshold":"-80","bcast-ratelimit":"disabled","bcast-ratelimit-cir":"10","bcast-ratelimit-cbs":"30","atf":"disabled","device_mode":"normal","dot11aconly":"disabled","bind":[{"bind":"0-0"}]},{"sect_name":"WLAN-Radio0/1","radio":"1","enabled":"enabled","beacon-interval":"100","max-power":"auto","dtim":"1","fragment-threshold":"2346","rts-threshold":"2346","a-mpdu":"enabled","mode":"an","channel":"149","distance":"1","bandwidth":"40","dot11nonly":"disabled","preamble":"short","protection-mode":"cts-to-self","short-gi":"enabled","rssi-access":"disabled","rssi-access-threshold":"-77","bcast-ratelimit":"disabled","bcast-ratelimit-cir":"10","bcast-ratelimit-cbs":"30","atf":"disabled","device_mode":"normal","dot11aconly":"disabled","bind":[{"bind":"1-1"}]}]
+ };
+	var jsSpec_2 = {"radio_count":"2","radio_specific":[{"id":"0","radio":"14","max-power":"27","channel_number":"13","bandwidth":"0","channel":[ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]},{"id":"1","radio":"9","max-power":"27","channel_number":"9","bandwidth":"0","channel":[ "36", "40", "44", "48", "149", "153", "157", "161", "165"]}]};
+</script>
+
+</head>
+
+<body onLoad="init();">
+	<div class="tabmenu">
+		<table width="99%" style="border-collapse:collapse;">
+			<tr id="tr_tabmenu" class="underline">
+			</tr>
+		</table>
+	</div>
+			
+	<!--2.4G radio-->
+	<div class="mytbl_content" align="left">	
+		<table width="100%" border="0" cellpadding="0" cellspacing="2" class="table_list">
+			<tr height="22" style="width:100%;">
+				<td class="col1">地区：&nbsp;</td>
+				<td class="col2">China
+				</td>
+			</tr>
+			<tr height="22" style="width:100%;">
+				<td class="col1">使能状态：&nbsp;</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_status" name="chk_status" />
+				</td>
+			</tr>
+			<tr height="22" style="width:100%;">
+				<td class="col1">工作模式 / 频宽：&nbsp;</td>
+				<td class="col2">
+					<select id="sel_channelMode" size="1" onChange="chgChannelMode();">
+					</select>
+				</td>
+			</tr>
+			<tr height="22">
+				<td class="col1">信道：</td>
+				<td class="col2">
+					<select id="sel_channel" name="sel_channel">
+						<option value="auto">auto</option>
+					</select>
+				</td>
+			</tr>
+			<tr height="22">
+				<td class="col1">发射功率：</td>
+				<td class="col2">
+					<select id="sel_maxPower" name="sel_maxPower" >
+						<option value="auto">auto</option>
+					</select>dBm（默认auto）</td>
+			</tr>
+			<tr height="22">
+				<td class="col1">Beacon帧间隔：</td>
+				<td class="col2"><input type="text" value="100" id="text_beacon" name="text_beacon"/>（40-3500毫秒，默认100）</td>
+			</tr>
+			<tr height="22">
+				<td class="col1">DTIM间隔：</td>
+				<td class="col2"><input type="text" value="1" id="text_dtim" name="text_dtim"/>（1-31，默认1）</td>
+			</tr>
+			<tr height="22">
+				<td class="col1">分片阈值：</td>
+				<td class="col2"><input type="text" value="2346" id="text_fragThreshold" name="text_fragThreshold"/>（256-2346，默认2346）</td>
+			</tr>
+			<tr height="22">
+				<td class="col1">RTS阈值：</td>
+				<td class="col2"><input type="text" value="2346" id="text_rts_cts" name="text_rts_cts"/>（0-2346，默认2346）</td>
+			</tr>
+			<tr height="22">
+				<td class="col1">发射距离：</td>
+				<td class="col2"><input type="text" value="1" id="text_distance" name="text_distance"/>（1-40km，默认1）</td>
+			</tr>
+			<tr height="22" style="width:100%;">
+				<td class="col1">无线保护模式：&nbsp;</td>
+				<td class="col2">
+					<select name="sel_protection_mode" id="sel_protection_mode" size="1" >
+						<option value="cts-to-self">cts-to-self</option>
+						<option value="none">none</option>
+						<option value="rts-cts">rts-cts</option>
+					</select>
+				</td>
+			</tr>
+			<tr height="22" class="part_2_4G"> <!-- 2.4G only -->
+				<td class="col1" width="150" >前导码：</td>
+				<td class="col2" width="400">
+					<select name="sel_preamble" id="sel_preamble" size="1" >
+						<option value="short">short</option>
+						<option value="long">long</option>
+					</select>
+				</td>
+			</tr>
+			<tr height="22" class="part_shortGI">
+				<td class="col1">Short GI：</td>
+				<td class="col2"><input type="checkbox" id="chk_shortGI" name="chk_shortGI" />开启 </td>
+			</tr>
+			<tr height="22" class="part_ampdu">
+				<td class="col1" width="150" >A-MPDU：</td>
+				<td class="col2" width="400"><input type="checkbox" id="chk_A_MPDU" name="chk_A_MPDU" />开启</td>
+			</tr>
+			<!-- rssi access -->
+			<tr>
+				<td class="col1">弱信号终端接入控制：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_rssi_enable" />开启
+				</td>
+			</tr>
+			<tr class="part_rssi_enable">
+				<td class="col1">弱信号终端接入阈值：</td>
+				<td class="col2">
+					<input type="text" id="text_rssi_threshold" />（-127- -32）dBm
+				</td>
+			</tr>
+			<!-- rssi access, end -->
+			<tr>
+				<td class="col1">广播报文速率限制：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_wbl_enable" />开启
+				</td>
+			</tr>
+			<tr class="wbl_cir">
+				<td class="col1">CIR：</td>
+				<td class="col2">
+					<input type="text" id="text_wbl_cir" />（1-10000）pps
+				</td>
+			</tr>
+			<tr class="wbl_cbs">
+				<td class="col1">CBS：</td>
+				<td class="col2">
+					<input type="text" id="text_wbl_cbs" />（1-10000，且必须大于或等于CIR）pps
+				</td>
+			</tr>
+			<tr height="22" class="part_ATF">
+				<td class="col1">Air-time fairness：</td>
+				<td class="col2"><input type="checkbox" id="chk_ATF" name="chk_ATF" ></td>
+			</tr>
+
+		</table>
+	</div>
+	<div class="content_option">
+		<input type="button" class="buttonL" onClick="cancel();" value="取 消" />
+		<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+	</div>
+
+</body>
+</html>

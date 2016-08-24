@@ -1,0 +1,9 @@
+#list_log table {
+	word-break:break-all;
+	word-wrap:break-word;
+}
+#list_log td.myGrid_col4{
+	text-align:left;
+	word-break:break-all;
+	word-wrap:break-word;
+}

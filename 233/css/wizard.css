@@ -1,0 +1,38 @@
+#wizard_div {
+	width:700px;
+	height:20px;
+	margin:15px 0 0 100px;
+}
+
+#wizard_div .step {
+	float:left;
+	height:15px;
+	font-size:12px;
+	margin-right:2px;
+	text-align:center;
+	line-height:12px;
+	padding-top:5px;
+}
+
+#wizard_div .head {
+	width:20px;
+	background-color:#465F88;
+	color:#FFFFFF;
+}
+
+#wizard_div .body {
+	width:70px;
+	background-color:#D2D6E7;
+}
+
+#wizard_div .finish {
+	background-color:#84C1A3;
+}
+
+#wizard_div .current {
+	background-color:#8EA5CF;
+}
+
+#wizard_div a:hover .finish {
+	background-color:#8EA5CF;
+}

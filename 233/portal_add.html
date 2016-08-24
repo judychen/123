@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/portal/portal_add.js?1468922814" charset="utf-8"></script>
+</head>
+
+<script language="javascript">
+	var jsDomainSet = { "pkg_dns_set": [ { "sect_name": "18", "key": [ { "key": "qq.com\/0" }, { "key": "baidu.com\/1" } ], "enabled": "enabled" } ] };
+</script>
+<body onLoad="init();" >
+	<div id="INNER" align="left" style="margin-top:10px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>新增Portal方案</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%" border="0" cellpadding="0" cellspacing="3" class="table_list">
+			<tr class="radius">
+				<td class="col1">方案名称：</td>
+				<td class="col2">
+					<input type="text" id="text_portal_scheme" size="32" maxlength="32" />（1-32个字符，只包含数字、字母、下划线）
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">使能：</td>
+				<td class="col2">
+					<select id="sel_portal_enabled">
+						<option value="enabled">启用</option>
+						<option value="disabled">禁用</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="col1">URL：</td>
+				<td class="col2">
+					<input type="text" id="text_url" size="32" maxlength="128" />（请以http://开头）
+				</td>
+			</tr>
+			<!-- domainSet settings -->
+			<tr>
+				<td class="col1">域名白名单：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_domainSet_enable" />
+					<select id="sel_domainSet" style="display:none;">
+						<option value="" >请选择域名集</option>
+					</select>
+				</td>
+			</tr>
+			<!-- domainSet settings, end -->
+		</table>
+	</div>
+	
+	<div class="content_option">
+		<input type="button" class="buttonL" onClick="goBack();" value="返 回" />
+		<input type="button" class="buttonL" onClick="ok();" value="确 定" />
+	</div>
+</body>
+</html>

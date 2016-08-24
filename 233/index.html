@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html style="height:100%;min-width:1024px; overflow:auto; margin:0px; padding:0px; border:0px;">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+
+	<title>康凯科技（杭州）有限公司</title>
+	<link href="css/menu.css" type="text/css" rel="stylesheet">
+	<link href="css/progress.css" type="text/css" rel="stylesheet">
+	<link href="css/msgbox.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+	<link rel="stylesheet" href="css/index.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myProgress.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/index.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/wizard/common.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/spec.js?1468922814" charset="utf-8"></script>
+	
+<script> 
+	var currentMenu = '';
+
+	/* don't delete below code, it's important for ignore cache
+	/* top.buildtime
+	*/
+var buildtime = 1468922814;
+	var uid="c9BY5E90GbwsRZWNUB4ZbRlaAz5nASv";
+	var username = "admin";
+	var jsDataDevice = {"device":[{"product":"AP3602","model":"AP3602-WS1-FAT","serial":"A2A9C11Z0091004","ethmac":"34:CD:6D:F3:FE:A0","softversion":"V200R006P02","bootversion":"1.0.3","hardversion":"A","uptime":"0天13时37分","cpu_usage":"0","mem_usage":"61","gateway":"172.20.90.1","dns":"114.114.114.114"}]};
+	var wizard_flag = "0";
+
+	function help() {
+		if ( top.Frame_Content.myhelp != undefined )
+			top.Frame_Content.myhelp();
+	}
+
+	
+</script>
+</head>
+
+<body height="100%" width="100%" onresize="resize();" onload="init();">
+	<form id="form"></form>
+
+	<div id="zzc"></div>
+	<div id="dialog">
+		<img src="images/loading.gif" style="margin-left:15px;margin-bottom:3px;margin-top:15px;"/><br/>
+	</div>
+
+	<div id="errDlg">
+		<div style="background-color: rgb(255, 255, 255); z-index: 19891017; height: 132px; width:400px;" class="xubox_main">
+			<div class="xubox_dialog">
+				<span class="xubox_msg xulayer_png32 xubox_msgico xubox_msgtype0"></span>
+				<span id="errMsg" class="xubox_msg xubox_text" style="padding-top: 54px;"></span>
+			</div>
+			<div class="xubox_title" ><em>提示</em></div>
+			<span class="xubox_setwin"><a class="xubox_close xulayer_png32 xubox_close0" href="javascript:showError(false);" style=""></a></span>
+			<span class="xubox_botton"><a id="errDlg_okBtn"  href="javascript:showError(false);" class="buttonL">确定</a></span>
+		</div>
+	</div>
+	
+	<div id="selectReboot" >
+		<div style="background-color: rgb(255, 255, 255); z-index: 19891017; height: 132px; width:400px;" class="xubox_main">
+			<div class="xubox_dialog">
+				<span class="xubox_msg xulayer_png32 xubox_msgico xubox_msgtype0"></span>
+				<span id="selectMsg" class="xubox_msg xubox_text" style="padding-top: 54px;"></span>
+			</div>
+			<div class="xubox_title"><em>提示</em></div>
+			<span class="xubox_setwin"><a class="xubox_close xulayer_png32 xubox_close0" href="javascript:showSelect(false);" style=""></a></span>
+			<span id="myAlert_span_save" style="font-size:12px; color:#474444; position: absolute;top: 100px;left: 130px;">保存当前配置</span>
+			<input type="checkbox" id="selectReboot_Select" style="position: absolute;left: 200px;margin-top: 102px;" />
+			<span class="xubox_botton"><a id="selectReboot_okBtn" onClick="selectOk();" class="buttonL" style="right:90px;">确定</a></span>
+			<span class="xubox_botton"><a id="selectReboot_cancelBtn"  href="javascript:showSelect(false);" class="buttonL">取消</a></span>	
+		</div>
+	</div>
+
+	<div id="div_progress" style="display:block;">
+        <div id="message" style="display:none;" >
+            设备重启中，请等待。。。
+        </div>
+
+        <div id="msg_faild" style="color:#FF0000; display:none;">
+            网页访问失败，请检查设备当前IP
+        </div>
+
+        <div id="loading" style="background:url(images/bak.png) no-repeat;">
+            <div style="background:url(images/pro.gif) no-repeat;" ></div>
+        </div>
+    </div>
+
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" height="100%">
+		<tbody width="100%" height="100%">
+			<tr id="my_header">
+				<td width="100%" style="padding-top:10px;padding-bottom:10px; height:40px;">
+				<!--
+					<table cellspacing="0" bgcolor="#D2D6E7">
+					-->
+					<table cellspacing="0">
+					<tbody>
+						<tr align="left">
+							<td width="7">&nbsp;</td>
+							<td width="150"><img width="204px" height="35px" border="0" src="images/logo.png"></td>
+							<td width="150"><img border="0" src="images/logoMinor.gif"></td>
+							<td width="600"><div id="dbg_msg" style="display:none; position:absolute;"></div></td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr id="my_banner" style="height:26px;">
+				<td style="background-image:url(images/headbar.jpg)" height="26" align="right">
+					<div id="navigationBar"></div>
+					<a href="#" class="white" style="font-size:12px; line-height:26px;" onclick="save();" >保存</a>
+					<img src="images/blank.gif" width="10" height="15" />
+					<a href="javascript:void(0);" class="white" style="font-size:12px; line-height:26px;" onclick="help();">帮助</a>
+					<img src="images/blank.gif" width="10" height="15" />
+					<span id="span_username" style="font-size:12px; color:#FFFFFF;"></span>
+					<a href="#" class="white" style="font-size:12px; line-height:26px;" onclick="logout();">退出</a>
+					<img src="images/blank.gif" width="20"height="15" />
+				</td>
+			</tr>
+			
+			<tr id="td_iframe" style="height:auto;">
+				<td style="vertical-align:top; ">
+			
+							<div id="layout_menu" style="width:161px; height:100%; float:left;">
+								<div style="text-align:left; height:25px; padding-top:9px;padding-left:18px;">
+									<!--	<img src="images/apDevice.png" />-->
+									<span id="span_device_type" style="font-size:16px; color:#0263BD;" ></span>
+								</div>
+						
+								<div id="menu" style="float:left; margin-left:5px; ">
+									<div>
+										<input class="btn_wizard" id="menu_wizard" type="button" value="配置向导" onclick="jumpToWizard();" />
+									</div>
+									
+									<div>
+										<input class="btn_o first_menu" type="button" value="系统状态" />
+										<div class="submenu" style="display: none;">
+											<a class="submenus" onclick="jump('equipment_overview', this);">设备概览</a>
+											<a class="submenus" onclick="jump('wireless_status', this);">无线接入服务</a>
+											<a class="submenus" onclick="jump('radio_status', this);">射频信息</a>
+											<a class="submenus" onclick="jump('clientlist', this);">客户端</a>
+											<a class="submenus" onclick="jump('view_wds_status', this);">WDS状态</a>
+										</div>
+									</div>
+								
+									<div>
+										<input class="btn_o" type="button" value="网络设置" />
+										<div class="submenu" style="display: none;">
+											<a class="submenus" onclick="jump('interface_manage', this);">接口管理</a>
+											<a class="submenus" onclick="jump('vlan_settings', this);">VLAN管理</a>
+											<a class="submenus" onclick="jump('dhcpd', this);">DHCP服务</a>
+											<a class="submenus" onclick="jump('arp', this);">ARP管理</a>		
+											<a class="submenus" onclick="jump('routeV4_settings', this);">IPv4路由</a>		
+											<a class="submenus" onclick="jump('global_dns_settings', this);">DNS管理</a>
+											<a class="submenus" onclick="jump('dnsmasq_settings', this);">DNS代理</a>
+											<a class="submenus" onclick="jump('servers_manage', this);">服务管理</a>
+											<a class="submenus" onclick="jump('igmp_snooping', this);">IGMP snooping</a>
+											<a class="submenus" onclick="jump('network_advanced_settings', this);">高级设置</a>
+										</div>
+									</div>
+									
+									<div>
+										<input class="btn_o" type="button" value="无线设置" />
+										<div class="submenu" style="display: none;">
+											<a class="submenus" onclick="jump('wireless_servers', this);">无线接入服务</a>
+											<a class="submenus" onclick="jump('radio_setting', this);">射频参数</a>
+											<a class="submenus" onclick="jump('radio_speed_settings', this);">射频速率</a>
+											<a class="submenus" onclick="jump('portal_settings', this);">Portal管理</a>
+											<a class="submenus" onclick="jump('domainSet_settings', this);">域名集管理</a>
+											<a class="submenus" onclick="jump('AAA_settings', this);">AAA认证</a>
+											<a class="submenus" onclick="jump('acl_settings', this);">ACL管理</a>
+											<a class="submenus" onclick="jump('wds', this);">WDS配置</a>
+											<a class="submenus" onclick="jump('time_acl_settings', this);">时间策略</a>
+											
+											<a class="submenus" onclick="jump('wireless_probe', this);">无线探针</a>
+											
+											<a class="submenus" onclick="jump('wireless_advanced', this);">高级设置</a>
+										</div>
+									</div>
+
+									<div>
+										<input class="btn_o" type="button" value="设备管理" />
+										<div class="submenu" style="display: none;">
+											<a class="submenus" onclick="jump('equipment_maintenance', this);">设备维护</a>
+											<a class="submenus" onclick="jump('capwap', this);">CAPWAP</a>
+											<a class="submenus" onclick="jump('timesetting', this);">时间设置</a>
+											<a class="submenus" onclick="jump('syslog', this);">日志管理</a>
+											<a class="submenus" onclick="jump('config_manage', this);">配置管理</a>
+											<a class="submenus" onclick="jump('accounts_manage', this);">用户管理</a>
+										</div>
+									</div>
+								</div>
+							</div>
+		
+							<div id="vertical_SLine" style="float:left;width:10px; margin-left:10px; border-left:1px dashed #C0C0C0;height:100%;">&nbsp;</div>
+							<div id="layout_content" style="width:834px;height:100%; float:left;">
+								<iframe src="about:blank" framespacing="0" name="Frame_Content" id="Frame_Content" border="0" style="width: 100%; height:100%;" frameborder="0" ></iframe>
+							</div>
+				</td>
+			</tr>
+			<tr id="my_footer">
+				<td align="center" height="25">
+					<span id="copyrightspan">
+						<copyright>Copyright(C) 2016 康凯科技（杭州）有限公司</copyright>
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

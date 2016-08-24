@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html class="subPage">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>
+		康凯科技（杭州）有限公司
+	</title>
+    
+	<link rel="stylesheet" href="css/basic.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+   
+<script type="text/javascript">
+
+    var ssid = new Array();
+	clientListString = "0;64:5a:04:99:4e:f6;1;70M;72M;34;2495sec;172.20.40.242<br><br>0;c8:f7:33:e9:7d:f7;1;3M;47M;29;1068sec;172.20.40.245<br><br>0;90:b9:31:6a:9e:8f;1;49M;24M;22;831sec;172.20.40.216<br><br>0;f0:c1:f1:bd:2a:f4;1;1M;18M;18;131sec;172.20.40.24<br><br>8;60:03:08:92:b5:80;149;44M;7M;46;5816sec;172.20.40.158<br><br>8;00:1d:e0:73:7e:91;149;257M;75M;29;5696sec;172.20.40.87<br><br>0;64:5a:04:99:4e:f6;1;70M;72M;34;2495sec;172.20.40.242<br><br>0;c8:f7:33:e9:7d:f7;1;3M;47M;29;1068sec;172.20.40.245<br><br>0;90:b9:31:6a:9e:8f;1;49M;24M;22;831sec;172.20.40.216<br><br>0;f0:c1:f1:bd:2a:f4;1;1M;18M;18;131sec;172.20.40.24<br><br>8;60:03:08:92:b5:80;149;44M;7M;46;5816sec;172.20.40.158<br><br>8;00:1d:e0:73:7e:91;149;257M;75M;29;5696sec;172.20.40.87<br><br>0;64:5a:04:99:4e:f6;1;70M;72M;34;2495sec;172.20.40.242<br><br>0;c8:f7:33:e9:7d:f7;1;3M;47M;29;1068sec;172.20.40.245<br><br>0;90:b9:31:6a:9e:8f;1;49M;24M;22;831sec;172.20.40.216<br><br>0;f0:c1:f1:bd:2a:f4;1;1M;18M;18;131sec;172.20.40.24<br><br>8;60:03:08:92:b5:80;149;44M;7M;46;5816sec;172.20.40.158<br><br>8;00:1d:e0:73:7e:91;149;257M;75M;29;5696sec;172.20.40.87<br><br>";
+	var jsArp = {"status":"ok", "arp":"IP address       HW type     Flags       HW address            Mask     Device;172.20.90.1      0x1         0x2         48:46:fb:da:ae:f1     *        Vlan-interface1;172.20.90.240    0x1         0x2         00:22:4d:af:99:17     *        Vlan-interface1;"};
+
+	var clientListArray;
+	var arrArp = new Array();
+	var tg = new myGrid('tg');
+	function refreshArpSuccess( data ) {
+		jsonData = eval("("+data+")");
+		jsArp.arp = jsonData.arp;
+		load();
+	}
+
+	function myhelp() {
+		popHelp("arpSettings");
+	}
+	
+	function refreshArp() {
+		var url="goform/form_arp_refresh?UID="+parent.uid;
+		var f = new myForm();
+		f.add( "test", "test");
+		f.submit( url, refreshArpSuccess);
+	}
+
+	function test(){
+		return "动态";
+	}
+	
+	function deleteT(){
+		alert("删除");
+	}
+	function test2(){
+		return "Vlan-interface1";
+	}
+
+	function Cancel(){
+	}
+	function Ok(){
+		alert("TODO:");
+	}
+
+	function addARP(){
+		pageJump("arp_edit.html?UID="+parent.uid);
+	}
+	
+	function onSearchLog() {
+		var keyWords = $("#text_keywords").val();
+		tg.pageview_search( $("#search_item").val(), keyWords );
+	}
+	
+	function load() {
+		var arp = jsArp.arp;
+		var arrData = arp.split(";");
+		var reg = /[^\s]+/g;
+		arrArp.length = 0;
+		if ( typeof(arrData.length) != "undefined" && arrData.length > 2 ) {
+
+			for (var i = 1; i < arrData.length - 1; i++ ) {
+				var ret = arrData[i].match( reg );
+				if ( ret != null ) {
+					if ( ret.length == 6 ) {
+						arrArp[i - 1] = "";	
+						for ( var j = 0; j < ret.length; j++ ) {
+	//						alert( "ret["+j+"]: "+ret[j]);
+							if ( j != 0 )
+								arrArp[i - 1] += ";";
+							arrArp[i - 1] += ret[j];
+
+						}
+						//alert( arrArp[i - 1] );
+					}
+				}
+			}
+		}
+		tg.pageview_init( arrArp, 10, 'list_table');
+	}
+
+	function init(){
+		setNavigationBar("网络设置>ARP管理>ARP列表");
+
+		//clientListArray = clientListString.split("<br><br>");
+		
+		tg.pageview_add('IP地址', 0, '5%', MG_SORT_ASCII, null, null);
+		//tg.pageview_add('掩码地址', 1, '5%', MG_SORT_ASCII, null, null);
+		tg.pageview_add('MAC地址', 3, '7%', MG_SORT_ASCII, null);
+		//tg.pageview_add('类型', 2, '5%', MG_SORT_ASCII, null, test);
+		tg.pageview_add('接口', 5, '5%', MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc);
+		//tg.pageview_add_btn("删除", "deleteT");
+
+		load();
+	}
+</script> 
+
+</head>
+<body onLoad="init();">
+		<div id="INNER" align="left" style="margin-top:10px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="bulleted"><div>&nbsp;</div></td>
+					<td class="my_title_tbl_content"> <div>ARP列表</div></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="content_tableQuery">
+			<input type="button" class="buttonL" value="刷 新" onclick="refreshArp();" style="float:left;margin-left:2px;"/>
+			<div>
+				<span style="margin-left:20px;">
+				查询项
+				</span>
+				<select id="search_item" class="searchItem">
+					<option value="0" selected="">IP地址</option>
+					<option value="3">MAC地址</option>
+					<option value="5">接口</option>
+				</select>
+				<span style="margin-left:10px;">
+				关键词
+				</span>
+				<input id="text_keywords" class="text_keywords" maxlength="22" empty="true" />
+				<input class="" id="apply" onclick="onSearchLog();" type="button" value="查 询" />
+			</div>
+		</div>
+		<div class="mytbl_content myGrid" id="list_table">
+		</div>
+</body>
+</html>

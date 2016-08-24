@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="subPage">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='pragma' content='no-cache'>
+<title>
+	康凯科技（杭州）有限公司
+</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myutil.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myForm.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/myGrid.js?1468922814" charset="utf-8"></script>
+<script type="text/javascript" src="js/validate.js?1468922814" charset="utf-8"></script>
+<link rel="stylesheet" href="css/basic.css" type="text/css">
+<style type="text/css">
+select{
+	width:110px;
+}
+</style>
+
+<script type="text/javascript">
+	var jsSystem = { "pkg_system": [ { "sect_name": "hostname" }, { "sect_name": "wirelessisolation", "enabled": "disabled" }, { "sect_name": "route", "forward": "disabled" }, { "sect_name": "wizard", "run": "1" } ] };
+	var jsWrrm = { "pkg_wrrm": [ { "sect_name": "wrrm", "dot11g-basic-rateset": "15", "dot11g-supported-rateset": "4080", "dot11g-disabled-rateset": "0", "dot11a-basic-rateset": "21", "dot11a-supported-rateset": "234", "dot11a-disabled-rateset": "0", "dot11n-basic-mcs": "0", "dot11n-supported-mcs": "15", "bandsteering-enable": "disabled", "bandsteering-retry-threshold": "0", "bandsteering-aging-time": "3600", "bandsteering-suppress-enable": "disabled", "bandsteering-suppress-threshold": "40", "arp-optimize": "disabled", "arp-optimize-policy": "broadcast-to-unicast", "rate-optimize": "disabled" } ] };
+	var jsSpec_2 = {"radio_count":"2","radio_specific":[{"id":"0","radio":"14","max-power":"27","channel_number":"13","bandwidth":"0","channel":[ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]},{"id":"1","radio":"9","max-power":"27","channel_number":"9","bandwidth":"0","channel":[ "36", "40", "44", "48", "149", "153", "157", "161", "165"]}]};
+
+	function myhelp() {
+		popHelp("advancedSettings");
+	}
+
+	$("document").ready( function(){
+		$("#chk_bandSteering_enable").change( changeBandSteeringEnable  );
+	});
+
+	function changeBandSteeringEnable() {
+		if ( $("#chk_bandSteering_enable").attr("checked") == "checked" ) {
+			$(".part_tr_bandSteering").css("display", "table-row");
+		} else
+			$(".part_tr_bandSteering").css("display", "none");
+	}
+
+	function isInputValid() {
+		if ( $("#chk_bandSteering_enable").attr("checked") == "checked" ) {
+			if ( $("#text_bandSteering_aging").val() == "" ) {
+				myAlert("老化时间不能为空！", "text_bandSteering_aging");
+				return false;
+			}
+
+			if (!checkNumberRang($("#text_bandSteering_aging").val(), 300, 604800)){
+				myAlert("非法的频谱导航老化时间！", "text_bandSteering_aging");
+				return false;
+			}
+		}
+	
+		return true;
+	}
+
+	function Ok() {
+		if ( !isInputValid() )
+			return;
+
+		var f = new myForm();
+		var url = "";
+		url = "setform/form_client_isolation_set?UID="+parent.uid;
+		if ( $("#chk_client_isolation").attr("checked") == "checked" ) {
+			f.add( "enabled", 1 );
+		} else
+			f.add( "enabled", 0 );
+
+		/* only dual-band surppot bandsteerying */
+		if ( jsSpec_2.radio_count >= 2 ) {
+			if ( $("#chk_bandSteering_enable").attr("checked") == "checked" ) {
+				f.add( "bandSteering_enable", 1);
+				f.add( "bandSteering_aging", $("#text_bandSteering_aging").val() );
+			} else
+				f.add( "bandSteering_enable", 0);
+		}
+
+		if ($("#chk_wireless_arp_optimize_enable").attr("checked") == "checked" ) {
+			f.add ("wireless_arp_optimize_enable", 1);
+	}
+		else {
+			f.add ("wireless_arp_optimize_enable", 0);
+		}
+		
+		f.submit( url, setClientIsolationSuccess );
+	}
+
+	function setClientIsolationSuccess( data ) {
+		var jsData = eval("("+data+")");
+		jsSystem.pkg_system = jsData.pkg_system;
+		jsWrrm.pkg_wrrm = jsData.pkg_wrrm;
+		load();
+	}
+
+	function Cancel() {
+		load();
+	}
+
+	function load() {
+		var sect_isolation_exsit = false;
+		var section;
+		for ( var i = 0; i < jsSystem.pkg_system.length; i++ ) {
+			section = jsSystem.pkg_system[i];
+			if ( section.sect_name == "wirelessisolation" ) {
+				sect_isolation_exsit = true;
+				break;
+			}
+		}
+
+		if ( sect_isolation_exsit ) {
+			if ( section.enabled == "enabled" )
+				$("#chk_client_isolation").attr("checked", true);
+			else
+				$("#chk_client_isolation").attr("checked", false);
+		} else {
+			$("#chk_client_isolation").attr("checked", false);
+		}
+
+		if ( jsWrrm.pkg_wrrm[0]["arp-optimize"] == "enabled" ) {
+			$("#chk_wireless_arp_optimize_enable").attr("checked", true);
+		}
+		else {
+			$("#chk_wireless_arp_optimize_enable").attr("checked", false);
+		}
+
+		/* only dual-band surppot bandsteerying */
+		if ( jsSpec_2.radio_count >= 2 ) {
+			if ( typeof(jsWrrm.pkg_wrrm[0]["bandsteering-aging-time"]) != "undefined" )
+				$("#text_bandSteering_aging").val( jsWrrm.pkg_wrrm[0]["bandsteering-aging-time"] );
+
+			if ( jsWrrm.pkg_wrrm[0]["bandsteering-enable"] == "enabled") {
+				$("#chk_bandSteering_enable").attr("checked", true);
+				$(".part_tr_bandSteering").css("display", "table-row");
+			} else {
+				$("#chk_bandSteering_enable").attr("checked", false);
+				$(".part_tr_bandSteering").css("display", "none");
+			}
+			$(".part_bandsteering").css("display", "block");
+		}
+	}
+
+	function init() {
+		setNavigationBar("无线设置>高级设置");
+		load();
+	}
+</script> 
+
+</head>
+<body onLoad="init();">
+	<div id="INNER" align="left" style="margin-top:10px" >
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>用户隔离</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr>
+				<td class="col1">用户隔离使能：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_client_isolation" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="INNER" class="part_bandsteering" align="left" style="margin-top:10px; display:none;" >
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>频谱导航</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content part_bandsteering" style="display:none;">
+		<table width="100%">
+			<tr>
+				<td class="col1">频谱导航使能：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_bandSteering_enable" />
+				</td>
+			</tr>
+			<tr class="part_tr_bandSteering">
+				<td class="col1">老化时间：</td>
+				<td class="col2">
+					<input type="text" id="text_bandSteering_aging" />（300-604800秒，默认3600）
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="INNER" align="left" style="margin-top:10px" >
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+			<tr>
+				<td class="bulleted"><div>&nbsp;</div></td>
+				<td class="my_title_tbl_content"><div>无线ARP优化</div></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+	<div class="mytbl_content">
+		<table width="100%">
+			<tr>
+				<td class="col1">无线ARP优化使能：</td>
+				<td class="col2">
+					<input type="checkbox" id="chk_wireless_arp_optimize_enable" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="content_option">
+		<input type="button" id="btn_Cancel" class="buttonL" onClick="Cancel();" value="取 消"/>	
+		<input type="button" id="btn_Ok" class="buttonL" onClick="Ok();" value="确 定"/>	
+	</div>
+
+</body>
+</html>

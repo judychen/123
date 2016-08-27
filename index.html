@@ -416,12 +416,225 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>			
-
+			</div>
+			<div>
+				<input type="button" value="返回">
+				<input type="button" value="上一步">
+				<input type="button" value="下一步">
+				<input type="button" value="返回">
+			</div>		
+		</div>
+		<div id="equipment_overview">
+			<div>
+				<span>设备信息</span>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<td class="col1">设备型号：</td>
+						<td class="col2"></td>
+					</tr>
+				    <tr>
+						<td class="col1">序列号：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">MAC地址：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">硬件版本：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">软件版本：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">Bootloader版本：</td>
+						<td class="col2"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<span>运行状态</span>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<td class="col1">已运行时间：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">CPU使用率：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">内存使用率：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">网关：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">DNS服务器：</td>
+						<td class="col2"></td>
+					</tr>
+					<tr>
+						<td class="col1">NMS连接状态：</td>
+						<td class="col2"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<span>接口信息</span>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>接口</td>
+						<td>IP地址/子网掩码</td>
+						<td>状态</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>共 <a href=""></a>条记录</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="wireless_status">
+			<div>
+				<span>无线服务列表</span>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>端口</td>
+						<td>SSID</td>
+						<td>射频单元</td>
+						<td>认证方式</td>
+						<td>启用状态</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>共 <a href=""></a>条记录</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="radio_status">
+			<div>
+				<span>射频列表</span>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>射频单元</td>
+						<td>模式</td>
+						<td>信道</td>
+						<td>功率(dBm)</td>
+						<td>RTS-CTS阈值</td>
+						<td>分片阈值</td>
+						<td>BSS端口数量</td>
+						<td>状态</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>共 <a href=""></a>条记录</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="clientlist">
+			<div>
+				<span>客户端列表</span>
+			</div>
+			<div>
+				<input type="button" value="刷新">
+				<span>查询项</span>
+				<select>
+					<option>MAC地址</option>
+					<option>IP地址</option>
+					<option>UpTime</option>
+					<option>SSID</option>
+					<option>RSSI</option>
+					<option>Idle</option>
+					<option>TxRate(Mbps)</option>
+					<option>RxRate(Mbps)</option>
+				</select>
+				<span>关键词</span>
+				<input type="text" name="">
+				<input type="button" value="查询">
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>MAC地址</td>
+						<td>IP地址</td>
+						<td>UpTime</td>
+						<td>SSID</td>
+						<td>RSSI</td>
+						<td>Idle</td>
+						<td>TxRate(Mbps)</td>
+						<td>RxRate(Mbps)</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>共 <a href=""></a>条记录</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="view_wds_status">
+			<div>
+				<span>WDS运行状态</span>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<td class="col1">WDS模式：</td>
+						<td class="col2"></td>
+					</tr>
+				</tbody>
+			</table>
 			
-			
-
-
 		</div>
 	</div>
 

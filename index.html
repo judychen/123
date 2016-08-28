@@ -424,6 +424,8 @@
 				<input type="button" value="返回">
 			</div>		
 		</div>
+
+		<!--系统状态-->
 		<div id="equipment_overview">
 			<div>
 				<span>设备信息</span>
@@ -506,7 +508,7 @@
 					</tr>
 					<tr>
 						<td>共 <a href=""></a>条记录</td>
-						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -535,7 +537,7 @@
 					</tr>
 					<tr>
 						<td>共 <a href=""></a>条记录</td>
-						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -568,7 +570,7 @@
 					</tr>
 					<tr>
 						<td>共 <a href=""></a>条记录</td>
-						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -617,7 +619,7 @@
 					</tr>
 					<tr>
 						<td>共 <a href=""></a>条记录</td>
-						<td>第<a href=""></a>页/共<a href=""></a>页</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -634,8 +636,265 @@
 					</tr>
 				</tbody>
 			</table>
-			
 		</div>
+
+		<!--网络设置-->
+		<div id="interface_settings">
+			<div>
+				<span>LAN口（Vlan-interface 1）设置</span>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<td class="col1">VLAN ID</td>
+						<td class="col2">1</td>
+					</tr>
+					<tr>
+						<td class="col1">使能状态：</td>
+						<td class="col2">
+							<select name="" id="">
+								<option value="DHCP">DHCP</option>
+								<option value="Static">Static</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">IP获取方式：</td>
+						<td class="col2">
+							<input type="text"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">IP地址：</td>
+						<td class="col2">
+							<input type="text"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">子网掩码：</td>
+						<td class="col2">
+							<input type="text"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">网关(默认路由)：</td>
+						<td class="col2">
+							<input type="text"/>（可选）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">上网账号：</td>
+						<td class="col2">
+							<input type="text"/>（1-64个字符，不支持" ' ~ \ #空格和?输入）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">上网口令：</td>
+						<td class="col2">
+							<input type="text"/>（1-64个字符，不支持" ' ~ \ #空格和?输入）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">MTU：</td>
+						<td class="col2">
+							<input type="text" value="1492"/>（可选，默认值1492，范围128~1492）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">服务名：</td>
+						<td class="col2">
+							<input type="text"/>（可选:1-64个字符，不支持" ' ~ \ #空格和?输入）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">服务器名：</td>
+						<td class="col2">
+							<input type="text"/>（可选:1-64个字符，不支持" ' ~ \ #空格和?输入）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">DNS设置：</td>
+						<td class="col2">
+							<select name="" id="">
+								<option value="">手动</option>
+								<option value="">自动</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">DNS服务器：</td>
+						<td class="col2">
+							<input type="text"/>（可选）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">备份DNS服务器：</td>
+						<td class="col2">
+							<input type="text"/>（可选）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">DHCP服务器：</td>
+						<td class="col2">
+							<select name="" id="">
+								<option value="">启用</option>
+								<option value="">禁用</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">默认IP地址：</td>
+						<td class="col2">
+							<input type="text"/>（可选）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">默认子网掩码：</td>
+						<td class="col2">
+							<input type="text"/>（可选）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">NAT：</td>
+						<td class="col2">
+							<select name="" id="">
+								<option value="">启用</option>
+								<option value="">禁用</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<input type="button" value="取消"/>
+				<input type="button" value="确定"/>
+			</div>
+			<div>
+				<span>三层接口列表</span>
+			</div>
+			<div>
+				<input type="button" value="新增"/>
+				<div>
+					<span>查询项</span>
+					<select name="" id="">
+						<option value="">名称</option>
+						<option value="">描述</option>
+						<option value="">IP地址/子网掩码</option>
+						<option value="">状态</option>
+					</select>
+					<span>关键词</span>
+					<input type="text"/>
+					<input type="button" value="查询"/>
+				</div>
+			</div>
+		</div>
+		<div id="vlan_settings">
+			<div>
+				<ul>
+					<li>VLAN</li>
+					<li>端口</li>
+				</ul>
+			</div>
+			<div id="vlan">
+				<div>
+					<input type="button" value="新增"/>
+					<div>
+						<span>查询项</span>
+						<select name="" id="">
+							<option value="">VLAN ID</option>
+							<option value="">VLAN名称</option>
+							<option value="">描述</option>
+							<option value="">成员端口</option>
+						</select>
+						<span>关键词</span>
+						<input type="text"/>
+						<input type="button" value="查询"/>
+					</div>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>VLAN ID</th>
+							<th>VLAN名称</th>
+							<th>描述</th>
+							<th>成员端口</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>共 <a href=""></a>条记录</td>
+							<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="port">
+				<table>
+					<thead>
+					<tr>
+						<th>端口</th>
+						<th>SSID</th>
+						<th>类型</th>
+						<th>PVID</th>
+						<th>Permit VLAN</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>共 <a href=""></a>条记录</td>
+						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="dhcpd"></div>
+		<div id="arp"></div>
+		<div id="routeV4_settings"></div>
+		<div id="global_dns_settings"></div>
+		<div id="dnsmasq_settings"></div>
+		<div id="servers_manage"></div>
+		<div id="igmp_snooping"></div>
+		<div id="network_advanced_settings"></div>
+
+		<!--无线设置-->
+		<div id="wireless_servers"></div>
+		<div id="radio_setting"></div>
+		<div id="radio_speed_settings"></div>
+		<div id="portal_settings"></div>
+		<div id="domainSet_settings"></div>
+		<div id="AAA_settings"></div>
+		<div id="acl_settings"></div>
+		<div id="wds"></div>
+		<div id="time_acl_settings"></div>
+		<div id="wireless_probe"></div>
+		<div id="wireless_advanced_settings"></div>
+
+		<!--设备管理-->
+		<div id="equipment_maintenance"></div>
+		<div id="capwap"></div>
+		<div id="time_settings"></div>
+		<div id="syslog"></div>
+		<div id="config_settings"></div>
+		<div id="accounts_settings"></div>
 	</div>
 
 	<footer>

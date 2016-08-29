@@ -8,6 +8,7 @@
 
 	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<link href="css/menu.css" rel="stylesheet" type="text/css">
+	<link href="css/config.css" rel="stylesheet" type="text/css">
 	<link href="css/basic.css" rel="stylesheet" type="text/css">
 	<script src="js/jquery-1.8.3.js"></script>
 </head>
@@ -15,99 +16,99 @@
 <body>
 	<header>
 		<div id="my_header">
-			<img src="Img\/logo.png">
-			<img src="Images/logoMinor.gif">
+			<img src="img/logo.png">
+			<img src="img/logoMinor.gif">
 		</div>
 		<div id="my_banner" style="background-image:url(img/headbar.jpg)" height="26px">
 			<a href="#" class="white">保存</a>
 			<a href="#" class="white">退出</a>
 		</div>
 	</header>
-
-	<div id="leftpanel">
-		<div id="device_type">
-			<span>AP3602</span>
-		</div>
-		
-		<div id="menu">
-			<ul id="main_menu">
-				<li><a>配置向导</a></li>
-				<li>
-					<a>系统状态</a>
-					<ul id="sub_menu">
-						<li>设备概览</li>
-						<li>无线接入服务</li>
-						<li>射频信息</li>
-						<li>客户端</li>
-						<li>WDS状态</li>
-					</ul>
-				</li>
-				<li>
-					<a>网络设置</a>
-					<ul id="sub_menu">
-						<li>接口管理</li>
-						<li>VLAN管理</li>
-						<li>DHCP服务</li>
-						<li>ARP管理</li>
-						<li>IPv4路由</li>
-						<li>DNS管理</li>
-						<li>DNS代理</li>
-						<li>服务管理</li>
-						<li>IGMPsnooping</li>
-						<li>高级设置</li>
-					</ul>
-				</li>
-				<li>
-					<a>无线设置</a>
-					<ul id="sub_menu">
-						<li>无线接入服务</li>
-						<li>射频参数</li>
-						<li>射频速率</li>
-						<li>Portal管理</li>
-						<li>域名集管理</li>
-						<li>AAA认证</li>
-						<li>ACL管理</li>
-						<li>WDS配置</li>
-						<li>时间策略</li>
-						<li>无线探针</li>
-						<li>高级设置</li>
-					</ul>
-				</li>
-				<li>
-					<a>设备管理</a>
-					<ul  id="sub_menu">
-						<li>设备维护</li>
-						<li>CAPWAP</li>
-						<li>时间设置</li>
-						<li>日志管理</li>
-						<li>配置管理</li>
-						<li>用户管理</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-
-	<div id="rightpanel">
-		<div id="wizard">
-			<div>
-				<span>配置过程</span>
+	<main  class="clearfix">
+		<div id="leftpanel">
+			<div id="device_type">
+				<span>AP3602</span>
 			</div>
-			<div>
-				<ul>
-					<li>工作模式</li>
-					<li>IP地址</li>
-					<li>用户密码</li>
-					<li>无线设置</li>
-					<li>配置总览</li>
+
+			<div id="menu">
+				<ul id="main_menu">
+					<li><a><span>配置向导</span></a></li>
+					<li>
+						<a><span>系统状态</span></a>
+						<ul id="sub_menu" style="display: block">
+							<li class="current">设备概览</li>
+							<li>无线接入服务</li>
+							<li>射频信息</li>
+							<li>客户端</li>
+							<li>WDS状态</li>
+						</ul>
+					</li>
+					<li>
+						<a><span>网络设置</span></a>
+						<ul id="sub_menu" style="display: block">
+							<li>接口管理</li>
+							<li>VLAN管理</li>
+							<li>DHCP服务</li>
+							<li>ARP管理</li>
+							<li>IPv4路由</li>
+							<li>DNS管理</li>
+							<li>DNS代理</li>
+							<li>服务管理</li>
+							<li>IGMPsnooping</li>
+							<li>高级设置</li>
+						</ul>
+					</li>
+					<li>
+						<a><span>无线设置</span></a>
+						<ul id="sub_menu" style="display: block">
+							<li>无线接入服务</li>
+							<li>射频参数</li>
+							<li>射频速率</li>
+							<li>Portal管理</li>
+							<li>域名集管理</li>
+							<li>AAA认证</li>
+							<li>ACL管理</li>
+							<li>WDS配置</li>
+							<li>时间策略</li>
+							<li>无线探针</li>
+							<li>高级设置</li>
+						</ul>
+					</li>
+					<li>
+						<a><span>设备管理</span></a>
+						<ul  id="sub_menu" style="display: block">
+							<li>设备维护</li>
+							<li>CAPWAP</li>
+							<li>时间设置</li>
+							<li>日志管理</li>
+							<li>配置管理</li>
+							<li>用户管理</li>
+						</ul>
+					</li>
 				</ul>
 			</div>
-			<div id="wizard_link_mode">
+		</div>
+
+		<div id="rightpanel" >
+			<div id="wizard">
 				<div>
-					<span>工作模式设置</span>
+					<span>配置过程</span>
 				</div>
-				<table>
-					<tbody>
+				<div>
+					<ul>
+						<li>工作模式</li>
+						<li>IP地址</li>
+						<li>用户密码</li>
+						<li>无线设置</li>
+						<li>配置总览</li>
+					</ul>
+				</div>
+				<div id="wizard_link_mode">
+					<div>
+						<span>工作模式设置</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td class="col1">工作模式选择：</td>
 							<td class="col2">
@@ -117,15 +118,15 @@
 								<span>NAT</span>
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="wizard_ip_settings">
-				<div>
-					<span>IP地址设置</span>
+						</tbody>
+					</table>
 				</div>
-				<table>
-					<tbody>
+				<div id="wizard_ip_settings">
+					<div>
+						<span>IP地址设置</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td class="col1">IP获取方式：</td>
 							<td class="col2">
@@ -177,15 +178,15 @@
 								<span>（可选）</span>
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="wizard_wan_settings">
-				<div>
-					<span>上网方式设置</span>
+						</tbody>
+					</table>
 				</div>
-				<table>
-					<tbody>
+				<div id="wizard_wan_settings">
+					<div>
+						<span>上网方式设置</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td class="col1">上网方式：</td>
 							<td class="col2">
@@ -273,27 +274,27 @@
 								<span>（可选）</span>
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="wizard_lan_settings">
-				<div>
-					<span>LAN设置（Vlan-interfan 1）</span>
+						</tbody>
+					</table>
 				</div>
-				<table>
-					<tbody>
+				<div id="wizard_lan_settings">
+					<div>
+						<span>LAN设置（Vlan-interfan 1）</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td class="col1">IP地址：</td>
 							<td class="col2">
 								<input type="text" name="" value="192.168.1.1">
-								
+
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">子网掩码：</td>
 							<td class="col2">
 								<input type="text" name="" value="255.255.255.0">
-								
+
 							</td>
 						</tr>
 						<tr>
@@ -311,19 +312,19 @@
 								<input type="text" name="" value="192.168.1.100">
 								-
 								<input type="text" name="" value="192.168.1.199">
-								
+
 							</td>
 						</tr>
-					</tbody>
-				</table>
-				
-			</div>
-			<div id="wizard_admin_pwd">
-				<div>
-					<span>用户密码</span>
+						</tbody>
+					</table>
+
 				</div>
-				<table>
-					<tbody>
+				<div id="wizard_admin_pwd">
+					<div>
+						<span>用户密码</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td class="col1">用户名：</td>
 							<td class="col2">admin</td>
@@ -340,15 +341,15 @@
 								<input type="text" name="">
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="wizard_wireless_settings">
-				<div>
-					<span>无线名称(SSID)</span>
+						</tbody>
+					</table>
 				</div>
-				<table>
-					<tbody>
+				<div id="wizard_wireless_settings">
+					<div>
+						<span>无线名称(SSID)</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td>2.4G SSID：</td>
 							<td>
@@ -363,13 +364,13 @@
 								（1-32个字符，不包含 ? " ; \）
 							</td>
 						</tr>
-					</tbody>
-				</table>
-				<div>
-					<span>无线安全</span>
-				</div>
-				<table>
-					<tbody>
+						</tbody>
+					</table>
+					<div>
+						<span>无线安全</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td>认证方式：</td>
 							<td>
@@ -386,15 +387,15 @@
 								（8-63个字符或64个十六进制字符）
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="wizard_summary">
-				<div>
-					<span>当前配置</span>
+						</tbody>
+					</table>
 				</div>
-				<table>
-					<tbody>
+				<div id="wizard_summary">
+					<div>
+						<span>当前配置</span>
+					</div>
+					<table>
+						<tbody>
 						<tr>
 							<td class="col1">工作模式：</td>
 							<td class="col2"></td>
@@ -419,29 +420,29 @@
 							<td class="col1">认证方式：</td>
 							<td class="col2"></td>
 						</tr>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<input type="button" value="返回">
+					<input type="button" value="上一步">
+					<input type="button" value="下一步">
+					<input type="button" value="返回">
+				</div>
 			</div>
-			<div>
-				<input type="button" value="返回">
-				<input type="button" value="上一步">
-				<input type="button" value="下一步">
-				<input type="button" value="返回">
-			</div>		
-		</div>
 
-		<!--系统状态-->
-		<div id="equipment_overview">
-			<div>
-				<span>设备信息</span>
-			</div>
-			<table>
-				<tbody>
+			<!--系统状态-->
+			<div id="equipment_overview">
+				<div>
+					<span>设备信息</span>
+				</div>
+				<table>
+					<tbody>
 					<tr>
 						<td class="col1">设备型号：</td>
 						<td class="col2"></td>
 					</tr>
-				    <tr>
+					<tr>
 						<td class="col1">序列号：</td>
 						<td class="col2"></td>
 					</tr>
@@ -461,13 +462,13 @@
 						<td class="col1">Bootloader版本：</td>
 						<td class="col2"></td>
 					</tr>
-				</tbody>
-			</table>
-			<div>
-				<span>运行状态</span>
-			</div>
-			<table>
-				<tbody>
+					</tbody>
+				</table>
+				<div>
+					<span>运行状态</span>
+				</div>
+				<table>
+					<tbody>
 					<tr>
 						<td class="col1">已运行时间：</td>
 						<td class="col2"></td>
@@ -492,20 +493,20 @@
 						<td class="col1">NMS连接状态：</td>
 						<td class="col2"></td>
 					</tr>
-				</tbody>
-			</table>
-			<div>
-				<span>接口信息</span>
-			</div>
-			<table>
-				<thead>
+					</tbody>
+				</table>
+				<div>
+					<span>接口信息</span>
+				</div>
+				<table>
+					<thead>
 					<tr>
 						<td>接口</td>
 						<td>IP地址/子网掩码</td>
 						<td>状态</td>
 					</tr>
-				</thead>
-				<tbody>
+					</thead>
+					<tbody>
 					<tr>
 						<td></td>
 						<td></td>
@@ -515,15 +516,15 @@
 						<td>共 <a href=""></a>条记录</td>
 						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div id="wireless_status">
-			<div>
-				<span>无线服务列表</span>
+					</tbody>
+				</table>
 			</div>
-			<table>
-				<thead>
+			<div id="wireless_status">
+				<div>
+					<span>无线服务列表</span>
+				</div>
+				<table>
+					<thead>
 					<tr>
 						<td>端口</td>
 						<td>SSID</td>
@@ -531,8 +532,8 @@
 						<td>认证方式</td>
 						<td>启用状态</td>
 					</tr>
-				</thead>
-				<tbody>
+					</thead>
+					<tbody>
 					<tr>
 						<td></td>
 						<td></td>
@@ -544,15 +545,15 @@
 						<td>共 <a href=""></a>条记录</td>
 						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div id="radio_status">
-			<div>
-				<span>射频列表</span>
+					</tbody>
+				</table>
 			</div>
-			<table>
-				<thead>
+			<div id="radio_status">
+				<div>
+					<span>射频列表</span>
+				</div>
+				<table>
+					<thead>
 					<tr>
 						<td>射频单元</td>
 						<td>模式</td>
@@ -564,8 +565,8 @@
 						<td>状态</td>
 						<td>操作</td>
 					</tr>
-				</thead>
-				<tbody>
+					</thead>
+					<tbody>
 					<tr>
 						<td></td>
 						<td></td>
@@ -577,32 +578,32 @@
 						<td>共 <a href=""></a>条记录</td>
 						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div id="clientlist">
-			<div>
-				<span>客户端列表</span>
+					</tbody>
+				</table>
 			</div>
-			<div>
-				<input type="button" value="刷新">
-				<span>查询项</span>
-				<select>
-					<option>MAC地址</option>
-					<option>IP地址</option>
-					<option>UpTime</option>
-					<option>SSID</option>
-					<option>RSSI</option>
-					<option>Idle</option>
-					<option>TxRate(Mbps)</option>
-					<option>RxRate(Mbps)</option>
-				</select>
-				<span>关键词</span>
-				<input type="text" name="">
-				<input type="button" value="查询">
-			</div>
-			<table>
-				<thead>
+			<div id="clientlist">
+				<div>
+					<span>客户端列表</span>
+				</div>
+				<div>
+					<input type="button" value="刷新">
+					<span>查询项</span>
+					<select>
+						<option>MAC地址</option>
+						<option>IP地址</option>
+						<option>UpTime</option>
+						<option>SSID</option>
+						<option>RSSI</option>
+						<option>Idle</option>
+						<option>TxRate(Mbps)</option>
+						<option>RxRate(Mbps)</option>
+					</select>
+					<span>关键词</span>
+					<input type="text" name="">
+					<input type="button" value="查询">
+				</div>
+				<table>
+					<thead>
 					<tr>
 						<td>MAC地址</td>
 						<td>IP地址</td>
@@ -613,8 +614,8 @@
 						<td>TxRate(Mbps)</td>
 						<td>RxRate(Mbps)</td>
 					</tr>
-				</thead>
-				<tbody>
+					</thead>
+					<tbody>
 					<tr>
 						<td></td>
 						<td></td>
@@ -626,30 +627,30 @@
 						<td>共 <a href=""></a>条记录</td>
 						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div id="view_wds_status">
-			<div>
-				<span>WDS运行状态</span>
+					</tbody>
+				</table>
 			</div>
-			<table>
-				<tbody>
+			<div id="view_wds_status">
+				<div>
+					<span>WDS运行状态</span>
+				</div>
+				<table>
+					<tbody>
 					<tr>
 						<td class="col1">WDS模式：</td>
 						<td class="col2"></td>
 					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<!--网络设置-->
-		<div id="interface_settings">
-			<div>
-				<span>LAN口（Vlan-interface 1）设置</span>
+					</tbody>
+				</table>
 			</div>
-			<table>
-				<tbody>
+
+			<!--网络设置-->
+			<div id="interface_settings">
+				<div>
+					<span>LAN口（Vlan-interface 1）设置</span>
+				</div>
+				<table>
+					<tbody>
 					<tr>
 						<td class="col1">VLAN ID</td>
 						<td class="col2">1</td>
@@ -768,56 +769,56 @@
 							</select>
 						</td>
 					</tr>
-				</tbody>
-			</table>
-			<div>
-				<input type="button" value="取消"/>
-				<input type="button" value="确定"/>
-			</div>
-			<div>
-				<span>三层接口列表</span>
-			</div>
-			<div>
-				<input type="button" value="新增"/>
+					</tbody>
+				</table>
 				<div>
-					<span>查询项</span>
-					<select name="" id="">
-						<option value="">名称</option>
-						<option value="">描述</option>
-						<option value="">IP地址/子网掩码</option>
-						<option value="">状态</option>
-					</select>
-					<span>关键词</span>
-					<input type="text"/>
-					<input type="button" value="查询"/>
+					<input type="button" value="取消"/>
+					<input type="button" value="确定"/>
 				</div>
-			</div>
-		</div>
-		<div id="vlan_settings">
-			<div>
-				<ul>
-					<li>VLAN</li>
-					<li>端口</li>
-				</ul>
-			</div>
-			<div id="vlan">
+				<div>
+					<span>三层接口列表</span>
+				</div>
 				<div>
 					<input type="button" value="新增"/>
 					<div>
 						<span>查询项</span>
 						<select name="" id="">
-							<option value="">VLAN ID</option>
-							<option value="">VLAN名称</option>
+							<option value="">名称</option>
 							<option value="">描述</option>
-							<option value="">成员端口</option>
+							<option value="">IP地址/子网掩码</option>
+							<option value="">状态</option>
 						</select>
 						<span>关键词</span>
 						<input type="text"/>
 						<input type="button" value="查询"/>
 					</div>
 				</div>
-				<table>
-					<thead>
+			</div>
+			<div id="vlan_settings">
+				<div>
+					<ul>
+						<li>VLAN</li>
+						<li>端口</li>
+					</ul>
+				</div>
+				<div id="vlan">
+					<div>
+						<input type="button" value="新增"/>
+						<div>
+							<span>查询项</span>
+							<select name="" id="">
+								<option value="">VLAN ID</option>
+								<option value="">VLAN名称</option>
+								<option value="">描述</option>
+								<option value="">成员端口</option>
+							</select>
+							<span>关键词</span>
+							<input type="text"/>
+							<input type="button" value="查询"/>
+						</div>
+					</div>
+					<table>
+						<thead>
 						<tr>
 							<th>VLAN ID</th>
 							<th>VLAN名称</th>
@@ -825,8 +826,8 @@
 							<th>成员端口</th>
 							<th>操作</th>
 						</tr>
-					</thead>
-					<tbody>
+						</thead>
+						<tbody>
 						<tr>
 							<td></td>
 							<td></td>
@@ -838,71 +839,72 @@
 							<td>共 <a href=""></a>条记录</td>
 							<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
 						</tr>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
+				<div id="port">
+					<table>
+						<thead>
+						<tr>
+							<th>端口</th>
+							<th>SSID</th>
+							<th>类型</th>
+							<th>PVID</th>
+							<th>Permit VLAN</th>
+							<th>操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>共 <a href=""></a>条记录</td>
+							<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-			<div id="port">
-				<table>
-					<thead>
-					<tr>
-						<th>端口</th>
-						<th>SSID</th>
-						<th>类型</th>
-						<th>PVID</th>
-						<th>Permit VLAN</th>
-						<th>操作</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>共 <a href=""></a>条记录</td>
-						<td>第<a href=""></a>页/共<a href=""></a>页<a>首页</a><a></a><a>尾页</a></td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
+
+			<div id="dhcpd"></div>
+			<div id="arp"></div>
+			<div id="routeV4_settings"></div>
+			<div id="global_dns_settings"></div>
+			<div id="dnsmasq_settings"></div>
+			<div id="servers_manage"></div>
+			<div id="igmp_snooping"></div>
+			<div id="network_advanced_settings"></div>
+
+			<!--无线设置-->
+			<div id="wireless_servers"></div>
+			<div id="radio_setting"></div>
+			<div id="radio_speed_settings"></div>
+			<div id="portal_settings"></div>
+			<div id="domainSet_settings"></div>
+			<div id="AAA_settings"></div>
+			<div id="acl_settings"></div>
+			<div id="wds"></div>
+			<div id="time_acl_settings"></div>
+			<div id="wireless_probe"></div>
+			<div id="wireless_advanced_settings"></div>
+
+			<!--设备管理-->
+			<div id="equipment_maintenance"></div>
+			<div id="capwap"></div>
+			<div id="time_settings"></div>
+			<div id="syslog"></div>
+			<div id="config_settings"></div>
+			<div id="accounts_settings"></div>
 		</div>
+	</main>
 
-		<div id="dhcpd"></div>
-		<div id="arp"></div>
-		<div id="routeV4_settings"></div>
-		<div id="global_dns_settings"></div>
-		<div id="dnsmasq_settings"></div>
-		<div id="servers_manage"></div>
-		<div id="igmp_snooping"></div>
-		<div id="network_advanced_settings"></div>
-
-		<!--无线设置-->
-		<div id="wireless_servers"></div>
-		<div id="radio_setting"></div>
-		<div id="radio_speed_settings"></div>
-		<div id="portal_settings"></div>
-		<div id="domainSet_settings"></div>
-		<div id="AAA_settings"></div>
-		<div id="acl_settings"></div>
-		<div id="wds"></div>
-		<div id="time_acl_settings"></div>
-		<div id="wireless_probe"></div>
-		<div id="wireless_advanced_settings"></div>
-
-		<!--设备管理-->
-		<div id="equipment_maintenance"></div>
-		<div id="capwap"></div>
-		<div id="time_settings"></div>
-		<div id="syslog"></div>
-		<div id="config_settings"></div>
-		<div id="accounts_settings"></div>
-	</div>
-
-	<footer>
+	<footer  class="clearfix">
 		<div>
 			<span>Copyright(C) 2016 康凯科技（杭州）有限公司</span>
 		</div>

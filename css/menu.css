@@ -8,29 +8,44 @@
 	color: #0263db;
 }
 
-#main_menu li{
+#main_menu>li{
 	width: 156px;
-	height: 30px;
 	font-size: 13px;
-	color: #465f88;
-	background-color: #eaedf8;
-	padding: 2px 0 2px 10px;
-	border: 1px solid #8ea5cf;
-	margin-bottom: 1px;
+    font-weight: bold;
+	color: #FFFFFF;
+	background-color: #8EA5CF;
+	padding-left:10px;
+	border-bottom: 1px solid #fff;
 }
 
-#main_menu #sub_menu{
+#main_menu>li>a{
+    display: inline-block;
+    height: 30px;
+}
+
+#main_menu>li>a>span{
+    position: relative;
+    top: 25%;
+}
+
+#sub_menu{
 	padding: 0px;
 	margin-left: -10px;
+    display: none;
 }
 
 #sub_menu li{
-	width: 145px;
+	width: 155px;
 	border: 1px solid #fff;
-	color: #465f88;
+	color: #573452;
 	font-size: 13px;
 	padding: 5px 0 5px 10px;
-	background: #eaedf8 url(../../img/arrow3.png) no-repeat;
+	background: #fff;
+}
 
-
+#sub_menu li.current,
+#sub_menu li:hover
+{
+    color: #465F88;
+    background: #EAEDF8;
 }

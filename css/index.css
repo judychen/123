@@ -11,7 +11,6 @@ body{
 
 #my_header{
 	height: 60px;
-	width: 100%;
 	background-color: rgb(210, 214, 231);
 	padding: 20px 0 0 10px;
 }
@@ -22,6 +21,14 @@ body{
 
 #my_banner{
 	height: 28px;
+}
+
+#my_banner a{
+	float: right;
+	display: inline-block;
+	margin: 0 8px;
+	font-size: 12px;
+	line-height: 26px;
 }
 
 footer{

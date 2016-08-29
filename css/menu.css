@@ -1,0 +1,36 @@
+#leftpanel{
+	float: left;
+	margin: 5px 5px 1px 5px;
+}
+
+#device_type{
+	margin: 10px;
+	color: #0263db;
+}
+
+#main_menu li{
+	width: 156px;
+	height: 30px;
+	font-size: 13px;
+	color: #465f88;
+	background-color: #eaedf8;
+	padding: 2px 0 2px 10px;
+	border: 1px solid #8ea5cf;
+	margin-bottom: 1px;
+}
+
+#main_menu #sub_menu{
+	padding: 0px;
+	margin-left: -10px;
+}
+
+#sub_menu li{
+	width: 145px;
+	border: 1px solid #fff;
+	color: #465f88;
+	font-size: 13px;
+	padding: 5px 0 5px 10px;
+	background: #eaedf8 url(../../img/arrow3.png) no-repeat;
+
+
+}

@@ -1,18 +1,35 @@
 html{
 	margin: 0px;
 	padding: 0px;
-	background-color: #233;
-
 }
 body{
 	padding: 0px;
 	margin: 0px;
-	background-color: #111;
+	background-color: #fff;
 	height: 100%;
 }
 
 #my_header{
-	height: 80px;
+	height: 60px;
 	width: 100%;
-	background-color: rgb(210, 214, 231)
+	background-color: rgb(210, 214, 231);
+	padding: 20px 0 0 10px;
+}
+
+#my_header img{
+	vertical-align: middle;
+}
+
+#my_banner{
+	height: 28px;
+}
+
+footer{
+	height: 20px;
+	background-color: rgb(210, 214, 231);
+	font-size:12px;
+	color:#6E6363;
+	padding: 4px 0px;
+	text-align: center;
+
 }

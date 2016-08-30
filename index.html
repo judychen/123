@@ -90,24 +90,29 @@
 		</div>
 
 		<div id="rightpanel" >
-			<div id="wizard">
-				<div>
+			<div id="wizard" style="display:none;">
+				<div class="table_title">
 					<span>配置过程</span>
 				</div>
 				<div>
-					<ul>
-						<li>工作模式</li>
-						<li>IP地址</li>
-						<li>用户密码</li>
-						<li>无线设置</li>
-						<li>配置总览</li>
+					<ul id="wizard_step">
+						<li class="wizard_step_head">1</li>
+						<li class="wizard_step_cont">工作模式</li>
+						<li class="wizard_step_head">2</li>
+						<li class="wizard_step_cont">IP地址</li>
+						<li class="wizard_step_head">3</li>
+						<li class="wizard_step_cont">用户密码</li>
+						<li class="wizard_step_head">4</li>
+						<li class="wizard_step_cont">无线设置</li>
+						<li class="wizard_step_head">5</li>
+						<li class="wizard_step_cont">配置总览</li>
 					</ul>
 				</div>
 				<div id="wizard_link_mode">
-					<div>
+					<div class="table_title">
 						<span>工作模式设置</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
 						<tr>
 							<td class="col1">工作模式选择：</td>
@@ -122,10 +127,10 @@
 					</table>
 				</div>
 				<div id="wizard_ip_settings">
-					<div>
+					<div  class="table_title">
 						<span>IP地址设置</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
 						<tr>
 							<td class="col1">IP获取方式：</td>
@@ -182,10 +187,10 @@
 					</table>
 				</div>
 				<div id="wizard_wan_settings">
-					<div>
+					<div  class="table_title">
 						<span>上网方式设置</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
 						<tr>
 							<td class="col1">上网方式：</td>
@@ -278,10 +283,10 @@
 					</table>
 				</div>
 				<div id="wizard_lan_settings">
-					<div>
+					<div  class="table_title">
 						<span>LAN设置（Vlan-interfan 1）</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
 						<tr>
 							<td class="col1">IP地址：</td>
@@ -320,60 +325,60 @@
 
 				</div>
 				<div id="wizard_admin_pwd">
-					<div>
+					<div class="table_title">
 						<span>用户密码</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
-						<tr>
-							<td class="col1">用户名：</td>
-							<td class="col2">admin</td>
-						</tr>
-						<tr>
-							<td class="col1">新的密码</td>
-							<td class="col2">
-								<input type="text" name="">
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">确认密码</td>
-							<td class="col2">
-								<input type="text" name="">
-							</td>
-						</tr>
+							<tr>
+								<td class="col1">用户名：</td>
+								<td class="col2">admin</td>
+							</tr>
+							<tr>
+								<td class="col1">新的密码</td>
+								<td class="col2">
+									<input type="text" name="">
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">确认密码</td>
+								<td class="col2">
+									<input type="text" name="">
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div id="wizard_wireless_settings">
-					<div>
+					<div class="table_title">
 						<span>无线名称(SSID)</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
 						<tr>
-							<td>2.4G SSID：</td>
-							<td>
+							<td class="col1">2.4G SSID：</td>
+							<td class="col2">
 								<input type="text" name="" value="CommSky_2.4G">
 								（1-32个字符，不包含 ? " ; \）
 							</td>
 						</tr>
 						<tr>
-							<td>5G SSID：</td>
-							<td>
+							<td class="col1">5G SSID：</td>
+							<td class="col2">
 								<input type="text" name="" value="CommSky_5G">
 								（1-32个字符，不包含 ? " ; \）
 							</td>
 						</tr>
 						</tbody>
 					</table>
-					<div>
+					<div class="table_title">
 						<span>无线安全</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
 						<tr>
-							<td>认证方式：</td>
-							<td>
+							<td class="col1">认证方式：</td>
+							<td class="col2">
 								<select>
 									<option>None</option>
 									<option>WPA/WPA2</option>
@@ -381,8 +386,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td>共享密钥：</td>
-							<td>
+							<td class="col1">共享密钥：</td>
+							<td class="col2">
 								<input type="text" name="">
 								（8-63个字符或64个十六进制字符）
 							</td>
@@ -391,10 +396,10 @@
 					</table>
 				</div>
 				<div id="wizard_summary">
-					<div>
+					<div class="table_title">
 						<span>当前配置</span>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<tbody>
 						<tr>
 							<td class="col1">工作模式：</td>
@@ -423,20 +428,20 @@
 						</tbody>
 					</table>
 				</div>
-				<div>
-					<input type="button" value="返回">
-					<input type="button" value="上一步">
-					<input type="button" value="下一步">
-					<input type="button" value="返回">
+				<div id="wizard_step_button">
+					<input type="button" class="button" value="返回">
+					<input type="button" class="button" value="上一步">
+					<input type="button" class="button" value="下一步">
+					<input type="button" class="button" value="返回">
 				</div>
 			</div>
 
 			<!--系统状态-->
 			<div id="equipment_overview">
-				<div>
+				<div class="table_title">
 					<span>设备信息</span>
 				</div>
-				<table>
+				<table class="tbl_cont">
 					<tbody>
 					<tr>
 						<td class="col1">设备型号：</td>
@@ -464,10 +469,10 @@
 					</tr>
 					</tbody>
 				</table>
-				<div>
+				<div class="table_title">
 					<span>运行状态</span>
 				</div>
-				<table>
+				<table class="tbl_cont">
 					<tbody>
 					<tr>
 						<td class="col1">已运行时间：</td>
@@ -495,15 +500,15 @@
 					</tr>
 					</tbody>
 				</table>
-				<div>
+				<div class="table_title">
 					<span>接口信息</span>
 				</div>
-				<table>
+				<table class="tbl">
 					<thead>
 					<tr>
-						<td>接口</td>
-						<td>IP地址/子网掩码</td>
-						<td>状态</td>
+						<td class="col0">接口</td>
+						<td class="col0">IP地址/子网掩码</td>
+						<td class="col0">状态</td>
 					</tr>
 					</thead>
 					<tbody>
@@ -520,10 +525,10 @@
 				</table>
 			</div>
 			<div id="wireless_status">
-				<div>
+				<div class="table_title">
 					<span>无线服务列表</span>
 				</div>
-				<table>
+				<table class="tbl_cont">
 					<thead>
 					<tr>
 						<td>端口</td>
@@ -549,10 +554,10 @@
 				</table>
 			</div>
 			<div id="radio_status">
-				<div>
+				<div class="table_title">
 					<span>射频列表</span>
 				</div>
-				<table>
+				<table class="tbl_cont">
 					<thead>
 					<tr>
 						<td>射频单元</td>
@@ -582,7 +587,7 @@
 				</table>
 			</div>
 			<div id="clientlist">
-				<div>
+				<div class="table_title">
 					<span>客户端列表</span>
 				</div>
 				<div>
@@ -602,7 +607,7 @@
 					<input type="text" name="">
 					<input type="button" value="查询">
 				</div>
-				<table>
+				<table class="tbl_cont">
 					<thead>
 					<tr>
 						<td>MAC地址</td>
@@ -631,10 +636,10 @@
 				</table>
 			</div>
 			<div id="view_wds_status">
-				<div>
+				<div class="table_title">
 					<span>WDS运行状态</span>
 				</div>
-				<table>
+				<table class="tbl_cont">
 					<tbody>
 					<tr>
 						<td class="col1">WDS模式：</td>
@@ -646,10 +651,10 @@
 
 			<!--网络设置-->
 			<div id="interface_settings">
-				<div>
+				<div class="table_title">
 					<span>LAN口（Vlan-interface 1）设置</span>
 				</div>
-				<table>
+				<table class="tbl_cont">
 					<tbody>
 					<tr>
 						<td class="col1">VLAN ID</td>
@@ -772,10 +777,10 @@
 					</tbody>
 				</table>
 				<div>
-					<input type="button" value="取消"/>
-					<input type="button" value="确定"/>
+					<input type="button" class="button" value="取消"/>
+					<input type="button" class="button" value="确定"/>
 				</div>
-				<div>
+				<div class="table_title">
 					<span>三层接口列表</span>
 				</div>
 				<div>
@@ -795,7 +800,7 @@
 				</div>
 			</div>
 			<div id="vlan_settings">
-				<div>
+				<div >
 					<ul>
 						<li>VLAN</li>
 						<li>端口</li>
@@ -817,7 +822,7 @@
 							<input type="button" value="查询"/>
 						</div>
 					</div>
-					<table>
+					<table class="tbl_cont">
 						<thead>
 						<tr>
 							<th>VLAN ID</th>
@@ -843,7 +848,7 @@
 					</table>
 				</div>
 				<div id="port">
-					<table>
+					<table class="tbl_cont">
 						<thead>
 						<tr>
 							<th>端口</th>

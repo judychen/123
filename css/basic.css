@@ -12,10 +12,13 @@
 
 ul{
 	padding: 0px;
+	margin: 0px;
 }
 
 li{
 	list-style: none;
+	padding: 0px;
+	margin: 0px;
 }
 
 a.white:link,
@@ -28,4 +31,15 @@ a.white:active{
 a.white:hover{
 	text-decoration:none;
 	color:#ffee8d;
+}
+
+.button{
+	background-color: #465f88;
+	color: #fff;
+	border: 1px solid #fff; /* 要改 */
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 5px 10px;
+  
 }

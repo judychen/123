@@ -1,3 +1,101 @@
 #rightpanel{
     float: left;
 }
+
+.table_title{
+	color: #465f88;
+	font-size: 14px;
+	border-bottom: 1px solid #ccc;
+	padding: 4px 0;
+}
+
+.table_title:before{
+	content: " ";
+	float: left;
+	position: relative;
+	background: #465f88;
+	display: block;
+	height: 16px;
+	width: 5px;
+}
+
+.table_title>span{
+	display: inline-block;
+	padding-left: 5px;
+
+}
+
+#wizard_step{
+	height: 30px;
+	padding-top: 20px;
+	padding-left: 80px;
+
+}
+
+.wizard_step_head{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #465f88;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+}
+
+.wizard_step_cont{
+	display: inline-block;
+	width: 70px;
+	height: 20px;
+	background-color: #d2d6e7;
+	color: #465f88;
+	font-size: 14px;
+	text-align: center;
+}
+
+.tbl_cont{
+	width: 800px;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.tbl{
+	width: 800px;
+	font-size: 12px;
+	line-height: 16px;
+	border-collapse: collapse;
+}
+
+th,tr{
+	height: 28px;
+}
+
+.col0{
+	background-color: #465f88;
+	color: #fff;
+	text-align: left;
+	padding-right: 3px;
+	cellspacing:0px;
+}
+
+.col1{
+	background-color: #465f88;
+	color: #fff;
+	text-align: right;
+	width: 38%;
+	padding-right: 8px;
+}
+
+.col2{
+	background-color: #d2d6e7;
+	color: #465f88;
+	text-align: left;
+	width: 62%;
+	padding-left: 8px;
+}
+
+#wizard_step_button{
+	margin-top: 10px;
+	width: 98%;
+	text-align: right;
+}
+

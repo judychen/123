@@ -2149,187 +2149,427 @@
 					<input type="button" class="button" value="确定"/>
 				</div>
 			</div>
-<!--写到这里-->
 			<!--设备管理-->
-			<div id="equipment_maintenance">
-				<div class="table_title">
-					<span>ARP列表</span>
+			<div id="equipment_maintenance" style="display:none">
+				<div class="underline">
+				    <ul>
+				        <li class="tab">设备重启</li>
+				        <li class="tab">软件升级</li>
+				        <li class="tab">Ping工具</li>
+				        <li class="tab">一键导出</li>
+				        <li class="tab">故障排除</li>
+				    </ul>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>IP地址</option>
-						<option>MAC地址</option>
-						<option>接口</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+
+				<div id="reboot">
+					<input type="button" class="button" value="重启">	
 				</div>
-				<table class="tbl">
-					<thead>
-					<tr>
-						<th>IP地址</th>
-						<th>MAC地址</th>
-						<th>接口</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="8">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
-				</table>
+
+				<div id="upgrade">
+					<table class="tbl_cont">
+					    <tbody>
+					    <tr>
+					        <td class="col1">当前硬件版本：</td>
+					        <td class="col2"></td>
+					    </tr>
+					    <tr>
+					        <td class="col1">当前软件版本：</td>
+					        <td class="col2"></td>
+					    </tr>
+					    <tr>
+					        <td class="col1">升级方式：</td>
+					        <td class="col2">
+					            <input type="radio" name="upgrade_type" id="upgrade_local" />
+					            <label for="upgrade_local">Local</label>
+					            <input type="radio" name="upgrade_type" id="upgrade_ftp" />
+					            <label for="upgrade_ftp">FTP</label>
+					            <input type="radio" name="upgrade_type" id="upgrade_tftp" />
+					            <label for="upgrade_tftp">TFTP</label>
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">请选择升级文件：</td>
+					        <td class="col2">
+					            <input type="file" value="选择文件" />
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">FTP服务器：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">文件名：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">用户：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（可选）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">密码：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（可选）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">TFTP服务器：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					     <tr>
+					        <td class="col1">文件名：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 	<input type="button" class="button" value="升级"/>
+					</div>
+				</div>
+				<div id="ping">
+					<table class="tbl_cont">
+					    <tbody>
+					    <tr>
+					        <td class="col1">主机:</td>
+					        <td class="col2">
+					            <input type="text"/>
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">次数：</td>
+					        <td class="col2">
+					            <input type="text" value="4" />（1-9999）
+					            <input type="button" name="" value="Ping">
+					        </td>
+					    </tr>
+					  
+					    </tbody>
+					</table>
+					<textarea id="ping_res"></textarea>
+				</div>
+				<div class="output">
+					<table class="tbl_cont">
+					    <tbody>
+					    
+					    <tr>
+					        <td class="col1">请选择方式：</td>
+					        <td class="col2">
+					            <input type="radio" name="upgrade_type" id="upgrade_local" />
+					            <label for="upgrade_local">Local</label>
+					            <input type="radio" name="upgrade_type" id="upgrade_ftp" />
+					            <label for="upgrade_ftp">FTP</label>
+					            <input type="radio" name="upgrade_type" id="upgrade_tftp" />
+					            <label for="upgrade_tftp">TFTP</label>
+					        </td>
+					    </tr>
+					   
+					    <tr>
+					        <td class="col1">FTP服务器：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">文件名：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">用户：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（可选）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">密码：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（可选）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">TFTP服务器：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					     <tr>
+					        <td class="col1">文件名：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="导出"/>
+					</div>
+				</div>
+				<div id="trouble_shooting">
+					<table class="tbl_cont">
+					    <tbody>					    
+					    <tr>
+					        <td class="col1">故障排除无线服务：</td>
+					        <td class="col2">
+					            <select>
+					            	<option>启用</option>
+					            	<option>禁用</option>
+					            </select>
+					        </td>
+					    </tr>
+					   
+					    <tr>
+					        <td class="col1">SSID：</td>
+					        <td class="col2">
+					        	
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">IP地址：</td>
+					        <td class="col2">
+					        	<input type="text" name="">
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">子网掩码：</td>
+					        <td class="col2">
+					        	<input type="text" name="">
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消"/>
+				 		<input type="button" class="button" value="确定"/>
+					</div>
+				</div>
 			</div>
-			<div id="capwap">
+			<div id="capwap" style="display:none">
 				<div class="table_title">
-					<span>ARP列表</span>
+					<span>CAPWAP</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>IP地址</option>
-						<option>MAC地址</option>
-						<option>接口</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
-				</div>
-				<table class="tbl">
-					<thead>
-					<tr>
-						<th>IP地址</th>
-						<th>MAC地址</th>
-						<th>接口</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="8">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
+				<table class="tbl_cont">
+				    <tbody>
+				    <tr>
+				        <td class="col1">使能状态：</td>
+				        <td class="col2">
+				            <input type="checkbox" checked="checked" />
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">主CAPWAP服务器：</td>
+				        <td class="col2">
+				            <input type="text"/>（可选, 1-64个字符）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">备份CAPWAP服务器：</td>
+				        <td class="col2">
+				            <input type="text"/>（可选, 1-64个字符）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">控制端口：</td>
+				        <td class="col2">
+				            <input type="text"/>（256-65535，默认为5246）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">高级选项：</td>
+				        <td class="col2">
+				            <input type="checkbox" />
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">MTU：</td>
+				        <td class="col2">
+				            <input type="text"/>（512-1500，默认为1300）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Discovery Interval：</td>
+				        <td class="col2">
+				            <input type="text"/>（0-90秒，默认为5）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Max Discovery Interval：</td>
+				        <td class="col2">
+				            <input type="text"/>（2-180秒，默认为20）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Echo Interval：</td>
+				        <td class="col2">
+				            <input type="text"/>（10-60秒，默认为30）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Retransmit Interval：</td>
+				        <td class="col2">
+				            <input type="text"/>（1-30秒，默认为3）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Silent Interval：</td>
+				        <td class="col2">
+				            <input type="text"/>（10-60秒，默认为30）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Wait Join：</td>
+				        <td class="col2">
+				            <input type="text"/>（30-120秒，默认为60）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Max Discoveries：</td>
+				        <td class="col2">
+				            <input type="text"/>（5-20，默认为10）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">Max Retransmit：</td>
+				        <td class="col2">
+				            <input type="text"/>（2-10，默认为5）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">默认云端服务器：</td>
+				        <td class="col2">
+				            <input type="text"/>（可选，1-64个字符，默认为redirector.commsky.com.cn）
+				        </td>
+				    </tr>
+				    </tbody>
 				</table>
+				<div class="content_option">
+				    <input type="button" class="button" value="取消"/>
+				    <input type="button" class="button" value="确定"/>
+				</div>
 			</div>
-			<div id="time_settings">
+			<div id="time_settings" style="display:none">
 				<div class="table_title">
-					<span>ARP列表</span>
+					<span>当前系统时间</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>IP地址</option>
-						<option>MAC地址</option>
-						<option>接口</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				
+				<table class="tbl_cont">
+				    <tbody>
+				    <tr>
+				        <td class="col1">当前系统时间：</td>
+				        <td class="col2"></td>
+				    </tr>
+				    
+				    </tbody>
+				</table>
+
+				<div class="table_title">
+					<span>设置系统时间</span>
 				</div>
-				<table class="tbl">
-					<thead>
-					<tr>
-						<th>IP地址</th>
-						<th>MAC地址</th>
-						<th>接口</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="8">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
+				
+				<table class="tbl_cont">
+				    <tbody>
+				    <tr>
+				        <td class="col1">时间更新方式：</td>
+				        <td class="col2">
+				            <select>
+				            	<option>自动同步</option>
+				            	<option>手动更新</option>
+				            </select>
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">NTP同步间隔：</td>
+				        <td class="col2">
+				            <input type="text"/>（60-86400秒，默认86400）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">NTP服务器1：</td>
+				        <td class="col2">
+				            <input type="text"/>（1-32个字符）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">NTP服务器2：</td>
+				        <td class="col2">
+				            <input type="text"/>（可选，1-32个字符）
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">NTP服务器3：</td>
+				        <td class="col2">
+				            <input type="text"/>（可选，1-32个字符）
+				        </td>
+				    </tr>
+				    </tbody>
 				</table>
 			</div>
 			<div id="syslog">
-				<div class="table_title">
-					<span>ARP列表</span>
+				<div class="underline">
+				    <ul>
+				        <li class="tab">日志信息</li>
+				        <li class="tab">日志设置</li>
+				        <li class="tab">日志导出</li>
+				    </ul>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>IP地址</option>
-						<option>MAC地址</option>
-						<option>接口</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div id="syslog_info">
+					<div>
+					    <input type="button" class="button" value="刷新">
+					    <span>查询项</span>
+					    <select>
+					        <option>时间/日期</option>
+					        <option>主机名</option>
+					        <option>级别</option>
+					        <option>模块</option>
+					        <option>描述</option>
+					    </select>
+					    <span>关键词</span>
+					    <input type="text" name="">
+					    <input type="button" value="查询">
+					</div>
+					<table class="tbl">
+					    <thead>
+					    <tr>
+					        <th>时间/日期</th>
+					        <th>主机名</th>
+					        <th>级别</th>
+					        <th>模块</th>
+					        <th>描述</th>
+					    </tr>
+					    </thead>
+					    <tbody>
+					    <tr>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					    </tr>
+					    <tr>
+					        <td colspan="8">
+					            <table class="tbl_page">
+					                <tbody>
+					                <tr>
+					                    <td>共 2 条记录</td>
+					                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+					                </tr>
+					                </tbody>
+					            </table>
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
 				</div>
-				<table class="tbl">
-					<thead>
-					<tr>
-						<th>IP地址</th>
-						<th>MAC地址</th>
-						<th>接口</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="8">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
-				</table>
+				<div id="syslog_setting"></div>
+				<div id="syslog_output"></div>
+
 			</div>
 			<div id="config_settings">
 				<div class="table_title">

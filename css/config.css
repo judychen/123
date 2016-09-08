@@ -27,29 +27,31 @@
 
 #wizard_step{
 	height: 30px;
-	padding-top: 20px;
-	padding-left: 80px;
-
+	text-align: center;
+	padding: 15px 0px 15px 100px;
 }
 
 .wizard_step_head{
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	background-color: #465f88;
 	color: #fff;
 	font-size: 14px;
-	text-align: center;
+	line-height: 25px;
+	float: left;
 }
 
 .wizard_step_cont{
 	display: inline-block;
 	width: 70px;
-	height: 20px;
+	height: 25px;
 	background-color: #d2d6e7;
 	color: #465f88;
 	font-size: 14px;
-	text-align: center;
+	line-height: 25px;
+	float: left;
+
 }
 
 .tbl_cont{

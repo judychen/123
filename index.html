@@ -90,7 +90,7 @@
 		</div>
 
 		<div id="rightpanel" >
-			<div id="wizard" style="display:none;">
+			<div id="wizard">
 				<div class="table_title">
 					<span>配置过程</span>
 				</div>
@@ -2513,7 +2513,7 @@
 				    </tbody>
 				</table>
 			</div>
-			<div id="syslog">
+			<div id="syslog" style="display:none">
 				<div class="underline">
 				    <ul>
 				        <li class="tab">日志信息</li>
@@ -2523,6 +2523,7 @@
 				</div>
 				<div id="syslog_info">
 					<div>
+						<input type="button" class="button" value="清空">
 					    <input type="button" class="button" value="刷新">
 					    <span>查询项</span>
 					    <select>
@@ -2551,9 +2552,11 @@
 					        <td></td>
 					        <td></td>
 					        <td></td>
+					        <td></td>
+					        <td></td>
 					    </tr>
 					    <tr>
-					        <td colspan="8">
+					        <td colspan="5">
 					            <table class="tbl_page">
 					                <tbody>
 					                <tr>
@@ -2567,98 +2570,226 @@
 					    </tbody>
 					</table>
 				</div>
-				<div id="syslog_setting"></div>
-				<div id="syslog_output"></div>
+				<div id="syslog_setting">
+					<div class="table_title">
+						<span>日志功能</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+					    <tr>
+					        <td class="col1">使能:</td>
+					        <td class="col2">
+					            <select>
+					            	<option>启用</option>
+					            	<option>禁用</option>
+					            </select>
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+					<div class="table_title">
+						<span>日志服务器</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+					    <tr>
+					        <td class="col1">使能:</td>
+					        <td class="col2">
+					            <select>
+					            	<option>启用</option>
+					            	<option>禁用</option>
+					            </select>
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+					<div class="table_title">
+						<span>日志缓存日志</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+					    <tr>
+					        <td class="col1">使能:</td>
+					        <td class="col2">
+					            <select>
+					            	<option>启用</option>
+					            	<option>禁用</option>
+					            </select>
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">日志等级:</td>
+					        <td class="col2">
+					            <select>
+					            	<option>0 Emergency</option>
+					            	<option>1 Alert</option>
+					            	<option>2 Critical</option>
+					            	<option>3 Error</option>
+					            	<option>4 Warning</option>
+					            	<option>5 Notice</option>
+					            	<option>6 Informational</option>
+					            	<option>7 Debug</option>
+					            </select>
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+				</div>
+				<div id="syslog_output">				
+					<table class="tbl_cont">
+					    <tbody>					   
+					    <tr>
+					        <td class="col1">请选择方式：</td>
+					        <td class="col2">
+					            <input type="radio" name="upgrade_type" id="upgrade_local" />
+					            <label for="upgrade_local">Local</label>
+					            <input type="radio" name="upgrade_type" id="upgrade_ftp" />
+					            <label for="upgrade_ftp">FTP</label>
+					            <input type="radio" name="upgrade_type" id="upgrade_tftp" />
+					            <label for="upgrade_tftp">TFTP</label>
+					        </td>
+					    </tr>
+					   
+					    <tr>
+					        <td class="col1">FTP服务器：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">文件名：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-32个字符）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">用户：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（可选）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">密码：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（可选）
+					        </td>
+					    </tr>
+					    <tr>
+					        <td class="col1">TFTP服务器：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-64个字符）
+					        </td>
+					    </tr>
+					     <tr>
+					        <td class="col1">文件名：</td>
+					        <td class="col2">
+					        	<input type="text" name="">（1-32个字符）
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+				</div>
 
 			</div>
-			<div id="config_settings">
+			<div id="config_settings" style="display:none">
 				<div class="table_title">
-					<span>ARP列表</span>
+					<span>恢复出厂配置</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>IP地址</option>
-						<option>MAC地址</option>
-						<option>接口</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
-				</div>
-				<table class="tbl">
-					<thead>
-					<tr>
-						<th>IP地址</th>
-						<th>MAC地址</th>
-						<th>接口</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="8">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
+				<table class="tbl_cont">
+				    <tbody>
+				    <tr>
+				        <td class="col1">恢复出厂配置:</td>
+				        <td class="col2">
+				            <input type="file" value="恢复" />
+				        </td>
+				    </tr>				    
+				    </tbody>
 				</table>
-			</div>
-			<div id="accounts_settings">
+
 				<div class="table_title">
-					<span>ARP列表</span>
+					<span>配置文件导入/导出</span>
 				</div>
+				<table class="tbl_cont">
+				    <tbody>
+				    <tr>
+				        <td class="col1">请选择方式：</td>
+				        <td class="col2">
+				            <input type="radio" name="config_output" id="config_local" />
+				            <label for="config_local">Local</label>
+				           	<input type="radio" name="config_output" id="config_local" />
+				            <label for="config_local">Local</label>
+				            <input type="radio" name="config_output" id="config_local" />
+				            <label for="config_local">Local</label>
+				        </td>
+				    </tr>
+				    <tr>
+				        <td class="col1">请选择已有的配置文件：</td>
+				        <td class="col2">
+				            <input type="file" value="选择文件" />		            
+				        </td>
+				    </tr>				    
+				    </tbody>
+				</table>
+
+			</div>
+			<div id="accounts_settings" style="display:none">
+				<div class="underline">
+				    <ul>
+				        <li class="tab">用户管理</li>
+				    </ul>
+				</div>				
 				<div>
-					<input type="button" class="button" value="刷新">
+					<input type="button" class="button" value="新增用户">
 					<span>查询项</span>
 					<select>
-						<option>IP地址</option>
-						<option>MAC地址</option>
-						<option>接口</option>
+						<option>用户名</option>
+						<option>级别</option>
+						
 					</select>
 					<span>关键词</span>
 					<input type="text" name="">
 					<input type="button" value="查询">
 				</div>
 				<table class="tbl">
-					<thead>
-					<tr>
-						<th>IP地址</th>
-						<th>MAC地址</th>
-						<th>接口</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="8">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
+				    <thead>
+				    <tr>
+				        <th>用户名</th>
+				        <th>级别</th>   
+				    </tr>
+				    </thead>
+				    <tbody>
+				    <tr>
+				        <td></td>
+				        <td></td> 
+				    </tr>
+				    <tr>
+				        <td colspan="2">
+				            <table class="tbl_page">
+				                <tbody>
+				                <tr>
+				                    <td>共 2 条记录</td>
+				                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+				                </tr>
+				                </tbody>
+				            </table>
+				        </td>
+				    </tr>
+				    </tbody>
+				</table>
+
+
+				<div class="table_title">
+					<span>页面登录后超时时间</span>
+				</div>
+				<table class="tbl_cont">
+				    <tbody>
+				    <tr>
+				        <td class="col1">超时时间：</td>
+				        <td class="col2">
+				            <input type="text" value="5" />（0-1440分钟，默认为5）
+				        </td>
+				    </tr>
+				    </tbody>
 				</table>
 			</div>
 		</div>

@@ -29,6 +29,7 @@ function link_mode_changed( type ) {
 		top.arr_wizard_items = arr_nat_wizard_items;
 	} else {
 		top.arr_wizard_items = arr_bridge_wizard_items;
+
 	}
 }
 

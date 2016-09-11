@@ -27,8 +27,14 @@ var entityMapReg = {
 };
 
 function setNavigationBar(content) {
-    var tmp = "位置：
+    var tmp = "位置："+ content;
+    $("#navigationBar").html(tmp);
+    if(content == "") $("#navigationBar").css("display","none");
+    else $("#navigationBar").css("display","block");
 }
+
+
+
 
 function tabMenu_init() {
     /*todo*/
@@ -58,16 +64,34 @@ function pageJump(url) {
     /*todo*/
 }
 
-function showWaitConfig() {
-    /*todo*/
+/*控制zcc和dialog显示和隐藏*/
+function showWaitConfig(bShow) {
+    if(bShow == true){
+        $("#zcc").css("display","blcok");
+        $("#dialog").css("display","blcok");
+    }else{
+        $("#zcc").css("display","none");
+        $("#dialog").css("display","none");
+    }
 }
 
 function showError(bShow, errMsg) {
-    /*todo*/
+   if(bShow == true){
+       $("#zcc").css("display","blcok");
+       $("#errDlg").css("display","blcok");
+       $("#errMsg").html(errMsg);
+       /*?*/
+   }else{
+       /*？*/
+       $("#zcc").css("display","none");
+       $("#errDlg").css("display","none");
+   }
+
 }
 
 function myAlert(info, id) {
-    /*todo*/
+    /*?*/
+    showError(true, info);
 }
 
 function showSelect(bShow, bSave, errMsg, funcselect) {
@@ -100,9 +124,20 @@ function myAlertSelect(info, funcselect) {
     /*todo*/
 }
 
+/*获得每个月的天数，按是否闰年枚举*/
 function getDays(year, month) {
-    /*todo*/
+    var leapYear = new Array(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    var nonLeap = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 );
+    if(isLeapYear(year)){
+        return leapYear[month - 1];
+    }else
+        return nonLeap[month - 1];
 }
+
+/*验证*/
+/*$(function(){
+    console.log(getDays(2015,10));
+ });*/
 
 function get_class_of_address(ip) {
     /*todo*/

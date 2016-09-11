@@ -86,8 +86,15 @@ function checkLetterAndNumberandUnderline(value){
     /*todo*/
 }
 
+/*
+①非整百年能被4整除的为闰年。（如2004年就是闰年,2100年不是闰年）
+②能被400整除的是闰年。(如2000年是闰年，1900年不是闰年)
+*/
 function isLeapYear(year){
-    /*todo*/
+    if((year % 400 == 0) || (year % 100 != 0 && year % 4 == 0)){
+        return true;
+    } else
+        return false;
 }
 
 function checkSSID(value){

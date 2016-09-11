@@ -31,6 +31,15 @@ body{
 	line-height: 26px;
 }
 
+#navigationBar{
+	float: left;
+	display: inline-block;
+	margin: 0 8px;
+	font-size: 12px;
+	line-height: 26px;
+	color: #fff;
+}
+
 footer{
 	height: 20px;
 	background-color: rgb(210, 214, 231);

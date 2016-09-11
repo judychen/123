@@ -12,7 +12,11 @@ function ok() {
     /*todo*/
 }
 
-function _link_mode_changed() {
+function isInputValid() {
+    /*todo*/
+}
+
+function lan_dhcpd_enable_changed() {
     /*todo*/
 }
 

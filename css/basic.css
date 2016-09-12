@@ -21,6 +21,10 @@ li{
 	margin: 0px;
 }
 
+a{
+	text-decoration: none;
+}
+
 a.white:link,
 a.white:visited,
 a.white:active{
@@ -43,3 +47,7 @@ a.white:hover{
 	padding: 5px 10px;
 }
 
+em{
+	font-style: normal;
+	font-weight: bolder;
+}

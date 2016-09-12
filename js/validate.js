@@ -31,7 +31,12 @@ function checkVlan(value){
 }
 
 function checkNumberRang(value, minValue, maxValue){
-    /*todo*/
+    var exp = /^[\-]?[1-9][0-9]*$/;/*è‡³å°‘ä¸€ä½æ•°çš„æ•´æ•°*/
+    var reg = value.match(exp); /*===splitåˆ†å‰²ä¸ºå­—ç¬¦ä¸²ï¼Œæ‰€ä»¥å¯ä»¥ç”¨matchã€‚matchå¿…é¡»ä¸ºå­—ç¬¦ä¸²====*/
+    if(reg == null && value != 0) return false;
+    var nValue = parseInt(value);
+    if( nValue < minValue || nValue > maxValue) return false;
+    return true;
 }
 
 function isHasChinese(value){
@@ -87,8 +92,8 @@ function checkLetterAndNumberandUnderline(value){
 }
 
 /*
-¢Ù·ÇÕû°ÙÄêÄÜ±»4Õû³ıµÄÎªÈòÄê¡££¨Èç2004Äê¾ÍÊÇÈòÄê,2100Äê²»ÊÇÈòÄê£©
-¢ÚÄÜ±»400Õû³ıµÄÊÇÈòÄê¡£(Èç2000ÄêÊÇÈòÄê£¬1900Äê²»ÊÇÈòÄê)
+ï¿½Ù·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü±ï¿½4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ê¡£ï¿½ï¿½ï¿½ï¿½2004ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,2100ï¿½ê²»ï¿½ï¿½ï¿½ï¿½ï¿½ê£©
+ï¿½ï¿½ï¿½Ü±ï¿½400ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¡£(ï¿½ï¿½2000ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£¬1900ï¿½ê²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 */
 function isLeapYear(year){
     if((year % 400 == 0) || (year % 100 != 0 && year % 4 == 0)){

@@ -136,11 +136,25 @@ function getDays(year, month) {
 
 /*验证*/
 /*$(function(){
-    console.log(getDays(2015,10));
+    console.log(get_class_of_address("243.0.0.0"));
  });*/
 
+//return: -1 means Unknown, 1 means A, 2 means B, 3 means C, 4 means D
 function get_class_of_address(ip) {
-    /*todo*/
+    var arrIP = ip.split(".");/*ip必须是字符串*/
+    if(!checkNumberRang(arrIP[0], 0, 255)) return -1;
+
+    var n = parseInt(arrIP[0]);
+    if(n >= 0 && n <= 127){
+        return 1;
+    }else if(n >= 128 && n <= 191 ){
+        return 2;
+    }else if(n >= 192 && n <= 223){
+        return 3;
+    }else {
+        return 4;
+    }
+
 }
 
 function netmask_dotteQuad2num(netmask) {

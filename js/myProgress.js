@@ -6,7 +6,11 @@ function isHasParent() {
 }
 
 function SetProgress(progress) {
-    /*todo*/
+    var jqDomProgress;
+    /*???*/
+    jqDomProgress = $("#" + progress_id + ">div");
+    jqDomProgress.css("width", String(progress) + "%");   /*为什么要转换为字符串*/
+    jqDomProgress.html(String(progress) + "%");
 }
 
 var i_count = 0;

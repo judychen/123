@@ -78,18 +78,18 @@ function showWaitConfig(bShow) {
 function showError(bShow, errMsg) {
    if(bShow == true){
        $("#zcc").css("display","blcok");
-       $("#errDlg").css("display","blcok");
+       $("#errDlg").show();
        $("#errMsg").html(errMsg);
        /*?*/
    }else{
        /*？*/
        $("#zcc").css("display","none");
-       $("#errDlg").css("display","none");
+       $("#errDlg").hide();
    }
 
 }
 
-function myAlert(info, id) {
+function myAlert(info/*, id*/) {
     /*?*/
     showError(true, info);
 }
@@ -212,10 +212,10 @@ function escapeReg(str) {
     });/*第二个参数是回调函数*/
 }
 
-/*应该是说明文档，可以忽略*/
-function popHelp(section) {
-    /*todo*/
-}
+/*帮助文档，忽略*/
+/*function popHelp(section) {
+    /!*todo*!/
+}*/
 
 /*去除前后的空白*/
 function strip_blank_boundary(value) {
@@ -239,11 +239,6 @@ function timeToString(n) {
     if(n < 10) return "0" + n;
     else return n;
 }
-
-/*验证*/
-$(function(){
- console.log(secToDHM(7210));
- });
 
 /*从秒数返回字符串时间，如7210-》星期日 02 00*/
 function secToString(sec) {

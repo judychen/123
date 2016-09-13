@@ -1,33 +1,108 @@
 function checkIP(value, advanced){
-    /*todo*/
+    /*0-255*/
+    var exp = /^([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])$/;
+    var reg = value.match(exp);
+    if(reg == null){
+        return false;
+    }
+
+    if(value == "0.0.0.0"){
+        /*????*/
+    }else if(value = "255.255.255.255"){
+        /*?????*/
+    }
+
+    return true;
 }
 
 function checkMask(mask){
-    /*todo*/
+    var obj = mask;
+    var exp=/^(254|252|248|240|224|192|128|0)\.0\.0\.0|255\.(254|252|248|240|224|192|128|0)\.0\.0|255\.255\.(254|252|248|240|224|192|128|0)\.0|255\.255\.255\.(254|252|248|240|224|192|128|0)|255.255.255.255$/;
+    var reg = obj.match(exp);
+    if(reg == null){
+        return false;
+    }else{
+        return true;
+    }
 }
 
 function isMacValid(mac){
-    /*todo*/
+    var exp = /^[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}$/;
+    if(!exp.test(mac)){
+        myAlert("MAC地址格式不正确！");
+        return false;
+    }
+    return true;
 }
 
 function isDomainNameValid(value){
-    /*todo*/
+    var exp = /^(a-zA-z0-9\.\-)+$/;
+    var reg = value.match(exp);
+    if(reg == null){
+        return false;
+    }
+
+    return true;
 }
 
+/*2-4094*/
 function checkVlanID(value){
-    /*todo*/
+    var exp = /^\d+[\-]{1}\d+$/;
+    var exp2 = /^\d+$/;
+    var reg = value.match(exp);
+
+    if(reg == null){
+        if(value.match(exp2) == null){
+            return false;
+        }else{
+            if( value > 1 && value < 4095 ) return true;
+            else return false;
+        }
+    }else{
+        var arr = value.split("-");
+        if(arr.length == 2){
+            var nStart = parseInt(arr[0]);
+            var nEnd= parseInt(arr[1]);
+            if(nStart < nEnd && nStart >1 && nEnd < 4095){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
 }
 
+/*不包含" ' ? ; 和空格*/
 function check_wep_key_ascii(value){
-    /*todo*/
+    var exp = /^[^"'?;\s]+$/;
+    var reg = value.match(exp);
+    if (reg == null) {
+        return false;
+    }
+    return true;
 }
 
+/*不包含" ' ? ; 和空格*/
 function check_psk_ascii(value){
-    /*todo*/
+    var exp = /^[^"'?;\s]+$/;
+    var reg = value.match(exp);
+    if (reg == null) {
+        return false;
+    }
+    return true;
 }
 
+/*1到4094之间的数字*/
 function checkVlan(value){
-    /*todo*/
+    if (isNaN(value))
+        return false;
+    var nVlan = parseInt(value);
+    if ( 0 >= nVlan || 4094 < nVlan)
+        return false;
+
+    return true;
 }
 
 function checkNumberRang(value, minValue, maxValue){
@@ -39,8 +114,22 @@ function checkNumberRang(value, minValue, maxValue){
     return true;
 }
 
+/*验证*/
+/*
+$(function(){
+    console.log(checkVlan("22"));
+});
+*/
+
+
 function isHasChinese(value){
-    /*todo*/
+    var exp = /[^\x00-\xff]/;
+    var reg = value.match( exp );
+    if ( reg == null ) {
+        return false;
+    }
+
+    return true;
 }
 
 function getStrLeng(str){
@@ -92,8 +181,9 @@ function checkLetterAndNumberandUnderline(value){
 }
 
 /*
-�ٷ��������ܱ�4������Ϊ���ꡣ����2004���������,2100�겻�����꣩
-���ܱ�400�����������ꡣ(��2000�������꣬1900�겻������)
+闰年
+1.非百年但能被4整除；
+2.能被400整除
 */
 function isLeapYear(year){
     if((year % 400 == 0) || (year % 100 != 0 && year % 4 == 0)){

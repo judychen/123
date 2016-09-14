@@ -18,8 +18,10 @@ function jump() {
     /*todo*/
 }
 
-$("document").ready(function () {
-    /*todo*/
+$(function () {
+    $("#main_menu>li").click(function () {
+        $(this).addClass("main_current");
+    })
 });
 
 function resize() {

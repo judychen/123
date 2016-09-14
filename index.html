@@ -16,6 +16,7 @@
 	<script src="js/myGrid.js"></script>
 	<script src="js/myProgress.js"></script>
 	<script src="js/validate.js"></script>
+	<script src="js/index.js"></script>
 </head>
 
 <body>
@@ -54,9 +55,9 @@
 			<div id="menu">
 				<ul id="main_menu">
 					<li><a><span>配置向导</span></a></li>
-					<li>
+					<li  class="main_current">
 						<a><span>系统状态</span></a>
-						<ul id="sub_menu" style="display: block">
+						<ul class="sub_menu">
 							<li class="current">设备概览</li>
 							<li>无线接入服务</li>
 							<li>射频信息</li>
@@ -66,7 +67,7 @@
 					</li>
 					<li>
 						<a><span>网络设置</span></a>
-						<ul id="sub_menu" style="display: block">
+						<ul class="sub_menu">
 							<li>接口管理</li>
 							<li>VLAN管理</li>
 							<li>DHCP服务</li>
@@ -81,7 +82,7 @@
 					</li>
 					<li>
 						<a><span>无线设置</span></a>
-						<ul id="sub_menu" style="display: block">
+						<ul class="sub_menu">
 							<li>无线接入服务</li>
 							<li>射频参数</li>
 							<li>射频速率</li>
@@ -97,7 +98,7 @@
 					</li>
 					<li>
 						<a><span>设备管理</span></a>
-						<ul  id="sub_menu" style="display: block">
+						<ul  class="sub_menu">
 							<li>设备维护</li>
 							<li>CAPWAP</li>
 							<li>时间设置</li>

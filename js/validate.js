@@ -114,50 +114,81 @@ function checkNumberRang(value, minValue, maxValue){
     return true;
 }
 
-/*验证*/
-/*
-$(function(){
-    console.log(checkVlan("22"));
-});
-*/
-
-
 function isHasChinese(value){
     var exp = /[^\x00-\xff]/;
     var reg = value.match( exp );
     if ( reg == null ) {
         return false;
     }
-
     return true;
 }
 
 function getStrLeng(str){
-    /*todo*/
+    var realLength = 0;
+    var len = str.length;
+    var charCode = -1;
+    for(var i = 0; i < len; i++){
+        charCode = str.charCodeAt(i);
+        if(charCode >= 0 && charCode <= 128){ /*0-127为一位的符号或英文*/
+            realLength += 1;
+        }else {
+            realLength +=3;
+        }
+    }
+    return realLength;
 }
 
 function checkStringLen(value, minLen, maxLen){
-    /*todo*/
+    var len = getStrLeng(value);
+    if(len < minLen && len > maxLen){
+        return false;
+    }
+    return true;
 }
 
 function isHexString(value){
-    /*todo*/
+    var exp = /^[0-9a-fA-F]+$/;
+    var reg = value.match(exp);
+    if(reg == null){
+        return false;
+    }
+    return true;
 }
 
 function isImageNameValid(value){
-    /*todo*/
+    var exp = /^[0-9a-zA-Z_\.\-\s]+$/;
+    var reg = value.match(exp);
+    if ( reg == null ) {
+        return false;
+    }
+    return true;
 }
 
 function isConfigNameValid(value){
-    /*todo*/
+    var exp = /^[0-9a-zA-Z_\.]+$/;
+    var reg = value.match(exp);
+    if ( reg == null ) {
+        return false;
+    }
+    return true;
 }
 
+//不包含" ' ; ?
 function checkPassword(value){
-    /*todo*/
+    var exp = /^[^"';?\s]+$/;
+    var reg = value.match(exp);
+    if (reg == null)
+        return false;
+    return true;
 }
 
+//只能包含数字、字母、下划线
 function checkUserName(value){
-    /*todo*/
+    var exp=/^[0-9a-zA-Z_]+$/;
+    var reg = value.match(exp);
+    if (reg == null)
+        return false;
+    return true;
 }
 
 function checkInputText(){
@@ -165,19 +196,36 @@ function checkInputText(){
 }
 
 function checkblank(value){
-    /*todo*/
+    var exp=/^[^";\\?\s]+$/;
+    var reg = value.match(exp);
+    if (reg == null)
+        return false;
+    return true;
 }
 
 function is_has_blank_or_question(value){
-    /*todo*/
+    var exp = /^[^?\s]*$/;
+    var reg = value.match(exp);
+    if (reg == null)
+        return true;
+
+    return false;
 }
 
 function checkLetterAndNumber(value){
-    /*todo*/
+    var exp = /^[0-9a-zA-Z]+$/;
+    var reg = value.match(exp);
+    if ( reg == null )
+        return false;
+    return true;
 }
 
 function checkLetterAndNumberandUnderline(value){
-    /*todo*/
+    var exp = /^[0-9a-zA-Z_]+$/;
+    var reg = value.match(exp);
+    if ( reg == null )
+        return false;
+    return true;
 }
 
 /*
@@ -197,7 +245,11 @@ function checkSSID(value){
 }
 
 function check_vlan_name_desc(value){
-    /*todo*/
+    var exp=/^[^"'?;<>\\/]+$/;
+    var reg = value.match(exp);
+    if ( reg == null )
+        return false;
+    return true;
 }
 
 function is_ip_multicast_address(value){

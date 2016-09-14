@@ -28,13 +28,13 @@
     top: 25%;
 }
 
-#sub_menu{
+.sub_menu{
 	padding: 0px;
 	margin-left: -10px;
     display: none;
 }
 
-#sub_menu li{
+.sub_menu li{
 	width: 155px;
 	border: 1px solid #fff;
 	color: #573452;
@@ -43,8 +43,8 @@
 	background: #fff;
 }
 
-#sub_menu li.current,
-#sub_menu li:hover
+.sub_menu li.current,
+.sub_menu li:hover
 {
     color: #465F88;
     background: #EAEDF8;

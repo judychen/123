@@ -54,57 +54,57 @@
 
 			<div id="menu">
 				<ul id="main_menu">
-					<li><a><span>配置向导</span></a></li>
-					<li  class="main_current">
+					<li id="m_wizard"><a><span>配置向导</span></a></li>
+					<li id="m_system_status" class="main_current">
 						<a><span>系统状态</span></a>
-						<ul class="sub_menu">
-							<li class="current">设备概览</li>
-							<li>无线接入服务</li>
-							<li>射频信息</li>
-							<li>客户端</li>
-							<li>WDS状态</li>
+						<ul class="sub_menu" style="display: block">
+							<li id="m_equipment_overview" class="current">设备概览</li>
+							<li id="m_wireless_status">无线接入服务</li>
+							<li id="m_radio_status">射频信息</li>
+							<li id="m_clientlist">客户端</li>
+							<li id="m_view_wds_status">WDS状态</li>
 						</ul>
 					</li>
-					<li>
+					<li id="m_networ_settings">
 						<a><span>网络设置</span></a>
 						<ul class="sub_menu">
-							<li>接口管理</li>
-							<li>VLAN管理</li>
-							<li>DHCP服务</li>
-							<li>ARP管理</li>
-							<li>IPv4路由</li>
-							<li>DNS管理</li>
-							<li>DNS代理</li>
-							<li>服务管理</li>
-							<li>IGMPsnooping</li>
-							<li>高级设置</li>
+							<li id="m_interface_settings">接口管理</li>
+							<li id="m_vlan_settings">VLAN管理</li>
+							<li id="m_dhcpd">DHCP服务</li>
+							<li id="m_arp">ARP管理</li>
+							<li id="m_routeV4_settings">IPv4路由</li>
+							<li id="m_global_dns_settings">DNS管理</li>
+							<li id="m_dnsmasq_settings">DNS代理</li>
+							<li id="m_servers_manage">服务管理</li>
+							<li id="m_igmp_snooping">IGMPsnooping</li>
+							<li id="m_network_advanced_settings">高级设置</li>
 						</ul>
 					</li>
-					<li>
+					<li id="m_wireless_settings">
 						<a><span>无线设置</span></a>
 						<ul class="sub_menu">
-							<li>无线接入服务</li>
-							<li>射频参数</li>
-							<li>射频速率</li>
-							<li>Portal管理</li>
-							<li>域名集管理</li>
-							<li>AAA认证</li>
-							<li>ACL管理</li>
-							<li>WDS配置</li>
-							<li>时间策略</li>
-							<li>无线探针</li>
-							<li>高级设置</li>
+							<li id="m_wireless_servers">无线接入服务</li>
+							<li id="m_radio_setting">射频参数</li>
+							<li id="m_radio_speed_settings">射频速率</li>
+							<li id="m_portal_settings">Portal管理</li>
+							<li id="m_domainSet_settings">域名集管理</li>
+							<li id="m_AAA_settings">AAA认证</li>
+							<li id="m_acl_settings">ACL管理</li>
+							<li id="m_wds">WDS配置</li>
+							<li id="m_time_acl_settings">时间策略</li>
+							<li id="m_wireless_probe">无线探针</li>
+							<li id="m_wireless_advanced_settings">高级设置</li>
 						</ul>
 					</li>
-					<li>
+					<li id="m_equipment_management">
 						<a><span>设备管理</span></a>
 						<ul  class="sub_menu">
-							<li>设备维护</li>
-							<li>CAPWAP</li>
-							<li>时间设置</li>
-							<li>日志管理</li>
-							<li>配置管理</li>
-							<li>用户管理</li>
+							<li id="m_equipment_maintenance">设备维护</li>
+							<li id="m_capwap">CAPWAP</li>
+							<li id="m_time_settings">时间设置</li>
+							<li id="m_syslog">日志管理</li>
+							<li id="m_syslog_setting">配置管理</li>
+							<li id="m_accounts_settings">用户管理</li>
 						</ul>
 					</li>
 				</ul>
@@ -112,7 +112,7 @@
 		</div>
 
 		<div id="rightpanel" >
-			<div id="wizard">
+			<div id="wizard" style="display: none;">
 				<div class="table_title">
 					<span>配置过程</span>
 				</div>
@@ -459,7 +459,7 @@
 			</div>
 
 			<!--系统状态-->
-			<div id="equipment_overview" style="display: none">
+			<div id="equipment_overview">
 				<div class="table_title">
 					<span>设备信息</span>
 				</div>

@@ -62,7 +62,6 @@ function showCont(){
     $("#m_wizard").click(function(){
         $("#wizard").show();
         $("#wizard").siblings().hide();
-        console.log("12");
     });
     $("#m_system_status").click(function(){
         $("#equipment_overview").show();

@@ -17,6 +17,15 @@
 	<script src="js/myProgress.js"></script>
 	<script src="js/validate.js"></script>
 	<script src="js/index.js"></script>
+	<!--wizard-->
+	<script src="js/wizad/commom.js"></script>
+	<script src="js/wizad/wizard_link_mode.js"></script>
+	<script src="js/wizad/ip_settings.js"></script>
+	<script src="js/wizad/admin_pwd.js"></script>
+	<script src="js/wizad/wirelss_settings.js"></script>
+	<script src="js/wizad/summary.js"></script>
+	<script src="js/wizad/wan_settings.js"></script>
+	<script src="js/wizad/lan_settings.js"></script>
 </head>
 
 <body>
@@ -117,241 +126,231 @@
 					<span>配置过程</span>
 				</div>
 				<div>
-					<ul id="wizard_step">
-						<li class="wizard_step_head">1</li>
-						<li class="wizard_step_cont">工作模式</li>
-						<li class="wizard_step_head">2</li>
-						<li class="wizard_step_cont">IP地址</li>
-						<li class="wizard_step_head">3</li>
-						<li class="wizard_step_cont">用户密码</li>
-						<li class="wizard_step_head">4</li>
-						<li class="wizard_step_cont">无线设置</li>
-						<li class="wizard_step_head">5</li>
-						<li class="wizard_step_cont">配置总览</li>
-					</ul>
+					<ul id="wizard_step"></ul>
 				</div>
-				<div id="wizard_link_mode">
-					<div class="table_title">
-						<span>工作模式设置</span>
+				<div id="wizard_content">
+					<div id="wizard_link_mode">
+						<div class="table_title">
+							<span>工作模式设置</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
+							<tr>
+								<td class="col1">工作模式选择：</td>
+								<td class="col2">
+									<input type="radio" name="radio_link_mode" value="bridge" checked="checked"/>
+									<span>桥接</span>
+									<input type="radio" name="radio_link_mode" value="nat"/>
+									<span>NAT</span>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">工作模式选择：</td>
-							<td class="col2">
-								<input type="radio" name="radio_link_mode" value="bridge" checked="checked"/>
-								<span>桥接</span>
-								<input type="radio" name="radio_link_mode" value="nat"/>
-								<span>NAT</span>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="wizard_ip_settings">
-					<div  class="table_title">
-						<span>IP地址设置</span>
+					<div id="wizard_ip_settings">
+						<div  class="table_title">
+							<span>IP地址设置</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
+							<tr>
+								<td class="col1">IP获取方式：</td>
+								<td class="col2">
+									<select>
+										<option>DHCP</option>
+										<option>Static</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">IP地址：</td>
+								<td class="col2">
+									<input type="text" name="">
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">子网掩码</td>
+								<td class="col2">
+									<input type="text" name="">
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">网关(默认路由)：</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>(可选)</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">DNS设置</td>
+								<td class="col2">
+									<select>
+										<option>自动</option>
+										<option>手动</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">DNS服务器</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>（可选）</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">备份DNS服务器</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>（可选）</span>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">IP获取方式：</td>
-							<td class="col2">
-								<select>
-									<option>DHCP</option>
-									<option>Static</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">IP地址：</td>
-							<td class="col2">
-								<input type="text" name="">
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">子网掩码</td>
-							<td class="col2">
-								<input type="text" name="">
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">网关(默认路由)：</td>
-							<td class="col2">
-								<input type="text" name="">
-								<span>(可选)</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DNS设置</td>
-							<td class="col2">
-								<select>
-									<option>自动</option>
-									<option>手动</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DNS服务器</td>
-							<td class="col2">
-								<input type="text" name="">
-								<span>（可选）</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">备份DNS服务器</td>
-							<td class="col2">
-								<input type="text" name="">
-								<span>（可选）</span>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="wizard_wan_settings">
-					<div  class="table_title">
-						<span>上网方式设置</span>
+					<div id="wizard_wan_settings">
+						<div  class="table_title">
+							<span>上网方式设置</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
+							<tr>
+								<td class="col1">上网方式：</td>
+								<td class="col2">
+									<select>
+										<option>DHCP</option>
+										<option>Static</option>
+										<option>PPPoE</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">IP地址：</td>
+								<td class="col2">
+									<input type="text" name="">
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">子网掩码</td>
+								<td class="col2">
+									<input type="text" name="">
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">网关(默认路由)：</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>(可选)</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">上网账号：</td>
+								<td class="col2">
+									<input type="text" name="">
+									(1-64个字符，不支持" ' ~ \ #空格和?输入)
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">上网口令：</td>
+								<td class="col2">
+									<input type="text" name="">
+									(1-64个字符，不支持" ' ~ \ #空格和?输入)
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">MTU：</td>
+								<td class="col2">
+									<input type="text" name="" value="1492">
+									(可选，默认值1492，范围128~1492)
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">服务名：</td>
+								<td class="col2">
+									<input type="text" name="">
+									(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">服务器名：</td>
+								<td class="col2">
+									<input type="text" name="">
+									(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">DNS设置</td>
+								<td class="col2">
+									<select>
+										<option>自动</option>
+										<option>手动</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">DNS服务器</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>（可选）</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">备份DNS服务器</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>（可选）</span>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">上网方式：</td>
-							<td class="col2">
-								<select>
-									<option>DHCP</option>
-									<option>Static</option>
-									<option>PPPoE</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">IP地址：</td>
-							<td class="col2">
-								<input type="text" name="">
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">子网掩码</td>
-							<td class="col2">
-								<input type="text" name="">
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">网关(默认路由)：</td>
-							<td class="col2">
-								<input type="text" name="">
-								<span>(可选)</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">上网账号：</td>
-							<td class="col2">
-								<input type="text" name="">
-								(1-64个字符，不支持" ' ~ \ #空格和?输入)
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">上网口令：</td>
-							<td class="col2">
-								<input type="text" name="">
-								(1-64个字符，不支持" ' ~ \ #空格和?输入)
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">MTU：</td>
-							<td class="col2">
-								<input type="text" name="" value="1492">
-								(可选，默认值1492，范围128~1492)
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">服务名：</td>
-							<td class="col2">
-								<input type="text" name="">
-								(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">服务器名：</td>
-							<td class="col2">
-								<input type="text" name="">
-								(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DNS设置</td>
-							<td class="col2">
-								<select>
-									<option>自动</option>
-									<option>手动</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DNS服务器</td>
-							<td class="col2">
-								<input type="text" name="">
-								<span>（可选）</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">备份DNS服务器</td>
-							<td class="col2">
-								<input type="text" name="">
-								<span>（可选）</span>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="wizard_lan_settings">
-					<div  class="table_title">
-						<span>LAN设置（Vlan-interfan 1）</span>
-					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">IP地址：</td>
-							<td class="col2">
-								<input type="text" name="" value="192.168.1.1">
+					<div id="wizard_lan_settings">
+						<div  class="table_title">
+							<span>LAN设置（Vlan-interfan 1）</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
+							<tr>
+								<td class="col1">IP地址：</td>
+								<td class="col2">
+									<input type="text" name="" value="192.168.1.1">
 
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">子网掩码：</td>
-							<td class="col2">
-								<input type="text" name="" value="255.255.255.0">
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">子网掩码：</td>
+								<td class="col2">
+									<input type="text" name="" value="255.255.255.0">
 
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DHCP服务器：</td>
-							<td class="col2">
-								<select>
-									<option>启用</option>
-									<option>禁用</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">地址池：</td>
-							<td class="col2">
-								<input type="text" name="" value="192.168.1.100">
-								-
-								<input type="text" name="" value="192.168.1.199">
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">DHCP服务器：</td>
+								<td class="col2">
+									<select>
+										<option>启用</option>
+										<option>禁用</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">地址池：</td>
+								<td class="col2">
+									<input type="text" name="" value="192.168.1.100">
+									-
+									<input type="text" name="" value="192.168.1.199">
 
-							</td>
-						</tr>
-						</tbody>
-					</table>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 
-				</div>
-				<div id="wizard_admin_pwd">
-					<div class="table_title">
-						<span>用户密码</span>
 					</div>
-					<table class="tbl_cont">
-						<tbody>
+					<div id="wizard_admin_pwd">
+						<div class="table_title">
+							<span>用户密码</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
 							<tr>
 								<td class="col1">用户名：</td>
 								<td class="col2">admin</td>
@@ -368,94 +367,90 @@
 									<input type="text" name="">
 								</td>
 							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="wizard_wireless_settings">
-					<div class="table_title">
-						<span>无线名称(SSID)</span>
+							</tbody>
+						</table>
 					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">2.4G SSID：</td>
-							<td class="col2">
-								<input type="text" name="" value="CommSky_2.4G">
-								（1-32个字符，不包含 ? " ; \）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">5G SSID：</td>
-							<td class="col2">
-								<input type="text" name="" value="CommSky_5G">
-								（1-32个字符，不包含 ? " ; \）
-							</td>
-						</tr>
-						</tbody>
-					</table>
-					<div class="table_title">
-						<span>无线安全</span>
+					<div id="wizard_wireless_settings">
+						<div class="table_title">
+							<span>无线名称(SSID)</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
+							<tr>
+								<td class="col1">2.4G SSID：</td>
+								<td class="col2">
+									<input type="text" name="" value="CommSky_2.4G">
+									（1-32个字符，不包含 ? " ; \）
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">5G SSID：</td>
+								<td class="col2">
+									<input type="text" name="" value="CommSky_5G">
+									（1-32个字符，不包含 ? " ; \）
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						<div class="table_title">
+							<span>无线安全</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
+							<tr>
+								<td class="col1">认证方式：</td>
+								<td class="col2">
+									<select>
+										<option>None</option>
+										<option>WPA/WPA2</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="col1">共享密钥：</td>
+								<td class="col2">
+									<input type="text" name="">
+									（8-63个字符或64个十六进制字符）
+								</td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">认证方式：</td>
-							<td class="col2">
-								<select>
-									<option>None</option>
-									<option>WPA/WPA2</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">共享密钥：</td>
-							<td class="col2">
-								<input type="text" name="">
-								（8-63个字符或64个十六进制字符）
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="wizard_summary">
-					<div class="table_title">
-						<span>当前配置</span>
+					<div id="wizard_summary">
+						<div class="table_title">
+							<span>当前配置</span>
+						</div>
+						<table class="tbl_cont">
+							<tbody>
+							<tr>
+								<td class="col1">工作模式：</td>
+								<td class="col2"></td>
+							</tr>
+							<tr>
+								<td class="col1">IP地址：</td>
+								<td class="col2"></td>
+							</tr>
+							<tr>
+								<td class="col1">用户密码：</td>
+								<td class="col2"></td>
+							</tr>
+							<tr>
+								<td class="col1">2.4G SSID：</td>
+								<td class="col2"></td>
+							</tr>
+							<tr>
+								<td class="col1">5G SSID：</td>
+								<td class="col2"></td>
+							</tr>
+							<tr>
+								<td class="col1">认证方式：</td>
+								<td class="col2"></td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">工作模式：</td>
-							<td class="col2"></td>
-						</tr>
-						<tr>
-							<td class="col1">IP地址：</td>
-							<td class="col2"></td>
-						</tr>
-						<tr>
-							<td class="col1">用户密码：</td>
-							<td class="col2"></td>
-						</tr>
-						<tr>
-							<td class="col1">2.4G SSID：</td>
-							<td class="col2"></td>
-						</tr>
-						<tr>
-							<td class="col1">5G SSID：</td>
-							<td class="col2"></td>
-						</tr>
-						<tr>
-							<td class="col1">认证方式：</td>
-							<td class="col2"></td>
-						</tr>
-						</tbody>
-					</table>
 				</div>
-				<div id="wizard_step_button">
-					<input type="button" class="button" value="返回">
-					<input type="button" class="button" value="上一步">
-					<input type="button" class="button" value="下一步">
-					<input type="button" class="button" value="返回">
-				</div>
+				<div id="wizard_step_button"></div>
 			</div>
 
 			<!--系统状态-->

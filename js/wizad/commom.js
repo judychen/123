@@ -1,12 +1,36 @@
-var arr_nat_wizard_items;
-var arr_brideg_wizard_items;
-var arr_wizard_items;
+var arr_nat_wizard_items = new Array(
+    ["工作模式", "wizard_link_mode"],
+    ["WAN设置", "wizard_wan_settings"],
+    ["LAN设置", "wizard_lan_settings"],
+    ["用户密码", "wizard_admin_pwd"],
+    ["无线设置", "wizard_wireless_settings"],
+    ["配置总览", "wizard_nat_summary"]
+);
+
+var arr_bridge_wizard_items = new Array(
+    ["工作模式", "wizard_link_mode"],
+    ["IP地址",	 "wizard_ip_settings"],
+    ["用户密码", "wizard_admin_pwd"],
+    ["无线设置", "wizard_wireless_settings"],
+    ["配置总览", "wizard_summary"]
+)
+
+var arr_wizard_items = new Array(
+    ["IP地址",	 "wizard_ip_settings"],
+    ["用户密码", "wizard_admin_pwd"],
+    ["无线设置", "wizard_wireless_settings"],
+    ["配置总览", "wizard_summary"]
+)
 
 function link_mode_changed(type) {
-    /*todo*/
+    if(type == "nat"){
+        arr_wizard_items = arr_nat_wizard_items;
+    }else{
+        arr_wizard_items = arr_bridge_wizard_items;
+    }
 }
 
-var g_wizard_hash;
+var g_wizard_hash = {};
 function _wizard_click(url) {
     /*todo*/
 }
@@ -16,35 +40,82 @@ function wizar_click(i) {
 }
 
 function isFirst() {
-    /*todo*/
+    if(arr_wizard_items[0][1] == g_wizard_hash.currentPage)
+        return true;
+    else
+        return false;
 }
 
 function isLast() {
-    /*todo*/
+    if(arr_wizard_items[arr_wizard_items.length - 1][1] == g_wizard_hash.currentPage)
+        return true;
+    else
+        return false;
 }
 
-function isCurrent() {
-    /*todo*/
+function isCurrent(currentPage) {
+    if(g_wizard_hash.currentPage == currentPage)
+        return true;
+    else
+        return false;
 }
 
-function getCurrentIndex() {
-    /*todo*/
+function getCurrentIndex(currentPage) {
+
+    for(var i = 0; i < arr_wizard_items.length; i++){
+        if(arr_wizard_items[i][1] == currentPage) return i;
+    }
+    return -1;
 }
 
 function generateWizardNavigationBar() {
-    /*todo*/
+    var str = "";
+    for(var i = 0; i < arr_wizard_items.length; i++){
+        /*??*/
+        str += "<li class=\"wizard_step_head\">" + (i + 1) + "</li>";
+        if(isCurrent(arr_wizard_items[i][1]))
+            str += "<li class=\"wizard_step_cont current\">";
+        else
+            str += "<li class=\"wizard_step_cont\">";
+        str += arr_wizard_items[i][0] + "</li>";
+    }
+    $("#wizard_step").html(str);
 }
 
 function generateWizardOptions() {
-    /*todo*/
+    var str = "";
+    str += "<input type=\"button\" class=\"button\" id=\"wizard_cancel\" value=\"返回\">";
+    if(!isFirst())
+        str += "<input type=\"button\" class=\"button\" id=\"wizard_prew\" value=\"上一步\">";
+    if(!isLast())
+        str += "<input type=\"button\" class=\"button\" id=\"wizard_next\" value=\"下一步\">";
+    else
+        str += "<input type=\"button\" class=\"button\" id=\"wizard_ok\" value=\"返回\">";
+    $("#wizard_step_button").html(str);
 }
 
 function initWizardDatas() {
     /*todo*/
 }
 
-function loadWizadProgress() {
-    /*todo*/
+function loadWizardProgress(currentPage, validFunc, okFunc) {
+    /*???*/
+    var index = getCurrentIndex(currentPage);
+
+    var item = arr_wizard_items[index][1];
+
+    $("#" + item).show();
+    $("#" + item).siblings().hide();
+
+    /*g_wizard_hash = ???*/
+    g_wizard_hash.currentPage = currentPage;
+    g_wizard_hash.validFunc = validFunc;
+    g_wizard_hash.okFunc = okFunc;
+
+    generateWizardNavigationBar();
+    generateWizardOptions();
+
+    return g_wizard_hash;
 }
 
 function wizard_next_step() {

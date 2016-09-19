@@ -26,6 +26,13 @@
 	<script src="js/wizad/summary.js"></script>
 	<script src="js/wizad/wan_settings.js"></script>
 	<script src="js/wizad/lan_settings.js"></script>
+	<!-- status -->
+	<script src="js/status/equipment_overview.js"></script>
+	<script src="js/status/wireless_status.js"></script>
+	<script src="js/status/radio_status.js"></script>
+	<script src="js/status/clientlist.js"></script>
+	<script src="js/status/view_wds_status.js"></script>
+
 </head>
 
 <body>
@@ -462,27 +469,27 @@
 					<tbody>
 					<tr>
 						<td class="col1">设备型号：</td>
-						<td class="col2"></td>
+						<td class="col2" id="product"></td>
 					</tr>
 					<tr>
 						<td class="col1">序列号：</td>
-						<td class="col2"></td>
+						<td class="col2" id="serial"></td>
 					</tr>
 					<tr>
 						<td class="col1">MAC地址：</td>
-						<td class="col2"></td>
+						<td class="col2" id="ethmac"></td>
 					</tr>
 					<tr>
 						<td class="col1">硬件版本：</td>
-						<td class="col2"></td>
+						<td class="col2" id="hardversion"></td>
 					</tr>
 					<tr>
 						<td class="col1">软件版本：</td>
-						<td class="col2"></td>
+						<td class="col2" id="softversion"></td>
 					</tr>
 					<tr>
 						<td class="col1">Bootloader版本：</td>
-						<td class="col2"></td>
+						<td class="col2" id="bootversion"></td>
 					</tr>
 					</tbody>
 				</table>
@@ -493,27 +500,35 @@
 					<tbody>
 					<tr>
 						<td class="col1">已运行时间：</td>
-						<td class="col2"></td>
+						<td class="col2" id="uptime"></td>
 					</tr>
 					<tr>
 						<td class="col1">CPU使用率：</td>
-						<td class="col2"></td>
+						<td class="col2">
+							<div id="cpu_used" class="used"></div>
+							<div id="cpu_free" class="free"></div>
+							<div id="cpu_usage" class="tbcont"></div>
+						</td>
 					</tr>
 					<tr>
 						<td class="col1">内存使用率：</td>
-						<td class="col2"></td>
+						<td class="col2">
+							<div id="mem_used" class="used"></div>
+							<div id="mem_free" class="free"></div>
+							<div id="mem_usage" class="tbcont"></div>
+						</td>
 					</tr>
 					<tr>
 						<td class="col1">网关：</td>
-						<td class="col2"></td>
+						<td class="col2" id="gateway"></td>
 					</tr>
 					<tr>
 						<td class="col1">DNS服务器：</td>
-						<td class="col2"></td>
+						<td class="col2" id="dns"></td>
 					</tr>
 					<tr>
 						<td class="col1">NMS连接状态：</td>
-						<td class="col2"></td>
+						<td class="col2" id="capwap"></td>
 					</tr>
 					</tbody>
 				</table>

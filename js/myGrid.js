@@ -106,8 +106,26 @@ function mG_changeClass(){
     /*todo*/
 }
 
-function myGrid(){
-    /*todo*/
+function myGrid(ObjName){
+    this.ObjName = ObjName;
+    this.start;
+    this.OPwidth = "1%";
+    this.BseparateHdFt = false;
+    this.pageview_list;
+    this.pageview_list_bak = new Array();
+    this.pagewiew_list_filter = new Array();
+    this.pageview_showlist = new Array();
+    this.pageview_length = 0;
+    this.pageview_pagesize;
+    this.pageview_npages;
+    this.pageview_current_page;
+    this.pageview_table_div;
+    this.pageview_title;
+    this.pageview_btnlist = new Array();
+    this.sort_by;
+    this.sort_dir;
+    this.pageview_have_checkbox = 0;
+    this.pageview_checkbox_formatFunc;
 }
 
 function pageview_oncbxclick(item){

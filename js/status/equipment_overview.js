@@ -56,7 +56,7 @@ var jsCapwapStatus = {
 
 var tg = new myGrid("tg");
 
-function init(){
+$(function(){
 	temp = jsDataDevice.device[0];
 
 	$("#product").html(temp.model);
@@ -92,12 +92,28 @@ function init(){
 		var tmp = jsDataInterface.pkg_interface[i];
 		var ifName = tmp.sect_name;
 
-		// ？？？
+		if(ifName.indexOf("Gigabit") != -1){
+			eval( "stat = jsIfStatus[\"if_giga_eth_status\"][\"" + ifName + "\"]" );
+		}else if(ifName.indexOf("Vlan") != -1){
+			eval( "stat = jsIfStatus[\"if_vlan_status\"][\"" + ifName + "\"]" );
+		}else{
+			eval( "stat = jsIfStatus[\"if_eth_status\"][\"" + ifName + "\"]" );
+		}
+
+		if(tmp.sect_name.indexOf("Vlan") == -1){
+			if ( typeof(tmp.linkmode) == "undefined" || tmp.linkmode == "bridge" )
+				tmp.ipaddr = "--";
+		}
+
+		if(typeof(stat) != "undefined"){
+			arrInterface[nCount++] = tmp.sect_name + ";" + tmp.ipaddr + ";" + stat;
+		}
+
 	}
 	setNavigationBar("系统状态>设备概览>设备信息");
-			
-}
+	tg.pageview_add('接口', 0, '40%', MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc );
+	tg.pageview_add('IP地址/子网掩码', 1, '40%', MG_SORT_ASCII);
+	tg.pageview_add('状态', 2, '20%', MG_SORT_ASCII);
+	tg.pageview_init(arrInterface, 10, 'list_interface');
 
-$(function(){
-	init();
 })

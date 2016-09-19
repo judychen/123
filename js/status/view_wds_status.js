@@ -15,7 +15,7 @@ function init(){
 	if(typeof(status) == "undefined")
 		return;
 	if(status.mode == "disable"){
-		$("#wds_mode").html("禁用")；
+		$("#wds_mode").html("禁用");
 		return;
 	}else if(status.mode == "rootap"){
 		$("#wds_mode").html("Root AP");

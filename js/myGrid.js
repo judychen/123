@@ -213,7 +213,6 @@ myGrid.prototype = {
 
         return str;
 
-
     },
     pageview_goto:function(pn){
         pageview_selected.length = 0;

@@ -163,87 +163,88 @@
 							<tr>
 								<td class="col1">IP获取方式：</td>
 								<td class="col2">
-									<select>
-										<option>DHCP</option>
-										<option>Static</option>
-										<option>PPPoe</option>
+									<select id="ip_sel_ipmode">
+										<option value="dhcp">DHCP</option>
+										<option value="static">Static</option>
+										<option value="pppoe">PPPoE</option>
 									</select>
 								</td>
 							</tr>
 							<tr class="ip_static">
 								<td class="col1">IP地址：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_static_ip">
 								</td>
 							</tr>
 							<tr class="ip_static">
 								<td class="col1">子网掩码</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_static_netmask">
 								</td>
 							</tr>
 							<tr class="ip_static">
 								<td class="col1">网关(默认路由)：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_static_gateway">
 									<span>(可选)</span>
 								</td>
 							</tr>
 							<tr class="ip_pppoe">
 								<td class="col1">上网账号：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_pppoe_account">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr class="ip_pppoe">
 								<td class="col1">上网口令：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_pppoe_password">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr class="ip_pppoe">
 								<td class="col1">MTU：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_pppoe_mtu">
 									<span>(可选，默认值1492，范围128~1492)</span>
 								</td>
 							</tr>
 							<tr class="ip_pppoe">
 								<td class="col1">服务名：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_pppoe_name">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr class="ip_pppoe">
 								<td class="col1">服务器名：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_pppoe_server">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="col1">DNS设置</td>
 								<td class="col2">
-									<select>
-										<option>自动</option>
-										<option>手动</option>
+									<select id="ip_sel_dnsmode">
+										<option value="auto">自动</option>
+										<option value="static">手动</option>
 									</select>
 								</td>
 							</tr>
-							<tr class="dns_static">
+
+							<tr class="ip_dns_static">
 								<td class="col1">DNS服务器</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="ip_dns_static1">
 									<span>（可选）</span>
 								</td>
 							</tr>
-							<tr class="dns_static">
+							<tr class="ip_dns_static">
 								<td class="col1">备份DNS服务器</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" ip_dns_static2>
 									<span>（可选）</span>
 								</td>
 							</tr>

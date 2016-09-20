@@ -54,7 +54,7 @@ var jsCapwapStatus = {
 	"ip":"172.20.90.240"
 };
 
-var tg = new myGrid("tg");
+var eqo = new myGrid("eqo");
 
 $(function(){
 	temp = jsDataDevice.device[0];
@@ -111,9 +111,9 @@ $(function(){
 
 	}
 	setNavigationBar("系统状态>设备概览>设备信息");
-	tg.pageview_add('接口', 0, '40%', MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc );
-	tg.pageview_add('IP地址/子网掩码', 1, '40%', MG_SORT_ASCII);
-	tg.pageview_add('状态', 2, '20%', MG_SORT_ASCII);
-	tg.pageview_init(arrInterface, 10, 'list_interface');
+	eqo.pageview_add('接口', 0, '40%', MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc );
+	eqo.pageview_add('IP地址/子网掩码', 1, '40%', MG_SORT_ASCII);
+	eqo.pageview_add('状态', 2, '20%', MG_SORT_ASCII);
+	eqo.pageview_init(arrInterface, 10, 'list_interface');
 
 })

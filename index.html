@@ -166,26 +166,62 @@
 									<select>
 										<option>DHCP</option>
 										<option>Static</option>
+										<option>PPPoe</option>
 									</select>
 								</td>
 							</tr>
-							<tr>
+							<tr class="ip_static">
 								<td class="col1">IP地址：</td>
 								<td class="col2">
 									<input type="text" name="">
 								</td>
 							</tr>
-							<tr>
+							<tr class="ip_static">
 								<td class="col1">子网掩码</td>
 								<td class="col2">
 									<input type="text" name="">
 								</td>
 							</tr>
-							<tr>
+							<tr class="ip_static">
 								<td class="col1">网关(默认路由)：</td>
 								<td class="col2">
 									<input type="text" name="">
 									<span>(可选)</span>
+								</td>
+							</tr>
+							<tr class="ip_pppoe">
+								<td class="col1">上网账号：</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
+								</td>
+							</tr>
+							<tr class="ip_pppoe">
+								<td class="col1">上网口令：</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
+								</td>
+							</tr>
+							<tr class="ip_pppoe">
+								<td class="col1">MTU：</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>(可选，默认值1492，范围128~1492)</span>
+								</td>
+							</tr>
+							<tr class="ip_pppoe">
+								<td class="col1">服务名：</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
+								</td>
+							</tr>
+							<tr class="ip_pppoe">
+								<td class="col1">服务器名：</td>
+								<td class="col2">
+									<input type="text" name="">
+									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr>
@@ -197,14 +233,14 @@
 									</select>
 								</td>
 							</tr>
-							<tr>
+							<tr class="dns_static">
 								<td class="col1">DNS服务器</td>
 								<td class="col2">
 									<input type="text" name="">
 									<span>（可选）</span>
 								</td>
 							</tr>
-							<tr>
+							<tr class="dns_static">
 								<td class="col1">备份DNS服务器</td>
 								<td class="col2">
 									<input type="text" name="">
@@ -573,8 +609,8 @@
 				<div class="table_title">
 					<span>无线服务列表</span>
 				</div>
-				<table class="tbl">
-					<thead>
+				<table class="tbl" id="list_wireless_status">
+					<!-- <thead>
 					<tr>
 						<th>端口</th>
 						<th>SSID</th>
@@ -603,15 +639,15 @@
 							</table>
 						</td>
 					</tr>
-					</tbody>
+					</tbody> -->
 				</table>
 			</div>
 			<div id="radio_status" style="display: none">
 				<div class="table_title">
 					<span>射频列表</span>
 				</div>
-				<table class="tbl">
-					<thead>
+				<table class="tbl" id="list_radio_status">
+					<!-- <thead>
 					<tr>
 						<th>射频单元</th>
 						<th>模式</th>
@@ -648,7 +684,7 @@
 							</table>
 						</td>
 					</tr>
-					</tbody>
+					</tbody> -->
 				</table>
 			</div>
 			<div id="clientlist" style="display: none">
@@ -672,8 +708,8 @@
 					<input type="text" name="">
 					<input type="button" value="查询">
 				</div>
-				<table class="tbl">
-					<thead>
+				<table class="tbl" id="list_client">
+					<!-- <thead>
 					<tr>
 						<th>MAC地址</th>
 						<th>IP地址</th>
@@ -708,14 +744,14 @@
 							</table>
 						</td>
 					</tr>
-					</tbody>
+					</tbody> -->
 				</table>
 			</div>
 			<div id="view_wds_status" style="display: none">
 				<div class="table_title">
 					<span>WDS运行状态</span>
 				</div>
-				<table class="tbl_cont">
+				<table class="tbl_cont" id="list_wds_status">
 					<tbody>
 					<tr>
 						<td class="col1">WDS模式：</td>
@@ -728,10 +764,6 @@
 					<tr>
 						<td class="col1">连接时间：</td>
 						<td class="col2" id="wds_uptime"></td>
-					</tr>
-					<tr>
-						<td class="col1">失败原因：</td>
-						<td class="col2" id="wds_lastFail"></td>
 					</tr>
 					<tr>
 						<td class="col1">配置NetID：</td>

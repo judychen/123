@@ -262,11 +262,7 @@ myGrid.prototype = {
                 link = '';
 
                 var text = "";
-
-                /*??*/
-                text = vs[this.pageview_showlist[j].index];
-
-                var text = "";
+                
                 if ( typeof(this.pageview_showlist[j].formatfunc) == "function" ) {
                     text = this.pageview_showlist[j].formatfunc(vs, this.pageview_showlist[j].index);
                 } else {

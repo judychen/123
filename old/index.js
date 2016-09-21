@@ -114,12 +114,30 @@ function showCont(){
         $("#dhcpd").show();
         $("#dhcpd").siblings().hide();
     });
-   
+   /*del $("#m_arp").click(function(){
+        $("#arp").show();
+        $("#arp").siblings().hide();
+    });*/
+/*del    $("#m_routeV4_settings").click(function(){
+        $("#routeV4_settings").show();
+        $("#routeV4_settings").siblings().hide();
+    });*/
+   /*del $("#m_global_dns_settings").click(function(){
+        $("#global_dns_settings").show();
+        $("#global_dns_settings").siblings().hide();
+    });
+    $("#m_dnsmasq_settings").click(function(){
+        $("#dnsmasq_settings").show();
+        $("#dnsmasq_settings").siblings().hide();
+    });*/
     $("#m_servers_manage").click(function(){
         $("#servers_manage").show();
         $("#servers_manage").siblings().hide();
     });
-   
+   /*del $("#m_igmp_snooping").click(function(){
+        $("#igmp_snooping").show();
+        $("#igmp_snooping").siblings().hide();
+    });*/
     $("#m_network_advanced_settings").click(function(){
         $("#network_advanced_settings").show();
         $("#network_advanced_settings").siblings().hide();
@@ -161,13 +179,24 @@ function showCont(){
         $("#time_acl_settings").show();
         $("#time_acl_settings").siblings().hide();
     });
-   
+    /*del$("#m_wireless_probe").click(function(){
+        $("#wireless_probe").show();
+        $("#wireless_probe").siblings().hide();
+    });*/
+   /*del $("#m_wireless_advanced_settings").click(function(){
+        $("#wireless_advanced_settings").show();
+        $("#wireless_advanced_settings").siblings().hide();
+    });*/
     /*设备管理*/
     $("#m_equipment_maintenance").click(function(){
         $("#equipment_maintenance").show();
         $("#equipment_maintenance").siblings().hide();
     });
-   
+    /*del$("#m_capwap").click(function(){
+        $("#capwap").show();
+        $("#capwap").siblings().hide();
+        console.log($("#capwap"));
+    });*/
     $("#m_time_settings").click(function(){
         $("#time_settings").show();
         $("#time_settings").siblings().hide();

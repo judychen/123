@@ -87,8 +87,13 @@
 						<ul class="sub_menu">
 							<li id="m_interface_settings">接口管理</li>
 							<li id="m_vlan_settings">VLAN管理</li>
-							<li id="m_dhcpd">DHCP服务</li>				
+							<li id="m_dhcpd">DHCP服务</li>
+							<!--del <li id="m_arp">ARP管理</li> -->
+							<!--del <li id="m_routeV4_settings">IPv4路由</li> -->
+							<!-- del<li id="m_global_dns_settings">DNS管理</li>
+							<li id="m_dnsmasq_settings">DNS代理</li> -->
 							<li id="m_servers_manage">服务管理</li>
+							<!--del <li id="m_igmp_snooping">IGMPsnooping</li> -->
 							<li id="m_network_advanced_settings">高级设置</li>
 						</ul>
 					</li>
@@ -104,12 +109,15 @@
 							<li id="m_acl_settings">ACL管理</li>
 							<li id="m_wds">WDS配置</li>
 							<li id="m_time_acl_settings">时间策略</li>
+							<!--del <li id="m_wireless_probe">无线探针</li> -->
+							<!--del <li id="m_wireless_advanced_settings">高级设置</li> -->
 						</ul>
 					</li>
 					<li id="m_equipment_management">
 						<a><span>设备管理</span></a>
 						<ul  class="sub_menu">
 							<li id="m_equipment_maintenance">设备维护</li>
+							<!-- <li id="m_capwap">CAPWAP</li> -->
 							<li id="m_time_settings">时间设置</li>
 							<li id="m_syslog">日志管理</li>
 							<li id="m_config_settings">配置管理</li>
@@ -1032,7 +1040,166 @@
 					</ul>
 				</div>
 			</div>
-			
+			<!-- del<div id="arp" style="display: none">
+				<div class="table_title">
+					<span>ARP列表</span>
+				</div>
+				<div>
+					<input type="button" class="button" value="刷新">
+					<span>查询项</span>
+					<select>
+						<option>IP地址</option>
+						<option>MAC地址</option>
+						<option>接口</option>
+					</select>
+					<span>关键词</span>
+					<input type="text" name="">
+					<input type="button" value="查询">
+				</div>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>IP地址</th>
+							<th>MAC地址</th>
+							<th>接口</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="8">
+								<table class="tbl_page">
+									<tbody>
+									<tr>
+										<td>共 2 条记录</td>
+										<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+									</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div> -->
+			<!-- del<div id="routeV4_settings" style="display: none">
+				<div class="underline">
+					<ul>
+						<li class="tab">生效路由</li>
+						<li class="tab">静态路由</li>
+					</ul>
+				</div>
+				<div>
+					<input type="button" class="button" value="刷新">
+					<span>查询项</span>
+					<select>
+						<option>目的IP地址</option>
+						<option>子网掩码</option>
+						<option>协议</option>
+						<option>优先级</option>
+						<option>下一跳</option>
+						<option>接口</option>
+					</select>
+					<span>关键词</span>
+					<input type="text" name="">
+					<input type="button" value="查询">
+				</div>
+				<table class="tbl">
+					<thead>
+					<tr>
+						<th>目的IP地址</th>
+						<th>子网掩码</th>
+						<th>协议</th>
+						<th>优先级</th>
+						<th>下一跳</th>
+						<th>接口</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							<table class="tbl_page">
+								<tbody>
+								<tr>
+									<td>共 2 条记录</td>
+									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+								</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div> -->
+			<!-- del<div id="global_dns_settings" style="display: none">
+				<div class="table_title">
+					<span>全局DNS</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">主DNS服务器:</td>
+						<td class="col2">
+							<input type="text"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">备用DNS服务器1：</td>
+						<td class="col2">
+							<input type="text"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">备用DNS服务器2：</td>
+						<td class="col2">
+							<input type="text"/>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="dnsmasq_settings" style="display: none">
+				<div class="table_title">
+					<span>DNS代理使能</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">使能状态</td>
+						<td class="col2">
+							<input type="checkbox"/>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="content_option">
+					<input type="button" class="button" value="取消"/>
+					<input type="button" class="button" value="确定"/>
+				</div>
+				<div>
+					<input type="button" class="button" value="刷新">
+					<span>查询项</span>
+					<select>
+						<option>IP地址</option>
+						<option>MAC地址</option>
+						<option>接口</option>
+					</select>
+					<span>关键词</span>
+					<input type="text" name="">
+					<input type="button" value="查询">
+				</div>
+			</div> -->
 			<div id="servers_manage" style="display: none">
 				<div class="table_title">
 					<span>Telnet服务</span>
@@ -1115,7 +1282,87 @@
 					<input type="button" class="button" value="确定"/>
 				</div>
 			</div>
-			
+			<!--del <div id="igmp_snooping" style="display: none">
+				<div class="table_title">
+					<span>组播转发策略设置</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">组播转发策略:</td>
+						<td class="col2">
+							<select name="" id="">
+								<option value="">accept-all</option>
+								<option value="">drop-unknown</option>
+								<option value="">drop-all</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">智能组播优化：</td>
+						<td class="col2">
+							<select name="" id="">
+								<option value="">启用</option>
+								<option value="">禁用</option>
+							</select>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="table_title">
+					<span>IGMP Snooping设置</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">IGMP Snooping使能:</td>
+						<td class="col2">
+							<select name="" id="">
+								<option value="">启用</option>
+								<option value="">禁用</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">组播组最大数量：</td>
+						<td class="col2">
+							<input type="text"/>（1-256, 默认256）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">各组播组最大成员数量：</td>
+						<td class="col2">
+							<input type="text"/>（2-256, 默认256）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">老化时间：</td>
+						<td class="col2">
+							<input type="text"/>（200-1000, 默认260秒）
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="content_option">
+					<input type="button" class="button" value="取消"/>
+					<input type="button" class="button" value="确定"/>
+				</div>
+				<div class="table_title">
+					<span>静态加入组播组列表</span>
+				</div>
+				<div>
+					<input type="button" class="button" value="刷新">
+					<span>查询项</span>
+					<select>
+						<option>IP地址</option>
+						<option>MAC地址</option>
+						<option>接口</option>
+					</select>
+					<span>关键词</span>
+					<input type="text" name="">
+					<input type="button" value="查询">
+				</div>
+			</div> -->
 			<div id="network_advanced_settings" style="display: none">
 				<div class="table_title">
 					<span>路由转发</span>
@@ -1902,7 +2149,102 @@
 					</tbody>
 				</table>
 			</div>
+			<!--del <div id="wireless_probe" style="display: none">
+				<div class="table_title">
+					<span>无线探针</span>
+				</div>
 			
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">使能：</td>
+						<td class="col2">
+							<select>
+								<option value="">启用</option>
+								<option value="">禁用</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">上报方式：</td>
+						<td class="col2">
+							<select>
+								<option value="">UDP</option>
+								<option value="">TAODIAN</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">服务器IP地址：</td>
+						<td class="col2">
+							<input type="text"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">端口：</td>
+						<td class="col2">
+							<input type="text"/>（1-65535）
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">上报间隔：</td>
+						<td class="col2">
+							<input type="text"/>（5-600秒）
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="content_option">
+					<input type="button" class="button" value="取消"/>
+					<input type="button" class="button" value="确定"/>
+				</div>
+			</div> -->
+			<!--del <div id="wireless_advanced_settings" style="display: none">
+				<div class="table_title">
+					<span>用户隔离</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">用户隔离使能：</td>
+						<td class="col2">
+							<input type="checkbox"/>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="table_title">
+					<span>频谱导航</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">频谱导航使能：</td>
+						<td class="col2">
+							<input type="checkbox"/>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="table_title">
+					<span>无线ARP优化</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+					<tr>
+						<td class="col1">无线ARP优化使能：</td>
+						<td class="col2">
+							<input type="checkbox"/>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			
+				<div class="content_option">
+					<input type="button" class="button" value="取消"/>
+					<input type="button" class="button" value="确定"/>
+				</div>
+			</div> -->
 			<!--设备管理-->
 			<div id="equipment_maintenance" style="display:none">
 				<div class="underline">

@@ -1,12 +1,13 @@
 var arrIS;
-
-function myhelp() {
-    /*todo*/
-}
-
-function changeDNSMode() {
-    /*todo*/
-}
+/****** struct of arrIS ******
+* ip_mode
+* static_ip
+* static_netmask
+* static_gateway
+* dns_mode
+* dns_first
+* dns_second
+*****************************/
 
 function isInputValid_ip() {
     /*todo*/
@@ -28,10 +29,7 @@ function ok() {
     /*todo*/
 }
 
-function change_ip_mode() {
-    /*todo*/
-}
-
 $(function () {
+	
 
 });

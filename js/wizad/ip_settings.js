@@ -8,7 +8,7 @@ var arrIS;
 * dns_first
 * dns_second
 *****************************/
-function changeIpMode(){//改成传参数的
+function changeIpMode(){
 	if ( $("#ip_sel_ipmode").val() == "dhcp" ) {
 		$(".ip_static").hide();
 		$(".ip_pppoe").hide();

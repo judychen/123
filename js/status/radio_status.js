@@ -162,7 +162,7 @@ $(function(){
 	}
 	
 
-	rs.pageview_init( arrRadio, 10, 'radio_status');
+	rs.pageview_init( arrRadio, 10, 'list_radio_status');
 
 
 });

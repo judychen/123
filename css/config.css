@@ -5,8 +5,10 @@
 .table_title{
 	color: #465f88;
 	font-size: 14px;
+	width: 800px;
 	border-bottom: 1px solid #ccc;
 	padding: 4px 0;
+	margin: 10px 0px 5px 0px;
 }
 
 .table_title:before{
@@ -53,6 +55,23 @@
 	line-height: 25px;
 	float: left;
 	margin: 1px;
+}
+
+.query{
+	margin-bottom: 5px;
+	font-size: 13px;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.subcenter{
+	text-align: center;
 }
 
 .tbl_cont{
@@ -136,16 +155,20 @@ tr{
 	width: 800px;
 	height: 30px;
 	border-bottom: 2px solid #8EA5CF;
+	margin: 5px 0px 20px 0px;
 }
 
 .tab{
 	display: inline-block;
-	padding: 3px 20px;
+	padding: 3px 10px;
+	margin: 3px 0px 0px 5px; 
 	border: 1px solid #ccc;
 	border-radius: 4px 4px 0px 0px;
 	background-color: #EAEDF8;
 	color: #465f88;
-	margin-top: 5px;
+	font-size: 13px;
+	line-height: 20px;
+	float: left;
 
 }
 

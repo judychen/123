@@ -20,8 +20,8 @@
 	<script src="js/spec.js"></script>
 	<!--wizard-->
 	<script src="js/wizad/commom.js"></script>
-	<!-- <script src="js/wizad/wizard_link_mode.js"></script>
-	<script src="js/wizad/ip_settings.js"></script>
+	<script src="js/wizad/wizard_link_mode.js"></script>
+	<!-- <script src="js/wizad/ip_settings.js"></script>
 	<script src="js/wizad/admin_pwd.js"></script>
 	<script src="js/wizad/wirelss_settings.js"></script>
 	<script src="js/wizad/summary.js"></script>
@@ -33,6 +33,12 @@
 	<script src="js/status/radio_status.js"></script>
 	<script src="js/status/clientlist.js"></script>
 	<script src="js/status/view_wds_status.js"></script>
+	<!-- equipment_management -->
+	<script src="js/management/equipment_maintenance.js"></script>
+	<script src="js/management/time_settings.js"></script>
+	<script src="js/management/syslog.js"></script>
+	<script src="js/management/config_settings.js"></script>
+	<script src="js/management/accounts_settings.js"></script>
 
 </head>
 
@@ -86,8 +92,7 @@
 						<a><span>网络设置</span></a>
 						<ul class="sub_menu">
 							<li id="m_interface_settings">接口管理</li>
-							<li id="m_vlan_settings">VLAN管理</li>
-							<li id="m_dhcpd">DHCP服务</li>				
+							<li id="m_vlan_settings">VLAN管理</li>		
 							<li id="m_servers_manage">服务管理</li>
 							<li id="m_network_advanced_settings">高级设置</li>
 						</ul>
@@ -576,75 +581,13 @@
 				<div class="table_title">
 					<span>接口信息</span>
 				</div>
-				<table class="tbl" id="list_interface">
-					<!--<thead>
-					<tr>
-						<th>接口</th>
-						<th>IP地址/子网掩码</th>
-						<th>状态</th>
-					</tr>
-					</thead>-->
-					<!--<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<table class="tbl_page">
-								<tbody>
-									<tr>
-										<td>共 2 条记录</td>
-										<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>-->
-				</table>
+				<table class="tbl" id="list_interface"></table>
 			</div>
 			<div id="wireless_status" style="display: none">
 				<div class="table_title">
 					<span>无线服务列表</span>
 				</div>
 				<table class="tbl" id="list_wireless_status">
-					<!-- <thead>
-					<tr>
-						<th>端口</th>
-						<th>SSID</th>
-						<th>射频单元</th>
-						<th>认证方式</th>
-						<th>启用状态</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>WLAN-BSS0</td>
-						<td>CommSky_2.4G</td>
-						<td>2.4G</td>
-						<td>WPA2-802.1X</td>
-						<td>启用</td>
-					</tr>
-					<tr>
-						<td colspan="5">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody> -->
 				</table>
 			</div>
 			<div id="radio_status" style="display: none">
@@ -652,66 +595,30 @@
 					<span>射频列表</span>
 				</div>
 				<table class="tbl" id="list_radio_status">
-					<!-- <thead>
-					<tr>
-						<th>射频单元</th>
-						<th>模式</th>
-						<th>信道</th>
-						<th>功率(dBm)</th>
-						<th>RTS-CTS阈值</th>
-						<th>分片阈值</th>
-						<th>BSS端口数量</th>
-						<th>状态</th>
-						<th>操作</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>Radio 0</td>
-						<td>802.11gn/20M</td>
-						<td>6</td>
-						<td>27</td>
-						<td>2346</td>
-						<td>2346</td>
-						<td>1</td>
-						<td>启用</td>
-						<td>详细</td>
-					</tr>
-					<tr>
-						<td colspan="9">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody> -->
 				</table>
 			</div>
 			<div id="clientlist" style="display: none">
 				<div class="table_title">
 					<span>客户端列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>MAC地址</option>
-						<option>IP地址</option>
-						<option>UpTime</option>
-						<option>SSID</option>
-						<option>RSSI</option>
-						<option>Idle</option>
-						<option>TxRate(Mbps)</option>
-						<option>RxRate(Mbps)</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="刷新">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>MAC地址</option>
+							<option>IP地址</option>
+							<option>UpTime</option>
+							<option>SSID</option>
+							<option>RSSI</option>
+							<option>Idle</option>
+							<option>TxRate(Mbps)</option>
+							<option>RxRate(Mbps)</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 				<table class="tbl" id="list_client">
 					<!-- <thead>
@@ -915,9 +822,9 @@
 				<div class="table_title">
 					<span>三层接口列表</span>
 				</div>
-				<div>
-					<input type="button" value="新增"/>
-					<div>
+				<div class="query">
+					<input type="button left" value="新增"/>
+					<div class="right">
 						<span>查询项</span>
 						<select name="" id="">
 							<option value="">名称</option>
@@ -934,23 +841,25 @@
 			<div id="vlan_settings" style="display: none">
 				<div class="underline">
 					<ul>
-						<li class="tab">VLAN</li>
-						<li class="tab">端口</li>
+						<li class="tab" id="vlan">VLAN</li>
+						<li class="tab" id="port">端口</li>
 					</ul>
 				</div>
-				<div id="vlan">
-					<div>
-						<input type="button" class="button" value="新增"/>
-						<span>查询项</span>
-						<select name="" id="">
-							<option value="">VLAN ID</option>
-							<option value="">VLAN名称</option>
-							<option value="">描述</option>
-							<option value="">成员端口</option>
-						</select>
-						<span>关键词</span>
-						<input type="text"/>
-						<input type="button" value="查询"/>
+				<div id="_vlan">
+					<div class="query">
+						<input type="button" class="button left" value="新增"/>
+						<div class="right">
+							<span>查询项</span>
+							<select name="" id="">
+								<option value="">VLAN ID</option>
+								<option value="">VLAN名称</option>
+								<option value="">描述</option>
+								<option value="">成员端口</option>
+							</select>
+							<span>关键词</span>
+							<input type="text"/>
+							<input type="button" value="查询"/>
+						</div>
 					</div>
 					<table class="tbl">
 						<thead>
@@ -985,7 +894,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="port">
+				<div id="_port">
 					<table class="tbl">
 						<thead>
 						<tr>
@@ -1022,17 +931,6 @@
 					</table>
 				</div>
 			</div>
-
-			<div id="dhcpd" style="display: none">
-				<div class="underline">
-					<ul>
-						<li class="tab">客户端列表</li>
-						<li class="tab">动态绑定</li>
-						<li class="tab">静态绑定</li>
-					</ul>
-				</div>
-			</div>
-			
 			<div id="servers_manage" style="display: none">
 				<div class="table_title">
 					<span>Telnet服务</span>
@@ -1162,16 +1060,18 @@
 				<div class="table_title">
 					<span>二/三层切换接口列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>名称</option>
-						<option>模式</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="刷新">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>名称</option>
+							<option>模式</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 				<table class="tbl">
 					<thead>
@@ -1259,317 +1159,323 @@
 			<div id="radio_setting" style="display: none">
 				<div class="underline">
 					<ul>
-						<li class="tab">Radio0</li>
-						<li class="tab">Radio1</li>
+						<li class="tab" id="radio0">Radio0</li>
+						<li class="tab" id="radio1">Radio1</li>
 					</ul>
 				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">地区：</td>
-						<td class="col2">China</td>
-					</tr>
-					<tr>
-						<td class="col1">使能状态：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">工作模式 / 频宽： </td>
-						<td class="col2">
-							<select>
-								<option value="">802.11g</option>
-								<option value="">802.11gn/20M</option>
-								<option value="">802.11gn/40M</option>
-								<option value="">802.11nonly/20M</option>
-								<option value="">802.11nonly/40M</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">信道：</td>
-						<td class="col2">
-							<select>
-								<option value="">auto</option>
-								<option value="">1</option>
-								<option value="">2</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
-								<option value="">6</option>
-								<option value="">7</option>
-								<option value="">8</option>
-								<option value="">9</option>
-								<option value="">10</option>
-								<option value="">11</option>
-								<option value="">12</option>
-								<option value="">13</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">发射功率：</td>
-						<td class="col2">
-							<select>
-								<option value="">auto</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
-								<option value="">6</option>
-								<option value="">7</option>
-								<option value="">8</option>
-								<option value="">9</option>
-								<option value="">10</option>
-								<option value="">11</option>
-								<option value="">12</option>
-								<option value="">13</option>
-								<option value="">14</option>
-								<option value="">15</option>
-								<option value="">16</option>
-								<option value="">17</option>
-								<option value="">18</option>
-								<option value="">19</option>
-								<option value="">20</option>
-								<option value="">21</option>
-								<option value="">22</option>
-								<option value="">23</option>
-								<option value="">24</option>
-								<option value="">25</option>
-								<option value="">26</option>
-								<option value="">27</option>
-							</select>
-							dBm（默认auto）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Beacon帧间隔：</td>
-						<td class="col2">
-							<input type="text" value="100"/>（40-3500毫秒，默认100）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">DTIM间隔：</td>
-						<td class="col2">
-							<input type="text" value="1"/>（1-31，默认1）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">分片阈值：</td>
-						<td class="col2">
-							<input type="text" value="2346"/>（256-2346，默认2346）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">RTS阈值：</td>
-						<td class="col2">
-							<input type="text" value="2346"/>（0-2346，默认2346）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">发射距离：</td>
-						<td class="col2">
-							<input type="text" value="1"/>（1-40km，默认1）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">无线保护模式：</td>
-						<td class="col2">
-							<select>
-								<option value="">cts-to-self</option>
-								<option value="">none</option>
-								<option value="">rts-cts</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">前导码：</td>
-						<td class="col2">
-							<select>
-								<option value="">short</option>
-								<option value="">long</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Short GI：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">A-MPDU：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">弱信号终端接入控制：</td>
-						<td class="col2">
-							<input type="checkbox"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">广播报文速率限制：</td>
-						<td class="col2">
-							<input type="checkbox"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Air-time fairness：</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">地区：</td>
-						<td class="col2">China</td>
-					</tr>
-					<tr>
-						<td class="col1">使能状态：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">工作模式 / 频宽： </td>
-						<td class="col2">
-							<select>
-								<option value="">802.11a</option>
-								<option value="">802.11an/20M</option>
-								<option value="">802.11an/40M</option>
-								<option value="">802.11nonly/20M</option>
-								<option value="">802.11nonly/40M</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">信道：</td>
-						<td class="col2">
-							<select>
-								<option value="">auto</option>
-								<option value="">36</option>
-								<option value="">40</option>
-								<option value="">44</option>
-								<option value="">48</option>
-								<option value="">149</option>
-								<option value="">153</option>
-								<option value="">157</option>
-								<option value="">161</option>
-								<option value="">165</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">发射功率：</td>
-						<td class="col2">
-							<select>
-								<option value="">auto</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
-								<option value="">6</option>
-								<option value="">7</option>
-								<option value="">8</option>
-								<option value="">9</option>
-								<option value="">10</option>
-								<option value="">11</option>
-								<option value="">12</option>
-								<option value="">13</option>
-								<option value="">14</option>
-								<option value="">15</option>
-								<option value="">16</option>
-								<option value="">17</option>
-								<option value="">18</option>
-								<option value="">19</option>
-								<option value="">20</option>
-								<option value="">21</option>
-								<option value="">22</option>
-								<option value="">23</option>
-								<option value="">24</option>
-								<option value="">25</option>
-								<option value="">26</option>
-								<option value="">27</option>
-							</select>
-							dBm（默认auto）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Beacon帧间隔：</td>
-						<td class="col2">
-							<input type="text" value="100"/>（40-3500毫秒，默认100）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">DTIM间隔：</td>
-						<td class="col2">
-							<input type="text" value="1"/>（1-31，默认1）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">分片阈值：</td>
-						<td class="col2">
-							<input type="text" value="2346"/>（256-2346，默认2346）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">RTS阈值：</td>
-						<td class="col2">
-							<input type="text" value="2346"/>（0-2346，默认2346）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">发射距离：</td>
-						<td class="col2">
-							<input type="text" value="1"/>（1-40km，默认1）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">无线保护模式：</td>
-						<td class="col2">
-							<select>
-								<option value="">cts-to-self</option>
-								<option value="">none</option>
-								<option value="">rts-cts</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Short GI：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">A-MPDU：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">弱信号终端接入控制：</td>
-						<td class="col2">
-							<input type="checkbox"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">广播报文速率限制：</td>
-						<td class="col2">
-							<input type="checkbox"/>开启
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Air-time fairness：</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
+				<div id="_radio0">
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">地区：</td>
+							<td class="col2">China</td>
+						</tr>
+						<tr>
+							<td class="col1">使能状态：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">工作模式 / 频宽： </td>
+							<td class="col2">
+								<select>
+									<option value="">802.11g</option>
+									<option value="">802.11gn/20M</option>
+									<option value="">802.11gn/40M</option>
+									<option value="">802.11nonly/20M</option>
+									<option value="">802.11nonly/40M</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">信道：</td>
+							<td class="col2">
+								<select>
+									<option value="">auto</option>
+									<option value="">1</option>
+									<option value="">2</option>
+									<option value="">3</option>
+									<option value="">4</option>
+									<option value="">5</option>
+									<option value="">6</option>
+									<option value="">7</option>
+									<option value="">8</option>
+									<option value="">9</option>
+									<option value="">10</option>
+									<option value="">11</option>
+									<option value="">12</option>
+									<option value="">13</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">发射功率：</td>
+							<td class="col2">
+								<select>
+									<option value="">auto</option>
+									<option value="">3</option>
+									<option value="">4</option>
+									<option value="">5</option>
+									<option value="">6</option>
+									<option value="">7</option>
+									<option value="">8</option>
+									<option value="">9</option>
+									<option value="">10</option>
+									<option value="">11</option>
+									<option value="">12</option>
+									<option value="">13</option>
+									<option value="">14</option>
+									<option value="">15</option>
+									<option value="">16</option>
+									<option value="">17</option>
+									<option value="">18</option>
+									<option value="">19</option>
+									<option value="">20</option>
+									<option value="">21</option>
+									<option value="">22</option>
+									<option value="">23</option>
+									<option value="">24</option>
+									<option value="">25</option>
+									<option value="">26</option>
+									<option value="">27</option>
+								</select>
+								dBm（默认auto）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">Beacon帧间隔：</td>
+							<td class="col2">
+								<input type="text" value="100"/>（40-3500毫秒，默认100）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">DTIM间隔：</td>
+							<td class="col2">
+								<input type="text" value="1"/>（1-31，默认1）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">分片阈值：</td>
+							<td class="col2">
+								<input type="text" value="2346"/>（256-2346，默认2346）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">RTS阈值：</td>
+							<td class="col2">
+								<input type="text" value="2346"/>（0-2346，默认2346）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">发射距离：</td>
+							<td class="col2">
+								<input type="text" value="1"/>（1-40km，默认1）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">无线保护模式：</td>
+							<td class="col2">
+								<select>
+									<option value="">cts-to-self</option>
+									<option value="">none</option>
+									<option value="">rts-cts</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">前导码：</td>
+							<td class="col2">
+								<select>
+									<option value="">short</option>
+									<option value="">long</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">Short GI：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">A-MPDU：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">弱信号终端接入控制：</td>
+							<td class="col2">
+								<input type="checkbox"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">广播报文速率限制：</td>
+							<td class="col2">
+								<input type="checkbox"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">Air-time fairness：</td>
+							<td class="col2">
+								<input type="checkbox"/>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="_radio1">
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">地区：</td>
+							<td class="col2">China</td>
+						</tr>
+						<tr>
+							<td class="col1">使能状态：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">工作模式 / 频宽： </td>
+							<td class="col2">
+								<select>
+									<option value="">802.11a</option>
+									<option value="">802.11an/20M</option>
+									<option value="">802.11an/40M</option>
+									<option value="">802.11nonly/20M</option>
+									<option value="">802.11nonly/40M</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">信道：</td>
+							<td class="col2">
+								<select>
+									<option value="">auto</option>
+									<option value="">36</option>
+									<option value="">40</option>
+									<option value="">44</option>
+									<option value="">48</option>
+									<option value="">149</option>
+									<option value="">153</option>
+									<option value="">157</option>
+									<option value="">161</option>
+									<option value="">165</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">发射功率：</td>
+							<td class="col2">
+								<select>
+									<option value="">auto</option>
+									<option value="">3</option>
+									<option value="">4</option>
+									<option value="">5</option>
+									<option value="">6</option>
+									<option value="">7</option>
+									<option value="">8</option>
+									<option value="">9</option>
+									<option value="">10</option>
+									<option value="">11</option>
+									<option value="">12</option>
+									<option value="">13</option>
+									<option value="">14</option>
+									<option value="">15</option>
+									<option value="">16</option>
+									<option value="">17</option>
+									<option value="">18</option>
+									<option value="">19</option>
+									<option value="">20</option>
+									<option value="">21</option>
+									<option value="">22</option>
+									<option value="">23</option>
+									<option value="">24</option>
+									<option value="">25</option>
+									<option value="">26</option>
+									<option value="">27</option>
+								</select>
+								dBm（默认auto）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">Beacon帧间隔：</td>
+							<td class="col2">
+								<input type="text" value="100"/>（40-3500毫秒，默认100）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">DTIM间隔：</td>
+							<td class="col2">
+								<input type="text" value="1"/>（1-31，默认1）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">分片阈值：</td>
+							<td class="col2">
+								<input type="text" value="2346"/>（256-2346，默认2346）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">RTS阈值：</td>
+							<td class="col2">
+								<input type="text" value="2346"/>（0-2346，默认2346）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">发射距离：</td>
+							<td class="col2">
+								<input type="text" value="1"/>（1-40km，默认1）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">无线保护模式：</td>
+							<td class="col2">
+								<select>
+									<option value="">cts-to-self</option>
+									<option value="">none</option>
+									<option value="">rts-cts</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">Short GI：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">A-MPDU：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">弱信号终端接入控制：</td>
+							<td class="col2">
+								<input type="checkbox"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">广播报文速率限制：</td>
+							<td class="col2">
+								<input type="checkbox"/>开启
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">Air-time fairness：</td>
+							<td class="col2">
+								<input type="checkbox"/>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+
 			</div>
 			<div id="radio_speed_settings" style="display: none">
 				<div class="table_title">
@@ -1674,33 +1580,37 @@
 				<div class="table_title">
 					<span>Portal方案列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="刷新">
-					<span>查询项</span>
-					<select>
-						<option>方案名称</option>
-						<option>URL</option>
-						<option>状态</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="刷新">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>方案名称</option>
+							<option>URL</option>
+							<option>状态</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 			</div>
 			<div id="domainSet_settings" style="display: none">
 				<div class="table_title">
 					<span>域名集列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="新增">
-					<span>查询项</span>
-					<select>
-						<option>方案名称</option>
-						<option>状态</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="新增">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>方案名称</option>
+							<option>状态</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 
 			</div>
@@ -1708,15 +1618,17 @@
 				<div class="table_title">
 					<span>AAA方案列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="新增">
-					<span>查询项</span>
-					<select>
-						<option>方案名称</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="新增">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>方案名称</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 				<table class="tbl">
 					<thead>
@@ -1747,16 +1659,18 @@
 				<div class="table_title">
 					<span>ACL方案列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="新增">
-					<span>查询项</span>
-					<select>
-						<option>方案名称</option>
-						<option>策略</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="新增">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>方案名称</option>
+							<option>策略</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 			</div>
 			<div id="wds" style="display: none">
@@ -1848,16 +1762,18 @@
 				<div class="table_title">
 					<span>Repeater Uplink列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="新增">
-					<span>查询项</span>
-					<select>
-						<option>RepeaterMac</option>
-						<option>UplinkMac</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="新增">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>RepeaterMac</option>
+							<option>UplinkMac</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 
 			</div>
@@ -1865,15 +1781,17 @@
 				<div class="table_title">
 					<span>时间策略列表</span>
 				</div>
-				<div>
-					<input type="button" class="button" value="新增">
-					<span>查询项</span>
-					<select>
-						<option>策略名称</option>
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="新增">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>策略名称</option>
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 				<table class="tbl">
 					<thead>
@@ -1907,19 +1825,19 @@
 			<div id="equipment_maintenance" style="display:none">
 				<div class="underline">
 				    <ul>
-				        <li class="tab">设备重启</li>
-				        <li class="tab">软件升级</li>
-				        <li class="tab">Ping工具</li>
-				        <li class="tab">一键导出</li>
-				        <li class="tab">故障排除</li>
+				        <li class="tab" id="reboot">设备重启</li>
+				        <li class="tab" id="upgrade">软件升级</li>
+				        <li class="tab" id="ping">Ping工具</li>
+				        <li class="tab" id="output">一键导出</li>
+				        <li class="tab" id="trouble_shooting">故障排除</li>
 				    </ul>
 				</div>
 
-				<div id="reboot">
+				<div id="_reboot" class="subcenter">
 					<input type="button" class="button" value="重启">	
 				</div>
 
-				<div id="upgrade">
+				<div id="_upgrade">
 					<table class="tbl_cont">
 					    <tbody>
 					    <tr>
@@ -1989,7 +1907,7 @@
 				 	<input type="button" class="button" value="升级"/>
 					</div>
 				</div>
-				<div id="ping">
+				<div id="_ping">
 					<table class="tbl_cont">
 					    <tbody>
 					    <tr>
@@ -2010,7 +1928,7 @@
 					</table>
 					<textarea id="ping_res"></textarea>
 				</div>
-				<div class="output">
+				<div id="_output">
 					<table class="tbl_cont">
 					    <tbody>
 					    
@@ -2068,7 +1986,7 @@
 				 		<input type="button" class="button" value="导出"/>
 					</div>
 				</div>
-				<div id="trouble_shooting">
+				<div id="_trouble_shooting">
 					<table class="tbl_cont">
 					    <tbody>					    
 					    <tr>
@@ -2107,109 +2025,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div id="capwap" style="display:none">
-				<div class="table_title">
-					<span>CAPWAP</span>
-				</div>
-				<table class="tbl_cont">
-				    <tbody>
-				    <tr>
-				        <td class="col1">使能状态：</td>
-				        <td class="col2">
-				            <input type="checkbox" checked="checked" />
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">主CAPWAP服务器：</td>
-				        <td class="col2">
-				            <input type="text"/>（可选, 1-64个字符）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">备份CAPWAP服务器：</td>
-				        <td class="col2">
-				            <input type="text"/>（可选, 1-64个字符）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">控制端口：</td>
-				        <td class="col2">
-				            <input type="text"/>（256-65535，默认为5246）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">高级选项：</td>
-				        <td class="col2">
-				            <input type="checkbox" />
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">MTU：</td>
-				        <td class="col2">
-				            <input type="text"/>（512-1500，默认为1300）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Discovery Interval：</td>
-				        <td class="col2">
-				            <input type="text"/>（0-90秒，默认为5）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Max Discovery Interval：</td>
-				        <td class="col2">
-				            <input type="text"/>（2-180秒，默认为20）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Echo Interval：</td>
-				        <td class="col2">
-				            <input type="text"/>（10-60秒，默认为30）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Retransmit Interval：</td>
-				        <td class="col2">
-				            <input type="text"/>（1-30秒，默认为3）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Silent Interval：</td>
-				        <td class="col2">
-				            <input type="text"/>（10-60秒，默认为30）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Wait Join：</td>
-				        <td class="col2">
-				            <input type="text"/>（30-120秒，默认为60）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Max Discoveries：</td>
-				        <td class="col2">
-				            <input type="text"/>（5-20，默认为10）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">Max Retransmit：</td>
-				        <td class="col2">
-				            <input type="text"/>（2-10，默认为5）
-				        </td>
-				    </tr>
-				    <tr>
-				        <td class="col1">默认云端服务器：</td>
-				        <td class="col2">
-				            <input type="text"/>（可选，1-64个字符，默认为redirector.commsky.com.cn）
-				        </td>
-				    </tr>
-				    </tbody>
-				</table>
-				<div class="content_option">
-				    <input type="button" class="button" value="取消"/>
-				    <input type="button" class="button" value="确定"/>
-				</div>
-			</div> -->
+			
 			<div id="time_settings" style="display:none">
 				<div class="table_title">
 					<span>当前系统时间</span>
@@ -2270,26 +2086,28 @@
 			<div id="syslog" style="display:none">
 				<div class="underline">
 				    <ul>
-				        <li class="tab">日志信息</li>
-				        <li class="tab">日志设置</li>
-				        <li class="tab">日志导出</li>
+				        <li class="tab" id="syslog_info">日志信息</li>
+				        <li class="tab" id="syslog_setting">日志设置</li>
+				        <li class="tab" id="syslog_output">日志导出</li>
 				    </ul>
 				</div>
-				<div id="syslog_info">
-					<div>
-						<input type="button" class="button" value="清空">
-					    <input type="button" class="button" value="刷新">
-					    <span>查询项</span>
-					    <select>
-					        <option>时间/日期</option>
-					        <option>主机名</option>
-					        <option>级别</option>
-					        <option>模块</option>
-					        <option>描述</option>
-					    </select>
-					    <span>关键词</span>
-					    <input type="text" name="">
-					    <input type="button" value="查询">
+				<div id="_syslog_info">
+					<div class="query">
+						<input type="button" class="button left" value="清空">
+					    <input type="button" class="button left" value="刷新">
+					    <div class="right">
+					    	<span>查询项</span>
+						    <select>
+						        <option>时间/日期</option>
+						        <option>主机名</option>
+						        <option>级别</option>
+						        <option>模块</option>
+						        <option>描述</option>
+						    </select>
+						    <span>关键词</span>
+						    <input type="text" name="">
+						    <input type="button" value="查询">
+					    </div>
 					</div>
 					<table class="tbl">
 					    <thead>
@@ -2324,7 +2142,7 @@
 					    </tbody>
 					</table>
 				</div>
-				<div id="syslog_setting">
+				<div id="_syslog_setting">
 					<div class="table_title">
 						<span>日志功能</span>
 					</div>
@@ -2389,7 +2207,7 @@
 					    </tbody>
 					</table>
 				</div>
-				<div id="syslog_output">				
+				<div id="_syslog_output">				
 					<table class="tbl_cont">
 					    <tbody>					   
 					    <tr>
@@ -2489,20 +2307,24 @@
 			<div id="accounts_settings" style="display:none">
 				<div class="underline">
 				    <ul>
-				        <li class="tab">用户管理</li>
+				        <li class="tab">
+				        	<a href="">用户管理</a>
+				        </li>
 				    </ul>
 				</div>				
-				<div>
-					<input type="button" class="button" value="新增用户">
-					<span>查询项</span>
-					<select>
-						<option>用户名</option>
-						<option>级别</option>
-						
-					</select>
-					<span>关键词</span>
-					<input type="text" name="">
-					<input type="button" value="查询">
+				<div class="query">
+					<input type="button" class="button left" value="新增用户">
+					<div class="right">
+						<span>查询项</span>
+						<select>
+							<option>用户名</option>
+							<option>级别</option>
+							
+						</select>
+						<span>关键词</span>
+						<input type="text" name="">
+						<input type="button" value="查询">
+					</div>
 				</div>
 				<table class="tbl">
 				    <thead>
@@ -2530,8 +2352,6 @@
 				    </tr>
 				    </tbody>
 				</table>
-
-
 				<div class="table_title">
 					<span>页面登录后超时时间</span>
 				</div>

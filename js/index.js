@@ -110,11 +110,7 @@ function showCont(){
         $("#vlan_settings").show();
         $("#vlan_settings").siblings().hide();
     });
-    $("#m_dhcpd").click(function(){
-        $("#dhcpd").show();
-        $("#dhcpd").siblings().hide();
-    });
-   
+      
     $("#m_servers_manage").click(function(){
         $("#servers_manage").show();
         $("#servers_manage").siblings().hide();

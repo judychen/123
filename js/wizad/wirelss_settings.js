@@ -19,7 +19,7 @@ function changeEncrypt() {
 
 $(function () {
     arrData = loadWizardProgress("wizard_wireless_settings");
-    setNavigationBar("配置向导>无线设置");
+
 
     generate_ssid_input();
 

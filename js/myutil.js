@@ -26,7 +26,26 @@ var entityMapReg = {
     "|": "\\|"
 };
 
-function setNavigationBar(content) {
+function setNavigationBar() {
+    $this = $(this);
+
+    if($this.parent().attr("id") == "main_menu"){
+        if($this.attr("id") == "m_wizard"){
+            content = $this.find("span").html();
+
+        }else{
+            content = $this.find("span").html();
+            content += ">";
+            content += $this.find("li:first").html();
+        }
+    }else if($this.parent().attr("class") == "sub_menu"){
+        content = $this.parent().prev("a").find("span").html();
+        content += ">";
+        content += $this.html();
+    }else{
+        return;
+    }
+
     var tmp = "位置："+ content;
     $("#navigationBar").html(tmp);
     if(content == "") $("#navigationBar").css("display","none");
@@ -40,16 +59,44 @@ function tabMenu_init() {
     /*todo*/
 }
 
-function tabMenuClicked(obj) {
-    /*todo*/
+function tabMenuClicked(){
+    var $obj=$(this);
+
+    if ( $obj.attr('class')=="tabSelected" )
+        return;
+    else if( $obj.hasClass("tabHover")){
+        $obj.removeClass('tabHover');
+        $obj.addClass('tabSelected');
+        $obj.siblings().removeClass("tabSelected");
+        console.log("2");
+    }else{
+        $obj.addClass('tabSelected');
+        $obj.siblings().removeClass("tabSelected");
+        console.log("3");
+    }
+    var idval = $obj.attr("id");
+
+    $("#_" + idval).show();
+    $("#_" + idval).siblings("div:not(':first')").hide();
 }
 
-function tabMenuMouseover(obj) {
-    /*todo*/
+function tabMenuMouseover(){
+    var $obj=$(this);
+
+    if ( $obj.hasClass("tabSelected"))
+        return;
+    else {
+        $obj.addClass('tabHover');
+    }
 }
 
-function tabMenuMouseout() {
-    /*todo*/
+function tabMenuMouseout(){
+    var $obj=$(this);
+
+    if ( $obj.hasClass("tabHover")){
+        $obj.removeClass('tabHover');
+        console.log($obj.attr('class'));
+    }
 }
 
 function getQueryString(name) {

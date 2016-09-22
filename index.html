@@ -60,11 +60,10 @@
 
 	<header>
 		<div id="my_header">
-			<img src="img/logo.png">
-			<img src="img/logoMinor.gif">
+
 		</div>
 		<div id="my_banner" style="background-image:url(img/headbar.jpg)" height="26px">
-			<div id="navigationBar"></div>
+			<div id="navigationBar">位置：系统状态>设备概览</div>
 			<a href="#" class="white">保存</a>
 			<a href="#" class="white">退出</a>
 		</div>
@@ -416,22 +415,7 @@
 							<span>无线名称(SSID)</span>
 						</div>
 						<table class="tbl_cont" id="wizard_ssid">
-							<tbody>
-							<!-- <tr>
-								<td class="col1">2.4G SSID：</td>
-								<td class="col2">
-									<input type="text" name="" value="CommSky_2.4G">
-									（1-32个字符，不包含 ? " ; \）
-								</td>
-							</tr>
-							<tr>
-								<td class="col1">5G SSID：</td>
-								<td class="col2">
-									<input type="text" name="" value="CommSky_5G">
-									（1-32个字符，不包含 ? " ; \）
-								</td>
-							</tr> -->
-							</tbody>
+							<tbody></tbody>
 						</table>
 						<div class="table_title">
 							<span>无线安全</span>
@@ -841,7 +825,7 @@
 			<div id="vlan_settings" style="display: none">
 				<div class="underline">
 					<ul>
-						<li class="tab" id="vlan">VLAN</li>
+						<li class="tab tabSelected" id="vlan">VLAN</li>
 						<li class="tab" id="port">端口</li>
 					</ul>
 				</div>
@@ -894,7 +878,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="_port">
+				<div id="_port" style="display: none">
 					<table class="tbl">
 						<thead>
 						<tr>
@@ -1159,7 +1143,7 @@
 			<div id="radio_setting" style="display: none">
 				<div class="underline">
 					<ul>
-						<li class="tab" id="radio0">Radio0</li>
+						<li class="tab tabSelected" id="radio0">Radio0</li>
 						<li class="tab" id="radio1">Radio1</li>
 					</ul>
 				</div>
@@ -1325,7 +1309,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="_radio1">
+				<div id="_radio1" style="display: none">
 					<table class="tbl_cont">
 						<tbody>
 						<tr>
@@ -1825,7 +1809,7 @@
 			<div id="equipment_maintenance" style="display:none">
 				<div class="underline">
 				    <ul>
-				        <li class="tab" id="reboot">设备重启</li>
+				        <li class="tab tabSelected" id="reboot">设备重启</li>
 				        <li class="tab" id="upgrade">软件升级</li>
 				        <li class="tab" id="ping">Ping工具</li>
 				        <li class="tab" id="output">一键导出</li>
@@ -1837,7 +1821,7 @@
 					<input type="button" class="button" value="重启">	
 				</div>
 
-				<div id="_upgrade">
+				<div id="_upgrade" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>
 					    <tr>
@@ -1907,7 +1891,7 @@
 				 	<input type="button" class="button" value="升级"/>
 					</div>
 				</div>
-				<div id="_ping">
+				<div id="_ping" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>
 					    <tr>
@@ -1928,7 +1912,7 @@
 					</table>
 					<textarea id="ping_res"></textarea>
 				</div>
-				<div id="_output">
+				<div id="_output" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>
 					    
@@ -1986,7 +1970,7 @@
 				 		<input type="button" class="button" value="导出"/>
 					</div>
 				</div>
-				<div id="_trouble_shooting">
+				<div id="_trouble_shooting" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>					    
 					    <tr>
@@ -2086,7 +2070,7 @@
 			<div id="syslog" style="display:none">
 				<div class="underline">
 				    <ul>
-				        <li class="tab" id="syslog_info">日志信息</li>
+				        <li class="tab tabSelected" id="syslog_info">日志信息</li>
 				        <li class="tab" id="syslog_setting">日志设置</li>
 				        <li class="tab" id="syslog_output">日志导出</li>
 				    </ul>
@@ -2142,7 +2126,7 @@
 					    </tbody>
 					</table>
 				</div>
-				<div id="_syslog_setting">
+				<div id="_syslog_setting" style="display: none">
 					<div class="table_title">
 						<span>日志功能</span>
 					</div>
@@ -2207,7 +2191,7 @@
 					    </tbody>
 					</table>
 				</div>
-				<div id="_syslog_output">				
+				<div id="_syslog_output" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>					   
 					    <tr>
@@ -2307,64 +2291,64 @@
 			<div id="accounts_settings" style="display:none">
 				<div class="underline">
 				    <ul>
-				        <li class="tab">
-				        	<a href="">用户管理</a>
-				        </li>
+				        <li class="tab tabSelected" id="accunts">用户管理</li>
 				    </ul>
 				</div>				
-				<div class="query">
-					<input type="button" class="button left" value="新增用户">
-					<div class="right">
-						<span>查询项</span>
-						<select>
-							<option>用户名</option>
-							<option>级别</option>
-							
-						</select>
-						<span>关键词</span>
-						<input type="text" name="">
-						<input type="button" value="查询">
+				<div id="_accunts">
+					<div class="query">
+						<input type="button" class="button left" value="新增用户">
+						<div class="right">
+							<span>查询项</span>
+							<select>
+								<option>用户名</option>
+								<option>级别</option>
+
+							</select>
+							<span>关键词</span>
+							<input type="text" name="">
+							<input type="button" value="查询">
+						</div>
 					</div>
+					<table class="tbl">
+						<thead>
+						<tr>
+							<th>用户名</th>
+							<th>级别</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<table class="tbl_page">
+									<tbody>
+									<tr>
+										<td>共 2 条记录</td>
+										<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+									</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="table_title">
+						<span>页面登录后超时时间</span>
+					</div>
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">超时时间：</td>
+							<td class="col2">
+								<input type="text" value="5" />（0-1440分钟，默认为5）
+							</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
-				<table class="tbl">
-				    <thead>
-				    <tr>
-				        <th>用户名</th>
-				        <th>级别</th>   
-				    </tr>
-				    </thead>
-				    <tbody>
-				    <tr>
-				        <td></td>
-				        <td></td> 
-				    </tr>
-				    <tr>
-				        <td colspan="2">
-				            <table class="tbl_page">
-				                <tbody>
-				                <tr>
-				                    <td>共 2 条记录</td>
-				                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-				                </tr>
-				                </tbody>
-				            </table>
-				        </td>
-				    </tr>
-				    </tbody>
-				</table>
-				<div class="table_title">
-					<span>页面登录后超时时间</span>
-				</div>
-				<table class="tbl_cont">
-				    <tbody>
-				    <tr>
-				        <td class="col1">超时时间：</td>
-				        <td class="col2">
-				            <input type="text" value="5" />（0-1440分钟，默认为5）
-				        </td>
-				    </tr>
-				    </tbody>
-				</table>
 			</div>
 		</div>
 	</main>

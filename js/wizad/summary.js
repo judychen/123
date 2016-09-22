@@ -27,7 +27,7 @@ function generate_tr_ssid() {
 $(function () {
    /* arrWS = loadWizardProgress("wizard_summary");
 
-    setNavigationBar("配置向导>配置总览");
+
 
     var temp;
 	var nat = jsSpec.spec.nat;*/

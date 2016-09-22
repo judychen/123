@@ -14,7 +14,7 @@ function _link_mode_changed() {
 }
 
 $(function () {
-    setNavigationBar("配置向导>工作模式");
+
     link_mode_changed();
     arrIS = loadWizardProgress("wizard_link_mode");
 /*    if(typeof (arrIS.link_mode) != "undefined"){

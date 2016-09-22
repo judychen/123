@@ -23,9 +23,7 @@ function lan_dhcpd_enable_changed() {
 
 $(function () {
 	arrIS = loadWizardProgress("wizard_lan_settings");
-
-	setNavigationBar("配置向导>LAN设置");
-
+	
 	if ( typeof(arrIS.ip) != "undefined" ) {
 		$("#wizard_lan_ip").val( arrIS.ip );
 		$("#wizard_lan_net").val( arrIS.netmask );

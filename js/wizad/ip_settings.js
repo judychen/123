@@ -67,7 +67,7 @@ function ok() {
 
 $(function () {
 	arrIS = loadWizardProgress("wizard_ip_settings");
-	setNavigationBar("配置向导>IP地址");
+
 	/*这边是配置初始值？？*/
 	if ( typeof(arrIS.ip_mode) != "undefined" ){
 		$("#sel_ip_mode").val( arrIS.ip_mode );

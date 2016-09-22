@@ -46,6 +46,13 @@ $(function () {
     })
 
     showCont();
+    /*tab事件*/
+    $(".underline li").click(tabMenuClicked);
+    $(".underline li").mouseover(tabMenuMouseover);
+    $(".underline li").mouseout(tabMenuMouseout);
+    /*navigationBar事件*/
+    $("li").click(setNavigationBar);
+
 });
 
 function resize() {

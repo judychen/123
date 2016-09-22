@@ -6,7 +6,7 @@ var arrAP;
 
 $(function () {
     arrAP = loadWizardProgress("wizard_admin_pwd");
-	setNavigationBar("配置向导>设备密码");
+
 	
 	var pwd = arrAP.pwd;
 	var pwd_check = arrAP.pwd_check;

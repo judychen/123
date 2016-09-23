@@ -16,11 +16,13 @@
 	background-color: #8EA5CF;
 	padding-left:10px;
 	border-bottom: 1px solid #fff;
+	cursor: pointer;
 }
 
 #main_menu>li>a{
     display: inline-block;
     height: 30px;
+
 }
 
 #main_menu>li>a>span{
@@ -41,6 +43,7 @@
 	font-size: 13px;
 	padding: 5px 0 5px 10px;
 	background: #fff;
+	cursor: pointer;
 }
 
 .sub_menu li.current,

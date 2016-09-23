@@ -807,7 +807,7 @@
 					<span>三层接口列表</span>
 				</div>
 				<div class="query">
-					<input type="button left" value="新增"/>
+					<input type="button" class="button left" value="新增"/>
 					<div class="right">
 						<span>查询项</span>
 						<select name="" id="">
@@ -820,6 +820,132 @@
 						<input type="text"/>
 						<input type="button" value="查询"/>
 					</div>
+				</div>
+
+				<div>
+					<div class="table_title">
+						<span>新增三层接口</span>
+					</div>
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">选择VLAN ID</td>
+							<td class="col2">
+								<select>
+									<option>请选择VLAN ID</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">描述：</td>
+							<td class="col2">
+								<input type="text"/>(可选，1-80个字符，不包含< > / \ ' " ; ?)
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">使能状态：</td>
+							<td class="col2">
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">IP获取方式：</td>
+							<td class="col2">
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+									<option>禁用</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">DNS设置：</td>
+							<td class="col2">
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">默认IP地址：</td>
+							<td class="col2">
+								<input type="text"/>（可选）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">默认子网掩码：</td>
+							<td class="col2">
+								<input type="text"/>（可选）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">NAT：</td>
+							<td class="col2">
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+								</select>
+							</td>
+						</tr>
+						
+						
+						<tr>
+							<td class="col1">DNS设置：</td>
+							<td class="col2">
+								<select name="" id="">
+									<option value="">手动</option>
+									<option value="">自动</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">DNS服务器：</td>
+							<td class="col2">
+								<input type="text"/>（可选）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">备份DNS服务器：</td>
+							<td class="col2">
+								<input type="text"/>（可选）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">DHCP服务器：</td>
+							<td class="col2">
+								<select name="" id="">
+									<option value="">启用</option>
+									<option value="">禁用</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">默认IP地址：</td>
+							<td class="col2">
+								<input type="text"/>（可选）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">默认子网掩码：</td>
+							<td class="col2">
+								<input type="text"/>（可选）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">NAT：</td>
+							<td class="col2">
+								<select name="" id="">
+									<option value="">启用</option>
+									<option value="">禁用</option>
+								</select>
+							</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<div id="vlan_settings" style="display: none">
@@ -2309,8 +2435,8 @@
 							<input type="button" value="查询">
 						</div>
 					</div>
-					<table class="tbl">
-						<thead>
+					<table class="tbl" id="list_accounts">
+						<!-- <thead>
 						<tr>
 							<th>用户名</th>
 							<th>级别</th>
@@ -2333,6 +2459,41 @@
 								</table>
 							</td>
 						</tr>
+						</tbody> -->
+					</table>
+					<div class="table_title">
+						<span>新增用户</span>
+					</div>
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">用户名</td>
+							<td class="col2">
+								<input type="text" value="" />（1-32个字符，只包含数字、字母、下划线）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">级别</td>
+							<td class="col2">
+								<select>
+									<option>普通用户</option>
+									<option>管理用户</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">初始密码</td>
+							<td class="col2">
+								<input type="text" value="" />（1-32个字符，不包含单、双引号、分号、空格、问号）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">确认密码</td>
+							<td class="col2">
+								<input type="text" value="" />
+							</td>
+						</tr>
+
 						</tbody>
 					</table>
 					<div class="table_title">

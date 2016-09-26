@@ -142,7 +142,29 @@ function myAlert(info/*, id*/) {
 }
 
 function showSelect(bShow, bSave, errMsg, funcselect) {
-    /*todo*/
+    if( bShow == true){
+        /*??*/
+        /*$("#zzc").show();*/
+        $("#selectReboot").show();
+        $("#selectMsg").html(errMsg);
+
+        $("#selectReboot_okBtn").focus().select();//???
+
+        
+/*        if(bSave){
+            $("#myAlert_span_save").show();
+            $("#selectReboot_Select").show();
+        }else{
+            $("#myAlert_span_save").hide();
+            $("#selectReboot_Select").hide();
+        }选择是否要保存选项的，可以连参数一起删了
+*/
+    }else{
+        /*???*/
+        /*$("#zcc").hide();*/
+        $("#selectReboot").hide();
+        console.log($("#selectReboot"));
+    }
 }
 
 function select_reboot() {
@@ -168,7 +190,10 @@ function myConfirm(info, bSave, funcOk) {
 }
 
 function myAlertSelect(info, funcselect) {
-    /*todo*/
+    /*???*/
+    var jqDomSelectDlg = $("#selectReboot_Select");
+    jqDomSelectDlg.attr("checked", false);
+    showSelect( true, true, info, funcselect);
 }
 
 /*获得每个月的天数，按是否闰年枚举*/

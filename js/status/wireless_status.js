@@ -1,23 +1,3 @@
-var jsWirelessServ = {
-	"status":"ok", 
-	"data":[
-		{
-			"bss_id":0, 
-			"radio_id":0, 
-			"ssid":"123", 
-			"auth":"None", 
-			"up":1 
-		},
-		{
-			"bss_id":1, 
-			"radio_id":1, 
-			"ssid":"123", 
-			"auth":"None", 
-			"up":1 
-		}
-	]
-};
-
 function formatPort( arrRow, index ) {
 	return "WLAN-BSS" + arrRow[index];
 }

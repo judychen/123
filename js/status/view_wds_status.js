@@ -1,11 +1,4 @@
-var jsWds = {
-	"wds_status":{
-		"mode":"rootap",
-		"status":"1",
-		"ref_netid":"2",
-		"level":"3"
-	}
-};
+
 
 var wdsst = new myGrid("wdsst");
 var arrFwd = new Array();

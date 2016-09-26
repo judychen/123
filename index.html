@@ -45,16 +45,33 @@
 <body>
 	<div id="zcc"></div>
 	<div id="dialog"></div>
-	<div id="errDlg" style="display: none">
-		<div id="errDlg_title">
-			<em></em>
+	<div id="errDlg" class="box" style="display: none">
+		<div class="box_title">
+			<span class="left">提示</span>
+			<input class="box_setwid right" type="button" name="" value="X">
 		</div>
-		<div id="errDlg_dialog">
-			<span id="errMsg"></span>
+		<div class="box_dialog">
+			<span></span>
+			<span id="errMsg" ></span>
 		</div>
-		<div id="errDlg_setwin"></div>
-		<div id="errDlg_botton">
-			<a id="errDlg_okBtn" href="" class="button">确定</a>
+		<div class="box_bottom right">
+			<input type="button" name="" id="errDlg_okBtn" class="button" value="确定">	
+		</div>
+	</div>
+	<div id="selectReboot" class="box" style="display: none">
+		<div class="box_title">
+			<span class="left">提示</span>
+			<input class="box_setwid right" type="button" name="" value="X">
+		</div>
+		<div class="box_dialog">
+			<span></span>
+			<span id="selectMsg" ></span>
+		</div>
+		<div class="box_bottom right">
+			<label for="selectReboot_select">保存当前配置</label>
+			<input type="checkbox" name="reboot" id="selectReboot_select">
+			<input type="button" name="" id="selectReboot_okBtn" class="button" value="确定">
+			<input type="button" name="" id="selectReboot_cancelBtn" class="button" value="取消">	
 		</div>
 	</div>
 
@@ -1944,7 +1961,7 @@
 				</div>
 
 				<div id="_reboot" class="subcenter">
-					<input type="button" class="button" value="重启">	
+					<input type="button" class="button" id="reboot_btn" value="重启">	
 				</div>
 
 				<div id="_upgrade" style="display: none">

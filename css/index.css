@@ -120,3 +120,40 @@ footer{
 	padding-right: 20px;
 
 }
+
+#div_progress{
+	width: 500px;
+	background-color: #fff;
+	position: absolute;
+	left: 300px;
+	top: 200px;
+	border:1px solid #465f88;
+}
+
+#loading{
+	background-image: url(../img/bak.png);
+	height: 50px;
+	width: 400px;
+	margin: 0 auto;
+}
+
+#loading>div{
+	background-image: url(../img/pro.gif);
+	height: 48px;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	line-height: 48px;
+}
+
+#message_reboot,#message_faild{
+	width: 200px;
+	height: 35px;
+	background-color:#d8e7f0; 
+	border:1px solid #187CBE; 
+	font-size: 12px;
+	line-height: 35px;
+	text-align: center;
+	margin: 20px auto;
+	display: none;
+}

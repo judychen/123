@@ -74,6 +74,13 @@
 			<input type="button" name="" id="selectReboot_cancelBtn" class="button" value="取消">	
 		</div>
 	</div>
+	<div id="div_progress" style="display:none">
+		<div id="message_reboot">设备重启中，请等待。。。</div>
+		<div id="message_faild">网页访问失败，请检查设备当前IP</div>
+		<div id="loading">
+			<div id="load_cont"></div>
+		</div>
+	</div>
 
 	<header>
 		<div id="my_header">
@@ -1969,60 +1976,60 @@
 					    <tbody>
 					    <tr>
 					        <td class="col1">当前硬件版本：</td>
-					        <td class="col2"></td>
+					        <td class="col2" id="current_hardversion"></td>
 					    </tr>
 					    <tr>
 					        <td class="col1">当前软件版本：</td>
-					        <td class="col2"></td>
+					        <td class="col2" id="current_softversion"></td>
 					    </tr>
 					    <tr>
 					        <td class="col1">升级方式：</td>
 					        <td class="col2">
-					            <input type="radio" name="upgrade_type" id="upgrade_local" />
+					            <input type="radio" name="upgrade_type" id="upgrade_local" class="radio_method" />
 					            <label for="upgrade_local">Local</label>
-					            <input type="radio" name="upgrade_type" id="upgrade_ftp" />
+					            <input type="radio" name="upgrade_type" id="upgrade_ftp"  class="radio_method" />
 					            <label for="upgrade_ftp">FTP</label>
-					            <input type="radio" name="upgrade_type" id="upgrade_tftp" />
+					            <input type="radio" name="upgrade_type" id="upgrade_tftp" class="radio_method" />
 					            <label for="upgrade_tftp">TFTP</label>
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="local_tr">
 					        <td class="col1">请选择升级文件：</td>
 					        <td class="col2">
 					            <input type="file" value="选择文件" />
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="ftp_tr">
 					        <td class="col1">FTP服务器：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="ftp_tr">
 					        <td class="col1">文件名：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="ftp_tr">
 					        <td class="col1">用户：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（可选）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="ftp_tr">
 					        <td class="col1">密码：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（可选）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="tftp_tr">
 					        <td class="col1">TFTP服务器：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）
 					        </td>
 					    </tr>
-					     <tr>
+					    <tr class="tftp_tr">
 					        <td class="col1">文件名：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）

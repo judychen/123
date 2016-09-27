@@ -141,34 +141,31 @@ function myAlert(info/*, id*/) {
     showError(true, info);
 }
 
+function myAlertSelect(info, funcselect) {
+    /*???*/
+    var jqDomSelectDlg = $("#selectReboot_Select");
+    jqDomSelectDlg.attr("checked", false);
+    showSelect( true, true, info, funcselect);
+}
+
 function showSelect(bShow, bSave, errMsg, funcselect) {
     if( bShow == true){
+        $("#selectReboot_okBtn").click(funcselect);
+        $(".box_setwid").click($("#selectReboot").hide);
+        $("#selectReboot_cancelBtn").click($("#selectReboot").hide);
         /*??*/
-        /*$("#zzc").show();*/
         $("#selectReboot").show();
         $("#selectMsg").html(errMsg);
-
-        $("#selectReboot_okBtn").focus().select();//???
-
-        
-/*        if(bSave){
-            $("#myAlert_span_save").show();
-            $("#selectReboot_Select").show();
-        }else{
-            $("#myAlert_span_save").hide();
-            $("#selectReboot_Select").hide();
-        }选择是否要保存选项的，可以连参数一起删了
-*/
     }else{
         /*???*/
-        /*$("#zcc").hide();*/
         $("#selectReboot").hide();
         console.log($("#selectReboot"));
     }
 }
 
 function select_reboot() {
-    /*todo*/
+    showSelect(false);
+    progressTask( 35 );
 }
 
 function save_select_success() {
@@ -187,13 +184,6 @@ function selectOk() {
 
 function myConfirm(info, bSave, funcOk) {
     /*todo*/
-}
-
-function myAlertSelect(info, funcselect) {
-    /*???*/
-    var jqDomSelectDlg = $("#selectReboot_Select");
-    jqDomSelectDlg.attr("checked", false);
-    showSelect( true, true, info, funcselect);
 }
 
 /*获得每个月的天数，按是否闰年枚举*/
@@ -333,6 +323,27 @@ function secToDHM(sec) {
     day.minute = parseInt((nSec % 3600) / 60);
 
     return day;
+}
+
+function changeMethod(){
+    $this = $(this);
+    if($this.next().val() == "Local"){
+        $(".local_tr").show();
+        $(".ftp_tr").hide();
+        $(".tftp_tr").hide();
+        console.log("loacl");
+    }else if ($this.next().val() == "FTP") {
+        $(".ftp_tr").show();
+        $(".local_tr").hide();
+        $(".tftp_tr").hide();
+        console.log("ftp");
+    }else{
+        $(".tftp_tr").show();
+        $(".local_tr").hide();
+        $(".ftp_tr").hide();
+        console.log("tftp");
+    }
+
 }
 
 

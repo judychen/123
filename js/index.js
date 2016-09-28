@@ -103,10 +103,10 @@ function showCont(){
         $("#clientlist").show();
         $("#clientlist").siblings().hide();
     });
-    $("#m_view_wds_status").click(function(){
+/*    $("#m_view_wds_status").click(function(){
         $("#view_wds_status").show();
         $("#view_wds_status").siblings().hide();
-    });
+    });*/
 
     /*Õ¯¬Á…Ë÷√*/
     $("#m_interface_settings").click(function(){

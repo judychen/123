@@ -143,23 +143,27 @@ function myAlert(info/*, id*/) {
 
 function myAlertSelect(info, funcselect) {
     /*???*/
-    var jqDomSelectDlg = $("#selectReboot_Select");
+    var jqDomSelectDlg = $("#save_select");
     jqDomSelectDlg.attr("checked", false);
     showSelect( true, true, info, funcselect);
 }
 
 function showSelect(bShow, bSave, errMsg, funcselect) {
     if( bShow == true){
-        $("#selectReboot_okBtn").click(funcselect);
-        $(".box_setwid").click($("#selectReboot").hide);
-        $("#selectReboot_cancelBtn").click($("#selectReboot").hide);
+        $("#prompt_okBtn").click(funcselect);
+        $("#prompt_setwid").click(function(){
+            $("#prompt").hide();
+        });
+        $("#prompt_cancelBtn").click(function(){
+            $("#prompt").hide();
+        });
         /*??*/
-        $("#selectReboot").show();
+        $("#prompt").show();
         $("#selectMsg").html(errMsg);
     }else{
         /*???*/
-        $("#selectReboot").hide();
-        console.log($("#selectReboot"));
+        $("#prompt").hide();
+       
     }
 }
 
@@ -325,26 +329,7 @@ function secToDHM(sec) {
     return day;
 }
 
-function changeMethod(){
-    $this = $(this);
-    if($this.next().val() == "Local"){
-        $(".local_tr").show();
-        $(".ftp_tr").hide();
-        $(".tftp_tr").hide();
-        console.log("loacl");
-    }else if ($this.next().val() == "FTP") {
-        $(".ftp_tr").show();
-        $(".local_tr").hide();
-        $(".tftp_tr").hide();
-        console.log("ftp");
-    }else{
-        $(".tftp_tr").show();
-        $(".local_tr").hide();
-        $(".ftp_tr").hide();
-        console.log("tftp");
-    }
 
-}
 
 
 

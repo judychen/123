@@ -291,3 +291,25 @@ var jsWds = {
     }
 };
 
+var jsNtp = { 
+    "pkg_time": [
+       { 
+            "sect_name": "ntpclient", 
+            "server": [
+                { 
+                    "server": "ntp.commsky.com.cn" 
+                }, 
+                { 
+                    "server": "time.nist.gov" 
+                }, 
+                { 
+                    "server": "time.windows.com" 
+                }
+            ], 
+            "enabled": "enabled", 
+            "period": "86400" 
+        } 
+    ] 
+};
+
+

@@ -32,7 +32,6 @@
 	<script src="js/status/wireless_status.js"></script>
 	<script src="js/status/radio_status.js"></script>
 	<script src="js/status/clientlist.js"></script>
-	<script src="js/status/view_wds_status.js"></script>
 	<!-- equipment_management -->
 	<script src="js/management/equipment_maintenance.js"></script>
 	<script src="js/management/time_settings.js"></script>
@@ -58,20 +57,20 @@
 			<input type="button" name="" id="errDlg_okBtn" class="button" value="确定">	
 		</div>
 	</div>
-	<div id="selectReboot" class="box" style="display: none">
+	<div id="prompt" class="box" style="display: none">
 		<div class="box_title">
 			<span class="left">提示</span>
-			<input class="box_setwid right" type="button" name="" value="X">
+			<input class="box_setwid right" id="prompt_setwid" type="button" name="" value="X">
 		</div>
 		<div class="box_dialog">
 			<span></span>
 			<span id="selectMsg" ></span>
 		</div>
 		<div class="box_bottom right">
-			<label for="selectReboot_select">保存当前配置</label>
-			<input type="checkbox" name="reboot" id="selectReboot_select">
-			<input type="button" name="" id="selectReboot_okBtn" class="button" value="确定">
-			<input type="button" name="" id="selectReboot_cancelBtn" class="button" value="取消">	
+			<label for="save_select">保存当前配置</label>
+			<input type="checkbox" name="reboot" id="save_select">
+			<input type="button" name="" id="prompt_okBtn" class="button" value="确定">
+			<input type="button" name="" id="prompt_cancelBtn" class="button" value="取消">	
 		</div>
 	</div>
 	<div id="div_progress" style="display:none">
@@ -130,7 +129,7 @@
 							<li id="m_domainSet_settings">域名集管理</li>
 							<li id="m_AAA_settings">AAA认证</li>
 							<li id="m_acl_settings">ACL管理</li>
-							<li id="m_wds">WDS配置</li>
+							<!-- <li id="m_wds">WDS配置</li> -->
 							<li id="m_time_acl_settings">时间策略</li>
 						</ul>
 					</li>
@@ -667,7 +666,7 @@
 					</tbody> -->
 				</table>
 			</div>
-			<div id="view_wds_status" style="display: none">
+			<!-- <div id="view_wds_status" style="display: none">
 				<div class="table_title">
 					<span>WDS运行状态</span>
 				</div>
@@ -695,7 +694,7 @@
 					</tr>
 					</tbody>
 				</table>
-			</div>
+			</div> -->
 
 			<div id="interface_settings" style="display: none">
 				<div class="table_title">
@@ -1807,7 +1806,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="wds" style="display: none">
+			<!-- <div id="wds" style="display: none">
 				<div class="table_title">
 					<span>WDS配置</span>
 				</div>
@@ -1844,7 +1843,7 @@
 					<tr>
 						<td class="col1">认证方式：</td>
 						<td class="col2">
-
+			
 							<select name="" id="">
 								<option value="">None</option>
 								<option value="">WPA2-PSK</option>
@@ -1909,8 +1908,8 @@
 						<input type="button" value="查询">
 					</div>
 				</div>
-
-			</div>
+			
+			</div> -->
 			<div id="time_acl_settings" style="display: none">
 				<div class="table_title">
 					<span>时间策略列表</span>
@@ -1961,9 +1960,9 @@
 				    <ul>
 				        <li class="tab tabSelected" id="reboot">设备重启</li>
 				        <li class="tab" id="upgrade">软件升级</li>
-				        <li class="tab" id="ping">Ping工具</li>
+				        <!-- <li class="tab" id="ping">Ping工具</li> -->
 				        <li class="tab" id="output">一键导出</li>
-				        <li class="tab" id="trouble_shooting">故障排除</li>
+				        <!-- <li class="tab" id="trouble_shooting">故障排除</li> -->
 				    </ul>
 				</div>
 
@@ -1985,7 +1984,7 @@
 					    <tr>
 					        <td class="col1">升级方式：</td>
 					        <td class="col2">
-					            <input type="radio" name="upgrade_type" id="upgrade_local" class="radio_method" />
+					            <input type="radio" name="upgrade_type" id="upgrade_local" class="radio_method" checked="checked" />
 					            <label for="upgrade_local">Local</label>
 					            <input type="radio" name="upgrade_type" id="upgrade_ftp"  class="radio_method" />
 					            <label for="upgrade_ftp">FTP</label>
@@ -1996,52 +1995,52 @@
 					    <tr class="local_tr">
 					        <td class="col1">请选择升级文件：</td>
 					        <td class="col2">
-					            <input type="file" value="选择文件" />
+					            <input type="file" value="选择文件" id="upgrade_file" />
 					        </td>
 					    </tr>
-					    <tr class="ftp_tr">
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">FTP服务器：</td>
 					        <td class="col2">
-					        	<input type="text" name="">（1-64个字符）
+					        	<input type="text" name="" id="upgrade_ftpserver">（1-64个字符）
 					        </td>
 					    </tr>
-					    <tr class="ftp_tr">
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">文件名：</td>
 					        <td class="col2">
-					        	<input type="text" name="">（1-64个字符）
+					        	<input type="text" name="" id="upgrade_ftpfile">（1-64个字符）
 					        </td>
 					    </tr>
-					    <tr class="ftp_tr">
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">用户：</td>
 					        <td class="col2">
-					        	<input type="text" name="">（可选）
+					        	<input type="text" name="" id="upgrade_ftpuser">（可选）
 					        </td>
 					    </tr>
-					    <tr class="ftp_tr">
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">密码：</td>
 					        <td class="col2">
-					        	<input type="text" name="">（可选）
+					        	<input type="text" name="" id="upgrade_ftppas">（可选）
 					        </td>
 					    </tr>
-					    <tr class="tftp_tr">
+					    <tr class="tftp_tr" style="display:none;">
 					        <td class="col1">TFTP服务器：</td>
 					        <td class="col2">
-					        	<input type="text" name="">（1-64个字符）
+					        	<input type="text" name="" id="upgrade_tftpserver">（1-64个字符）
 					        </td>
 					    </tr>
-					    <tr class="tftp_tr">
+					    <tr class="tftp_tr" style="display:none;">
 					        <td class="col1">文件名：</td>
 					        <td class="col2">
-					        	<input type="text" name="">（1-64个字符）
+					        	<input type="text" name="" id="upgrade_tftpfile">（1-64个字符）
 					        </td>
 					    </tr>
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 	<input type="button" class="button" value="升级"/>
+				 		<input type="button" class="button" value="升级" id="upgradebtn" />
 					</div>
 				</div>
-				<div id="_ping" style="display: none">
+				<!-- <div id="_ping" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>
 					    <tr>
@@ -2061,54 +2060,53 @@
 					    </tbody>
 					</table>
 					<textarea id="ping_res"></textarea>
-				</div>
+				</div> -->
 				<div id="_output" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>
-					    
 					    <tr>
 					        <td class="col1">请选择方式：</td>
 					        <td class="col2">
-					            <input type="radio" name="upgrade_type" id="upgrade_local" />
-					            <label for="upgrade_local">Local</label>
-					            <input type="radio" name="upgrade_type" id="upgrade_ftp" />
-					            <label for="upgrade_ftp">FTP</label>
-					            <input type="radio" name="upgrade_type" id="upgrade_tftp" />
-					            <label for="upgrade_tftp">TFTP</label>
+					            <input type="radio" name="output_type" id="output_local" class="radio_method" checked="checked" />
+					            <label for="output_local">Local</label>
+					            <input type="radio" name="output_type" id="output_ftp" class="radio_method"/>
+					            <label for="output_ftp">FTP</label>
+					            <input type="radio" name="output_type" id="output_tftp" class="radio_method"/>
+					            <label for="output_tftp">TFTP</label>
 					        </td>
 					    </tr>
 					   
-					    <tr>
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">FTP服务器：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">文件名：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">用户：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（可选）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="ftp_tr" style="display:none;">
 					        <td class="col1">密码：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（可选）
 					        </td>
 					    </tr>
-					    <tr>
+					    <tr class="tftp_tr" style="display:none;">
 					        <td class="col1">TFTP服务器：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）
 					        </td>
 					    </tr>
-					     <tr>
+					    <tr class="tftp_tr" style="display:none;">
 					        <td class="col1">文件名：</td>
 					        <td class="col2">
 					        	<input type="text" name="">（1-64个字符）
@@ -2120,7 +2118,7 @@
 				 		<input type="button" class="button" value="导出"/>
 					</div>
 				</div>
-				<div id="_trouble_shooting" style="display: none">
+				<!-- <div id="_trouble_shooting" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>					    
 					    <tr>
@@ -2157,7 +2155,7 @@
 				 		<input type="button" class="button" value="取消"/>
 				 		<input type="button" class="button" value="确定"/>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			
 			<div id="time_settings" style="display:none">
@@ -2216,6 +2214,10 @@
 				    </tr>
 				    </tbody>
 				</table>
+				<div class="content_option">
+				 	<input type="button" class="button" value="取消" id="timeok" />
+				 	<input type="button" class="button" value="确定" id="timecancel" />
+				</div>
 			</div>
 			<div id="syslog" style="display:none">
 				<div class="underline">

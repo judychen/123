@@ -64,6 +64,26 @@ $(function(){
 	}
 
 	as.pageview_init(usersList, 8, 'list_accounts')
+
+	$("#accunts_add_btn").click(function(){
+		$("#accunts_add").show();
+		$("#accunts_add").siblings().hide();
+	});
+
+	$("#accounts_add_ok").click(function(){
+		$("#accunts_add").hide();
+		$("#accunts_add").siblings().show();
+	});
+
+
+	
+
+
+
+
+
+
+
 });
 
 

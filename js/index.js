@@ -179,11 +179,6 @@ function showCont(){
         $("#syslog").show();
         $("#syslog").siblings().hide();
     });
-    $("#m_config_settings").click(function(){
-        $("#config_settings").show();
-        $("#config_settings").siblings().hide();
-    
-    });
     $("#m_accounts_settings").click(function(){
         $("#accounts_settings").show();
         $("#accounts_settings").siblings().hide();

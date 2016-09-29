@@ -15,13 +15,32 @@ function refreshTime() {
 	var seconds = now.getSeconds();
 	if (seconds < 10) seconds= "0"+seconds;
 	var strNow =  year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
-	$("#time_now").text(strNow);
-	now_sec = parseInt(now_sec)+1;
+	$("#time_current").text(strNow);
+	now_sec = parseInt(now_sec)+1;//执行一次+1s
+}
+
+function changeTimeMode(){
+	if($("#sel_timeMode").val() == "disabled"){
+		$(".timeAuto").hide();
+		$(".timeManual").show();
+	}else{
+		$(".timeAuto").show();
+		$(".timeManual").hide();
+	}
 }
 
 
 $(function(){
 	refreshTime();
 	setInterval(refreshTime, 1000);
-	load();
+	
+	var jsNtpInfo = jsNtp.pkg_time[0];
+	$("#sel_timeMode").val( jsNtpInfo.enabled );
+
+	/*var str = "";
+	for(var i = 0; i < 2037; i++){
+
+	}*/
+
+	$("#sel_timeMode").click(changeTimeMode);
 });

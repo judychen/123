@@ -5,6 +5,10 @@ function reboot(){
 
 }
 
+function restdefault(){
+	myAlertSelect("恢复出厂设置后设备将重启，确定要恢复吗？", select_reboot);//使用的重启的函数，待改
+}
+
 function changeMethod(){
     $this = $(this);
     if($this.next().html() == "Local"){
@@ -65,6 +69,8 @@ $(function(){
 	/*???*/
 	$("#reboot_btn").click(reboot);
 	/*保存当前配置未做,实际的数据恢复未做*/
+
+	$("#restore_btn").click(restdefault);
 
 	/*软件升级*/
 	var temp = jsDataDevice.device[0];

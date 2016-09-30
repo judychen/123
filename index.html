@@ -32,6 +32,12 @@
 	<script src="js/status/wireless_status.js"></script>
 	<script src="js/status/radio_status.js"></script>
 	<script src="js/status/clientlist.js"></script>
+	<!-- wireless -->
+	<script src="js/wireless/wireless_servers.js"></script>
+	<script src="js/wireless/radio_setting.js"></script>
+	<script src="js/wireless/domainSet_settings.js"></script>
+	<script src="js/wireless/acl_settings.js"></script>
+	<script src="js/wireless/time_acl_settings.js"></script>
 	<!-- equipment_management -->
 	<script src="js/management/equipment_maintenance.js"></script>
 	<script src="js/management/time_settings.js"></script>
@@ -106,16 +112,6 @@
 							<li id="m_wireless_status">无线接入服务</li>
 							<li id="m_radio_status">射频信息</li>
 							<li id="m_clientlist">客户端</li>
-							<li id="m_view_wds_status">WDS状态</li>
-						</ul>
-					</li>
-					<li id="m_networ_settings">
-						<a><span>网络设置</span></a>
-						<ul class="sub_menu">
-							<li id="m_interface_settings">接口管理</li>
-							<li id="m_vlan_settings">VLAN管理</li>		
-							<li id="m_servers_manage">服务管理</li>
-							<li id="m_network_advanced_settings">高级设置</li>
 						</ul>
 					</li>
 					<li id="m_wireless_settings">
@@ -123,12 +119,8 @@
 						<ul class="sub_menu">
 							<li id="m_wireless_servers">无线接入服务</li>
 							<li id="m_radio_setting">射频参数</li>
-							<li id="m_radio_speed_settings">射频速率</li>
-							<li id="m_portal_settings">Portal管理</li>
 							<li id="m_domainSet_settings">域名集管理</li>
-							<li id="m_AAA_settings">AAA认证</li>
 							<li id="m_acl_settings">ACL管理</li>
-							<!-- <li id="m_wds">WDS配置</li> -->
 							<li id="m_time_acl_settings">时间策略</li>
 						</ul>
 					</li>
@@ -664,573 +656,6 @@
 					</tbody> -->
 				</table>
 			</div>
-			<!-- <div id="view_wds_status" style="display: none">
-				<div class="table_title">
-					<span>WDS运行状态</span>
-				</div>
-				<table class="tbl_cont" id="list_wds_status">
-					<tbody>
-					<tr>
-						<td class="col1">WDS模式：</td>
-						<td class="col2" id="wds_mode"></td>
-					</tr>
-					<tr>
-						<td class="col1">状态：</td>
-						<td class="col2" id="wds_status"></td>
-					</tr>
-					<tr>
-						<td class="col1">连接时间：</td>
-						<td class="col2" id="wds_uptime"></td>
-					</tr>
-					<tr>
-						<td class="col1">配置NetID：</td>
-						<td class="col2" id="wds_ref_netid"></td>
-					</tr>
-					<tr>
-						<td class="col1">层级：</td>
-						<td class="col2" id="wds_level"></td>
-					</tr>
-					</tbody>
-				</table>
-			</div> -->
-
-			<div id="interface_settings" style="display: none">
-				<div class="table_title">
-					<span>LAN口（Vlan-interface 1）设置</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">VLAN ID</td>
-						<td class="col2">1</td>
-					</tr>
-					<tr>
-						<td class="col1">使能状态：</td>
-						<td class="col2">
-							<select name="" id="">
-								<option value="DHCP">DHCP</option>
-								<option value="Static">Static</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">IP获取方式：</td>
-						<td class="col2">
-							<input type="text"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">IP地址：</td>
-						<td class="col2">
-							<input type="text"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">子网掩码：</td>
-						<td class="col2">
-							<input type="text"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">网关(默认路由)：</td>
-						<td class="col2">
-							<input type="text"/>（可选）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">上网账号：</td>
-						<td class="col2">
-							<input type="text"/>（1-64个字符，不支持" ' ~ \ #空格和?输入）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">上网口令：</td>
-						<td class="col2">
-							<input type="text"/>（1-64个字符，不支持" ' ~ \ #空格和?输入）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">MTU：</td>
-						<td class="col2">
-							<input type="text" value="1492"/>（可选，默认值1492，范围128~1492）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">服务名：</td>
-						<td class="col2">
-							<input type="text"/>（可选:1-64个字符，不支持" ' ~ \ #空格和?输入）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">服务器名：</td>
-						<td class="col2">
-							<input type="text"/>（可选:1-64个字符，不支持" ' ~ \ #空格和?输入）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">DNS设置：</td>
-						<td class="col2">
-							<select name="" id="">
-								<option value="">手动</option>
-								<option value="">自动</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">DNS服务器：</td>
-						<td class="col2">
-							<input type="text"/>（可选）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">备份DNS服务器：</td>
-						<td class="col2">
-							<input type="text"/>（可选）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">DHCP服务器：</td>
-						<td class="col2">
-							<select name="" id="">
-								<option value="">启用</option>
-								<option value="">禁用</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">默认IP地址：</td>
-						<td class="col2">
-							<input type="text"/>（可选）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">默认子网掩码：</td>
-						<td class="col2">
-							<input type="text"/>（可选）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">NAT：</td>
-						<td class="col2">
-							<select name="" id="">
-								<option value="">启用</option>
-								<option value="">禁用</option>
-							</select>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="content_option">
-					<input type="button" class="button" value="取消"/>
-					<input type="button" class="button" value="确定"/>
-				</div>
-				<div class="table_title">
-					<span>三层接口列表</span>
-				</div>
-				<div class="query">
-					<input type="button" class="button left" value="新增"/>
-					<div class="right">
-						<span>查询项</span>
-						<select name="" id="">
-							<option value="">名称</option>
-							<option value="">描述</option>
-							<option value="">IP地址/子网掩码</option>
-							<option value="">状态</option>
-						</select>
-						<span>关键词</span>
-						<input type="text"/>
-						<input type="button" value="查询"/>
-					</div>
-				</div>
-
-				<div>
-					<div class="table_title">
-						<span>新增三层接口</span>
-					</div>
-					<table class="tbl_cont">
-						<tbody>
-						<tr>
-							<td class="col1">选择VLAN ID</td>
-							<td class="col2">
-								<select>
-									<option>请选择VLAN ID</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">描述：</td>
-							<td class="col2">
-								<input type="text"/>(可选，1-80个字符，不包含< > / \ ' " ; ?)
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">使能状态：</td>
-							<td class="col2">
-								<select>
-									<option>启用</option>
-									<option>禁用</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">IP获取方式：</td>
-							<td class="col2">
-								<select>
-									<option>启用</option>
-									<option>禁用</option>
-									<option>禁用</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DNS设置：</td>
-							<td class="col2">
-								<select>
-									<option>启用</option>
-									<option>禁用</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">默认IP地址：</td>
-							<td class="col2">
-								<input type="text"/>（可选）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">默认子网掩码：</td>
-							<td class="col2">
-								<input type="text"/>（可选）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">NAT：</td>
-							<td class="col2">
-								<select>
-									<option>启用</option>
-									<option>禁用</option>
-								</select>
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td class="col1">DNS设置：</td>
-							<td class="col2">
-								<select name="" id="">
-									<option value="">手动</option>
-									<option value="">自动</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DNS服务器：</td>
-							<td class="col2">
-								<input type="text"/>（可选）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">备份DNS服务器：</td>
-							<td class="col2">
-								<input type="text"/>（可选）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">DHCP服务器：</td>
-							<td class="col2">
-								<select name="" id="">
-									<option value="">启用</option>
-									<option value="">禁用</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">默认IP地址：</td>
-							<td class="col2">
-								<input type="text"/>（可选）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">默认子网掩码：</td>
-							<td class="col2">
-								<input type="text"/>（可选）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">NAT：</td>
-							<td class="col2">
-								<select name="" id="">
-									<option value="">启用</option>
-									<option value="">禁用</option>
-								</select>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div id="vlan_settings" style="display: none">
-				<div class="underline">
-					<ul>
-						<li class="tab tabSelected" id="vlan">VLAN</li>
-						<li class="tab" id="port">端口</li>
-					</ul>
-				</div>
-				<div id="_vlan">
-					<div class="query">
-						<input type="button" class="button left" value="新增"/>
-						<div class="right">
-							<span>查询项</span>
-							<select name="" id="">
-								<option value="">VLAN ID</option>
-								<option value="">VLAN名称</option>
-								<option value="">描述</option>
-								<option value="">成员端口</option>
-							</select>
-							<span>关键词</span>
-							<input type="text"/>
-							<input type="button" value="查询"/>
-						</div>
-					</div>
-					<table class="tbl">
-						<thead>
-						<tr>
-							<th>VLAN ID</th>
-							<th>VLAN名称</th>
-							<th>描述</th>
-							<th>成员端口</th>
-							<th>操作</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<table class="tbl_page">
-									<tbody>
-									<tr>
-										<td>共 2 条记录</td>
-										<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-									</tr>
-									</tbody>
-								</table>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="_port" style="display: none">
-					<table class="tbl">
-						<thead>
-						<tr>
-							<th>端口</th>
-							<th>SSID</th>
-							<th>类型</th>
-							<th>PVID</th>
-							<th>Permit VLAN</th>
-							<th>操作</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td colspan="6">
-								<table class="tbl_page">
-									<tbody>
-									<tr>
-										<td>共 2 条记录</td>
-										<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-									</tr>
-									</tbody>
-								</table>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div id="servers_manage" style="display: none">
-				<div class="table_title">
-					<span>Telnet服务</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">启用:</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">端口：</td>
-						<td class="col2">
-							<input type="text" value="23"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="table_title">
-					<span>SSH</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">启用:</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">端口：</td>
-						<td class="col2">
-							<input type="text" value="22"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="table_title">
-					<span>HTTP</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">启用:</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">端口：</td>
-						<td class="col2">
-							<input type="text" value="80"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="table_title">
-					<span>HTTPS</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">启用:</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">端口：</td>
-						<td class="col2">
-							<input type="text" value="443"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="content_option">
-					<input type="button" class="button" value="取消"/>
-					<input type="button" class="button" value="确定"/>
-				</div>
-			</div>
-			
-			<div id="network_advanced_settings" style="display: none">
-				<div class="table_title">
-					<span>路由转发</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">路由转发:</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="table_title">
-					<span>ALG设置</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">主DNS服务器:</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">备用DNS服务器1：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">备用DNS服务器2：</td>
-						<td class="col2">
-							<input type="checkbox" checked="checked"/>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="content_option">
-					<input type="button" class="button" value="取消"/>
-					<input type="button" class="button" value="确定"/>
-				</div>
-				<div class="table_title">
-					<span>二/三层切换接口列表</span>
-				</div>
-				<div class="query">
-					<input type="button" class="button left" value="刷新">
-					<div class="right">
-						<span>查询项</span>
-						<select>
-							<option>名称</option>
-							<option>模式</option>
-						</select>
-						<span>关键词</span>
-						<input type="text" name="">
-						<input type="button" value="查询">
-					</div>
-				</div>
-				<table class="tbl">
-					<thead>
-					<tr>
-						<th>名称</th>
-						<th>模式</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
 
 			<!--无线设置-->
 			<div id="wireless_servers" style="display: none">
@@ -1242,7 +667,7 @@
 					<tr>
 						<td class="col1">无线接入服务：</td>
 						<td class="col2">
-							<input type="button" class="button" value="新建"/>
+							<input type="button" class="button" value="新建" id="wireless_add_btn" />
 						</td>
 					</tr>
 					</tbody>
@@ -1286,6 +711,153 @@
 					</tr>
 					</tbody>
 				</table>
+				<div id="wireless_add" style="display:none;">
+					<div class="table_title">
+						<span>新增无线服务</span>
+					</div>
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">SSID名称：</td>
+							<td class="col2">
+								<input type="text"/>（1-32位字符，不包含 ? " ; \）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">选择绑定射频：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked" id="radio_2.4" name="radio_check">
+								<label for="radio_2.4">2.4G</label>
+								<input type="checkbox" checked="checked" id="radio_5" name="radio_check"><label for="radio_5">5G</label>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">使能状态：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked">
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">允许广播SSID：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked">
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">最大客户端接入数量：</td>
+							<td class="col2">
+								<input type="text"/>（1-127，默认为127）
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">用户限速：</td>
+							<td class="col2">
+								上行
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+								</select>
+								下行
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">ACL：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked">
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">上网时段控制：</td>
+							<td class="col2">
+								<input type="checkbox" checked="checked">
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="table_title">
+						<span>无线安全</span>
+					</div>
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">认证方式：</td>
+							<td class="col2">
+								<select id="sel_auth">
+									<option value="none">None</option>
+									<option value="wep">WEP</option>
+									<option value="wpa">WPA/WPA2-PSK</option>
+								</select>
+							</td>
+						</tr>
+						<tr class="wep_tr" style="display:none;">
+							<td class="col1">Key：</td>
+							<td class="col2">
+								<input type="text" name="">（5或13个字符，10或26个十六进制字符）
+							</td>
+						</tr>
+						<tr class="wep_tr" style="display:none;">
+							<td class="col1">WEP模式：</td>
+							<td class="col2">
+								<input type="radio" name="">开放
+								<input type="radio" name="">共享
+							</td>
+						</tr>
+						<tr class="wep_tr" style="display:none;">
+							<td class="col1">Primary Key：</td>
+							<td class="col2">Key 1</td>
+						</tr>
+						<tr class="wpa_tr" style="display:none;">
+							<td class="col1">共享密钥：</td>
+							<td class="col2">
+								<input type="text" name="">（8-63个字符或64个十六进制字符）
+							</td>
+						</tr>
+						<tr class="wpa_tr" style="display:none;">
+							<td class="col1">WPA模式：</td>
+							<td class="col2">
+								<input type="radio" name="WPA_mode" id="wpa_wpa" value="WPA">
+								<label for="wpa_wpa">WPA</label>
+								<input type="radio" name="WPA_mode" id="wpa_wpa2" value="WPA2">
+								<label for="wpa_wpa2">WPA2</label>
+								<input type="radio" name="WPA_mode" id="wpa_auto" value="Auto">
+								<label for="wpa_auto">Auto</label>
+								
+							</td>
+						</tr>
+						<tr class="wpa_tr" style="display:none;">
+							<td class="col1">加密方式：</td>
+							<td class="col2">
+								<input type="radio" name="WPA_cipher" id="wpa_tkip" value="TKIP">
+								<label for="wpa_tkip">TKIP</label>
+								<input type="radio" name="WPA_cipher" id="wpa_ccmp" value="CCMP">
+								<label for="wpa_ccmp">CCMP</label>
+								<input type="radio" name="WPA_cipher" id="wpa_cipher_auto" value="Auto">
+								<label for="wpa_cipher_auto">Auto</label>
+							</td>
+						</tr>
+						<tr class="wpa_tr" style="display:none;">
+							<td class="col1">GTK-lifetime：</td>
+							<td class="col2">
+								<input type="checkbox" name="">使能
+							</td>
+						</tr>
+						<tr class="wpa_tr" style="display:none;">
+							<td class="col1">GTK-lifetime：</td>
+							<td class="col2">
+								<input type="checkbox" name="">使能
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="wireless_add_ok" />
+				 		<input type="button" class="button" value="确定" id="wireless_add_cancel" />
+					</div>
+				</div>
 			</div>
 			<div id="radio_setting" style="display: none">
 				<div class="underline">
@@ -1605,127 +1177,7 @@
 						</tbody>
 					</table>
 				</div>
-
-
-			</div>
-			<div id="radio_speed_settings" style="display: none">
-				<div class="table_title">
-					<span>802.11a</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">基本速率：</td>
-						<td class="col2">
-							<input type="checkbox"/>6
-							<input type="checkbox"/>9
-							<input type="checkbox"/>12
-							<input type="checkbox"/>18
-							<input type="checkbox"/>24
-							<input type="checkbox"/>36
-							<input type="checkbox"/>48
-							<input type="checkbox"/>54
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">支持速率：</td>
-						<td class="col2">
-							<input type="checkbox"/>6
-							<input type="checkbox"/>9
-							<input type="checkbox"/>12
-							<input type="checkbox"/>18
-							<input type="checkbox"/>24
-							<input type="checkbox"/>36
-							<input type="checkbox"/>48
-							<input type="checkbox"/>54
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="table_title">
-					<span>802.11g</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">基本速率：</td>
-						<td class="col2">
-							<input type="checkbox"/>1
-							<input type="checkbox"/>2
-							<input type="checkbox"/>5.5
-							<input type="checkbox"/>11
-							<input type="checkbox"/>6
-							<input type="checkbox"/>9
-							<input type="checkbox"/>12
-							<input type="checkbox"/>18
-							<input type="checkbox"/>24
-							<input type="checkbox"/>36
-							<input type="checkbox"/>48
-							<input type="checkbox"/>54
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">支持速率：</td>
-						<td class="col2">
-							<input type="checkbox"/>1
-							<input type="checkbox"/>2
-							<input type="checkbox"/>5.5
-							<input type="checkbox"/>11
-							<input type="checkbox"/>6
-							<input type="checkbox"/>9
-							<input type="checkbox"/>12
-							<input type="checkbox"/>18
-							<input type="checkbox"/>24
-							<input type="checkbox"/>36
-							<input type="checkbox"/>48
-							<input type="checkbox"/>54
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="table_title">
-					<span>802.11n</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">基本速率：</td>
-						<td class="col2">
-							<input type="text" value="0"/>(0-15，默认为0)
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">支持速率：</td>
-						<td class="col2">
-							<input type="text" value="15"/>(0-15，默认为15)
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="content_option">
-					<input type="button" class="button" value="取消"/>
-					<input type="button" class="button" value="确定"/>
-				</div>
-			</div>
-			<div id="portal_settings" style="display: none">
-				<div class="table_title">
-					<span>Portal方案列表</span>
-				</div>
-				<div class="query">
-					<input type="button" class="button left" value="刷新">
-					<div class="right">
-						<span>查询项</span>
-						<select>
-							<option>方案名称</option>
-							<option>URL</option>
-							<option>状态</option>
-						</select>
-						<span>关键词</span>
-						<input type="text" name="">
-						<input type="button" value="查询">
-					</div>
-				</div>
-			</div>
+			</div>		
 			<div id="domainSet_settings" style="display: none">
 				<div class="table_title">
 					<span>域名集列表</span>
@@ -1743,48 +1195,143 @@
 						<input type="button" value="查询">
 					</div>
 				</div>
-
-			</div>
-			<div id="AAA_settings" style="display: none">
-				<div class="table_title">
-					<span>AAA方案列表</span>
-				</div>
-				<div class="query">
-					<input type="button" class="button left" value="新增">
-					<div class="right">
-						<span>查询项</span>
-						<select>
-							<option>方案名称</option>
-						</select>
-						<span>关键词</span>
-						<input type="text" name="">
-						<input type="button" value="查询">
-					</div>
-				</div>
 				<table class="tbl">
 					<thead>
-					<tr>
-						<th>方案名称</th>
-					</tr>
+					    <tr>
+					        <th>时间/日期</th>
+					        <th>主机名</th>
+					        <th>级别</th>
+					       
+					    </tr>
 					</thead>
 					<tbody>
-					<tr>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="1">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
+					    <tr>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        
+					    </tr>
+					    <tr>
+					        <td colspan="3">
+					            <table class="tbl_page">
+					                <tbody>
+					                <tr>
+					                    <td>共 2 条记录</td>
+					                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+					                </tr>
+					                </tbody>
+					            </table>
+					        </td>
+					    </tr>
 					</tbody>
 				</table>
+				<div id="domainSet_add">
+					<div class="table_title">
+						<span>新增域名集</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">域名集名称：</td>
+						        <td class="col2" id="">
+						        	<input type="text" name="">（1-32个字符，只包含数字、字母、下划线）
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="" />
+				 		<input type="button" class="button" value="确定" id="" />
+					</div>
+				</div>
+				<div id="domainkey_add">
+					<div class="table_title">
+						<span>新增域名关键字</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">关键字：</td>
+						        <td class="col2" id="">
+						        	<input type="text" name="">（4-32个字符，只包含.-数字和字母）
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="" />
+				 		<input type="button" class="button" value="确定" id="" />
+					</div>
+				</div>
+				<div id="domainSet_edit">
+					<div class="table_title">
+						<span>域名集编辑</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">域名集名称：</td>
+						        <td class="col2" id=""></td>
+						    </tr>
+						    <tr>
+						        <td class="col1">使能：</td>
+						        <td class="col2" id="">
+						        	<select>
+						        		<option value="enabled">启用</option>
+						        		<option value="disabled">禁用</option>
+						        	</select>
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="" />
+				 		<input type="button" class="button" value="确定" id="" />
+					</div>
+					<div class="table_title">
+						<span>域名关键字列表</span>
+					</div>
+					<div class="query">
+						<input type="button" class="button left" value="新增">
+						<input type="button" class="button left" value="清空">
+						<div class="right">
+							<span>查询项</span>
+							<select>
+								<option>域名关键字</option>
+							</select>
+							<span>关键词</span>
+							<input type="text" name="">
+							<input type="button" value="查询">
+						</div>
+					</div>
+					<table class="tbl">
+						<thead>
+						    <tr>
+						        <th>域名关键字</th>
+						        <th>操作</th>
+						    </tr>
+						</thead>
+						<tbody>
+						    <tr>
+						        <td></td>
+						        <td></td>
+						    </tr>
+						    <tr>
+						        <td colspan="2">
+						            <table class="tbl_page">
+						                <tbody>
+						                <tr>
+						                    <td>共 2 条记录</td>
+						                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+						                </tr>
+						                </tbody>
+						            </table>
+						        </td>
+						    </tr>
+						</tbody>
+					</table>
+				</div>
+
 			</div>
 			<div id="acl_settings" style="display: none">
 				<div class="table_title">
@@ -1804,110 +1351,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div id="wds" style="display: none">
-				<div class="table_title">
-					<span>WDS配置</span>
-				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">模式选择</td>
-						<td class="col2">
-							<input type="radio" id="dis" name="mode"/>
-							<label for="dis">禁用</label>
-							<input type="radio" id="Root" name="mode"/>
-							<label for="Root">Root AP</label>
-							<input type="radio" id="Auto" name="mode"/>
-							<label for="Auto">Auto repeater</label>
-							<input type="radio" id="Static" name="mode"/>
-							<label for="Static">Static repeater</label>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Net ID：</td>
-						<td class="col2">
-							<input type="text"/>（1-32个字符）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">Backhaul：</td>
-						<td class="col2">
-							<select name="" id="">
-								<option value="">2.4G</option>
-								<option value="">5G</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">认证方式：</td>
-						<td class="col2">
-			
-							<select name="" id="">
-								<option value="">None</option>
-								<option value="">WPA2-PSK</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">共享密钥：</td>
-						<td class="col2">
-							<input type="text"/>（8-63个字符或64个十六进制字符）
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">ACL：</td>
-						<td class="col2">
-							<input type="checkbox"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">最大层级：</td>
-						<td class="col2">
-							<select name="" id="">
-								<option value="">1</option>
-								<option value="">2</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">自动发现功能：</td>
-						<td class="col2">
-							<select name="" id="">
-								<option value="">Enable</option>
-								<option value="">Disable</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td class="col1">上行绑定MAC：</td>
-						<td class="col2">
-							<input type="text"/>（可选，XX:XX:XX:XX:XX:XX）
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="content_option">
-					<input type="button" class="button" value="取消"/>
-					<input type="button" class="button" value="确定"/>
-				</div>
-				<div class="table_title">
-					<span>Repeater Uplink列表</span>
-				</div>
-				<div class="query">
-					<input type="button" class="button left" value="新增">
-					<div class="right">
-						<span>查询项</span>
-						<select>
-							<option>RepeaterMac</option>
-							<option>UplinkMac</option>
-						</select>
-						<span>关键词</span>
-						<input type="text" name="">
-						<input type="button" value="查询">
-					</div>
-				</div>
-			
-			</div> -->
 			<div id="time_acl_settings" style="display: none">
 				<div class="table_title">
 					<span>时间策略列表</span>
@@ -2050,27 +1493,7 @@
 				 		<input type="button" class="button" value="升级" id="upgradebtn" />
 					</div>
 				</div>
-				<!-- <div id="_ping" style="display: none">
-					<table class="tbl_cont">
-					    <tbody>
-					    <tr>
-					        <td class="col1">主机:</td>
-					        <td class="col2">
-					            <input type="text"/>
-					        </td>
-					    </tr>
-					    <tr>
-					        <td class="col1">次数：</td>
-					        <td class="col2">
-					            <input type="text" value="4" />（1-9999）
-					            <input type="button" name="" value="Ping">
-					        </td>
-					    </tr>
-					  
-					    </tbody>
-					</table>
-					<textarea id="ping_res"></textarea>
-				</div> -->
+				
 				<div id="_output" style="display: none">
 					<table class="tbl_cont">
 					    <tbody>
@@ -2128,44 +1551,6 @@
 				 		<input type="button" class="button" value="导出"/>
 					</div>
 				</div>
-				<!-- <div id="_trouble_shooting" style="display: none">
-					<table class="tbl_cont">
-					    <tbody>					    
-					    <tr>
-					        <td class="col1">故障排除无线服务：</td>
-					        <td class="col2">
-					            <select>
-					            	<option>启用</option>
-					            	<option>禁用</option>
-					            </select>
-					        </td>
-					    </tr>
-					   
-					    <tr>
-					        <td class="col1">SSID：</td>
-					        <td class="col2">
-					        	
-					        </td>
-					    </tr>
-					    <tr>
-					        <td class="col1">IP地址：</td>
-					        <td class="col2">
-					        	<input type="text" name="">
-					        </td>
-					    </tr>
-					    <tr>
-					        <td class="col1">子网掩码：</td>
-					        <td class="col2">
-					        	<input type="text" name="">
-					        </td>
-					    </tr>
-					    </tbody>
-					</table>
-					<div class="content_option">
-				 		<input type="button" class="button" value="取消"/>
-				 		<input type="button" class="button" value="确定"/>
-					</div>
-				</div> -->
 			</div>
 			
 			<div id="time_settings" style="display:none">
@@ -2548,7 +1933,7 @@
 
 	<footer  class="clearfix">
 		<div>
-			<span>Copyright(C) 2016 康凯科技（杭州）有限公司</span>
+			<span></span>
 		</div>
 	</footer>
 

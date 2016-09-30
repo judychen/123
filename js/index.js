@@ -74,10 +74,7 @@ function showCont(){
         $("#equipment_overview").show();
         $("#equipment_overview").siblings().hide();
     });
-    $("#m_networ_settings").click(function(){
-        $("#interface_settings").show();
-        $("#interface_settings").siblings().hide();
-    });
+    
     $("#m_wireless_settings").click(function(){
         $("#wireless_servers").show();
         $("#wireless_servers").siblings().hide();
@@ -103,30 +100,7 @@ function showCont(){
         $("#clientlist").show();
         $("#clientlist").siblings().hide();
     });
-/*    $("#m_view_wds_status").click(function(){
-        $("#view_wds_status").show();
-        $("#view_wds_status").siblings().hide();
-    });*/
 
-    /*网络设置*/
-    $("#m_interface_settings").click(function(){
-        $("#interface_settings").show();
-        $("#interface_settings").siblings().hide();
-    });
-    $("#m_vlan_settings").click(function(){
-        $("#vlan_settings").show();
-        $("#vlan_settings").siblings().hide();
-    });
-      
-    $("#m_servers_manage").click(function(){
-        $("#servers_manage").show();
-        $("#servers_manage").siblings().hide();
-    });
-   
-    $("#m_network_advanced_settings").click(function(){
-        $("#network_advanced_settings").show();
-        $("#network_advanced_settings").siblings().hide();
-    });
     /*无线设置*/
     $("#m_wireless_servers").click(function(){
         $("#wireless_servers").show();
@@ -136,30 +110,17 @@ function showCont(){
         $("#radio_setting").show();
         $("#radio_setting").siblings().hide();
     });
-    $("#m_radio_speed_settings").click(function(){
-        $("#radio_speed_settings").show();
-        $("#radio_speed_settings").siblings().hide();
-    });
-    $("#m_portal_settings").click(function(){
-        $("#portal_settings").show();
-        $("#portal_settings").siblings().hide();
-    });
+    
     $("#m_domainSet_settings").click(function(){
         $("#domainSet_settings").show();
         $("#domainSet_settings").siblings().hide();
     });
-    $("#m_AAA_settings").click(function(){
-        $("#AAA_settings").show();
-        $("#AAA_settings").siblings().hide();
-    });
+    
     $("#m_acl_settings").click(function(){
         $("#acl_settings").show();
         $("#acl_settings").siblings().hide();
     });
-    $("#m_wds").click(function(){
-        $("#wds").show();
-        $("#wds").siblings().hide();
-    });
+    
     $("#m_time_acl_settings").click(function(){
         $("#time_acl_settings").show();
         $("#time_acl_settings").siblings().hide();

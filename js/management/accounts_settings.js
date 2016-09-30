@@ -75,6 +75,11 @@ $(function(){
 		$("#accunts_add").siblings().show();
 	});
 
+	$("#accounts_add_cancel").click(function(){
+		$("#accunts_add").hide();
+		$("#accunts_add").siblings().show();
+	});
+
 
 	
 

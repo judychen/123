@@ -24,8 +24,7 @@ function changeMethod(){
     }else{
         $(".tftp_tr").show();
         $(".local_tr").hide();
-        $(".ftp_tr").hide();
-        
+        $(".ftp_tr").hide();   
     }
 }
 

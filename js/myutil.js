@@ -163,7 +163,6 @@ function showSelect(bShow, bSave, errMsg, funcselect) {
     }else{
         /*???*/
         $("#prompt").hide();
-       
     }
 }
 

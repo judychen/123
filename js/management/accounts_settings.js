@@ -79,16 +79,6 @@ $(function(){
 		$("#accunts_add").hide();
 		$("#accunts_add").siblings().show();
 	});
-
-
-	
-
-
-
-
-
-
-
 });
 
 

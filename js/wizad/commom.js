@@ -71,7 +71,7 @@ function getCurrentIndex(currentPage) {
 function generateWizardNavigationBar() {
     var str = "";
     for(var i = 0; i < arr_wizard_items.length; i++){
-        /*??*/
+        
         str += "<li class=\"wizard_step_head\">" + (i + 1) + "</li>";
         if(isCurrent(arr_wizard_items[i][1]))
             str += "<li class=\"wizard_step_cont current\">";
@@ -84,13 +84,13 @@ function generateWizardNavigationBar() {
 
 function generateWizardOptions() {
     var str = "";
-    str += "<input type=\"button\" class=\"button\" id=\"wizard_cancel\" value=\"返回\">";
+    str += "<input type=\"button\" class=\"button\" id=\"wizard_cancel\" onClick=\"wizard_cancel();\" value=\"返回\">";
     if(!isFirst())
-        str += "<input type=\"button\" class=\"button\" id=\"wizard_prew\" value=\"上一步\">";
+        str += "<input type=\"button\" class=\"button\" id=\"wizard_prew\" onClick=\"wizard_prew_step();\" value=\"上一步\">";
     if(!isLast())
-        str += "<input type=\"button\" class=\"button\" id=\"wizard_next\" value=\"下一步\">";
+        str += "<input type=\"button\" class=\"button\" id=\"wizard_next\" onClick=\"wizard_next_step();\" value=\"下一步\">";
     else
-        str += "<input type=\"button\" class=\"button\" id=\"wizard_ok\" value=\"返回\">";
+        str += "<input type=\"button\" class=\"button\" id=\"wizard_ok\" onClick=\"wizard_ok();\" value=\"完成\">";
     $("#wizard_step_button").html(str);
 }
 
@@ -119,19 +119,33 @@ function loadWizardProgress(currentPage, validFunc, okFunc) {
 }
 
 function wizard_next_step() {
-    /*todo*/
+    for(var i=0; i < arr_wizard_items.length; i++){
+        if(isCurrent(arr_wizard_items[i][1])){
+            loadWizardProgress(arr_wizard_items[i+1][1]);
+            break;
+        }
+    }
 }
 
 function wizard_prew_step() {
-    /*todo*/
+    for(var i=0; i < arr_wizard_items.length; i++){
+        if(isCurrent(arr_wizard_items[i][1])){
+            console.log(i);
+            loadWizardProgress(arr_wizard_items[i-1][1]);
+            break;
+        }
+    }
 }
 
 function wizard_cancel() {
-    /*todo*/
+    $("#m_equipment_overview").parent().show();
+    $("#m_equipment_overview").addClass('current');
+    $("#equipment_overview").show();
+    $("#equipment_overview").siblings().hide();
 }
 
 function wizard_ok() {
-    /*todo*/
+    reboot();
 }
 
 

@@ -57,6 +57,14 @@
 	margin: 1px;
 }
 
+.current{
+	background-color: #8EA5CF;
+}
+
+.pass{
+	background-color: #84C1A3;
+}
+
 .query{
 	margin-bottom: 5px;
 	font-size: 13px;

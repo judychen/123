@@ -21,8 +21,13 @@ function lan_dhcpd_enable_changed() {
 		$(".wizard_lan_ippoool").hide();
 }
 
+function validWizardLan(){
+	
+}
+
+
 $(function () {
-	arrIS = loadWizardProgress("wizard_lan_settings");
+	
 	
 	if ( typeof(arrIS.ip) != "undefined" ) {
 		$("#wizard_lan_ip").val( arrIS.ip );

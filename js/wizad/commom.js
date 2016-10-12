@@ -13,14 +13,16 @@ var arr_bridge_wizard_items = new Array(
     ["用户密码", "wizard_admin_pwd"],
     ["无线设置", "wizard_wireless_settings"],
     ["配置总览", "wizard_summary"]
-)
+);
 
 var arr_wizard_items = new Array(
     ["IP地址",	 "wizard_ip_settings"],
     ["用户密码", "wizard_admin_pwd"],
     ["无线设置", "wizard_wireless_settings"],
     ["配置总览", "wizard_summary"]
-)
+);
+
+var arrIS = new Object();
 
 function link_mode_changed(type) {
     if(type == "nat"){
@@ -127,28 +129,36 @@ function loadWizardProgress(currentPage, validFunc, okFunc) {
 }
 
 function wizard_next_step() {
+    var check;
     for(var i=0; i < arr_wizard_items.length; i++){
         if(isCurrent(arr_wizard_items[i][1])){
             if(arr_wizard_items == arr_nat_wizard_items){
                 switch (i){
-                case 1: console.log(1);break;
-                case 2: console.log(2);break;
-                case 3: console.log(3);break;
-                case 4: console.log(4);break;
+                case 0: check = validWizardLinkmode();break;
+                case 1: check = validWizardIp();break;
+                case 2: check = validWizardAdpwd();break;
+                case 3: check = validWizardWireless();break;
+                case 4: check = validWizardSummary();break;
                 default: break;
 
                 }
             }else{
                 switch (i){
-                case 1: console.log(5);break;
-                case 2: console.log(6);break;
-                case 3: console.log(7);break;
-                case 4: console.log(8);break;
+                case 0: check = validWizardLinkmode();break;
+                case 1: check = validWizardIp();break;
+                case 2: check = validWizardLan();break;
+                case 3: check = validWizardAdpwd();break;
+                case 3: check = validWizardWireless();break;
+                case 4: check = validWizardSummary();break;
                 default: break;
 
                 }
             }
-            loadWizardProgress(arr_wizard_items[i+1][1]);
+
+            if(check){
+                loadWizardProgress(arr_wizard_items[i+1][1]);
+            }
+            
             break;
         }
     }

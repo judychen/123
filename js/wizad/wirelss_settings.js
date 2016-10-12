@@ -17,10 +17,12 @@ function changeEncrypt() {
 
 }
 
+function validWizardWireless(){
+	
+}
+
 $(function () {
-    arrData = loadWizardProgress("wizard_wireless_settings");
-
-
+    
     generate_ssid_input();
 
 	var jsRadios = jsSpec.spec.radios;

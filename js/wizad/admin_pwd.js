@@ -1,18 +1,21 @@
-var arrAP;
+
 /*
 * pwd
 * pwd_check
 */
 
-$(function () {
-    arrAP = loadWizardProgress("wizard_admin_pwd");
-
+function validWizardAdpwd(){
 	
-	var pwd = arrAP.pwd;
-	var pwd_check = arrAP.pwd_check;
+}
+
+$(function () {
+    
+	
+	/*var pwd = arrAP.pwd;
+	var pwd_check = arrAP.pwd_check;*/
 		
-	$("#wizard_password").val( pwd );
-	$("#wizard_password_check").val( pwd_check );
+	/*$("#wizard_password").val( pwd );
+	$("#wizard_password_check").val( pwd_check );*/
 		
 });
 

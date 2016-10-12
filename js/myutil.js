@@ -134,6 +134,15 @@ function showError(bShow, errMsg) {
        $("#errDlg").hide();
    }
 
+   $("#errDlg_okBtn").click(function(){
+        $("#zcc").css("display","none");
+        $("#errDlg").hide();
+   });
+   $("#box_setwid").click(function(){
+        $("#zcc").css("display","none");
+        $("#errDlg").hide();
+   });
+
 }
 
 function myAlert(info/*, id*/) {

@@ -1,14 +1,15 @@
-var arrIS = {};
+
 /****** struct of arrIS ******
  * link_mode
  *****************************/
-function ok() {
+function validWizardLinkmode() {
     arrIS.link_mode = $("input[name='radio_link_mode']:checked").val();
+    return true;
 }
 
 function _link_mode_changed() {
-    var link_mode = $("input[name='radio_link_mode']:checked").val();
-    link_mode_changed(link_mode);
+    var lmode = $("input[name='radio_link_mode']:checked").val();
+    link_mode_changed(lmode);
     /*??*/
     loadWizardProgress("wizard_link_mode");
 }
@@ -25,5 +26,4 @@ $(function () {
     }*/
 
     $("input[name='radio_link_mode']").change(_link_mode_changed);
-    
 });

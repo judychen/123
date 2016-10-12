@@ -24,6 +24,10 @@ function generate_tr_ssid() {
     /*todo*/
 }
 
+function validWizardSummary(){
+	
+}
+
 $(function () {
    /* arrWS = loadWizardProgress("wizard_summary");
 

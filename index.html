@@ -21,8 +21,8 @@
 	<!--wizard-->
 	<script src="js/wizad/commom.js"></script>
 	<script src="js/wizad/wizard_link_mode.js"></script>
-	<!-- <script src="js/wizad/ip_settings.js"></script>
-	<script src="js/wizad/admin_pwd.js"></script>
+	<script src="js/wizad/ip_settings.js"></script>
+	<!-- <script src="js/wizad/admin_pwd.js"></script>
 	<script src="js/wizad/wirelss_settings.js"></script>
 	<script src="js/wizad/summary.js"></script>
 	<script src="js/wizad/wan_settings.js"></script>
@@ -180,54 +180,54 @@
 									</select>
 								</td>
 							</tr>
-							<tr class="ip_static">
+							<tr class="ip_static" style="display:none;">
 								<td class="col1">IP地址：</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_static_ip">
 								</td>
 							</tr>
-							<tr class="ip_static">
+							<tr class="ip_static" style="display:none;">
 								<td class="col1">子网掩码</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_static_netmask">
 								</td>
 							</tr>
-							<tr class="ip_static">
+							<tr class="ip_static" style="display:none;">
 								<td class="col1">网关(默认路由)：</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_static_gateway">
 									<span>(可选)</span>
 								</td>
 							</tr>
-							<tr class="ip_pppoe">
+							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">上网账号：</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_pppoe_account">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
-							<tr class="ip_pppoe">
+							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">上网口令：</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_pppoe_password">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
-							<tr class="ip_pppoe">
+							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">MTU：</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_pppoe_mtu">
 									<span>(可选，默认值1492，范围128~1492)</span>
 								</td>
 							</tr>
-							<tr class="ip_pppoe">
+							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">服务名：</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_pppoe_name">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
-							<tr class="ip_pppoe">
+							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">服务器名：</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_pppoe_server">
@@ -244,14 +244,14 @@
 								</td>
 							</tr>
 
-							<tr class="ip_dns_static">
+							<tr class="ip_dns_static" style="display:none;">
 								<td class="col1">DNS服务器</td>
 								<td class="col2">
 									<input type="text" name="" id="ip_dns_static1">
 									<span>（可选）</span>
 								</td>
 							</tr>
-							<tr class="ip_dns_static">
+							<tr class="ip_dns_static" style="display:none;">
 								<td class="col1">备份DNS服务器</td>
 								<td class="col2">
 									<input type="text" name="" ip_dns_static2>
@@ -500,7 +500,12 @@
 						</table>
 					</div>
 				</div>
-				<div id="wizard_step_button"></div>
+				<div id="wizard_step_button">
+					<input type="button" class="button" id="wizard_cancel" value="返回">
+					<input type="button" class="button" id="wizard_prew" value="上一步">
+					<input type="button" class="button" id="wizard_next" value="下一步">
+					<input type="button" class="button" id="wizard_ok" value="完成">
+				</div>
 			</div>
 
 			<!--系统状态-->

@@ -83,15 +83,22 @@ function generateWizardNavigationBar() {
 }
 
 function generateWizardOptions() {
-    var str = "";
-    str += "<input type=\"button\" class=\"button\" id=\"wizard_cancel\" onClick=\"wizard_cancel();\" value=\"返回\">";
-    if(!isFirst())
-        str += "<input type=\"button\" class=\"button\" id=\"wizard_prew\" onClick=\"wizard_prew_step();\" value=\"上一步\">";
-    if(!isLast())
-        str += "<input type=\"button\" class=\"button\" id=\"wizard_next\" onClick=\"wizard_next_step();\" value=\"下一步\">";
-    else
-        str += "<input type=\"button\" class=\"button\" id=\"wizard_ok\" onClick=\"wizard_ok();\" value=\"完成\">";
-    $("#wizard_step_button").html(str);
+   
+    if(isFirst())
+        $("#wizard_prew").hide();
+    else{
+        $("#wizard_prew").show();
+    }
+    if(isLast()){
+        $("#wizard_next").hide();
+        $("#wizard_ok").show();
+        console.log("ok"); 
+    }else{
+        $("#wizard_ok").hide();
+        $("#wizard_next").show();   
+    }
+
+        
 }
 
 function initWizardDatas() {
@@ -114,13 +121,33 @@ function loadWizardProgress(currentPage, validFunc, okFunc) {
 
     generateWizardNavigationBar();
     generateWizardOptions();
+    console.log(g_wizard_hash);
 
-    return g_wizard_hash;
+    /*return g_wizard_hash;*/
 }
 
 function wizard_next_step() {
     for(var i=0; i < arr_wizard_items.length; i++){
         if(isCurrent(arr_wizard_items[i][1])){
+            if(arr_wizard_items == arr_nat_wizard_items){
+                switch (i){
+                case 1: console.log(1);break;
+                case 2: console.log(2);break;
+                case 3: console.log(3);break;
+                case 4: console.log(4);break;
+                default: break;
+
+                }
+            }else{
+                switch (i){
+                case 1: console.log(5);break;
+                case 2: console.log(6);break;
+                case 3: console.log(7);break;
+                case 4: console.log(8);break;
+                default: break;
+
+                }
+            }
             loadWizardProgress(arr_wizard_items[i+1][1]);
             break;
         }
@@ -130,7 +157,6 @@ function wizard_next_step() {
 function wizard_prew_step() {
     for(var i=0; i < arr_wizard_items.length; i++){
         if(isCurrent(arr_wizard_items[i][1])){
-            console.log(i);
             loadWizardProgress(arr_wizard_items[i-1][1]);
             break;
         }
@@ -147,6 +173,14 @@ function wizard_cancel() {
 function wizard_ok() {
     reboot();
 }
+
+$(function(){
+    $("#wizard_cancel").click(wizard_cancel);
+    $("#wizard_ok").click(ok);
+    $("#wizard_prew").click(wizard_prew_step);
+    $("#wizard_next").click(wizard_next_step);
+});
+
 
 
 

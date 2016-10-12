@@ -60,8 +60,6 @@ function upgrade(){
 	}
 }
 
-
-
 $(function(){
 	/*软件重启*/
 	var temp = jsDataDevice.device[0];

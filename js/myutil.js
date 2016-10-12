@@ -277,11 +277,6 @@ function escapeReg(str) {
     });/*第二个参数是回调函数*/
 }
 
-/*帮助文档，忽略*/
-/*function popHelp(section) {
-    /!*todo*!/
-}*/
-
 /*去除前后的空白*/
 function strip_blank_boundary(value) {
     return value.replace(/(^\s*)|(\s*$)/g, "");

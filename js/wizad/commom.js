@@ -134,22 +134,24 @@ function wizard_next_step() {
         if(isCurrent(arr_wizard_items[i][1])){
             if(arr_wizard_items == arr_nat_wizard_items){
                 switch (i){
-                case 0: check = validWizardLinkmode();break;
-                case 1: check = validWizardIp();break;
-                case 2: check = validWizardAdpwd();break;
-                case 3: check = validWizardWireless();break;
-                case 4: check = validWizardSummary();break;
+               
+                    case 0: check = validWizardLinkmode();break;
+                    case 1: check = validWizardIp();break;
+                    case 2: check = validWizardLan();break;
+                    case 3: check = validWizardAdpwd();break;
+                    case 4: check = validWizardWireless();break;
+                    case 5: check = validWizardSummary();break;
+
                 default: break;
 
                 }
             }else{
                 switch (i){
-                case 0: check = validWizardLinkmode();break;
-                case 1: check = validWizardIp();break;
-                case 2: check = validWizardLan();break;
-                case 3: check = validWizardAdpwd();break;
-                case 3: check = validWizardWireless();break;
-                case 4: check = validWizardSummary();break;
+                    case 0: check = validWizardLinkmode();break;
+                    case 1: check = validWizardIp();break;
+                    case 2: check = validWizardAdpwd();break;
+                    case 3: check = validWizardWireless();break;
+                    case 4: check = validWizardSummary();break;
                 default: break;
 
                 }

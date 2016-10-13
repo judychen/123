@@ -45,29 +45,10 @@ function changeDnsMode(){
 	}
 }
 
-function isInputValid_ip() {
-    /*todo*/
-}
-
-function isInputValid_dns() {
-    /*todo*/
-}
-
-function needConfirm() {
-    /*todo*/
-}
-
-function isInputValid() {
-    /*todo*/
-}
-
-function ok() {
-    /*todo*/
-}
-
 function checkValidWizardIp(){
 	
-	if($("#sel_ip_mode").val() == "static"){
+	
+	if($("#ip_sel_ipmode").val() == "static"){
 		if(!checkIP($("#ip_static_ip").val())){
 			showError(true, "输入的IP地址格式不正确!");
 			return false;
@@ -83,12 +64,66 @@ function checkValidWizardIp(){
 				return false;
 			}
 		}
-	}else if($("#sel_ip_mode").val() == "static"){
+	}else if($("#ip_sel_ipmode").val() == "pppoe"){
+		if($("#ip_pppoe_account").val() == "")
+		{
+			showError(true, "用户名不能为空!");
+			return false;
+		}
+		if($("#ip_pppoe_password").val() == "")
+		{
+			showError(true, "用户密码不能为空!");
+			return false;
+		}
+		if ( isHasChinese( $("#ip_pppoe_account").val() ) ) {
+			showError(true, "字符串不能包含中文！");
+			return false;
+		}
+		if ( isHasChinese( $("#ip_pppoe_password").val() ) ) {
+			showError(true, "字符串不能包含中文！");
+			return false;
+		}
+		if ( isHasChinese( $("#ip_pppoe_name").val() ) ) {
+			showError(true, "字符串不能包含中文！");
+			return false;
+		}
+		if ( isHasChinese( $("#ip_pppoe_server").val() ) ) {
+			showError(true, "字符串不能包含中文！");
+			return false;
+		}
+		if (!checkNumberRang($("#ip_pppoe_mtu").val(), 128, 1492)){
+			showError(true, "非法的MTU值！");
+			return false;
+		}
+		if(checkUserOrPwd($("#ip_pppoe_password").val())==false)
+		{
+			showError(true, "非法的初始密码！");
+			return false;
+		}
+		if(checkUserOrPwd($("#ip_pppoe_account").val())==false)
+		{
+			showError(true, "非法的用户名！");
+			return false;
+		}
+		if(checkUserOrPwd($("#ip_pppoe_server").val())==false)
+		{
+			if(!$("#ip_pppoe_server").val() == "")
+			{
+				showError(true, "非法的服务名！");
+				return false;
+			}
+		}
+		if(checkUserOrPwd($("#ip_pppoe_name").val())==false)
+		{
+			if(!$("#ip_pppoe_name").val() == "")
+			{
+				showError(true, "非法的服务器名！");
+				return false;
+			}
+		}
 
 	}
 	
-	/*????*/
-
 	var first_dns = $("#ip_dns_static1").val();
 	var second_dns = $("#ip_dns_static2").val();
 
@@ -140,7 +175,7 @@ $(function () {
 	$("#ip_sel_dnsmode").change( changeDnsMode );
 
 	/*子网掩码判断，先不做*/
-
+	
 });
 
 

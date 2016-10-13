@@ -202,14 +202,14 @@
 							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">上网账号：</td>
 								<td class="col2">
-									<input type="text" name="" id="ip_pppoe_account">
+									<input type="text" name="" id="ip_pppoe_account" maxlength="64">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">上网口令：</td>
 								<td class="col2">
-									<input type="text" name="" id="ip_pppoe_password">
+									<input type="text" name="" id="ip_pppoe_password" maxlength="64">
 									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
@@ -223,15 +223,15 @@
 							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">服务名：</td>
 								<td class="col2">
-									<input type="text" name="" id="ip_pppoe_name">
-									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
+									<input type="text" name="" id="ip_pppoe_name" maxlength="64">
+									<span>(可选：1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr class="ip_pppoe" style="display:none;">
 								<td class="col1">服务器名：</td>
 								<td class="col2">
-									<input type="text" name="" id="ip_pppoe_server">
-									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
+									<input type="text" name="" id="ip_pppoe_server" maxlength="64">
+									<span>(可选：1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr>
@@ -411,13 +411,15 @@
 							<tr>
 								<td class="col1">新的密码</td>
 								<td class="col2">
-									<input type="text" name="" id="wizard_password">
+									<input type="text" name="" id="wizard_password" maxlength="32">
+									<span>(1-32个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="col1">确认密码</td>
 								<td class="col2">
-									<input type="text" name="" id="wizard_password_check">
+									<input type="text" name="" id="wizard_password_check" maxlength="32">
+									<span>(1-32个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							</tbody>
@@ -428,7 +430,20 @@
 							<span>无线名称(SSID)</span>
 						</div>
 						<table class="tbl_cont" id="wizard_ssid">
-							<tbody></tbody>
+							<tbody>
+								<tr>
+									<td class="col1">2.4G SSID：</td>
+									<td class="col2">
+										<input type="text" id="wizard_ssid_0" maxlength="32">（1-32个字符，不包含 ? " ; \）
+									</td>
+								</tr>
+								<tr>
+									<td class="col1">5G SSID：</td>
+									<td class="col2">
+										<input type="text" id="wizard_ssid_1" maxlength="32">（1-32个字符，不包含 ? " ; \）
+									</td>
+								</tr>
+							</tbody>
 						</table>
 						<div class="table_title">
 							<span>无线安全</span>
@@ -444,11 +459,11 @@
 									</select>
 								</td>
 							</tr>
-							<tr class="wizard_wpa">
+							<tr class="wizard_wpa" style="display:none;">
 								<td class="col1">共享密钥：</td>
 								<td class="col2">
 									<input type="text" name="" id="wizard_wpa_sec">
-									（8-63个字符或64个十六进制字符）
+									（8-63个字符）
 								</td>
 							</tr>
 							</tbody>

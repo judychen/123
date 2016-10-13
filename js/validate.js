@@ -1,6 +1,8 @@
 function checkIP(value, advanced){
     /*0-255*/
     var exp = /^([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])$/;
+    
+
     var reg = value.match(exp);
     if(reg == null){
         return false;
@@ -140,6 +142,7 @@ function getStrLeng(str){
 
 function checkStringLen(value, minLen, maxLen){
     var len = getStrLeng(value);
+    console.log(len < minLen);
     if(len < minLen && len > maxLen){
         return false;
     }
@@ -280,8 +283,12 @@ function is_ip_reserved(){
     /*todo*/
 }
 
-function checkPPPoEUserOrPwd(){
-    /*todo*/
+function checkUserOrPwd(value){
+    var exp=/^[^"~?\\#\'\s]+$/;
+    var reg = value.match(exp);
+    if (reg == null)
+        return false;
+    return true;
 }
 
 function is_ip_netword(){

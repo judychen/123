@@ -1,7 +1,7 @@
 var arrData;
 /****** struct of arrIS ******
-* ssid_1	//2.4g
-* ssid_2	//5g
+* ssid_0	//2.4g
+* ssid_1	//5g
 * encrypt
 * psk
 *****************************/
@@ -17,18 +17,63 @@ function changeEncrypt() {
 
 }
 
+function checkValidWizardWireless(){
+	if($("#wizard_ssid_0").val() == "" || $("#wizard_ssid_1").val() == ""){
+		showError(true, "SSID不能为空");
+		return false;
+	}else{
+		if(checkUserOrPwd($("#wizard_ssid_0").val())==false || checkUserOrPwd($("#wizard_ssid_1").val())==false)
+		{
+			
+			showError(true, "SSID格式不正确！");
+			return false;
+		}	
+	}
+
+	if($("#wizard_sel_encrypt").val() == "wap2"){
+		if($("#wizard_wpa_sec").val() == ""){
+			showError(true, "共享密钥不能为空");
+			return false;
+		}else{
+			
+			if ( checkStringLen( $("#wizard_wpa_sec").val(), 8, 63 ) == false ) {
+				showError(true, "共享密钥长度不正确，应为8-63个字符！");
+				return false;
+			}
+
+			if(checkUserOrPwd($("#wizard_wpa_sec").val())==false)
+			{
+				
+				showError(true, "共享密钥格式不正确！");
+				return false;
+			}	
+
+
+		}
+	}
+
+	return true;
+}
+
 function validWizardWireless(){
-	
+	if(!checkValidWizardWireless()){
+		return false;
+	}
+
+	arrIS.ssid_0 = $("#wizard_ssid_0").val();
+	arrIS.ssid_1 = $("#wizard_ssid_1").val();
+	arrIS.encrypt = $("#wizard_sel_encrypt").val();
+	arrIS.psk = $("#wizard_wpa_sec").val();
+
+
+	return true;
 }
 
 $(function () {
     
-    generate_ssid_input();
 
-	var jsRadios = jsSpec.spec.radios;
-    /*判断？？？*/
 
-    for ( var i = 0; i < jsRadios.length; i++ ) {
+/*    for ( var i = 0; i < jsRadios.length; i++ ) {
 		$("#wizard_ssid_" + i ).val( jsRadios[i].default_ssid );
 	}
 
@@ -38,34 +83,8 @@ $(function () {
 		if ( typeof(arrData.psk) != "undefined" ) {
 			$("#wizard_wpa_sec").val( arrData.psk );
 		}
-	}
+	}*/
 
-	$(".wizard_wpa").hide();//暂时做个初始值
 	$("#wizard_sel_encrypt").change(changeEncrypt);
 
 });
-
-//根据radio个数生成SSID个数
-function generate_ssid_input() {
-    var str = "";
-	var radios = jsSpec.spec.radios;
-	for ( var i = 0 ; i < radios.length; i++ ) {
-		str += "<tr>";
-		str += "<td class=\"col1\">" + radios[i].name + " SSID：</td>";
-		str += "<td class=\"col2\"><input type=\"text\" id=\"wizard_ssid_" + i + "\" maxlength=\"32\" />（1-32个字符，不包含 ? \" ; \\）</td>";
-		str += "</tr>";
-	}
-	$("#wizard_ssid").html( str );
-}
-
-function isInputValid() {
-    /*todo*/
-}
-
-function ok() {
-    /*todo*/
-}
-
-function isInputValid_wpa_psk() {
-    /*todo*/
-}

@@ -1,4 +1,4 @@
-var arrData;
+
 /****** struct of arrIS ******
 * ssid_0	//2.4g
 * ssid_1	//5g
@@ -35,14 +35,13 @@ function checkValidWizardWireless(){
 			showError(true, "共享密钥不能为空");
 			return false;
 		}else{
-			
+
 			if ( checkStringLen( $("#wizard_wpa_sec").val(), 8, 63 ) == false ) {
 				showError(true, "共享密钥长度不正确，应为8-63个字符！");
 				return false;
 			}
 
-			if(checkUserOrPwd($("#wizard_wpa_sec").val())==false)
-			{
+			if(checkUserOrPwd($("#wizard_wpa_sec").val())==false){
 				
 				showError(true, "共享密钥格式不正确！");
 				return false;
@@ -65,26 +64,11 @@ function validWizardWireless(){
 	arrIS.encrypt = $("#wizard_sel_encrypt").val();
 	arrIS.psk = $("#wizard_wpa_sec").val();
 
-
 	return true;
 }
 
 $(function () {
     
-
-
-/*    for ( var i = 0; i < jsRadios.length; i++ ) {
-		$("#wizard_ssid_" + i ).val( jsRadios[i].default_ssid );
-	}
-
-	if ( typeof(arrData.encrypt) != "undefined" ) {
-		$("#wizard_sel_encrypt").val( arrData.encrypt );
-
-		if ( typeof(arrData.psk) != "undefined" ) {
-			$("#wizard_wpa_sec").val( arrData.psk );
-		}
-	}*/
-
 	$("#wizard_sel_encrypt").change(changeEncrypt);
 
 });

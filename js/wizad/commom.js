@@ -123,7 +123,6 @@ function loadWizardProgress(currentPage, validFunc, okFunc) {
 
     generateWizardNavigationBar();
     generateWizardOptions();
-    console.log(g_wizard_hash);
 
     /*return g_wizard_hash;*/
 }
@@ -140,8 +139,7 @@ function wizard_next_step() {
                     case 2: check = validWizardLan();break;
                     case 3: check = validWizardAdpwd();break;
                     case 4: check = validWizardWireless();break;
-                    case 5: check = validWizardSummary();break;
-
+                    
                 default: break;
 
                 }
@@ -151,7 +149,7 @@ function wizard_next_step() {
                     case 1: check = validWizardIp();break;
                     case 2: check = validWizardAdpwd();break;
                     case 3: check = validWizardWireless();break;
-                    case 4: check = validWizardSummary();break;
+                   
                 default: break;
 
                 }
@@ -159,6 +157,7 @@ function wizard_next_step() {
 
             if(check){
                 loadWizardProgress(arr_wizard_items[i+1][1]);
+                if(i == (arr_wizard_items.length -2)) loadSummaryData();
             }
             
             break;
@@ -183,6 +182,8 @@ function wizard_cancel() {
 }
 
 function wizard_ok() {
+    validWizardSummary();
+
     reboot();
 }
 

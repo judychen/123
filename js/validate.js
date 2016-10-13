@@ -143,7 +143,7 @@ function getStrLeng(str){
 function checkStringLen(value, minLen, maxLen){
     var len = getStrLeng(value);
     console.log(len < minLen);
-    if(len < minLen && len > maxLen){
+    if(len < minLen || len > maxLen){
         return false;
     }
     return true;

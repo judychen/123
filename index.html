@@ -270,93 +270,95 @@
 							<tr>
 								<td class="col1">上网方式：</td>
 								<td class="col2">
-									<select>
-										<option>DHCP</option>
-										<option>Static</option>
-										<option>PPPoE</option>
+									<select id="wan_sel_ipmode">
+										<option value="dhcp">DHCP</option>
+										<option value="static">Static</option>
+										<option value="pppoe">PPPoE</option>
 									</select>
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_static" style="display:none;">
 								<td class="col1">IP地址：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="wan_static_ip">
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_static" style="display:none;">
 								<td class="col1">子网掩码</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="wan_static_netmask">
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_static" style="display:none;">
 								<td class="col1">网关(默认路由)：</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="wan_static_gateway">
 									<span>(可选)</span>
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_pppoe" style="display:none;">
 								<td class="col1">上网账号：</td>
 								<td class="col2">
-									<input type="text" name="">
-									(1-64个字符，不支持" ' ~ \ #空格和?输入)
+									<input type="text" name="" id="wan_pppoe_account" maxlength="64">
+									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_pppoe" style="display:none;">
 								<td class="col1">上网口令：</td>
 								<td class="col2">
-									<input type="text" name="">
-									(1-64个字符，不支持" ' ~ \ #空格和?输入)
+									<input type="text" name="" id="wan_pppoe_password" maxlength="64">
+									<span>(1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_pppoe" style="display:none;">
 								<td class="col1">MTU：</td>
 								<td class="col2">
-									<input type="text" name="" value="1492">
-									(可选，默认值1492，范围128~1492)
+									<input type="text" name="" id="wan_pppoe_mtu">
+									<span>(可选，默认值1492，范围128~1492)</span>
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_pppoe" style="display:none;">
 								<td class="col1">服务名：</td>
 								<td class="col2">
-									<input type="text" name="">
-									(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)
+									<input type="text" name="" id="wan_pppoe_name" maxlength="64">
+									<span>(可选：1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_pppoe" style="display:none;">
 								<td class="col1">服务器名：</td>
 								<td class="col2">
-									<input type="text" name="">
-									(可选:1-64个字符，不支持" ' ~ \ #空格和?输入)
+									<input type="text" name="" id="wan_pppoe_server" maxlength="64">
+									<span>(可选：1-64个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="col1">DNS设置</td>
 								<td class="col2">
-									<select>
-										<option>自动</option>
-										<option>手动</option>
+									<select id="wan_sel_dnsmode">
+										<option value="auto">自动</option>
+										<option value="static">手动</option>
 									</select>
 								</td>
 							</tr>
-							<tr>
+
+							<tr class="wan_dns_static" style="display:none;">
 								<td class="col1">DNS服务器</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="wan_dns_static1">
 									<span>（可选）</span>
 								</td>
 							</tr>
-							<tr>
+							<tr class="wan_dns_static" style="display:none;">
 								<td class="col1">备份DNS服务器</td>
 								<td class="col2">
-									<input type="text" name="">
+									<input type="text" name="" id="wan_dns_static2">
 									<span>（可选）</span>
 								</td>
 							</tr>
 							</tbody>
 						</table>
 					</div>
+					
 					<div id="wizard_lan_settings">
 						<div  class="table_title">
 							<span>LAN设置（Vlan-interfan 1）</span>

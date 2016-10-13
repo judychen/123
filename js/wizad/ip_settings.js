@@ -14,14 +14,14 @@ function changeIpMode(){
 		$(".ip_static").hide();
 		$(".ip_pppoe").hide();
 
-		$("#ip_sel_dnsMode").val("auto");
-		$(".ip_dns_manual").hide();
+		$("#ip_sel_dnsmode").val("auto");
+		$(".ip_dns_static").hide();
 	} else if ( $("#ip_sel_ipmode").val() == "static") {
 		
 		$(".ip_static").show();
 		$(".ip_pppoe").hide();
-		$("#ip_sel_dnsMode").attr("disabled", "disabled");
-		$("#ip_sel_dnsMode").val("static");
+		$("#ip_sel_dnsmode").attr("disabled", "disabled");
+		$("#ip_sel_dnsmode").val("static");
 		$(".ip_dns_static").show();
 
 	}else if( $("#ip_sel_ipmode").val() == "pppoe"){
@@ -29,8 +29,7 @@ function changeIpMode(){
 		$(".ip_static").hide();
 		$(".ip_pppoe").show();
 
-		$("#ip_sel_dnsMode").attr("disabled", "disabled");
-		$("#ip_sel_dnsMode").val("auto");
+		$("#ip_sel_dnsmode").val("auto");
 		$(".ip_dns_static").hide();
 
 	}
@@ -41,7 +40,6 @@ function changeDnsMode(){
 		$(".ip_dns_static").hide();
 	} else {
 		$(".ip_dns_static").show();
-		console.log("static");
 	}
 }
 
@@ -127,19 +125,20 @@ function checkValidWizardIp(){
 	var first_dns = $("#ip_dns_static1").val();
 	var second_dns = $("#ip_dns_static2").val();
 
+	//shoud add static and dhcp check
 	if ( first_dns != "" && !checkIP( first_dns ) ) {
-		showError(true, "输入的DNS服务器IP格式不正确!");
-		return false;
-	}
-	if ( second_dns != "" && !checkIP( second_dns ) ) {
-		showError(true, "输入的备份DNS服务器IP格式不正确!");
-		return false;
-	}
+			showError(true, "输入的DNS服务器IP格式不正确!");
+			return false;
+		}
+		if ( second_dns != "" && !checkIP( second_dns ) ) {
+			showError(true, "输入的备份DNS服务器IP格式不正确!");
+			return false;
+		}
 
-	if ( first_dns != "" && first_dns == second_dns ) {
-		showError(true, "两个DNS服务器IP不能相同！");
-		return false;
-	}
+		if ( first_dns != "" && first_dns == second_dns ) {
+			showError(true, "两个DNS服务器IP不能相同！");
+			return false;
+		}
 
 	return true;
 

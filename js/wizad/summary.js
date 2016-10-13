@@ -1,57 +1,33 @@
-var arrWS;
 
-function isInputValid() {
-    /*todo*/
-}
-
-function _finish() {
-    /*todo*/
-}
-
-function finish() {
-    /*todo*/
-}
-
-function gohome() {
-    /*todo*/
-}
-
-function ajaxDone() {
-    /*todo*/
-}
-
-function generate_tr_ssid() {
-    /*todo*/
-}
-
-function validWizardSummary(){
-	
-}
-
-$(function () {
-   /* arrWS = loadWizardProgress("wizard_summary");
-
-
-
-    var temp;
-	var nat = jsSpec.spec.nat;*/
-
-	/*if ( typeof(nat) != "undefined" ) {
-		
-		if(temp.link_mode == "nat"){
-			$("#wizard_sum_mode").html("NAT模式");
-		}else{
-			$("#wizard_sum_mode").html("桥接模式");
-		}
-		step = 1;
-
-	}else{
-
-		step = 0;
-
+function loadSummaryData(){
+	if ( arrIS.link_mode == "nat") {
+		$(".wizard_sum_nat").show();
+		$(".wizard_sum_bridge").hide();
+	} else {
+		$(".wizard_sum_bridge").show();
+		$(".wizard_sum_nat").hide();
 	}
 
-	if ( temp.ip_mode == "dhcp" ) {
+
+	if(arrIS.link_mode == "nat"){
+		$("#wizard_sum_mode").html("NAT模式");
+	}else{
+		$("#wizard_sum_mode").html("桥接模式");
+	}
+
+	if ( arrIS.ip_mode == "dhcp" ) {
+		$("#wizard_sum_ip").html("DHCP分配");
+
+	}else if(arrIS.ip_mode == "pppoe"){
+		$("#wizard_sum_ip").html("PPPoE");
+
+	}else{
+		$("#wizard_sum_ip").html( arrIS.static_ip + " / " + arrIS.static_netmask );
+	}
+
+	/*nat方式未配置*/
+		
+	/*if ( arrIS.ip_mode == "dhcp" ) {
 		$("#wizard_sum_wan").html("DHCP分配");
 
 	}else if(temp.ip_mode == "pppoe"){
@@ -62,7 +38,7 @@ $(function () {
 	}*/
 	/*dns*/
 
-/*	if ( temp.dns_mode == "static" ){
+	/*if ( temp.dns_mode == "static" ){
 		$("#span_dns_mode").html("自动");
 	}else{
 		var str = "";
@@ -74,32 +50,30 @@ $(function () {
 			str += temp.dns_first;
 		}
 		$("#span_dns_mode").html( str );
-	}*/
+	}
 
-	/*$("#wizard_sum_ip").html( temp.ip + " / " + temp.netmask );
+	$("#wizard_sum_ip").html( temp.ip + " / " + temp.netmask );
 
 	if (temp.dhcpd_enable == "enable") {
 		$("#wizard_sum_landhcp").html( "启用&nbsp;&nbsp;&nbsp;" + temp.ippool_start + " - " + temp.ippool_end );
 	} else
-		$("#wizard_sum_landhcp").html( "禁用" );
+		$("#wizard_sum_landhcp").html( "禁用" );*/
 
-	if ( temp.pwd != "" ) {
+	if ( arrIS.pwd != "" ) {
 		$("#wizard_sum_ap").html( "已更改" );
 	}else{
 		$("#wizard_sum_ap").html( "未更改" );
 	}
 
-	var jsRadios = jsSpec.spec.radios;
-	for ( var i = 0; i < jsRadios.length; i++ ) {
-		eval( "$(\"#wizard_sum_ssid" + i + "\").html( temp.ssid_" + i + " )" );
-	}
+	$("#wizard_sum_ssid0").html(arrIS.ssid_0);
+	$("#wizard_sum_ssid1").html(arrIS.ssid_1);
 
-	if ( temp.encrypt == "none" ){
+	if ( arrIS.encrypt == "none" ){
 		$("#wizard_sum_cipher").html( "None" );
 	}else{
 		$("#wizard_sum_cipher").html( "WPA/WPA2" );
-	}*/
+	}
 
+}
 
-});
 

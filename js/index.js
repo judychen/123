@@ -45,7 +45,7 @@ $(function () {
         event.stopPropagation();
     })
 
-    showCont();
+    showContent();
     /*tab事件*/
     $(".underline li").click(tabMenuClicked);
     $(".underline li").mouseover(tabMenuMouseover);
@@ -64,7 +64,7 @@ function init() {
 }
 
 /*太戳，等优化*/
-function showCont(){
+function showContent(){
     /*主标题*/
     $("#m_wizard").click(function(){
         $("#wizard").show();

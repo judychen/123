@@ -92,8 +92,6 @@
 		</div>
 		<div id="my_banner" style="background-image:url(img/headbar.jpg)" height="26px">
 			<div id="navigationBar">位置：系统状态>设备概览</div>
-			<a href="#" class="white">保存</a>
-			<a href="#" class="white">退出</a>
 		</div>
 	</header>
 	<main  class="clearfix">
@@ -898,39 +896,39 @@
 						<tr>
 							<td class="col1">使能状态：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked" id="radio0_enable" />
+								<input type="checkbox" checked="checked" id="radio0_status" />
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">工作模式 / 频宽： </td>
 							<td class="col2">
 								<select id="radio0_mode">
-									<option value="">802.11g</option>
-									<option value="">802.11gn/20M</option>
-									<option value="">802.11gn/40M</option>
-									<option value="">802.11nonly/20M</option>
-									<option value="">802.11nonly/40M</option>
+									<option value="802.11g">802.11g</option>
+									<option value="802.11gn20">802.11gn/20M</option>
+									<option value="802.11gn40">802.11gn/40M</option>
+									<option value="802.11n20">802.11nonly/20M</option>
+									<option value="802.11n40">802.11nonly/40M</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">信道：</td>
 							<td class="col2">
-								<select id="radio0_channels">
-									<option value="">auto</option>
-									<option value="">1</option>
-									<option value="">2</option>
-									<option value="">3</option>
-									<option value="">4</option>
-									<option value="">5</option>
-									<option value="">6</option>
-									<option value="">7</option>
-									<option value="">8</option>
-									<option value="">9</option>
-									<option value="">10</option>
-									<option value="">11</option>
-									<option value="">12</option>
-									<option value="">13</option>
+								<select id="radio0_channel">
+									<option value="auto">auto</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
 								</select>
 							</td>
 						</tr>
@@ -938,32 +936,32 @@
 							<td class="col1">发射功率：</td>
 							<td class="col2">
 								<select id="radio0_maxpower">
-									<option value="">auto</option>
-									<option value="">3</option>
-									<option value="">4</option>
-									<option value="">5</option>
-									<option value="">6</option>
-									<option value="">7</option>
-									<option value="">8</option>
-									<option value="">9</option>
-									<option value="">10</option>
-									<option value="">11</option>
-									<option value="">12</option>
-									<option value="">13</option>
-									<option value="">14</option>
-									<option value="">15</option>
-									<option value="">16</option>
-									<option value="">17</option>
-									<option value="">18</option>
-									<option value="">19</option>
-									<option value="">20</option>
-									<option value="">21</option>
-									<option value="">22</option>
-									<option value="">23</option>
-									<option value="">24</option>
-									<option value="">25</option>
-									<option value="">26</option>
-									<option value="">27</option>
+									<option value="auto">auto</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
 								</select>
 								dBm（默认auto）
 							</td>
@@ -992,23 +990,11 @@
 								<input type="text" value="2346" id="radio0_rtsThreshold" />（0-2346，默认2346）
 							</td>
 						</tr>
-						<tr>
-							<td class="col1">弱信号终端接入控制：</td>
-							<td class="col2">
-								<input type="checkbox" id="radio0_rssi" />开启
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">广播报文速率限制：</td>
-							<td class="col2">
-								<input type="checkbox" id="radio0_ratelimit" />开启
-							</td>
-						</tr>
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="radio_setting0_ok" />
-				 		<input type="button" class="button" value="确定" id="radio_setting0_cancel" />
+				 		<input type="button" class="button" value="取消" id="radio_setting0_cancel" />
+				 		<input type="button" class="button" value="确定" id="radio_setting0_ok" />
 					</div>
 				</div>
 				<div id="_radio1" style="display: none">
@@ -1021,68 +1007,68 @@
 						<tr>
 							<td class="col1">使能状态：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked"/>
+								<input type="checkbox" checked="checked" id="radio1_status" />
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">工作模式 / 频宽： </td>
 							<td class="col2">
-								<select>
-									<option value="">802.11a</option>
-									<option value="">802.11an/20M</option>
-									<option value="">802.11an/40M</option>
-									<option value="">802.11nonly/20M</option>
-									<option value="">802.11nonly/40M</option>
+								<select id="radio1_mode">
+									<option value="802.11a">802.11a</option>
+									<option value="802.11an20">802.11an/20M</option>
+									<option value="802.11an40">802.11an/40M</option>
+									<option value="802.11n20">802.11nonly/20M</option>
+									<option value="802.11n40">802.11nonly/40M</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">信道：</td>
 							<td class="col2">
-								<select>
-									<option value="">auto</option>
-									<option value="">36</option>
-									<option value="">40</option>
-									<option value="">44</option>
-									<option value="">48</option>
-									<option value="">149</option>
-									<option value="">153</option>
-									<option value="">157</option>
-									<option value="">161</option>
-									<option value="">165</option>
+								<select id="radio1_channel">
+									<option value="auto">auto</option>
+									<option value="36">36</option>
+									<option value="40">40</option>
+									<option value="44">44</option>
+									<option value="48">48</option>
+									<option value="149">149</option>
+									<option value="153">153</option>
+									<option value="157">157</option>
+									<option value="161">161</option>
+									<option value="165">165</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">发射功率：</td>
 							<td class="col2">
-								<select>
-									<option value="">auto</option>
-									<option value="">3</option>
-									<option value="">4</option>
-									<option value="">5</option>
-									<option value="">6</option>
-									<option value="">7</option>
-									<option value="">8</option>
-									<option value="">9</option>
-									<option value="">10</option>
-									<option value="">11</option>
-									<option value="">12</option>
-									<option value="">13</option>
-									<option value="">14</option>
-									<option value="">15</option>
-									<option value="">16</option>
-									<option value="">17</option>
-									<option value="">18</option>
-									<option value="">19</option>
-									<option value="">20</option>
-									<option value="">21</option>
-									<option value="">22</option>
-									<option value="">23</option>
-									<option value="">24</option>
-									<option value="">25</option>
-									<option value="">26</option>
-									<option value="">27</option>
+								<select id="radio1_maxpower">
+									<option value="auto">auto</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
 								</select>
 								dBm（默认auto）
 							</td>
@@ -1090,44 +1076,32 @@
 						<tr>
 							<td class="col1">Beacon帧间隔：</td>
 							<td class="col2">
-								<input type="text" value="100"/>（40-3500毫秒，默认100）
+								<input type="text" value="100" id="radio1_beacon"/>（40-3500毫秒，默认100）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">DTIM间隔：</td>
 							<td class="col2">
-								<input type="text" value="1"/>（1-31，默认1）
+								<input type="text" value="1" id="radio1_dtim"/>（1-31，默认1）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">分片阈值：</td>
 							<td class="col2">
-								<input type="text" value="2346"/>（256-2346，默认2346）
+								<input type="text" value="2346" id="radio1_fragThreshold"/>（256-2346，默认2346）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">RTS阈值：</td>
 							<td class="col2">
-								<input type="text" value="2346"/>（0-2346，默认2346）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">弱信号终端接入控制：</td>
-							<td class="col2">
-								<input type="checkbox"/>开启
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">广播报文速率限制：</td>
-							<td class="col2">
-								<input type="checkbox"/>开启
+								<input type="text" value="2346" id="radio1_rtsThreshold"/>（0-2346，默认2346）
 							</td>
 						</tr>
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="radio_setting1_ok" />
-				 		<input type="button" class="button" value="确定" id="radio_setting1_cancel" />
+				 		<input type="button" class="button" value="取消" id="radio_setting1_cancel" />
+				 		<input type="button" class="button" value="确定" id="radio_setting1_ok" />
 					</div>
 				</div>
 			</div>		
@@ -1970,7 +1944,7 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="导出"/>
+				 		<input type="button" class="button" value="导出" id="outputbtn" />
 					</div>
 				</div>
 			</div>
@@ -2001,26 +1975,26 @@
 				        <td class="col2">
 				            <select id="sel_timeMode">
 				            	<option value="enabled">自动同步</option>
-				            	<option value="disabled">手动更新</option>
+				            	<option value="disabled">手动设置</option>
 				            </select>
 				        </td>
 				    </tr>
 				    <tr class="timeAuto">
 				        <td class="col1">NTP同步间隔：</td>
 				        <td class="col2">
-				            <input type="text"/>（60-86400秒，默认86400）
+				            <input type="text" value="86400" />（60-86400秒，默认86400）
 				        </td>
 				    </tr>
 				    <tr class="timeAuto">
 				        <td class="col1">NTP服务器1：</td>
 				        <td class="col2">
-				            <input type="text"/>（1-32个字符）
+				            <input type="text" value="time.nist.gov" maxlength="32" />（1-32个字符）
 				        </td>
 				    </tr>
 				    <tr class="timeAuto">
 				        <td class="col1">NTP服务器2：</td>
 				        <td class="col2">
-				            <input type="text"/>（可选，1-32个字符）
+				            <input type="text" value="time.windows.com" maxlength="32" />（可选，1-32个字符）
 				        </td>
 				    </tr>
 				    <tr class="timeAuto">
@@ -2029,25 +2003,248 @@
 				            <input type="text"/>（可选，1-32个字符）
 				        </td>
 				    </tr>
-				    <tr class="timeManual" >
+				    <tr class="timeManual" style="display:none;">
 						<td class="col1">日期：</td>
 						<td class="col2">
-							<select id="sel_timeYear" ></select>
+							<select id="sel_timeYear" >
+								<option value="">2000</option>
+								<option value="">2001</option>
+								<option value="">2002</option>
+								<option value="">2003</option>
+								<option value="">2004</option>
+								<option value="">2005</option>
+								<option value="">2006</option>
+								<option value="">2007</option>
+								<option value="">2008</option>
+								<option value="">2009</option>
+								<option value="">2010</option>
+								<option value="">2011</option>
+								<option value="">2012</option>
+								<option value="">2013</option>
+								<option value="">2014</option>
+								<option value="">2015</option>
+								<option value="">2016</option>
+								<option value="">2017</option>
+								<option value="">2018</option>
+								<option value="">2019</option>
+								<option value="">2020</option>
+								<option value="">2021</option>
+								<option value="">2022</option>
+								<option value="">2023</option>
+								<option value="">2024</option>
+								<option value="">2025</option>
+								<option value="">2026</option>
+								<option value="">2027</option>
+								<option value="">2028</option>
+								<option value="">2029</option>
+								<option value="">2030</option>
+							</select>
 							年	
-							<select id="sel_timeMonth" > </select>
+							<select id="sel_timeMonth" >
+								<option value="">01</option>
+								<option value="">02</option>
+								<option value="">03</option>
+								<option value="">04</option>
+								<option value="">05</option>
+								<option value="">06</option>
+								<option value="">07</option>
+								<option value="">08</option>
+								<option value="">09</option>
+								<option value="">10</option>
+								<option value="">11</option>
+								<option value="">12</option>
+							</select>
 							月	
-							<select id="sel_timeDay"> </select>
+							<select id="sel_timeDay">
+								<option value="">01</option>
+								<option value="">02</option>
+								<option value="">03</option>
+								<option value="">04</option>
+								<option value="">05</option>
+								<option value="">06</option>
+								<option value="">07</option>
+								<option value="">08</option>
+								<option value="">09</option>
+								<option value="">10</option>
+								<option value="">11</option>
+								<option value="">12</option>
+								<option value="">13</option>
+								<option value="">14</option>
+								<option value="">15</option>
+								<option value="">16</option>
+								<option value="">17</option>
+								<option value="">18</option>
+								<option value="">19</option>
+								<option value="">20</option>
+								<option value="">21</option>
+								<option value="">22</option>
+								<option value="">23</option>
+								<option value="">24</option>
+								<option value="">25</option>
+								<option value="">26</option>
+								<option value="">27</option>
+								<option value="">28</option>
+								<option value="">29</option>
+								<option value="">30</option>
+								<option value="">31</option>
+							</select>
 							日
 						</td>
 					</tr>
-					<tr class="timeManual">
-						<td class="col1">本地时间：</td>
+					<tr class="timeManual" style="display:none;">
+						<td class="col1">时间：</td>
 						<td class="col2">
-							<select id="sel_timeHours" name="sel_timeHours"></select>
+							<select id="sel_timeHours" name="sel_timeHours">
+								<option value="">01</option>
+								<option value="">02</option>
+								<option value="">03</option>
+								<option value="">04</option>
+								<option value="">05</option>
+								<option value="">06</option>
+								<option value="">07</option>
+								<option value="">08</option>
+								<option value="">09</option>
+								<option value="">10</option>
+								<option value="">11</option>
+								<option value="">12</option>
+								<option value="">13</option>
+								<option value="">14</option>
+								<option value="">15</option>
+								<option value="">16</option>
+								<option value="">17</option>
+								<option value="">18</option>
+								<option value="">19</option>
+								<option value="">20</option>
+								<option value="">21</option>
+								<option value="">22</option>
+								<option value="">23</option>
+							</select>
 							时
-							<select id="sel_timeMinutes" name="sel_timeMinutes"></select>
+							<select id="sel_timeMinutes" name="sel_timeMinutes">
+								<option value="">00</option>
+								<option value="">01</option>
+								<option value="">02</option>
+								<option value="">03</option>
+								<option value="">04</option>
+								<option value="">05</option>
+								<option value="">06</option>
+								<option value="">07</option>
+								<option value="">08</option>
+								<option value="">09</option>
+								<option value="">10</option>
+								<option value="">11</option>
+								<option value="">12</option>
+								<option value="">13</option>
+								<option value="">14</option>
+								<option value="">15</option>
+								<option value="">16</option>
+								<option value="">17</option>
+								<option value="">18</option>
+								<option value="">19</option>
+								<option value="">20</option>
+								<option value="">21</option>
+								<option value="">22</option>
+								<option value="">23</option>
+								<option value="">24</option>
+								<option value="">25</option>
+								<option value="">26</option>
+								<option value="">27</option>
+								<option value="">28</option>
+								<option value="">29</option>
+								<option value="">30</option>
+								<option value="">31</option>
+								<option value="">32</option>
+								<option value="">33</option>
+								<option value="">34</option>
+								<option value="">35</option>
+								<option value="">36</option>
+								<option value="">37</option>
+								<option value="">38</option>
+								<option value="">39</option>
+								<option value="">40</option>
+								<option value="">41</option>
+								<option value="">42</option>
+								<option value="">43</option>
+								<option value="">44</option>
+								<option value="">45</option>
+								<option value="">46</option>
+								<option value="">47</option>
+								<option value="">48</option>
+								<option value="">49</option>
+								<option value="">50</option>
+								<option value="">51</option>
+								<option value="">52</option>
+								<option value="">53</option>
+								<option value="">54</option>
+								<option value="">55</option>
+								<option value="">56</option>
+								<option value="">57</option>
+								<option value="">58</option>
+								<option value="">59</option>
+							</select>
 							分
-							<select id="sel_timeSeconds" name="sel_timeSeconds"></select>
+							<select id="sel_timeSeconds" name="sel_timeSeconds">
+								<option value="">00</option>
+								<option value="">01</option>
+								<option value="">02</option>
+								<option value="">03</option>
+								<option value="">04</option>
+								<option value="">05</option>
+								<option value="">06</option>
+								<option value="">07</option>
+								<option value="">08</option>
+								<option value="">09</option>
+								<option value="">10</option>
+								<option value="">11</option>
+								<option value="">12</option>
+								<option value="">13</option>
+								<option value="">14</option>
+								<option value="">15</option>
+								<option value="">16</option>
+								<option value="">17</option>
+								<option value="">18</option>
+								<option value="">19</option>
+								<option value="">20</option>
+								<option value="">21</option>
+								<option value="">22</option>
+								<option value="">23</option>
+								<option value="">24</option>
+								<option value="">25</option>
+								<option value="">26</option>
+								<option value="">27</option>
+								<option value="">28</option>
+								<option value="">29</option>
+								<option value="">30</option>
+								<option value="">31</option>
+								<option value="">32</option>
+								<option value="">33</option>
+								<option value="">34</option>
+								<option value="">35</option>
+								<option value="">36</option>
+								<option value="">37</option>
+								<option value="">38</option>
+								<option value="">39</option>
+								<option value="">40</option>
+								<option value="">41</option>
+								<option value="">42</option>
+								<option value="">43</option>
+								<option value="">44</option>
+								<option value="">45</option>
+								<option value="">46</option>
+								<option value="">47</option>
+								<option value="">48</option>
+								<option value="">49</option>
+								<option value="">50</option>
+								<option value="">51</option>
+								<option value="">52</option>
+								<option value="">53</option>
+								<option value="">54</option>
+								<option value="">55</option>
+								<option value="">56</option>
+								<option value="">57</option>
+								<option value="">58</option>
+								<option value="">59</option>
+							</select>
 							秒
 						</td>
 					</tr>

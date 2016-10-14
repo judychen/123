@@ -60,6 +60,10 @@ function upgrade(){
 	}
 }
 
+function output(){
+	/*暂时无导出文件*/
+}
+
 $(function(){
 	/*软件重启*/
 	var temp = jsDataDevice.device[0];
@@ -76,6 +80,9 @@ $(function(){
 	$(".radio_method").click(changeMethod);
 	$("#upgradebtn").click(upgrade);
 	/*输入框未判断，升级操作实际未执行*/
+
+	/*output*/
+	$("#outputbtn").click(output);
 	
 
 });

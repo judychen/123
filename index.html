@@ -898,13 +898,13 @@
 						<tr>
 							<td class="col1">使能状态：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked"/>
+								<input type="checkbox" checked="checked" id="radio0_enable" />
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">工作模式 / 频宽： </td>
 							<td class="col2">
-								<select>
+								<select id="radio0_mode">
 									<option value="">802.11g</option>
 									<option value="">802.11gn/20M</option>
 									<option value="">802.11gn/40M</option>
@@ -916,7 +916,7 @@
 						<tr>
 							<td class="col1">信道：</td>
 							<td class="col2">
-								<select>
+								<select id="radio0_channels">
 									<option value="">auto</option>
 									<option value="">1</option>
 									<option value="">2</option>
@@ -937,7 +937,7 @@
 						<tr>
 							<td class="col1">发射功率：</td>
 							<td class="col2">
-								<select>
+								<select id="radio0_maxpower">
 									<option value="">auto</option>
 									<option value="">3</option>
 									<option value="">4</option>
@@ -971,37 +971,37 @@
 						<tr>
 							<td class="col1">Beacon帧间隔：</td>
 							<td class="col2">
-								<input type="text" value="100"/>（40-3500毫秒，默认100）
+								<input type="text" value="100" id="radio0_beacon" />（40-3500毫秒，默认100）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">DTIM间隔：</td>
 							<td class="col2">
-								<input type="text" value="1"/>（1-31，默认1）
+								<input type="text" value="1" id="radio0_dtim" />（1-31，默认1）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">分片阈值：</td>
 							<td class="col2">
-								<input type="text" value="2346"/>（256-2346，默认2346）
+								<input type="text" value="2346" id="radio0_fragThreshold" />（256-2346，默认2346）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">RTS阈值：</td>
 							<td class="col2">
-								<input type="text" value="2346"/>（0-2346，默认2346）
+								<input type="text" value="2346" id="radio0_rtsThreshold" />（0-2346，默认2346）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">弱信号终端接入控制：</td>
 							<td class="col2">
-								<input type="checkbox"/>开启
+								<input type="checkbox" id="radio0_rssi" />开启
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">广播报文速率限制：</td>
 							<td class="col2">
-								<input type="checkbox"/>开启
+								<input type="checkbox" id="radio0_ratelimit" />开启
 							</td>
 						</tr>
 						</tbody>

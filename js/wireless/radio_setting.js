@@ -1,4 +1,5 @@
-var radioS;
+var radio0S;
+var radio1S;
 /*
 * status
 * mode
@@ -8,20 +9,38 @@ var radioS;
 * dtim
 * fragThreshold
 * rtsThreshold
-* lowRssi
+* rssi
 * ratelimit
-* atf
 */
 
 function checkValidRadio0(){
 
-	if(!checkValidWizardpwd()){
-		return false;
-	}
 
-	arrIS.pwd = $("#wizard_password").val();
+
+
 
 	return true;
+
+}
+
+
+function validRadio0(){
+
+	if(checkValidRadio0()){
+		radio0S.status = $("#wizard_password").val();
+		radio0S.mode = $("#wizard_password").val();
+		radio0S.channel = $("#wizard_password").val();
+		radio0S.maxpower = $("#wizard_password").val();
+		radio0S.beacon = $("#wizard_password").val();
+		radio0S.dtim = $("#wizard_password").val();
+		radio0S.fragThreshold = $("#wizard_password").val();
+		radio0S.rtsThreshold = $("#wizard_password").val();
+		radio0S.rssi = $("#wizard_password").val();
+		radio0S.ratelimit = $("#wizard_password").val();
+	}
+
+	
+
 
 }
 

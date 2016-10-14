@@ -15,13 +15,15 @@ function changeIpMode(){
 		$(".ip_pppoe").hide();
 
 		$("#ip_sel_dnsmode").val("auto");
+		$("#ip_sel_dnsmode").removeAttr("disabled");
 		$(".ip_dns_static").hide();
 	} else if ( $("#ip_sel_ipmode").val() == "static") {
 		
 		$(".ip_static").show();
 		$(".ip_pppoe").hide();
-		$("#ip_sel_dnsmode").attr("disabled", "disabled");
+		
 		$("#ip_sel_dnsmode").val("static");
+		$("#ip_sel_dnsmode").attr("disabled", "disabled");
 		$(".ip_dns_static").show();
 
 	}else if( $("#ip_sel_ipmode").val() == "pppoe"){
@@ -30,6 +32,7 @@ function changeIpMode(){
 		$(".ip_pppoe").show();
 
 		$("#ip_sel_dnsmode").val("auto");
+		$("#ip_sel_dnsmode").removeAttr("disabled");
 		$(".ip_dns_static").hide();
 
 	}

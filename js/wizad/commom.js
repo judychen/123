@@ -4,7 +4,7 @@ var arr_nat_wizard_items = new Array(
     ["LAN设置", "wizard_lan_settings"],
     ["用户密码", "wizard_admin_pwd"],
     ["无线设置", "wizard_wireless_settings"],
-    ["配置总览", "wizard_nat_summary"]
+    ["配置总览", "wizard_summary"]
 );
 
 var arr_bridge_wizard_items = new Array(
@@ -21,6 +21,7 @@ var arr_wizard_items = new Array(
     ["无线设置", "wizard_wireless_settings"],
     ["配置总览", "wizard_summary"]
 );
+
 
 var arrIS = new Object();
 
@@ -98,9 +99,7 @@ function generateWizardOptions() {
     }else{
         $("#wizard_ok").hide();
         $("#wizard_next").show();   
-    }
-
-        
+    }        
 }
 
 function initWizardDatas() {
@@ -135,7 +134,7 @@ function wizard_next_step() {
                 switch (i){
                
                     case 0: check = validWizardLinkmode();break;
-                    case 1: check = validWizardIp();break;
+                    case 1: check = validWizardWan();break;
                     case 2: check = validWizardLan();break;
                     case 3: check = validWizardAdpwd();break;
                     case 4: check = validWizardWireless();break;
@@ -182,14 +181,13 @@ function wizard_cancel() {
 }
 
 function wizard_ok() {
-    validWizardSummary();
-
+    
     reboot();
 }
 
 $(function(){
     $("#wizard_cancel").click(wizard_cancel);
-    $("#wizard_ok").click(ok);
+    $("#wizard_ok").click(wizard_ok);
     $("#wizard_prew").click(wizard_prew_step);
     $("#wizard_next").click(wizard_next_step);
 });

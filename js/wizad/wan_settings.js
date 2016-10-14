@@ -15,15 +15,16 @@ function changeWanIpMode(){
 		$(".wan_static").hide();
 		$(".wan_pppoe").hide();
 
-		$("#wan_sel_dnsMode").val("auto");
+		$("#wan_sel_dnsmode").val("auto");
+		$("#wan_sel_dnsmode").removeAttr("disabled");
 		$(".wan_dns_static").hide();
 	} else if ( $("#wan_sel_ipmode").val() == "static") {
 		
 		$(".wan_static").show();
 		$(".wan_pppoe").hide();
-		$("#wan_sel_dnsMode").attr("disabled", "disabled");
-		$("#wan_sel_dnsMode").val("static");
-		console.log($("#wan_sel_dnsMode").val());
+
+		$("#wan_sel_dnsmode").val("static");
+		$("#wan_sel_dnsmode").attr("disabled", "disabled");
 		$(".wan_dns_static").show();
 
 	}else if( $("#wan_sel_ipmode").val() == "pppoe"){
@@ -31,8 +32,8 @@ function changeWanIpMode(){
 		$(".wan_static").hide();
 		$(".wan_pppoe").show();
 
-		$("#wan_sel_dnsMode").attr("disabled", "disabled");
-		$("#wan_sel_dnsMode").val("auto");
+		$("#wan_sel_dnsmode").val("auto");
+		$("#wan_sel_dnsmode").removeAttr("disabled");
 		$(".wan_dns_static").hide();
 
 	}
@@ -46,7 +47,6 @@ function changeWanDnsMode(){
 	}
 }
 
-//未
 function checkValidWizardWan(){
 		
 	if($("#wan_sel_ipmode").val() == "static"){
@@ -146,7 +146,7 @@ function checkValidWizardWan(){
 
 }
 
-function validWizardIp(){
+function validWizardWan(){
 	if(!checkValidWizardWan()){
 		return false;
 	}

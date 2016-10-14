@@ -413,14 +413,14 @@
 							<tr>
 								<td class="col1">新的密码</td>
 								<td class="col2">
-									<input type="text" name="" id="wizard_password" maxlength="32">
+									<input type="text" name="" id="wizard_password" maxlength="32" value="admin">
 									<span>(1-32个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
 							<tr>
 								<td class="col1">确认密码</td>
 								<td class="col2">
-									<input type="text" name="" id="wizard_password_check" maxlength="32">
+									<input type="text" name="" id="wizard_password_check" maxlength="32" value="admin">
 									<span>(1-32个字符，不支持" ' ~ \ #空格和?输入)</span>
 								</td>
 							</tr>
@@ -436,13 +436,13 @@
 								<tr>
 									<td class="col1">2.4G SSID：</td>
 									<td class="col2">
-										<input type="text" id="wizard_ssid_0" maxlength="32">（1-32个字符，不包含 ? " ; \）
+										<input type="text" id="wizard_ssid_0" maxlength="32" value="2.4G">（1-32个字符，不包含 ? " ; \）
 									</td>
 								</tr>
 								<tr>
 									<td class="col1">5G SSID：</td>
 									<td class="col2">
-										<input type="text" id="wizard_ssid_1" maxlength="32">（1-32个字符，不包含 ? " ; \）
+										<input type="text" id="wizard_ssid_1" maxlength="32" value="5G">（1-32个字符，不包含 ? " ; \）
 									</td>
 								</tr>
 							</tbody>
@@ -993,43 +993,6 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="col1">发射距离：</td>
-							<td class="col2">
-								<input type="text" value="1"/>（1-40km，默认1）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">无线保护模式：</td>
-							<td class="col2">
-								<select>
-									<option value="">cts-to-self</option>
-									<option value="">none</option>
-									<option value="">rts-cts</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">前导码：</td>
-							<td class="col2">
-								<select>
-									<option value="">short</option>
-									<option value="">long</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">Short GI：</td>
-							<td class="col2">
-								<input type="checkbox" checked="checked"/>开启
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">A-MPDU：</td>
-							<td class="col2">
-								<input type="checkbox" checked="checked"/>开启
-							</td>
-						</tr>
-						<tr>
 							<td class="col1">弱信号终端接入控制：</td>
 							<td class="col2">
 								<input type="checkbox"/>开启
@@ -1041,17 +1004,11 @@
 								<input type="checkbox"/>开启
 							</td>
 						</tr>
-						<tr>
-							<td class="col1">Air-time fairness：</td>
-							<td class="col2">
-								<input type="checkbox"/>
-							</td>
-						</tr>
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="wireless_add_ok" />
-				 		<input type="button" class="button" value="确定" id="wireless_add_cancel" />
+				 		<input type="button" class="button" value="取消" id="radio_setting0_ok" />
+				 		<input type="button" class="button" value="确定" id="radio_setting0_cancel" />
 					</div>
 				</div>
 				<div id="_radio1" style="display: none">
@@ -1155,34 +1112,6 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="col1">发射距离：</td>
-							<td class="col2">
-								<input type="text" value="1"/>（1-40km，默认1）
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">无线保护模式：</td>
-							<td class="col2">
-								<select>
-									<option value="">cts-to-self</option>
-									<option value="">none</option>
-									<option value="">rts-cts</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">Short GI：</td>
-							<td class="col2">
-								<input type="checkbox" checked="checked"/>开启
-							</td>
-						</tr>
-						<tr>
-							<td class="col1">A-MPDU：</td>
-							<td class="col2">
-								<input type="checkbox" checked="checked"/>开启
-							</td>
-						</tr>
-						<tr>
 							<td class="col1">弱信号终端接入控制：</td>
 							<td class="col2">
 								<input type="checkbox"/>开启
@@ -1194,17 +1123,11 @@
 								<input type="checkbox"/>开启
 							</td>
 						</tr>
-						<tr>
-							<td class="col1">Air-time fairness：</td>
-							<td class="col2">
-								<input type="checkbox"/>
-							</td>
-						</tr>
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="wireless_add_ok" />
-				 		<input type="button" class="button" value="确定" id="wireless_add_cancel" />
+				 		<input type="button" class="button" value="取消" id="radio_setting1_ok" />
+				 		<input type="button" class="button" value="确定" id="radio_setting1_cancel" />
 					</div>
 				</div>
 			</div>		

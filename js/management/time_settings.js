@@ -1,3 +1,12 @@
+var time = {
+	"year": "2000",
+	"month": "12",
+	"day": "1",
+	"hour": "0",
+	"minute": "0",
+	"second": "0"
+}
+
 var now_sec= 946662817;
 
 function refreshTime() {
@@ -32,7 +41,6 @@ function changeTimeMode(){
 function change_year_month(){
 	var year = $("#sel_timeYear").val();
 	var month = $("#sel_timeMonth").val();
-	/*var day = $("#sel_timeDay").val();*/
 
 	var days = getDays(year, month);
 
@@ -58,7 +66,7 @@ function initime(){
 	$("#sel_timeYear").html( year );
 
 	var month = "";
-	for(var i = 0; i < 13; i++){
+	for(var i = 1; i < 13; i++){
 		
 		if ( i < 10 )
 			month += "<option value='" + i + "'>0" + i + "</option>";
@@ -78,8 +86,84 @@ function initime(){
 
 	$("#sel_timeDay").html( day );
 
+	var hour = "";
+	for(var i = 0; i < 24; i++){
+		if ( i < 10 )
+			hour += "<option value='" + i + "'>0" + i + "</option>";
+		else
+			hour += "<option value='" + i + "'>" + i + "</option>";
+	}
 
+	$("#sel_timeHours").html( hour );
 
+	var min = "";
+	for(var i = 0; i < 60; i++){
+		if ( i < 10 )
+			min += "<option value='" + i + "'>0" + i + "</option>";
+		else
+			min += "<option value='" + i + "'>" + i + "</option>";
+	}
+
+	$("#sel_timeMinutes").html( min );
+
+	var sec = "";
+	for(var i = 0; i < 60; i++){
+		if ( i < 10 )
+			sec += "<option value='" + i + "'>0" + i + "</option>";
+		else
+			sec += "<option value='" + i + "'>" + i + "</option>";
+	}
+
+	$("#sel_timeSeconds").html( sec );
+}
+
+function isAutoTimeValid(){
+	if (!checkNumberRang($("#ntp_interval").val(), 60, 86400 )){
+		showError(true, "非法的NTP同步间隔！");
+		return false;
+	}
+
+	return true;
+}
+
+function timeOk(){
+	
+
+	if($("#sel_timeMode").val() == "enabled"){
+		if(!isAutoTimeValid()){
+			return;
+		}
+
+		/*ntp之类的存储*/
+	}else{
+		time.year = $("#sel_timeYear").val();
+		time.month = $("#sel_timeMonth").val() -1;
+		time.day = $("#sel_timeDay").val();
+		time.hour = $("#sel_timeHours").val();
+		time.minute = $("#sel_timeMinutes").val();
+		time.second = $("#sel_timeSeconds").val();
+
+		var date = new Date();
+		date.setFullYear(time.year);
+		date.setMonth(time.month);
+		date.setDate(time.day);
+		date.setHours(time.hour);
+		date.setMinutes(time.minute);
+		date.setSeconds(time.second);
+
+		now_sec = Date.parse(date)/1000;
+		
+	}
+}
+
+function timeCancel(){
+	$("#sel_timeYear").val(time.year);
+	time.month++;
+	$("#sel_timeMonth").val(time.month);
+	$("#sel_timeDay").val(time.day);
+	$("#sel_timeHours").val(time.hour);
+	$("#sel_timeMinutes").val(time.minute);
+	$("#sel_timeSeconds").val(time.second);
 }
 
 
@@ -90,15 +174,13 @@ $(function(){
 	var jsNtpInfo = jsNtp.pkg_time[0];
 	$("#sel_timeMode").val( jsNtpInfo.enabled );
 
-	/*var str = "";
-	for(var i = 0; i < 2037; i++){
-
-	}*/
-
 	$("#sel_timeMode").click(changeTimeMode);
 
 	initime()
 
 	$("#sel_timeYear").change(change_year_month);
 	$("#sel_timeMonth").change(change_year_month);
+
+	$("#timeok").click(timeOk);
+	$("#timecancel").click(timeCancel);
 });

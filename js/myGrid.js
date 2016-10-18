@@ -7,6 +7,7 @@ var pageview_selected;
 
 var sort_by_938233;/*为啥？？？*/
 
+
 /*???为啥要split？？？*/
 function pageview_ascii_sort_asc(a, b){
     if(a == "") return 1;
@@ -299,7 +300,6 @@ myGrid.prototype = {
         this.pageview_showlist.length++;
         this.pageview_showlist[this.pageview_showlist.length-1] = new pageview_item(title, index, width
             , cansort, linkfunc, formatfunc, sortAscFunc, sortDscFunc);
-
     },
     pageview_btn:function(){
 
@@ -332,16 +332,10 @@ myGrid.prototype = {
         }
         this.pageview_pagesize = size;
         /*初始化整个表格*/
-        if(typeof(tblDiv) == "string")
-            this.pageview_table_div = $("#" + tblDiv);
-        else
-            this.pageview_table_div = tblDiv;
-
+        this.pageview_table_div = $("#" + tblDiv);
         pageview_selected = new Array(plist.length);
         for(var i = 0; i < plist.length; i ++) pageview_selected[i] = false;
-        /*这边两句用ceil不就好了嘛？*/
-        this.pageview_npages = Math.round(this.pageview_length / this.pageview_pagesize);
-        if(this.pageview_length - this.pageview_npages * this.pageview_pagesize > 0) this.pageview_npages ++;
+        this.pageview_npages = Math.ceil(this.pageview_length / this.pageview_pagesize);
         if ( typeof(page) == "undefined"
             || page == null || page == "null" )
             this.pageview_current_page = 1;

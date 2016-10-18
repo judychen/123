@@ -244,7 +244,12 @@ function isLeapYear(year){
 }
 
 function checkSSID(value){
-    /*todo*/
+    var exp=/^[^";\\?]+$/;
+    var reg = value.match(exp);
+    if ( reg == null )
+        return false;
+    return true;
+
 }
 
 function check_vlan_name_desc(value){

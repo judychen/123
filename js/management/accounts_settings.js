@@ -7,8 +7,85 @@ var jsUsers = {
 	 	 	"level": "1", 
 	 	 	"cipher": "0", 
 	 	 	"password": "admin" 
-	 	} 
-	] 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	},
+	 	{ 
+	 	 	"sect_name": "admin", 
+	 	 	"name": "admin", 
+	 	 	"level": "1", 
+	 	 	"cipher": "0", 
+	 	 	"password": "admin" 
+	 	}
+	]
 };
 var jsIdleTime = { 
 	"pkg_idletime": [
@@ -45,8 +122,6 @@ function btn_formatFunc( arrayRow, index ) {
 			return true;
 }
 
-
-
 var as = new myGrid("as");
 
 $(function(){
@@ -54,16 +129,17 @@ $(function(){
 	as.pageview_add('用户名', 0, '50%', MG_SORT_ASCII);
 	as.pageview_add('级别', 1, '42%', MG_SORT_NUM, null, format_level );
 	
-	/*as.pageview_add_btn("编辑", editUser);
-	as.pageview_add_btn("删除", delUser, null, null, btn_formatFunc);*/
+	/*as.pageview_add_btn("编辑", editUser);*/
+	/*as.pageview_add_btn("删除", delUser, null, null, btn_formatFunc);*/
 
     usersList.length = 0;
 	for ( var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
 		var temp = jsUsers.pkg_usrmanage[i];
 		usersList[i] = temp.name+";"+temp.level;
 	}
+	console.log(usersList);
 
-	as.pageview_init(usersList, 8, 'list_accounts')
+	as.pageview_init(usersList, 10, 'list_accounts')
 
 	$("#accunts_add_btn").click(function(){
 		$("#accunts_add").show();

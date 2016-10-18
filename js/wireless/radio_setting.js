@@ -50,7 +50,6 @@ function checkValidRadio1(){
 	
 	if (!checkNumberRang($("#radio1_beacon").val(), 40, 3500 )){
 		showError(true, "非法的Beacon帧间隔！");
-		console.log("1");
 		return false;
 	}
 

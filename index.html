@@ -740,60 +740,60 @@
 						<tr>
 							<td class="col1">SSID名称：</td>
 							<td class="col2">
-								<input type="text" maxlength="32" />（1-32位字符，不包含 ? " ; \）
+								<input type="text" maxlength="32" id="wl_add_ssid" />（1-32位字符，不包含 ? " ; \）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">选择绑定射频：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked" id="radio_2.4" name="radio_check">
+								<input type="checkbox" checked="checked" id="wl_add_radio_2.4" name="radio_check">
 								<label for="radio_2.4">2.4G</label>
-								<input type="checkbox" checked="checked" id="radio_5" name="radio_check"><label for="radio_5">5G</label>
+								<input type="checkbox" checked="checked" id="wl_add_radio_5" name="radio_check"><label for="radio_5">5G</label>
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">使能状态：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked">
+								<input type="checkbox" checked="checked" id="wl_add_enable">
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">允许广播SSID：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked">
+								<input type="checkbox" checked="checked" id="wl_add_enableSSID">
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">最大客户端接入数量：</td>
 							<td class="col2">
-								<input type="text"/>（1-127，默认为127）
+								<input type="text" id="wl_add_maxclient" value="127" />（1-127，默认为127）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">用户限速：</td>
 							<td class="col2">
 								上行
-								<select>
-									<option>启用</option>
-									<option>禁用</option>
+								<select id="wl_add_up">
+									<option value="enable">启用</option>
+									<option value="disable" selected="selected">禁用</option>
 								</select>
 								下行
-								<select>
-									<option>启用</option>
-									<option>禁用</option>
+								<select id="wl_add_down">
+									<option value="enable">启用</option>
+									<option value="disable" selected="selected">禁用</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">ACL：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked">
+								<input type="checkbox" id="wl_add_acl">
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">上网时段控制：</td>
 							<td class="col2">
-								<input type="checkbox" checked="checked">
+								<input type="checkbox" id="wl_add_time">
 							</td>
 						</tr>
 						</tbody>
@@ -806,7 +806,7 @@
 						<tr>
 							<td class="col1">认证方式：</td>
 							<td class="col2">
-								<select id="sel_auth">
+								<select class="sel_auth" id="wl_add_sel_auth">
 									<option value="none">None</option>
 									<option value="wep">WEP</option>
 									<option value="wpa">WPA/WPA2-PSK</option>
@@ -816,14 +816,14 @@
 						<tr class="wep_tr" style="display:none;">
 							<td class="col1">Key：</td>
 							<td class="col2">
-								<input type="text" name="">（5或13个字符，10或26个十六进制字符）
+								<input type="text" name="" id="wl_add_wepkey">（5个字符）
 							</td>
 						</tr>
 						<tr class="wep_tr" style="display:none;">
 							<td class="col1">WEP模式：</td>
-							<td class="col2">
-								<input type="radio" name="">开放
-								<input type="radio" name="">共享
+							<td class="col2" id="wl_add_wepmode">
+								<input type="radio" name="wl_add_wep" value="open" checked="checked">开放
+								<input type="radio" name="wl_add_wep" value="sherd">共享
 							</td>
 						</tr>
 						<tr class="wep_tr" style="display:none;">
@@ -833,49 +833,37 @@
 						<tr class="wpa_tr" style="display:none;">
 							<td class="col1">共享密钥：</td>
 							<td class="col2">
-								<input type="text" name="">（8-63个字符或64个十六进制字符）
+								<input type="text" name="" id="wl_add_wpakey">（8-63个字符或64个十六进制字符）
 							</td>
 						</tr>
 						<tr class="wpa_tr" style="display:none;">
 							<td class="col1">WPA模式：</td>
-							<td class="col2">
-								<input type="radio" name="WPA_mode" id="wpa_wpa" value="WPA">
+							<td class="col2" id="wl_add_wpamode">
+								<input type="radio" name="WPA_mode" id="wpa_wpa" value="wpa">
 								<label for="wpa_wpa">WPA</label>
-								<input type="radio" name="WPA_mode" id="wpa_wpa2" value="WPA2">
+								<input type="radio" name="WPA_mode" id="wpa_wpa2" value="wpa2" checked="checked">
 								<label for="wpa_wpa2">WPA2</label>
-								<input type="radio" name="WPA_mode" id="wpa_auto" value="Auto">
+								<input type="radio" name="WPA_mode" id="wpa_auto" value="auto">
 								<label for="wpa_auto">Auto</label>
 								
 							</td>
 						</tr>
 						<tr class="wpa_tr" style="display:none;">
 							<td class="col1">加密方式：</td>
-							<td class="col2">
-								<input type="radio" name="WPA_cipher" id="wpa_tkip" value="TKIP">
+							<td class="col2" id="wl_add_wpacipher">
+								<input type="radio" name="WPA_cipher" id="wpa_tkip" value="tkip">
 								<label for="wpa_tkip">TKIP</label>
-								<input type="radio" name="WPA_cipher" id="wpa_ccmp" value="CCMP">
+								<input type="radio" name="WPA_cipher" id="wpa_ccmp" value="ccmp" checked="checked">
 								<label for="wpa_ccmp">CCMP</label>
-								<input type="radio" name="WPA_cipher" id="wpa_cipher_auto" value="Auto">
+								<input type="radio" name="WPA_cipher" id="wpa_cipher_auto" value="auto">
 								<label for="wpa_cipher_auto">Auto</label>
-							</td>
-						</tr>
-						<tr class="wpa_tr" style="display:none;">
-							<td class="col1">GTK-lifetime：</td>
-							<td class="col2">
-								<input type="checkbox" name="">使能
-							</td>
-						</tr>
-						<tr class="wpa_tr" style="display:none;">
-							<td class="col1">GTK-lifetime：</td>
-							<td class="col2">
-								<input type="checkbox" name="">使能
 							</td>
 						</tr>
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="wireless_add_ok" />
-				 		<input type="button" class="button" value="确定" id="wireless_add_cancel" />
+				 		<input type="button" class="button" value="取消" id="wireless_add_cancel" />
+				 		<input type="button" class="button" value="确定" id="wireless_add_ok" />
 					</div>
 				</div>
 			</div>
@@ -993,8 +981,8 @@
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="radio_setting0_cancel" />
-				 		<input type="button" class="button" value="确定" id="radio_setting0_ok" />
+				 		<input type="button" class="button" value="取消" id="radio_setting0_ok" />
+				 		<input type="button" class="button" value="确定" id="radio_setting0_cancel" />
 					</div>
 				</div>
 				<div id="_radio1" style="display: none">
@@ -1100,8 +1088,8 @@
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="radio_setting1_cancel" />
-				 		<input type="button" class="button" value="确定" id="radio_setting1_ok" />
+				 		<input type="button" class="button" value="取消" id="radio_setting1_ok" />
+				 		<input type="button" class="button" value="确定" id="radio_setting1_cancel" />
 					</div>
 				</div>
 			</div>		
@@ -1168,8 +1156,8 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="btn_domainset_cancel" />
-				 		<input type="button" class="button" value="确定" id="btn_domainset_ok" />
+				 		<input type="button" class="button" value="取消" id="btn_domainset_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_domainset_cancel" />
 					</div>
 				</div>
 				<div id="domainkey_add" style="display:none;">
@@ -1187,8 +1175,8 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="btn_domainkey_cancel" />
-				 		<input type="button" class="button" value="确定" id="btn_domainkey_ok" />
+				 		<input type="button" class="button" value="取消" id="btn_domainkey_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_domainkey_cancel" />
 					</div>
 				</div>
 				<div id="domainSet_edit" style="display:none;">
@@ -1213,8 +1201,8 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="btn_domainset_edit_cancel" />
-				 		<input type="button" class="button" value="确定" id="btn_domainset_edit_ok" />
+				 		<input type="button" class="button" value="取消" id="btn_domainset_edit_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_domainset_edit_cancel" />
 					</div>
 					<div class="table_title">
 						<span>域名关键字列表</span>
@@ -1333,8 +1321,8 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="btn_acl_add_cancel" />
-				 		<input type="button" class="button" value="确定" id="btn_acl_add_ok" />
+				 		<input type="button" class="button" value="取消" id="btn_acl_add_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_acl_add_cancel" />
 					</div>
 				</div>
 				<div id="acl_mac_add" style="display:none;">
@@ -1352,8 +1340,8 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="btn_acl_mac_cancel" />
-				 		<input type="button" class="button" value="确定" id="btn_acl_mac_ok" />
+				 		<input type="button" class="button" value="取消" id="btn_acl_mac_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_acl_mac_cancel" />
 					</div>
 				</div>
 				<div id="acl_edit" style="display:none;">
@@ -1378,8 +1366,8 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="btn_acl_edit_cancel" />
-				 		<input type="button" class="button" value="确定" id="btn_acl_edit_ok" />
+				 		<input type="button" class="button" value="取消" id="btn_acl_edit_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_acl_edit_cancel" />
 					</div>
 					<div class="table_title">
 						<span>MAC地址列表</span>
@@ -1483,8 +1471,8 @@
 					    </tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="btn_time_acl_add_cancel" />
-				 		<input type="button" class="button" value="确定" id="btn_time_acl_add_ok" />
+				 		<input type="button" class="button" value="取消" id="btn_time_acl_add_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_time_acl_add_cancel" />
 					</div>
 				</div>
 				<div id="time_acl_range_add" style="display:none;">
@@ -2237,32 +2225,7 @@
 							<input type="button" value="查询">
 						</div>
 					</div>
-					<table class="tbl" id="list_accounts">
-						<!-- <thead>
-						<tr>
-							<th>用户名</th>
-							<th>级别</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<table class="tbl_page">
-									<tbody>
-									<tr>
-										<td>共 2 条记录</td>
-										<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-									</tr>
-									</tbody>
-								</table>
-							</td>
-						</tr>
-						</tbody> -->
-					</table>
+					<table class="tbl" id="list_accounts"></table>
 				</div>
 				<div id="accunts_add" style="display:none;">
 					<div class="table_title">

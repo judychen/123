@@ -110,22 +110,7 @@ function showContent(){
         $("#radio_setting").show();
         $("#radio_setting").siblings().hide();
     });
-    
-    $("#m_domainSet_settings").click(function(){
-        $("#domainSet_settings").show();
-        $("#domainSet_settings").siblings().hide();
-    });
-    
-    $("#m_acl_settings").click(function(){
-        $("#acl_settings").show();
-        $("#acl_settings").siblings().hide();
-    });
-    
-    $("#m_time_acl_settings").click(function(){
-        $("#time_acl_settings").show();
-        $("#time_acl_settings").siblings().hide();
-    });
-   
+
     /*设备管理*/
     $("#m_equipment_maintenance").click(function(){
         $("#equipment_maintenance").show();

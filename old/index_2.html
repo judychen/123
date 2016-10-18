@@ -35,6 +35,9 @@
 	<!-- wireless -->
 	<script src="js/wireless/wireless_servers.js"></script>
 	<script src="js/wireless/radio_setting.js"></script>
+	<script src="js/wireless/domainSet_settings.js"></script>
+	<script src="js/wireless/acl_settings.js"></script>
+	<script src="js/wireless/time_acl_settings.js"></script>
 	<!-- equipment_management -->
 	<script src="js/management/equipment_maintenance.js"></script>
 	<script src="js/management/time_settings.js"></script>
@@ -114,6 +117,8 @@
 						<ul class="sub_menu">
 							<li id="m_wireless_servers">无线接入服务</li>
 							<li id="m_radio_setting">射频参数</li>
+							<li id="m_acl_settings">ACL管理</li>
+							<li id="m_time_acl_settings">时间策略</li>
 						</ul>
 					</li>
 					<li id="m_equipment_management">
@@ -726,7 +731,33 @@
 								<input type="text" id="wl_add_maxclient" value="127" />（1-127，默认为127）
 							</td>
 						</tr>
-						
+						<tr>
+							<td class="col1">用户限速：</td>
+							<td class="col2">
+								上行
+								<select id="wl_add_up">
+									<option value="enable">启用</option>
+									<option value="disable" selected="selected">禁用</option>
+								</select>
+								下行
+								<select id="wl_add_down">
+									<option value="enable">启用</option>
+									<option value="disable" selected="selected">禁用</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">ACL：</td>
+							<td class="col2">
+								<input type="checkbox" id="wl_add_acl">
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">上网时段控制：</td>
+							<td class="col2">
+								<input type="checkbox" id="wl_add_time">
+							</td>
+						</tr>
 						</tbody>
 					</table>
 					<div class="table_title">
@@ -912,8 +943,8 @@
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="radio_setting0_cancel" />
-				 		<input type="button" class="button" value="确定" id="radio_setting0_ok" />
+				 		<input type="button" class="button" value="取消" id="radio_setting0_ok" />
+				 		<input type="button" class="button" value="确定" id="radio_setting0_cancel" />
 					</div>
 				</div>
 				<div id="_radio1" style="display: none">
@@ -1019,11 +1050,541 @@
 						</tbody>
 					</table>
 					<div class="content_option">
-				 		<input type="button" class="button" value="取消" id="radio_setting1_cancel" />
-				 		<input type="button" class="button" value="确定" id="radio_setting1_ok" />
+				 		<input type="button" class="button" value="取消" id="radio_setting1_ok" />
+				 		<input type="button" class="button" value="确定" id="radio_setting1_cancel" />
 					</div>
 				</div>
 			</div>		
+			<div id="acl_settings" style="display: none">
+				<div id="acl_main">
+					<div class="table_title">
+						<span>ACL方案列表</span>
+					</div>
+					<div class="query">
+						<input type="button" class="button left" value="新增" id="btn_acl_add">
+						<div class="right">
+							<span>查询项</span>
+							<select>
+								<option>方案名称</option>
+								<option>策略</option>
+							</select>
+							<span>关键词</span>
+							<input type="text" name="">
+							<input type="button" value="查询">
+						</div>
+					</div>
+					<table class="tbl">
+						<thead>
+						    <tr>
+						        <th>方案名称</th>
+						        <th>状态</th>
+						        <th>操作</th>
+						       
+						    </tr>
+						</thead>
+						<tbody>
+						    <tr>
+						        <td></td>
+						        <td></td>
+						        <td><input type="button" value="编辑" id="btn_acl_edit"></td>
+						        
+						    </tr>
+						    <tr>
+						        <td colspan="3">
+						            <table class="tbl_page">
+						                <tbody>
+						                <tr>
+						                    <td>共 2 条记录</td>
+						                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+						                </tr>
+						                </tbody>
+						            </table>
+						        </td>
+						    </tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="acl_add" style="display:none;">
+					<div class="table_title">
+						<span>新增ACL方案</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">方案名称名称：</td>
+						        <td class="col2" id="">
+						        	<input type="text" name="">（1-16个字符，只包含数字、字母、下划线）
+						        </td>
+						    </tr>
+						    <tr>
+						        <td class="col1">策略：</td>
+						        <td class="col2" id="">
+						        	<select>
+						        		<option>白名单</option>
+						        		<option>黑名单</option>
+						        	</select>
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="btn_acl_add_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_acl_add_cancel" />
+					</div>
+				</div>
+				<div id="acl_mac_add" style="display:none;">
+					<div class="table_title">
+						<span>新增MAC地址</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">MAC地址：</td>
+						        <td class="col2" id="">
+						        	<input type="text" name="">（格式如：45:11:20:30:40:F0）
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="btn_acl_mac_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_acl_mac_cancel" />
+					</div>
+				</div>
+				<div id="acl_edit" style="display:none;">
+					<div class="table_title">
+						<span>ACL方案编辑</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">方案名称：</td>
+						        <td class="col2" id=""></td>
+						    </tr>
+						    <tr>
+						        <td class="col1">策略：</td>
+						        <td class="col2" id="">
+						        	<select>
+						        		<option value="enabled">白名单</option>
+						        		<option value="disabled">黑名单</option>
+						        	</select>
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="btn_acl_edit_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_acl_edit_cancel" />
+					</div>
+					<div class="table_title">
+						<span>MAC地址列表</span>
+					</div>
+					<div class="query">
+						<input type="button" class="button left" value="新增" id="btn_acl_mac_add">
+						<div class="right">
+							<span>查询项</span>
+							<select>
+								<option>MAC地址</option>
+							</select>
+							<span>关键词</span>
+							<input type="text" name="">
+							<input type="button" value="查询">
+						</div>
+					</div>
+					<table class="tbl">
+						<thead>
+						    <tr>
+						        <th>MAC地址</th>
+						        <th>操作</th>
+						    </tr>
+						</thead>
+						<tbody>
+						    <tr>
+						        <td></td>
+						        <td></td>
+						    </tr>
+						    <tr>
+						        <td colspan="2">
+						            <table class="tbl_page">
+						                <tbody>
+						                <tr>
+						                    <td>共 2 条记录</td>
+						                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+						                </tr>
+						                </tbody>
+						            </table>
+						        </td>
+						    </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="time_acl_settings" style="display: none">
+				<div id="time_acl_main">
+					<div class="table_title">
+						<span>时间策略列表</span>
+					</div>
+					<div class="query">
+						<input type="button" class="button left" value="新增" id="btn_time_acl_add">
+						<div class="right">
+							<span>查询项</span>
+							<select>
+								<option>策略名称</option>
+							</select>
+							<span>关键词</span>
+							<input type="text" name="">
+							<input type="button" value="查询">
+						</div>
+					</div>
+					<table class="tbl">
+						<thead>
+						<tr>
+							<th>策略名称</th>
+							<th>操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td></td>
+							<td><input type="button" value="编辑" id="btn_time_acl_edit"></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<table class="tbl_page">
+									<tbody>
+									<tr>
+										<td>共 2 条记录</td>
+										<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+									</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="time_acl_add" style="display:none;">
+					<div class="table_title">
+						<span>新增时间策略</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">策略名称：</td>
+						        <td class="col2" id="">
+						        	<input type="text" name="">（1-16个字符，只包含数字、字母、下划线）
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="btn_time_acl_add_ok" />
+				 		<input type="button" class="button" value="确定" id="btn_time_acl_add_cancel" />
+					</div>
+				</div>
+				<div id="time_acl_range_add" style="display:none;">
+					<div class="table_title">
+						<span>新增时间段</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">方式选择：</td>
+						        <td class="col2" id="">
+						        	<input type="radio" name="timeType" id="timeType1">
+						        	<label for="timeType1">方式一</label>
+						        	<input type="radio" name="timeType" id="timeType2">
+						        	<label for="timeType2">方式二</label>
+						        </td>
+						    </tr>
+						    <tr>
+						        <td class="col1">日期：</td>
+						        <td class="col2" id="">
+						        	<input type="checkbox" name="timeDate" id="timeDateAll">
+						        	<label for="timeDateAll">全选</label>
+						        	<input type="checkbox" name="timeDate" id="timeDateSun">
+						        	<label for="timeDateSun">星期日</label>
+						        	<input type="checkbox" name="timeDate" id="timeDateMon">
+						        	<label for="timeDateMon">星期一</label>
+						        	<input type="checkbox" name="timeDate" id="timeDateTue">
+						        	<label for="timeDateTue">星期二</label>
+						        	<input type="checkbox" name="timeDate" id="timeDateWed">
+						        	<label for="timeDateWed">星期三</label>
+						        	<input type="checkbox" name="timeDate" id="timeDateThu">
+						        	<label for="timeDateThu">星期四</label>
+						        	<input type="checkbox" name="timeDate" id="timeDateFri">
+						        	<label for="timeDateFri">星期五</label>
+						        	<input type="checkbox" name="timeDate" id="timeDateSat">
+						        	<label for="timeDateSat">星期六</label>
+						        	
+						        </td>
+						    </tr>
+						    <tr>
+						        <td class="col1">时间：</td>
+						        <td class="col2" id="">
+						        	<input type="radio" name="timeRange" id="timeRange1">
+						        	<label for="timeRange1">全天</label>
+						        	<input type="radio" name="timeRange" id="timeRange2">
+						        	<label for="timeRange2">时间周期</label>
+						        	<select>
+						        		<option>0</option>
+						        		<option>1</option>
+						        		<option>2</option>
+						        		<option>3</option>
+						        		<option>4</option>
+						        		<option>5</option>
+						        		<option>6</option>
+						        		<option>7</option>
+						        		<option>8</option>
+						        		<option>9</option>
+						        		<option>10</option>
+						        		<option>11</option>
+						        		<option>12</option>
+						        		<option>13</option>
+						        		<option>14</option>
+						        		<option>15</option>
+						        		<option>16</option>
+						        		<option>17</option>
+						        		<option>18</option>
+						        		<option>19</option>
+						        		<option>20</option>
+						        		<option>21</option>
+						        		<option>22</option>
+						        		<option>23</option>
+						        	</select>时
+						        	<select>
+						        		<option>0</option>
+						        		<option>1</option>
+						        		<option>2</option>
+						        		<option>3</option>
+						        		<option>4</option>
+						        		<option>5</option>
+						        		<option>6</option>
+						        		<option>7</option>
+						        		<option>8</option>
+						        		<option>9</option>
+						        		<option>10</option>
+						        		<option>11</option>
+						        		<option>12</option>
+						        		<option>13</option>
+						        		<option>14</option>
+						        		<option>15</option>
+						        		<option>16</option>
+						        		<option>17</option>
+						        		<option>18</option>
+						        		<option>19</option>
+						        		<option>20</option>
+						        		<option>21</option>
+						        		<option>22</option>
+						        		<option>23</option>
+						        		<option>24</option>
+						        		<option>25</option>
+						        		<option>26</option>
+						        		<option>27</option>
+						        		<option>28</option>
+						        		<option>29</option>
+						        		<option>30</option>
+						        		<option>31</option>
+						        		<option>32</option>
+						        		<option>33</option>
+						        		<option>34</option>
+						        		<option>35</option>
+						        		<option>36</option>
+						        		<option>37</option>
+						        		<option>38</option>
+						        		<option>39</option>
+						        		<option>40</option>
+						        		<option>41</option>
+						        		<option>42</option>
+						        		<option>43</option>
+						        		<option>44</option>
+						        		<option>45</option>
+						        		<option>46</option>
+						        		<option>47</option>
+						        		<option>48</option>
+						        		<option>49</option>
+						        		<option>50</option>
+						        		<option>51</option>
+						        		<option>52</option>
+						        		<option>53</option>
+						        		<option>54</option>
+						        		<option>55</option>
+						        		<option>56</option>
+						        		<option>57</option>
+						        		<option>58</option>
+						        		<option>59</option>
+						        	</select>分-
+						        	<select>
+						        		<option>0</option>
+						        		<option>1</option>
+						        		<option>2</option>
+						        		<option>3</option>
+						        		<option>4</option>
+						        		<option>5</option>
+						        		<option>6</option>
+						        		<option>7</option>
+						        		<option>8</option>
+						        		<option>9</option>
+						        		<option>10</option>
+						        		<option>11</option>
+						        		<option>12</option>
+						        		<option>13</option>
+						        		<option>14</option>
+						        		<option>15</option>
+						        		<option>16</option>
+						        		<option>17</option>
+						        		<option>18</option>
+						        		<option>19</option>
+						        		<option>20</option>
+						        		<option>21</option>
+						        		<option>22</option>
+						        		<option>23</option>
+						        	</select>时
+						        	<select>
+						        		<option>0</option>
+						        		<option>1</option>
+						        		<option>2</option>
+						        		<option>3</option>
+						        		<option>4</option>
+						        		<option>5</option>
+						        		<option>6</option>
+						        		<option>7</option>
+						        		<option>8</option>
+						        		<option>9</option>
+						        		<option>10</option>
+						        		<option>11</option>
+						        		<option>12</option>
+						        		<option>13</option>
+						        		<option>14</option>
+						        		<option>15</option>
+						        		<option>16</option>
+						        		<option>17</option>
+						        		<option>18</option>
+						        		<option>19</option>
+						        		<option>20</option>
+						        		<option>21</option>
+						        		<option>22</option>
+						        		<option>23</option>
+						        		<option>24</option>
+						        		<option>25</option>
+						        		<option>26</option>
+						        		<option>27</option>
+						        		<option>28</option>
+						        		<option>29</option>
+						        		<option>30</option>
+						        		<option>31</option>
+						        		<option>32</option>
+						        		<option>33</option>
+						        		<option>34</option>
+						        		<option>35</option>
+						        		<option>36</option>
+						        		<option>37</option>
+						        		<option>38</option>
+						        		<option>39</option>
+						        		<option>40</option>
+						        		<option>41</option>
+						        		<option>42</option>
+						        		<option>43</option>
+						        		<option>44</option>
+						        		<option>45</option>
+						        		<option>46</option>
+						        		<option>47</option>
+						        		<option>48</option>
+						        		<option>49</option>
+						        		<option>50</option>
+						        		<option>51</option>
+						        		<option>52</option>
+						        		<option>53</option>
+						        		<option>54</option>
+						        		<option>55</option>
+						        		<option>56</option>
+						        		<option>57</option>
+						        		<option>58</option>
+						        		<option>59</option>
+						        	</select>分
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="btn_time_acl_range_cancel" />
+				 		<input type="button" class="button" value="确定" id="btn_time_acl_range_ok" />
+					</div>
+				</div>
+				<div id="time_acl_edit" style="display:none;">
+					<div class="table_title">
+						<span>时间策略编辑</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">策略名称：</td>
+						        <td class="col2" id=""></td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="table_title">
+						<span>绝对时间段</span>
+					</div>
+					<table class="tbl_cont">
+					    <tbody>
+						    <tr>
+						        <td class="col1">启用：</td>
+						        <td class="col2" id="">
+						        	<input type="checkbox" name="">
+						        </td>
+						    </tr>
+					    </tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="btn_time_acl_edit_cancel" />
+				 		<input type="button" class="button" value="确定" id="btn_time_acl_edit_ok" />
+					</div>
+					<div class="table_title">
+						<span>周期时间段列表</span>
+					</div>
+					<div class="query">
+						<input type="button" class="button left" value="新增" id="btn_time_acl_range_add">
+						<div class="right">
+							<span>查询项</span>
+							<select>
+								<option>开始时间</option>
+								<option>结束时间</option>
+							</select>
+							<span>关键词</span>
+							<input type="text" name="">
+							<input type="button" value="查询">
+						</div>
+					</div>
+					<table class="tbl">
+						<thead>
+						    <tr>
+						        <th>开始时间</th>
+						        <th>结束时间</th>
+						        <th>操作</th>
+						    </tr>
+						</thead>
+						<tbody>
+						    <tr>
+						        <td></td>
+						        <td></td>
+						    </tr>
+						    <tr>
+						        <td colspan="3">
+						            <table class="tbl_page">
+						                <tbody>
+						                <tr>
+						                    <td>共 2 条记录</td>
+						                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
+						                </tr>
+						                </tbody>
+						            </table>
+						        </td>
+						    </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 			
 			<!--设备管理-->
 			<div id="equipment_maintenance" style="display:none">
@@ -1513,6 +2074,24 @@
 				 		<input type="button" class="button" value="取消" id="accounts_add_cancel" />
 				 		<input type="button" class="button" value="确定" id="accounts_add_ok" />
 					</div>
+				</div>
+				
+				<div class="table_title">
+					<span>页面登录后超时时间</span>
+				</div>
+				<table class="tbl_cont">
+					<tbody>
+						<tr>
+							<td class="col1">超时时间：</td>
+							<td class="col2">
+								<input type="text" value="5" />（0-1440分钟，默认为5）
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="content_option">
+				 		<input type="button" class="button" value="取消"/>
+				 		<input type="button" class="button" value="确定"/>
 				</div>
 			</div>
 		</div>

@@ -1,99 +1,12 @@
 var usersList = new Array();
 var jsUsers = {
 	 "pkg_usrmanage": [
-	 	 { 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
 	 	{ 
-	 	 	"sect_name": "admin", 
 	 	 	"name": "admin", 
 	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
-	 	 	"password": "admin" 
-	 	},
-	 	{ 
-	 	 	"sect_name": "admin", 
-	 	 	"name": "admin", 
-	 	 	"level": "1", 
-	 	 	"cipher": "0", 
 	 	 	"password": "admin" 
 	 	}
 	]
-};
-var jsIdleTime = { 
-	"pkg_idletime": [
-		{ 
-			"sect_name": "idletime", 
-			"time": "0" 
-		} 
-	] 
 };
 
 function format_level( arrRow, index ) {
@@ -122,6 +35,50 @@ function btn_formatFunc( arrayRow, index ) {
 			return true;
 }
 
+function checkValidAccount(){
+	if ( $("#account_add_name").val() == "" ) {
+		showError(true, "用户名不能为空！");
+		return false;
+	}
+
+	if ( !checkUserName( $("#account_add_name").val() ) ) {
+		showError(true, "非法的用户名！");
+		return false;
+	}
+
+	if ( $("#account_add_pass").val() == "" ) {
+		showError(true, "用户密码不能为空！");	
+		return false;
+	}
+
+	if ( checkPassword( $("#account_add_pass").val()) == false ) {
+		showError(true, "非法的初始密码！");
+		return false;
+	}
+
+	if ( $("#account_add_pass").val() != $("#account_add_passcheck").val() ) {
+		showError(true, "两次输入的用户密码不一致！");
+		return false;
+	}
+	return true;
+}
+
+function validAccount(){
+	if(!checkValidAccount()){
+		return false;
+	}
+
+	list = {
+		"name": $("#account_add_name").val(),
+		"level": $("#account_add_level").val(),
+		"password": $("#account_add_passcheck").val()
+	}
+
+	jsUsers.pkg_usrmanage.push(list);
+
+	return true;
+}
+
 var as = new myGrid("as");
 
 $(function(){
@@ -137,24 +94,33 @@ $(function(){
 		var temp = jsUsers.pkg_usrmanage[i];
 		usersList[i] = temp.name+";"+temp.level;
 	}
-	console.log(usersList);
 
 	as.pageview_init(usersList, 10, 'list_accounts')
 
 	$("#accunts_add_btn").click(function(){
+		$("#account_add_name").val("");
+		$("#account_add_level").val(0);
+		$("#account_add_pass").val("");
+		$("#account_add_passcheck").val("");
+
 		$("#accunts_add").show();
 		$("#accunts_add").siblings().hide();
 	});
 
 	$("#accounts_add_ok").click(function(){
+		if(validAccount()){
+			$("#accunts_add").hide();
+			$("#accunts_add").siblings().show();
+		}
+		
+	});
+
+	$("#accounts_add_cancel").click(function(){
+		
 		$("#accunts_add").hide();
 		$("#accunts_add").siblings().show();
 	});
 
-	$("#accounts_add_cancel").click(function(){
-		$("#accunts_add").hide();
-		$("#accunts_add").siblings().show();
-	});
 });
 
 

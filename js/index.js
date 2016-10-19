@@ -2,22 +2,6 @@ function logout() {
     /*todo*/
 }
 
-function save_cfg_success() {
-    /*todo*/
-}
-
-function save() {
-    /*todo*/
-}
-
-function jumpToWizard() {
-    /*todo*/
-}
-
-function jump() {
-    /*todo*/
-}
-
 $(function () {
     $("#main_menu>li").click(function () {
         $this = $(this);
@@ -78,9 +62,6 @@ function showContent(){
     $("#m_wireless_settings").click(function(){
         $("#wireless_servers").show();
         $("#wireless_servers").siblings().hide();
-    });$("#m_equipment_management").click(function(){
-        $("#equipment_maintenance").show();
-        $("#equipment_maintenance").siblings().hide();
     });
 
     /*系统状态*/
@@ -111,7 +92,6 @@ function showContent(){
         $("#radio_setting").siblings().hide();
     });
 
-    /*设备管理*/
     $("#m_equipment_maintenance").click(function(){
         $("#equipment_maintenance").show();
         $("#equipment_maintenance").siblings().hide();
@@ -120,10 +100,6 @@ function showContent(){
     $("#m_time_settings").click(function(){
         $("#time_settings").show();
         $("#time_settings").siblings().hide();
-    });
-    $("#m_syslog").click(function(){
-        $("#syslog").show();
-        $("#syslog").siblings().hide();
     });
     $("#m_accounts_settings").click(function(){
         $("#accounts_settings").show();

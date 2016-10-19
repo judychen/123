@@ -260,34 +260,6 @@ function check_vlan_name_desc(value){
     return true;
 }
 
-function is_ip_multicast_address(value){
-    /*todo*/
-}
-
-function is_ip_multicast_address_reserved(value){
-    /*todo*/
-}
-
-function is_ip_loopback_address(value){
-    /*todo*/
-}
-
-function is_ip_unicast_address(ip, netmask){
-    /*todo*/
-}
-
-function is_equal_network_number(){
-    /*todo*/
-}
-
-function is_ip_and_gatewap_same_subnet(){
-    /*todo*/
-}
-
-function is_ip_reserved(){
-    /*todo*/
-}
-
 function checkUserOrPwd(value){
     var exp=/^[^"~?\\#\'\s]+$/;
     var reg = value.match(exp);

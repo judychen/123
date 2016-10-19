@@ -38,7 +38,6 @@
 	<!-- equipment_management -->
 	<script src="js/management/equipment_maintenance.js"></script>
 	<script src="js/management/time_settings.js"></script>
-	<script src="js/management/syslog.js"></script>
 	<script src="js/management/accounts_settings.js"></script>
 
 </head>
@@ -110,18 +109,12 @@
 						</ul>
 					</li>
 					<li id="m_wireless_settings">
-						<a><span>无线设置</span></a>
+						<a><span>管理设置</span></a>
 						<ul class="sub_menu">
 							<li id="m_wireless_servers">无线接入服务</li>
 							<li id="m_radio_setting">射频参数</li>
-						</ul>
-					</li>
-					<li id="m_equipment_management">
-						<a><span>设备管理</span></a>
-						<ul  class="sub_menu">
 							<li id="m_equipment_maintenance">设备维护</li>
 							<li id="m_time_settings">时间设置</li>
-							<li id="m_syslog">日志管理</li>
 							<li id="m_accounts_settings">用户管理</li>
 						</ul>
 					</li>
@@ -634,7 +627,7 @@
 				<table class="tbl" id="list_client"></table>
 			</div>
 
-			<!--无线设置-->
+			<!--管理设置-->
 			<div id="wireless_servers" style="display: none">
 				<div class="table_title">
 					<span>新建无线接入服务</span>
@@ -1024,17 +1017,13 @@
 					</div>
 				</div>
 			</div>		
-			
-			<!--设备管理-->
 			<div id="equipment_maintenance" style="display:none">
 				<div class="underline">
 				    <ul>
 				        <li class="tab tabSelected" id="reboot">设备重启</li>
 				        <li class="tab" id="restore">恢复出厂配置</li>
 				        <li class="tab" id="upgrade">软件升级</li>
-				        <!-- <li class="tab" id="ping">Ping工具</li> -->
 				        <li class="tab" id="output">一键导出</li>
-				        <!-- <li class="tab" id="trouble_shooting">故障排除</li> -->
 				    </ul>
 				</div>
 
@@ -1265,191 +1254,7 @@
 				 	<input type="button" class="button" value="取消" id="timecancel" />
 				 	<input type="button" class="button" value="确定" id="timeok" />
 				</div>
-			</div>
-			<div id="syslog" style="display:none">
-				<div class="underline">
-				    <ul>
-				        <li class="tab tabSelected" id="syslog_info">日志信息</li>
-				        <li class="tab" id="syslog_setting">日志设置</li>
-				        <li class="tab" id="syslog_output">日志导出</li>
-				    </ul>
-				</div>
-				<div id="_syslog_info">
-					<div class="query">
-						<input type="button" class="button left" value="清空">
-					    <input type="button" class="button left" value="刷新">
-					    <div class="right">
-					    	<span>查询项</span>
-						    <select>
-						        <option>时间/日期</option>
-						        <option>主机名</option>
-						        <option>级别</option>
-						        <option>模块</option>
-						        <option>描述</option>
-						    </select>
-						    <span>关键词</span>
-						    <input type="text" name="">
-						    <input type="button" value="查询">
-					    </div>
-					</div>
-					<table class="tbl">
-					    <thead>
-					    <tr>
-					        <th>时间/日期</th>
-					        <th>主机名</th>
-					        <th>级别</th>
-					        <th>模块</th>
-					        <th>描述</th>
-					    </tr>
-					    </thead>
-					    <tbody>
-					    <tr>
-					        <td></td>
-					        <td></td>
-					        <td></td>
-					        <td></td>
-					        <td></td>
-					    </tr>
-					    <tr>
-					        <td colspan="5">
-					            <table class="tbl_page">
-					                <tbody>
-					                <tr>
-					                    <td>共 2 条记录</td>
-					                    <td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-					                </tr>
-					                </tbody>
-					            </table>
-					        </td>
-					    </tr>
-					    </tbody>
-					</table>
-				</div>
-				<div id="_syslog_setting" style="display: none">
-					<div class="table_title">
-						<span>日志功能</span>
-					</div>
-					<table class="tbl_cont">
-					    <tbody>
-					    <tr>
-					        <td class="col1">使能:</td>
-					        <td class="col2">
-					            <select>
-					            	<option>启用</option>
-					            	<option>禁用</option>
-					            </select>
-					        </td>
-					    </tr>
-					    </tbody>
-					</table>
-					<div class="table_title">
-						<span>日志服务器</span>
-					</div>
-					<table class="tbl_cont">
-					    <tbody>
-					    <tr>
-					        <td class="col1">使能:</td>
-					        <td class="col2">
-					            <select>
-					            	<option>启用</option>
-					            	<option>禁用</option>
-					            </select>
-					        </td>
-					    </tr>
-					    </tbody>
-					</table>
-					<div class="table_title">
-						<span>日志缓存日志</span>
-					</div>
-					<table class="tbl_cont">
-					    <tbody>
-					    <tr>
-					        <td class="col1">使能:</td>
-					        <td class="col2">
-					            <select>
-					            	<option>启用</option>
-					            	<option>禁用</option>
-					            </select>
-					        </td>
-					    </tr>
-					    <tr>
-					        <td class="col1">日志等级:</td>
-					        <td class="col2">
-					            <select>
-					            	<option>0 Emergency</option>
-					            	<option>1 Alert</option>
-					            	<option>2 Critical</option>
-					            	<option>3 Error</option>
-					            	<option>4 Warning</option>
-					            	<option>5 Notice</option>
-					            	<option>6 Informational</option>
-					            	<option>7 Debug</option>
-					            </select>
-					        </td>
-					    </tr>
-					    </tbody>
-					</table>
-					<div class="content_option">
-				 		<input type="button" class="button" value="取消"/>
-				 		<input type="button" class="button" value="确定"/>
-					</div>
-				</div>
-				<div id="_syslog_output" style="display: none">
-					<table class="tbl_cont">
-					    <tbody>					   
-					    <tr>
-					        <td class="col1">请选择方式：</td>
-					        <td class="col2">
-					            <input type="radio" name="sysout_type" id="sysout_local" class="radio_method" checked="checked"/>
-					            <label for="sysout_local">Local</label>
-					            <input type="radio" name="sysout_type" id="sysout_ftp" class="radio_method" />
-					            <label for="sysout_ftp">FTP</label>
-					           <input type="radio" name="sysout_type" id="sysout_tftp" class="radio_method" />
-					            <label for="sysout_tftp">TFTP</label>
-					        </td>
-					    </tr>
-					    <tr class="ftp_tr" style="display:none;">
-					        <td class="col1">FTP服务器：</td>
-					        <td class="col2">
-					        	<input type="text" name="">（1-64个字符）
-					        </td>
-					    </tr>
-					    <tr class="ftp_tr" style="display:none;">
-					        <td class="col1">文件名：</td>
-					        <td class="col2">
-					        	<input type="text" name="">（1-32个字符）
-					        </td>
-					    </tr>
-					    <tr class="ftp_tr" style="display:none;">
-					        <td class="col1">用户：</td>
-					        <td class="col2">
-					        	<input type="text" name="">（可选）
-					        </td>
-					    </tr>
-					    <tr class="ftp_tr" style="display:none;">
-					        <td class="col1">密码：</td>
-					        <td class="col2">
-					        	<input type="text" name="">（可选）
-					        </td>
-					    </tr>
-					    <tr class="tftp_tr" style="display:none;">
-					        <td class="col1">TFTP服务器：</td>
-					        <td class="col2">
-					        	<input type="text" name="">（1-64个字符）
-					        </td>
-					    </tr>
-					     <tr class="tftp_tr" style="display:none;">
-					        <td class="col1">文件名：</td>
-					        <td class="col2">
-					        	<input type="text" name="">（1-32个字符）
-					        </td>
-					    </tr>
-					    </tbody>
-					</table>
-				</div>
-
-			</div>
-			
+			</div>		
 			<div id="accounts_settings" style="display:none">
 				<div class="underline">
 				    <ul>
@@ -1482,28 +1287,28 @@
 						<tr>
 							<td class="col1">用户名</td>
 							<td class="col2">
-								<input type="text" value="" />（1-32个字符，只包含数字、字母、下划线）
+								<input type="text" value="" id="account_add_name" maxlength="32" />（1-32个字符，只包含数字、字母、下划线）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">级别</td>
 							<td class="col2">
-								<select>
-									<option>普通用户</option>
-									<option>管理用户</option>
+								<select id="account_add_level">
+									<option value="0">普通用户</option>
+									<option value="1">管理用户</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">初始密码</td>
 							<td class="col2">
-								<input type="text" value="" />（1-32个字符，不包含单、双引号、分号、空格、问号）
+								<input type="text" value="" id="account_add_pass" maxlength="32" />（1-32个字符，不包含单、双引号、分号、空格、问号）
 							</td>
 						</tr>
 						<tr>
 							<td class="col1">确认密码</td>
 							<td class="col2">
-								<input type="text" value="" />
+								<input type="text" value="" id="account_add_passcheck" maxlength="32" />
 							</td>
 						</tr>
 

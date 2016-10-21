@@ -31,7 +31,6 @@
 	<script src="js/status/equipment_overview.js"></script>
 	<script src="js/status/wireless_status.js"></script>
 	<script src="js/status/radio_status.js"></script>
-	<script src="js/status/clientlist.js"></script>
 	<!-- wireless -->
 	<script src="js/wireless/wireless_servers.js"></script>
 	<script src="js/wireless/radio_setting.js"></script>
@@ -105,7 +104,6 @@
 							<li id="m_equipment_overview" class="current">设备概览</li>
 							<li id="m_wireless_status">无线接入服务</li>
 							<li id="m_radio_status">射频信息</li>
-							<li id="m_clientlist">客户端</li>
 						</ul>
 					</li>
 					<li id="m_wireless_settings">
@@ -601,32 +599,6 @@
 				<table class="tbl" id="list_radio_status">
 				</table>
 			</div>
-			<div id="clientlist" style="display: none">
-				<div class="table_title">
-					<span>客户端列表</span>
-				</div>
-				<div class="query">
-					<input type="button" class="button left" value="刷新">
-					<div class="right">
-						<span>查询项</span>
-						<select>
-							<option>MAC地址</option>
-							<option>IP地址</option>
-							<option>UpTime</option>
-							<option>SSID</option>
-							<option>RSSI</option>
-							<option>Idle</option>
-							<option>TxRate(Mbps)</option>
-							<option>RxRate(Mbps)</option>
-						</select>
-						<span>关键词</span>
-						<input type="text" name="">
-						<input type="button" value="查询">
-					</div>
-				</div>
-				<table class="tbl" id="list_client"></table>
-			</div>
-
 			<!--管理设置-->
 			<div id="wireless_servers" style="display: none">
 				<div class="table_title">

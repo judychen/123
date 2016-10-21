@@ -77,10 +77,6 @@ function showContent(){
         $("#radio_status").show();
         $("#radio_status").siblings().hide();
     });
-    $("#m_clientlist").click(function(){
-        $("#clientlist").show();
-        $("#clientlist").siblings().hide();
-    });
 
     /*Œﬁœﬂ…Ë÷√*/
     $("#m_wireless_servers").click(function(){

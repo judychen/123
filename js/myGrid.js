@@ -157,8 +157,24 @@ myGrid.prototype = {
     _Add_CheckBoxFont:function(){
 
     },
-    _Add_opBtns:function(){
+    _Add_opBtns:function(vs, p){
+        var str = "";
+        if ( this.pageview_btnlist.length > 0 ) {
+            for ( var i = 0; i < this.pageview_btnlist.length; i++ ) {
+                var btn = this.pageview_btnlist[i];
 
+                str += "<td class=\"opBtn"+ i + "\">"+"<input type=\"button\" value=\""+btn.value+"\"" ;
+                str +=  "/></td>";
+                   /* if( typeof(this.pageview_btnlist[i].classname) != "undefined" && this.pageview_btnlist[i].classname != null )
+                        str += "class=\""+ this.pageview_btnlist[i].classname+"\"" ;
+                    if( typeof(this.pageview_btnlist[i].title) != "undefined" && this.pageview_btnlist[i].title != null )
+                        str += "title=\"" + this.pageview_btnlist[i].title+"\"";
+                        str +=  "/></td>";*/
+                console.log(str);
+            }
+        }
+
+        return str;
     },
     headerChkClick:function(){
 
@@ -188,6 +204,11 @@ myGrid.prototype = {
             str += '<th>' + this.pageview_showlist[i].title + '</th>';
         }
 
+        if(this.pageview_btnlist.length > 0)
+        {
+            str += '<th colSpan='+ this.pageview_btnlist.length + ' width='+this.OPwidth+'>操作</th>';
+        }
+
     //是否在表尾增加各操作按钮/*<操作> ？？？*/
         str += "</th></thead>"
 
@@ -199,7 +220,7 @@ myGrid.prototype = {
         var str = "";
         var colSpan = 0;
         /*??*/
-        colSpan += this.pageview_showlist.length;/*??*/
+        colSpan += this.pageview_showlist.length + this.pageview_btnlist.length;
 
         str += '<tr><td colspan= "' + colSpan + '">';
         str += '<table class=\"tbl_page\"><tbody><tr>';
@@ -275,7 +296,8 @@ myGrid.prototype = {
                 str += '</td>';
             }
 
-            /*??*/
+            str += this._Add_opBtns(vs, p);
+
             str += '</tr>';
 
             p ++;
@@ -294,18 +316,21 @@ myGrid.prototype = {
     //linkfunc: item link event handler
     //formatfunc: handler for format data before display
     pageview_add:function(title, index, width, cansort, linkfunc, formatfunc, sortAscFunc, sortDscFunc){
-        if ( formatfunc != null && typeof(formatfunc) != "undefined" && typeof(formatfunc) != "function"){
-            alert("error: typeof(formatfunc) must be function!");
-        }/*？？*/
+        
         this.pageview_showlist.length++;
         this.pageview_showlist[this.pageview_showlist.length-1] = new pageview_item(title, index, width
             , cansort, linkfunc, formatfunc, sortAscFunc, sortDscFunc);
     },
-    pageview_btn:function(){
-
+    pageview_btn:function(value, title, classname, linkfunc, formatFunc){
+        this.value = value;
+        this.title = title;
+        this.classname = classname;
+        this.linkfunc = linkfunc;
+        this.formatFunc = formatFunc;
     },
-    pageview_add_btn:function(){
-
+    pageview_add_btn:function(value, funcName, tip, classname, formatFunc){
+        this.pageview_btnlist.length++;
+        this.pageview_btnlist[this.pageview_btnlist.length-1] = new this.pageview_btn(value, tip, classname, funcName, formatFunc);
     },
     pageview_add_checkbox:function(){
 

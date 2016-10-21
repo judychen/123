@@ -7,7 +7,7 @@ var time = {
 	"second": "0"
 }
 
-var now_sec= 946662817;
+var now_sec= 1477016716;
 
 function refreshTime() {
 	var now = new Date();

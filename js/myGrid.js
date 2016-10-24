@@ -126,7 +126,7 @@ function mG_changeClass(){
 function myGrid(ObjName){
     this.ObjName = ObjName;
     this.start;
-    this.OPwidth = "1%";
+    this.OPwidth = "10%";
     this.BseparateHdFt = false;
     this.pageview_list;
     this.pageview_list_bak = new Array();
@@ -163,14 +163,8 @@ myGrid.prototype = {
             for ( var i = 0; i < this.pageview_btnlist.length; i++ ) {
                 var btn = this.pageview_btnlist[i];
 
-                str += "<td class=\"opBtn"+ i + "\">"+"<input type=\"button\" value=\""+btn.value+"\"" ;
+                str += "<td>"+"<input type=\"button\" value=\""+btn.value+"\"" + "class=\"opBtn" + i + "\"";
                 str +=  "/></td>";
-                   /* if( typeof(this.pageview_btnlist[i].classname) != "undefined" && this.pageview_btnlist[i].classname != null )
-                        str += "class=\""+ this.pageview_btnlist[i].classname+"\"" ;
-                    if( typeof(this.pageview_btnlist[i].title) != "undefined" && this.pageview_btnlist[i].title != null )
-                        str += "title=\"" + this.pageview_btnlist[i].title+"\"";
-                        str +=  "/></td>";*/
-                console.log(str);
             }
         }
 
@@ -201,12 +195,12 @@ myGrid.prototype = {
         /*排序判断暂??*/
 
         for(i = 0; i < this.pageview_showlist.length; i++){
-            str += '<th>' + this.pageview_showlist[i].title + '</th>';
+            str += '<th ' + 'width='+ this.pageview_showlist[i].width + '>' + this.pageview_showlist[i].title + '</th>';
         }
 
         if(this.pageview_btnlist.length > 0)
         {
-            str += '<th colSpan='+ this.pageview_btnlist.length + ' width='+this.OPwidth+'>操作</th>';
+            str += '<th colSpan='+ this.pageview_btnlist.length + ' width=' + this.OPwidth+'>操作</th>';
         }
 
     //是否在表尾增加各操作按钮/*<操作> ？？？*/

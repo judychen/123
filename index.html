@@ -1228,27 +1228,29 @@
 				</div>
 			</div>		
 			<div id="accounts_settings" style="display:none">
-				<div class="underline">
-				    <ul>
-				        <li class="tab tabSelected" id="accunts">用户管理</li>
-				    </ul>
-				</div>				
-				<div id="_accunts">
-					<div class="query">
-						<input type="button" class="button left" value="新增用户" id="accunts_add_btn">
-						<div class="right">
-							<span>查询项</span>
-							<select>
-								<option>用户名</option>
-								<option>级别</option>
+				<div>
+					<div class="underline">
+					    <ul>
+					        <li class="tab tabSelected" id="accunts">用户管理</li>
+					    </ul>
+					</div>				
+					<div id="_accunts">
+						<div class="query">
+							<input type="button" class="button left" value="新增用户" id="accunts_add_btn">
+							<div class="right">
+								<span>查询项</span>
+								<select>
+									<option>用户名</option>
+									<option>级别</option>
 
-							</select>
-							<span>关键词</span>
-							<input type="text" name="">
-							<input type="button" value="查询">
+								</select>
+								<span>关键词</span>
+								<input type="text" name="">
+								<input type="button" value="查询">
+							</div>
 						</div>
+						<table class="tbl" id="list_accounts"></table>
 					</div>
-					<table class="tbl" id="list_accounts"></table>
 				</div>
 				<div id="accunts_add" style="display:none;">
 					<div class="table_title">
@@ -1289,6 +1291,53 @@
 					<div class="content_option">
 				 		<input type="button" class="button" value="取消" id="accounts_add_cancel" />
 				 		<input type="button" class="button" value="确定" id="accounts_add_ok" />
+					</div>
+				</div>
+				<div id="accunts_edit" style="display:none;">
+					<div class="table_title">
+						<span>用户编辑</span>
+					</div>
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">用户名</td>
+							<td class="col2">
+								<span id="account_edit_name"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">级别</td>
+							<td class="col2">
+								<select id="account_edit_level">
+									<option value="0">普通用户</option>
+									<option value="1">管理用户</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="col1">重置密码</td>
+							<td class="col2">
+								<input type="checkbox" id="account_edit_check">
+							</td>
+						</tr>
+						<tr class="account_rest_pass" style="display:none;">
+							<td class="col1">新的密码</td>
+							<td class="col2">
+								<input type="text" value="" id="account_edit_pass" maxlength="32" />（1-32个字符，不包含单、双引号、分号、空格、问号）
+							</td>
+						</tr>
+						<tr class="account_rest_pass" style="display:none;">
+							<td class="col1">确认密码</td>
+							<td class="col2">
+								<input type="text" value="" id="account_edit_passcheck" maxlength="32" />
+							</td>
+						</tr>
+
+						</tbody>
+					</table>
+					<div class="content_option">
+				 		<input type="button" class="button" value="取消" id="accounts_edit_cancel" />
+				 		<input type="button" class="button" value="确定" id="accounts_edit_ok" />
 					</div>
 				</div>
 			</div>

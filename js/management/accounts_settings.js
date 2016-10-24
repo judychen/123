@@ -67,6 +67,27 @@ function checkValidAccount(){
 	return true;
 }
 
+function checkValidEditAccount(){
+	if(($("#account_edit_check").is(":checked"))){
+		if ( $("#account_edit_pass").val() == "" ) {
+			showError(true, "用户密码不能为空！");	
+			return false;
+		}
+
+		if ( checkPassword( $("#account_edit_pass").val()) == false ) {
+			showError(true, "非法的初始密码！");
+			return false;
+		}
+
+		if ( $("#account_edit_pass").val() != $("#account_edit_passcheck").val() ) {
+			showError(true, "两次输入的用户密码不一致！");
+			return false;
+		}
+	}
+
+	return true;
+}
+
 function validAccount(){
 	if(!checkValidAccount()){
 		return false;
@@ -83,12 +104,30 @@ function validAccount(){
 	return true;
 }
 
+function validEditAccount(){
+	if(!checkValidEditAccount()){
+		return false;
+	}
+
+	list = {
+		"name": $("#account_edit_name").text(),
+		"level": $("#account_edit_level").val(),
+		"password": $("#account_add_passcheck").val()
+	}
+
+	jsUsers.pkg_usrmanage.push(list);
+
+	return true;
+}
+
+
+
 var as = new myGrid("as");
 
 $(function(){
 	/*??*/
 	as.pageview_add('用户名', 0, '50%', MG_SORT_ASCII);
-	as.pageview_add('级别', 1, '42%', MG_SORT_NUM, null, format_level );
+	as.pageview_add('级别', 1, '40%', MG_SORT_NUM, null, format_level );
 	
 	as.pageview_add_btn("编辑", editUser);
 	as.pageview_add_btn("删除", delUser);
@@ -100,6 +139,8 @@ $(function(){
 	}
 
 	as.pageview_init(usersList, 10, 'list_accounts');
+
+	btn0 = $("#list_accounts").find($(".opBtn0"));
 
 	$("#accunts_add_btn").click(function(){
 		$("#account_add_name").val("");
@@ -114,7 +155,7 @@ $(function(){
 	$("#accounts_add_ok").click(function(){
 		if(validAccount()){
 			$("#accunts_add").hide();
-			$("#accunts_add").siblings().show();
+			$("#accunts_add").siblings().first().show();
 			usersList.length = 0;
 			for ( var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
 				var temp = jsUsers.pkg_usrmanage[i];
@@ -122,14 +163,84 @@ $(function(){
 			}
 			as.pageview_init(usersList, 10, 'list_accounts');
 
+			
+
 		}
 	});
 
 	$("#accounts_add_cancel").click(function(){
 		
 		$("#accunts_add").hide();
-		$("#accunts_add").siblings().show();
+		$("#accunts_add").siblings().first().show();
 	});
+
+	$(".opBtn0").click(function() {
+		btn0 = $("#list_accounts").find($(".opBtn0"));
+		alert($(this).index());
+	});
+
+	
+
+	/*for(var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
+		btn0.eq(i).click(function(){
+			var tp = jsUsers.pkg_usrmanage[i];
+			$("#accunts_edit").show();
+			$("#accunts_edit").siblings().hide();
+
+			$("#account_edit_name").text(tp.name);
+			$("#account_edit_level").val(tp.level);
+
+			$("#accounts_edit_ok").click(function(){
+
+				if(checkValidEditAccount()){
+
+					tp.level = $("#account_edit_level").val();
+					if($("#account_edit_check").is(":checked")){
+						tp.password = $("#account_edit_passcheck").val();
+					}
+
+					$("#accunts_edit").hide();
+					$("#accunts_edit").siblings().first().show();
+					for ( var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
+						var t = jsUsers.pkg_usrmanage[i];
+						usersList[i] = t.name+";"+t.level;
+					}
+					as.pageview_init(usersList, 10, 'list_accounts');
+				}
+			});
+
+			$("#accounts_edit_cancel").click(function(){
+				
+				$("#accunts_edit").hide();
+				$("#accunts_edit").siblings().first().show();
+			});
+			console.log(i);
+			alert(i);
+
+		});
+
+		btn1.eq(i).click(function() {
+			for ( var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
+				var t = jsUsers.pkg_usrmanage[i];
+				usersList[i] = t.name+";"+t.level;
+			}
+			as.pageview_init(usersList, 10, 'list_accounts');
+		});
+
+
+	}*/
+
+	$("#account_edit_check").click(function(){
+		if($("#account_edit_check").is(":checked")){
+			$(".account_rest_pass").show();
+		}else{
+			$(".account_rest_pass").hide();
+		}
+	});
+
+	
+	
+
 
 });
 

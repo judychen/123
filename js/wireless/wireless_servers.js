@@ -99,7 +99,102 @@ function vilidWireless(){
 
 }
 
+function editApService(){
+
+}
+
+function delApService(){
+
+}
+
+var wl = new myGrid("wl");
+
 $(function(){
+
+		wl.pageview_add('SSID', 0, '20%', MG_SORT_ASCII);
+		wl.pageview_add('使能状态', 1, '10%', MG_SORT_ASCII);
+
+		for ( var i = 0; i < jsSpec.spec.radios.length; i++ ) {
+			var radio = jsSpec.spec.radios[i];
+			wl.pageview_add("射频" + radio.name, 1+i, "10%", 
+				MG_SORT_SELF, null, null, interface_sort_asc, interface_sort_dsc);
+		}
+		wl.pageview_add('最大连接数', 5, '20%', MG_SORT_NUM);
+		wl.pageview_add('认证方式', 6, '20%', MG_SORT_ASCII);
+		
+		wl.pageview_add_btn("编辑",editApService);
+		wl.pageview_add_btn("删除",delApService);
+
+	
+var count = 0;
+		for ( var i = 0; i < jsServTpl.pkg_wlan_service_template.length; i++ ) {
+			//get service template ssid
+			var servTpl = jsServTpl.pkg_wlan_service_template[i];	
+			//client_max, ssid,authentication,service-template
+			if ( typeof(servTpl.ssid) == "undefined" ) {
+				servTpl.ssid = "";
+			}
+
+			if ( typeof(servTpl.client_max) == "undefined" ) {
+				servTpl.client_max = "";
+			}
+
+			arrServTplList[count] = "";
+			arrServTplList[count] += servTpl.ssid;
+			arrServTplList[count] += ";";
+			arrServTplList[count] += servTpl.client_max;
+			arrServTplList[count] += ";";
+			arrServTplList[count] += get_cipher( servTpl.authentication, servTpl.cipher );
+			arrServTplList[count] += ";";
+
+			var servTplIndex = servTpl.sect_name.slice(15);
+			var arrBss = getBss(servTplIndex);	//每个raido下是否有BSS对应该服务模板
+
+			arrServTplList[count] += servTplIndex;
+			arrServTplList[count] += ";";
+			if ( servTpl["service-template"] == "enabled" ) {
+				arrServTplList[count] += "开启;";
+				for ( k = 0; k < arrBss.length; k++ ) {
+					if ( arrBss[k] != null ){
+						if ( isBssEnable( arrBss[k] ) ){ //service template enable && WLAN-BSS enable
+							arrServTplList[count] += "WLAN-BSS"+arrBss[k]+";";
+						}
+						else
+							arrServTplList[count] += ";";
+							
+					} else
+						arrServTplList[count] += ";";
+				}
+
+			} else {
+				arrServTplList[count] += "关闭;";
+				for ( k=0; k < arrBss.length; k++ ){
+					if ( arrBss[k] != null ){
+						arrServTplList[count] += "WLAN-BSS"+arrBss[k]+";";
+					} else
+						arrServTplList[count] += ";";
+				}
+			}
+			
+
+			count++;
+		}
+
+			wl.pageview_init(arrServTplList, 10, 'list_table' );
+
+
+
+
+
+
+
+
+
+
+	}
+
+
+
 	//btn:add,ok,cancel
 	$("#wireless_add_btn").click(function(){
 		$("#wl_add_ssid").val("");
@@ -137,6 +232,26 @@ $(function(){
 	});
 	
 	$(".sel_auth").change(changeAuth);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 });

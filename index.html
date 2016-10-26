@@ -601,58 +601,25 @@
 			</div>
 			<!--管理设置-->
 			<div id="wireless_servers" style="display: none">
-				<div class="table_title">
-					<span>新建无线接入服务</span>
+				<div>
+					<div class="table_title">
+						<span>新建无线接入服务</span>
+					</div>
+					<table class="tbl_cont">
+						<tbody>
+						<tr>
+							<td class="col1">无线接入服务：</td>
+							<td class="col2">
+								<input type="button" class="button" value="新建" id="wireless_add_btn" />
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="table_title">
+						<span>无线服务列表</span>
+					</div>
+					<table class="tbl" id="list_wireless"></table>
 				</div>
-				<table class="tbl_cont">
-					<tbody>
-					<tr>
-						<td class="col1">无线接入服务：</td>
-						<td class="col2">
-							<input type="button" class="button" value="新建" id="wireless_add_btn" />
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="table_title">
-					<span>无线服务列表</span>
-				</div>
-				<table class="tbl">
-					<thead>
-					<tr>
-						<th>SSID</th>
-						<th>使能状态</th>
-						<th>射频2.4G</th>
-						<th>射频5G</th>
-						<th>最大连接数</th>
-						<th>认证方式</th>
-						<th>操作</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="7">
-							<table class="tbl_page">
-								<tbody>
-								<tr>
-									<td>共 2 条记录</td>
-									<td>第 1 页/共 1 页  <a>首页</a><a>1</a><a>尾页</a></td>
-								</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					</tbody>
-				</table>
 				<div id="wireless_add" style="display:none;">
 					<div class="table_title">
 						<span>新增无线服务</span>
@@ -1237,17 +1204,6 @@
 					<div id="_accunts">
 						<div class="query">
 							<input type="button" class="button left" value="新增用户" id="accunts_add_btn">
-							<div class="right">
-								<span>查询项</span>
-								<select>
-									<option>用户名</option>
-									<option>级别</option>
-
-								</select>
-								<span>关键词</span>
-								<input type="text" name="">
-								<input type="button" value="查询">
-							</div>
 						</div>
 						<table class="tbl" id="list_accounts"></table>
 					</div>

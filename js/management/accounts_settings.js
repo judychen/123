@@ -126,7 +126,7 @@ var as = new myGrid("as");
 
 $(function(){
 	/*??*/
-	as.pageview_add('用户名', 0, '50%', MG_SORT_ASCII);
+	as.pageview_add('用户名', 0, '40%', MG_SORT_ASCII);
 	as.pageview_add('级别', 1, '40%', MG_SORT_NUM, null, format_level );
 	
 	as.pageview_add_btn("编辑", editUser);
@@ -141,6 +141,7 @@ $(function(){
 	as.pageview_init(usersList, 10, 'list_accounts');
 
 	btn0 = $("#list_accounts").find($(".opBtn0"));
+	btn1 = $("#list_accounts").find($(".opBtn1"));
 
 	$("#accunts_add_btn").click(function(){
 		$("#account_add_name").val("");
@@ -162,9 +163,6 @@ $(function(){
 				usersList[i] = temp.name+";"+temp.level;
 			}
 			as.pageview_init(usersList, 10, 'list_accounts');
-
-			
-
 		}
 	});
 
@@ -174,16 +172,11 @@ $(function(){
 		$("#accunts_add").siblings().first().show();
 	});
 
-	$(".opBtn0").click(function() {
-		btn0 = $("#list_accounts").find($(".opBtn0"));
-		alert($(this).index());
-	});
+	/*zan shi*/
 
-	
-
-	/*for(var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
+	for(var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
 		btn0.eq(i).click(function(){
-			var tp = jsUsers.pkg_usrmanage[i];
+			var tp = jsUsers.pkg_usrmanage[i-1];
 			$("#accunts_edit").show();
 			$("#accunts_edit").siblings().hide();
 
@@ -214,21 +207,8 @@ $(function(){
 				$("#accunts_edit").hide();
 				$("#accunts_edit").siblings().first().show();
 			});
-			console.log(i);
-			alert(i);
-
 		});
-
-		btn1.eq(i).click(function() {
-			for ( var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
-				var t = jsUsers.pkg_usrmanage[i];
-				usersList[i] = t.name+";"+t.level;
-			}
-			as.pageview_init(usersList, 10, 'list_accounts');
-		});
-
-
-	}*/
+	}
 
 	$("#account_edit_check").click(function(){
 		if($("#account_edit_check").is(":checked")){
@@ -238,10 +218,26 @@ $(function(){
 		}
 	});
 
-	
-	
+	for(var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
+		btn1.eq(i).click(function(){
+			
+			jsUsers.pkg_usrmanage.splice(i-1,1);
 
+			if(jsUsers.pkg_usrmanage.length == 0){
+				usersList = "";
 
+				as.pageview_init(usersList, 10, 'list_accounts');
+
+			}else{
+				for ( var i = 0; i < jsUsers.pkg_usrmanage.length; i++ ){
+					var t = jsUsers.pkg_usrmanage[i];
+					usersList[i] = t.name+";"+t.level;
+				}
+				as.pageview_init(usersList, 10, 'list_accounts');
+			}
+			
+		});
+	}
 });
 
 
